@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    
+    <script src="ville.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demande d'ordre de mission</title>
+</head>
+<body>
+    <p>Nom: | Prenom: | Du:</p>
+
+    <p id="title_part">Mission:</p>
+    <div id="mission">
+
+        <input type="radio" name="Mission" id="france" checked>
+            <label for="france">France</label>
+            <div>
+                <input type="radio" name="Frais" id="avec" checked>
+                    <label for="avec">Avec Frais</label>
+                <input type="radio" name="Frais" id="sans">
+                    <label for="sans">Sans frais</label>
+            </div>
+            
+        <input type="radio" name="Mission" id="etranger">
+            <label for="etranger">Etranger</label>
+        <div>
+        <iframe src="list_pays.html" frameborder="0"></iframe>
+        </div>
+        <div id='condition_mission'>
+
+            <div>
+                <a for="depart">Date de départ:</a>
+                <input type="datetime-local" id="depart" name="date_depart" value="" min="" max="2018-12-31" />
+            </div>
+
+            <div>
+                <a for="retour">Date de retour:</a>
+                <input type="datetime-local" id="retour" name="date_retour" value="" min="" max="2018-12-31" />
+            </div>
+
+            <div>
+                <div>
+                    <p>Lieu de déplacement: </p>
+                    <input id="lieu" placeholder="Lieu de la mission">
+                    <div>
+                        <input id="code" placeholder="Code postal">
+                        <input id="ville" placeholder="Ville">
+                    </div>
+                </div>
+                <ul id="list_ville">
+                    <li data-vicopo="#ville, #code" data-vicopo-click='{"#code": "code", "#ville": "ville"}'>
+                      <strong data-vicopo-code-postal></strong>
+                      <span data-vicopo-ville></span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+    <p id="title_part">Moyen de transport:</p>
+    <div id="transport">
+
+        <input type="radio" name="Transport" id="V_perso">
+            <label for="V_perso">Véhicule personnel</label>
+        <input type="radio" name="Transport" id="V_UB">
+            <label for="V_UB">Véhicule de l'Université (demande a faire ICI sur l'Intranet de UB)</label>
+        <input type="radio" name="Transport" id="Train">
+            <label for="Train">Train</label>
+        <input type="radio" name="Transport" id="Avion">
+            <label for="Avion">Avion</label>
+
+    </div>
+    <div id="hotel">
+
+        <input type="checkbox" name="Hotel" id="hotel">
+            <label for="Hotel">Me réserver un hôtel ?</label>
+            <div>
+                <input id="Arrondisement" placeholder="Arrondisement si existant">
+                <div>
+                    <p>Petit déjeuner compris ?</p>
+                    <input type="radio" name="PtDej_oui" id="PtDej_oui">
+                        <label for="PtDej_oui">OUI</label>
+                    <input type="radio" name="PtDej_non" id="PtDej_oui">
+                        <label for="PtDej_non">NON</label>
+                </div>
+            </div>
+            
+
+    </div>
+</body>
+</html>
