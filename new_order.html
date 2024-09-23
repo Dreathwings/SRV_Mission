@@ -1,9 +1,21 @@
-<!DOCTYPE html>
+
 <html lang="fr">
 <head>
-    <link rel="stylesheet" href="styles.css">
-    
-    <script src="ville.js"></script>
+		<link rel="stylesheet" href="./css/bootstrap-material-datetimepicker.css" />
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+		<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="./js/bootstarp.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"></script>
+        <script type="text/javascript" src="js/JQuery.js"></script>
+        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="./css/radio_card.css">
+        <script type="text/javascript" src="./js/ville.js"></script>
+
+        <script type="text/javascript" src="./js/moment-with-locales.min.js"></script>
+        <script type="text/javascript" src="./js/bootstrap-material-datetimepicker.js"></script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +24,7 @@
 <body>
     <p>Nom: | Prenom: | Du:</p>
 
-    <p id="title_part">Mission:</p>
+    <strong id="title_part">Mission:</strong>
     <div id="mission">
 
         <input type="radio" name="Mission" id="france" checked>
@@ -27,19 +39,53 @@
         <input type="radio" name="Mission" id="etranger">
             <label for="etranger">Etranger</label>
         <div>
-        <iframe src="list_pays.html" frameborder="0"></iframe>
+        <iframe src="list_pays.html" frameborder="0" height="37.5px"></iframe>
         </div>
         <div id='condition_mission'>
-
-            <div>
                 <a for="depart">Date de départ:</a>
-                <input type="datetime-local" id="depart" name="date_depart" value="" min="" max="2018-12-31" />
-            </div>
+                <input type="text" id="date-fr-start" class="form-control floating-label" value="" placeholder="Date de début" autocomplete="off">
 
-            <div>
                 <a for="retour">Date de retour:</a>
-                <input type="datetime-local" id="retour" name="date_retour" value="" min="" max="2018-12-31" />
-            </div>
+                <input type="text" id="date-fr-return" class="form-control floating-label" value="" placeholder="Date de retour" autocomplete="off">
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function()
+            {
+                $('#date-fr-start').bootstrapMaterialDatePicker
+                ({
+                    format: 'DD/MM/YYYY HH:mm',
+                    lang: 'fr',
+                    weekStart: 1, 
+                    cancelText : 'ANNULER',
+                    nowButton : false,
+                    switchOnClick : true,
+                }).on('change', function(e, date){
+                    $('#date-fr-return').bootstrapMaterialDatePicker('setMinDate', date);
+                    $('#date-fr-return').bootstrapMaterialDatePicker('setDate', date);
+                });
+                $('#date-fr-return').bootstrapMaterialDatePicker
+                ({
+                    format: 'DD/MM/YYYY HH:mm',
+                    lang: 'fr',
+                    weekStart: 1, 
+                    cancelText : 'ANNULER',
+                    nowButton : false,
+                    switchOnClick : true
+                });
+                let dateActuelle = new Date();
+                dateActuelle.setHours(0)
+                dateActuelle.setMinutes(0)
+                let maxDate = new Date(new Date().getFullYear(), 11, 31)
+                $("#date-fr-start").bootstrapMaterialDatePicker('setMaxDate', maxDate)
+                $("#date-fr-return").bootstrapMaterialDatePicker('setMaxDate', maxDate)
+
+                dateActuelle.setDate(dateActuelle.getDate()+10);
+                $("#date-fr-start").bootstrapMaterialDatePicker('setMinDate', dateActuelle)
+                $.material.init()
+            });
+        </script>
+
+            
 
             <div>
                 <div>
@@ -52,8 +98,8 @@
                 </div>
                 <ul id="list_ville">
                     <li data-vicopo="#ville, #code" data-vicopo-click='{"#code": "code", "#ville": "ville"}'>
-                      <strong data-vicopo-code-postal></strong>
-                      <span data-vicopo-ville></span>
+                      <div id="code_postal" data-vicopo-code-postal></div>
+                      <div id="ville" data-vicopo-ville></div>
                     </li>
                 </ul>
             </div>
@@ -62,17 +108,31 @@
 
     </div>
 
-    <p id="title_part">Moyen de transport:</p>
+    <strong id="title_part">Moyen de transport:</strong>
     <div id="transport">
-
-        <input type="radio" name="Transport" id="V_perso">
-            <label for="V_perso">Véhicule personnel</label>
-        <input type="radio" name="Transport" id="V_UB">
-            <label for="V_UB">Véhicule de l'Université (demande a faire ICI sur l'Intranet de UB)</label>
-        <input type="radio" name="Transport" id="Train">
-            <label for="Train">Train</label>
-        <input type="radio" name="Transport" id="Avion">
-            <label for="Avion">Avion</label>
+            <div class="col-12 pb-5">
+                <input class="checkbox-tools" type="radio" name="Transport" id="tool-1" checked>
+                <label class="for-checkbox-tools" for="tool-1">
+                    <img class="img_vehicule" src="ressources/voiture.svg" alt="">
+                    Véhicule personnel
+                </label><!--
+                --><input class="checkbox-tools" type="radio" name="Transport" id="tool-2">
+                <label class="for-checkbox-tools" for="tool-2">
+                    <img class="img_vehicule" src="ressources/construction-automobile.svg" alt="">
+                    Véhicule de l'Université
+                </label><!--
+                --><input class="checkbox-tools" type="radio" name="Transport" id="tool-3">
+                <label class="for-checkbox-tools" for="tool-3">
+                    <img class="img_vehicule" src="ressources/former.svg" alt="">
+                    Train
+                </label><!--
+                --><input class="checkbox-tools" type="radio" name="Transport" id="tool-4">
+                <label class="for-checkbox-tools" for="tool-4">
+                    <img class="img_vehicule" src="ressources/avion-alt.svg" alt="">
+                    Avion
+                </label><!--
+                
+            </div>
 
     </div>
     <div id="hotel">
