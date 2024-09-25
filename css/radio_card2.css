@@ -4,54 +4,62 @@
 
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=devanagari,latin-ext');
-
+@font-face {
+    font-family: 'unicons';
+    src:url('fonts/unicons.eot');
+    src:url('fonts/unicons.eot?#iefix') format('embedded-opentype'),
+        url('fonts/unicons.svg#unicons') format('svg'),
+        url('fonts/unicons.woff') format('woff'),
+        url('fonts/unicons.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
 :root {
 	--white: #ffffff;
-	--light: #BEC5AD;
+	--light: #f0eff3;
 	--black: #000000;
-	--_5: #1f2029;
-	--_4: #113f67;
-	--_3: #38598b;
-	--_2: #a2a8d3;
-	--_1: #e7eaf6;
+	--dark-blue: #1f2029;
+	--dark-light: #353746;
+	--red: #da2c4d;
+	--yellow: #f8ab37;
+	--grey: #ecedf3;
 }
 
 /* #Primary
 ================================================== */
 
-body{
+div.body{
 	width: 100%;
-	background: var(--_5);
 	overflow-x: hidden;
-    font-family: 'Poppins', sans-serif;
+    font-family: sans-serif;
 	font-size: 17px;
 	line-height: 30px;
 	-webkit-transition: all 300ms linear;
-	transition: all 300ms linear;
-    color: var(--_2);
+	transition: all 300ms linear; 
+    color: var(--light);
 }
+
 p{
     font-family: 'Poppins', sans-serif;
 	font-size: 17px;
 	line-height: 30px;
-	color: var(--white);
 	letter-spacing: 1px;
 	font-weight: 500;
 	-webkit-transition: all 300ms linear;
 	transition: all 300ms linear; 
 }
 ::selection {
-	color: var(--_1);
-	background-color: var(--_5);
+	color: var(--white);
+	background-color: var(--black);
 }
 ::-moz-selection {
-	color: var(--_1);
-	background-color: var(--_5);
+	color: var(--white);
+	background-color: var(--black);
 }
 mark{
-	color: var(--_1);
-	background-color: var(--_5);
+	color: var(--white);
+	background-color: var(--black);
 }
 .section {
     position: relative;
@@ -67,54 +75,63 @@ mark{
     z-index: 100 !important;
 }
 
-img.img_vehicule{
-    width: 100px;
-}
+
 .background-color{
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: var(--_4);
-	z-index: 1;
+	
+	background-color: var(--dark-blue);
+	z-index: -1;
 	-webkit-transition: all 300ms linear;
 	transition: all 300ms linear; 
 }
-.checkbox:checked ~ .background-color{
-	background-color: var(--_4);
+.checkbox:checked ~ div.background-color{
+	background-color: var(--white);
+}
+.checkbox:checked ~ div.body{
+	color: var(--dark-blue);
 }
 
 
 [type="checkbox"]:checked,
 [type="checkbox"]:not(:checked),
 [type="radio"]:checked.checkbox-tools,
-[type="radio"]:not(:checked).checkbox-tools
-{
+[type="radio"]:checked.checkbox-budget,
+[type="radio"]:not(:checked).checkbox-tools,
+[type="radio"]:not(:checked).checkbox-budget{
 	position: absolute;
 	left: -9999px;
 	width: 0;
 	height: 0;
 	visibility: hidden;
 }
-.checkbox:checked + label,
-.checkbox:not(:checked) + label{
-	position: relative;
+.checkbox:checked ~ label,
+.checkbox:not(:checked) ~ label{
+	font-family: 'unicons-line';
+	position: absolute;
 	width: 70px;
 	display: inline-block;
 	padding: 0;
 	margin: 0 auto;
 	text-align: center;
-	margin-top: 100px;
-	height: 20px;
+	margin: 17px 0;
+	right: 3%;
+	top: 20px;
+	height: 10px;
 	border-radius: 4px;
-	background-image: linear-gradient(298deg, var(--_4), var(--_3));
+	background-image: linear-gradient(298deg, var(--red), var(--yellow));
 	z-index: 100 !important;
 }
-.checkbox:checked + label:before,
-.checkbox:not(:checked) + label:before {
+.checkbox:checked ~ label:before,
+.checkbox:not(:checked) ~ label:before{
 	position: absolute;
-	font-family: 'unicons';
+	font-family: "unicons-line" sans-serif !important;
+	-webkit-font-smoothing: antialiased;
+    -o-transform: scale(1);
+    text-rendering: optimizeLegibility;
 	cursor: pointer;
 	top: -17px;
 	z-index: 2;
@@ -127,23 +144,24 @@ img.img_vehicule{
 	-webkit-transition: all 300ms linear;
 	transition: all 300ms linear; 
 }
-.checkbox:not(:checked) + label:before {
-	content: '\eac1';
+.checkbox:not(:checked) ~ label:before{
+	content: "\ea8d";
 	left: 0;
-	color: var(--_3);
-	background-color: var(--_2);
+	color: var(--grey);
+	background-color: var(--dark-light);
 	box-shadow: 0 4px 4px rgba(0,0,0,0.15), 0 0 0 1px rgba(26,53,71,0.07);
 }
-.checkbox:checked + label:before {
-	content: '\eb8f';
+
+.checkbox:checked ~ label:before{
+	content: "\eb0f";
 	left: 30px;
-	color: var(--_4);
-	background-color: var(--_2);
+	color: var(--yellow);
+	background-color: var(--dark-blue);
 	box-shadow: 0 4px 4px rgba(26,53,71,0.25), 0 0 0 1px rgba(26,53,71,0.07);
 }
 
 .checkbox:checked ~ .section .container .row .col-12 p{
-	color: var(--_4);
+	color: var(--dark-blue);
 }
 
 
@@ -153,13 +171,11 @@ img.img_vehicule{
 	display: inline-block;
 	padding: 20px;
 	width: 110px;
-    height: 140px;
 	font-size: 14px;
 	line-height: 20px;
 	letter-spacing: 1px;
 	margin: 0 auto;
-	margin: 1.5%;
-	clear: left;
+	margin:1.5%;
 	text-align: center;
 	border-radius: 4px;
 	overflow: hidden;
@@ -170,7 +186,7 @@ img.img_vehicule{
 	transition: all 300ms linear; 
 }
 .checkbox-tools:not(:checked) + label{
-	background-color: var(--_4);
+	background-color: var(--dark-light);
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 .checkbox-tools:checked + label{
@@ -189,7 +205,7 @@ img.img_vehicule{
 	width: 100%;
 	height: 100%;
 	border-radius: 4px;
-	background-image: linear-gradient(298deg, var(--_5), var(--_2));
+	background-image: linear-gradient(298deg, var(--red), var(--yellow));
 	z-index: -1;
 }
 .checkbox-tools:checked + label .uil,
@@ -201,21 +217,52 @@ img.img_vehicule{
 }
 
 .checkbox:checked ~ .section .container .row .col-12 .checkbox-tools:not(:checked) + label{
-	background-color: var(--_2);
+	background-color: var(--light);
 	color: var(--dark-blue);
 	box-shadow: 0 1x 4px 0 rgba(0, 0, 0, 0.05);
 }
 
-.checkbox-budget:checked + label,
-.checkbox-budget:not(:checked) + label{
+.checkbox-budget:checked + label.oui_non,
+.checkbox-budget:not(:checked) + label.oui_non{
+	position: relative;
+	display: inline-flex;
+	padding: 0;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	width: 100px;
+	height: 15px;
+	font-size: 20px;
+	line-height: 15px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	margin: 0 auto;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 10px;
+	text-align: center;
+	border-radius: 4px;
+	overflow: hidden;
+	cursor: pointer;
+	text-transform: uppercase;
+	-webkit-transition: all 300ms linear;
+	transition: all 300ms linear; 
+	-webkit-text-stroke: 1px var(--white);
+    text-stroke: 1px var(--white);
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    color: transparent;
+	justify-content: center;
+}
+.checkbox-budget:checked + label.pays,
+.checkbox-budget:not(:checked) + label.pays{
 	position: relative;
 	display: inline-block;
 	padding: 0;
 	padding-top: 20px;
 	padding-bottom: 20px;
-	width: 260px;
-	font-size: 52px;
-	line-height: 52px;
+	width: 300px;
+	font-size: 40px;
+	line-height: 40px;
 	font-weight: 700;
 	letter-spacing: 1px;
 	margin: 0 auto;
@@ -235,8 +282,9 @@ img.img_vehicule{
     text-fill-color: transparent;
     color: transparent;
 }
+
 .checkbox-budget:not(:checked) + label{
-	background-color: var(--_4);
+	background-color: var(--dark-light);
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 .checkbox-budget:checked + label{
@@ -255,7 +303,7 @@ img.img_vehicule{
 	width: 100%;
 	height: 100%;
 	border-radius: 4px;
-	background-image: linear-gradient(138deg, var(--_2), var(--_4));
+	background-image: linear-gradient(138deg, var(--red), var(--yellow));
 	z-index: -1;
 }
 .checkbox-budget:checked + label span,
@@ -288,12 +336,93 @@ img.img_vehicule{
 }
 
 .checkbox:checked ~ .section .container .row .col-xl-10 .checkbox-budget:not(:checked) + label{
-	background-color: var(--_2);
+	background-color: var(--light);
 	-webkit-text-stroke: 1px var(--dark-blue);
     text-stroke: 1px var(--dark-blue);
 	box-shadow: 0 1x 4px 0 rgba(0, 0, 0, 0.05);
 }
-
+@media (max-width: 400px) {
+	.checkbox-budget:checked + label.pays,
+	.checkbox-budget:not(:checked) + label.pays{
+		position: relative;
+		display: inline-block;
+		padding: 0;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		width: 150px;
+		font-size: 25px;
+		line-height: 25px;
+		font-weight: 700;
+		letter-spacing: 1px;
+		margin: 0 auto;
+		margin-left: 5px;
+		margin-right: 5px;
+		margin-bottom: 10px;
+		text-align: center;
+		border-radius: 4px;
+		overflow: hidden;
+		cursor: pointer;
+		text-transform: uppercase;
+		-webkit-transition: all 300ms linear;
+		transition: all 300ms linear; 
+		-webkit-text-stroke: 1px var(--white);
+		text-stroke: 1px var(--white);
+		-webkit-text-fill-color: transparent;
+		text-fill-color: transparent;
+		color: transparent;
+	}
+	.checkbox-budget:not(:checked) + label{
+		background-color: var(--dark-light);
+		box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+	}
+	.checkbox-budget:checked + label{
+		background-color: transparent;
+		box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+	}
+	.checkbox-budget:not(:checked) + label:hover{
+		box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+	}
+	.checkbox-budget:checked + label::before,
+	.checkbox-budget:not(:checked) + label::before{
+		position: absolute;
+		content: '';
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border-radius: 4px;
+		background-image: linear-gradient(138deg, var(--red), var(--yellow));
+		z-index: -1;
+	}
+	.checkbox-budget:checked + label span,
+	.checkbox-budget:not(:checked) + label span{
+		position: relative;
+		display: block;
+	}
+	.checkbox-budget:checked + label span::before,
+	.checkbox-budget:not(:checked) + label span::before{
+		position: absolute;
+		content: attr(data-hover);
+		top: 0;
+		left: 0;
+		width: 100%;
+		overflow: hidden;
+		-webkit-text-stroke: transparent;
+		text-stroke: transparent;
+		-webkit-text-fill-color: var(--white);
+		text-fill-color: var(--white);
+		color: var(--white);
+		-webkit-transition: max-height 0.3s;
+		-moz-transition: max-height 0.3s;
+		transition: max-height 0.3s;
+	}
+	.checkbox-budget:not(:checked) + label span::before{
+		max-height: 0;
+	}
+	.checkbox-budget:checked + label span::before{
+		max-height: 100%;
+	}
+}
 .checkbox-booking:checked + label,
 .checkbox-booking:not(:checked) + label{
 	position: relative;
@@ -310,7 +439,6 @@ img.img_vehicule{
 	justify-content: center;
 	-ms-flex-pack: center;
 	text-align: center;
-
 	padding: 0;
 	padding: 6px 25px;
 	font-size: 14px;
@@ -323,14 +451,11 @@ img.img_vehicule{
 	text-align: center;
 	border-radius: 4px;
 	cursor: pointer;
-    color: var(--_1);
+    color: var(--white);
 	text-transform: uppercase;
-	background-color: var(--_2);
+	background-color: var(--dark-light);
 	-webkit-transition: all 300ms linear;
 	transition: all 300ms linear; 
-}
-label.for-checkbox-tools:nth-child(2+1){
-	clear: left;
 }
 .checkbox-booking:not(:checked) + label::before{
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
@@ -351,7 +476,7 @@ label.for-checkbox-tools:nth-child(2+1){
 	height: calc(100% + 4px);
 	border-radius: 4px;
 	z-index: -2;
-	background-image: linear-gradient(138deg, var(--_4), var(--_3));
+	background-image: linear-gradient(138deg, var(--red), var(--yellow));
 	-webkit-transition: all 300ms linear;
 	transition: all 300ms linear; 
 }
@@ -371,7 +496,7 @@ label.for-checkbox-tools:nth-child(2+1){
 	height: calc(100% + 4px);
 	border-radius: 4px;
 	z-index: -2;
-	background-color: var(--_3);
+	background-color: var(--dark-light);
 	-webkit-transition: all 300ms linear;
 	transition: all 300ms linear; 
 }
@@ -401,7 +526,7 @@ label.for-checkbox-tools:nth-child(2+1){
 	top: 50%;
 	margin-top: -1px;
 	height: 2px;
-	background-image: linear-gradient(138deg, var(--_4), var(--_3));
+	background-image: linear-gradient(138deg, var(--red), var(--yellow));
 	z-index: 1;
 	-webkit-transition: all 300ms linear;
 	transition: all 300ms linear; 
@@ -415,16 +540,28 @@ label.for-checkbox-tools:nth-child(2+1){
 
 .checkbox:checked ~ .section .container .row .col-12 .checkbox-booking:not(:checked) + label,
 .checkbox:checked ~ .section .container .row .col-12 .checkbox-booking:checked + label{
-	background-color: var(--_2);
-    color: var(--_1);
+	background-color: var(--light);
+    color: var(--dark-blue);
 }
 .checkbox:checked ~ .section .container .row .col-12 .checkbox-booking:checked + label::after,
 .checkbox:checked ~ .section .container .row .col-12 .checkbox-booking:not(:checked) + label::after{
-	background-color: var(--_2);
+	background-color: var(--light);
+}
+p.sub_text{
+	font-size:medium;
+	display: flex;
+	justify-content: center;
+	height: 25px;
+	margin: 0;
+	margin-top: 10px;
+}
+[name='PtDej'].checkbox-budget{
+	width: 40%;
 }
 
-
-
+img.img_vehicule{
+    width: 100px;
+}
 
 .link-to-page {
 	position: fixed;

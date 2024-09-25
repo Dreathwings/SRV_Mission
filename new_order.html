@@ -1,6 +1,10 @@
 
 <html lang="fr">
 <head>
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/solid.css">
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/thinline.css">
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
 		<link rel="stylesheet" href="./css/bootstrap-material-datetimepicker.css" />
 		<link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -11,7 +15,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"></script>
         <script type="text/javascript" src="js/JQuery.js"></script>
         <link rel="stylesheet" href="./css/style.css">
-        <link rel="stylesheet" href="./css/radio_card.css">
+        <link rel="stylesheet" href="./css/radio_card2.css">
         <script type="text/javascript" src="./js/ville.js"></script>
 
         <script type="text/javascript" src="./js/moment-with-locales.min.js"></script>
@@ -19,138 +23,161 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./ressources/bm_gradignan_geii_rvb.png">
     <title>Demande d'ordre de mission</title>
 </head>
 <body>
-    <p>Nom: | Prenom: | Du:</p>
-
-    <strong id="title_part">Mission:</strong>
-    <div id="mission">
-
-        <input type="radio" name="Mission" id="france" checked>
-            <label for="france">France</label>
-            <div>
-                <input type="radio" name="Frais" id="avec" checked>
-                    <label for="avec">Avec Frais</label>
-                <input type="radio" name="Frais" id="sans">
-                    <label for="sans">Sans frais</label>
-            </div>
-            
-        <input type="radio" name="Mission" id="etranger">
-            <label for="etranger">Etranger</label>
-        <div>
-        <iframe src="list_pays.html" frameborder="0" height="37.5px"></iframe>
+    <input class="checkbox" type="checkbox" name="general" id="general">
+                <label class="for-checkbox" for="general"></label>
+    <div class="background-color"></div>
+    <div class="body">
+        <div class="Header">
+            <p>Nom: | Prenom: | Du:</p>     
         </div>
-        <div id='condition_mission'>
-                <a for="depart">Date de départ:</a>
-                <input type="text" id="date-fr-start" class="form-control floating-label" value="" placeholder="Date de début" autocomplete="off">
-
-                <a for="retour">Date de retour:</a>
-                <input type="text" id="date-fr-return" class="form-control floating-label" value="" placeholder="Date de retour" autocomplete="off">
-        </div>
-        <script type="text/javascript">
-            $(document).ready(function()
-            {
-                $('#date-fr-start').bootstrapMaterialDatePicker
-                ({
-                    format: 'DD/MM/YYYY HH:mm',
-                    lang: 'fr',
-                    weekStart: 1, 
-                    cancelText : 'ANNULER',
-                    nowButton : false,
-                    switchOnClick : true,
-                }).on('change', function(e, date){
-                    $('#date-fr-return').bootstrapMaterialDatePicker('setMinDate', date);
-                    $('#date-fr-return').bootstrapMaterialDatePicker('setDate', date);
-                });
-                $('#date-fr-return').bootstrapMaterialDatePicker
-                ({
-                    format: 'DD/MM/YYYY HH:mm',
-                    lang: 'fr',
-                    weekStart: 1, 
-                    cancelText : 'ANNULER',
-                    nowButton : false,
-                    switchOnClick : true
-                });
-                let dateActuelle = new Date();
-                dateActuelle.setHours(0)
-                dateActuelle.setMinutes(0)
-                let maxDate = new Date(new Date().getFullYear(), 11, 31)
-                $("#date-fr-start").bootstrapMaterialDatePicker('setMaxDate', maxDate)
-                $("#date-fr-return").bootstrapMaterialDatePicker('setMaxDate', maxDate)
-
-                dateActuelle.setDate(dateActuelle.getDate()+10);
-                $("#date-fr-start").bootstrapMaterialDatePicker('setMinDate', dateActuelle)
-                $.material.init()
-            });
-        </script>
-
-            
-
-            <div>
-                <div>
-                    <p>Lieu de déplacement: </p>
-                    <input id="lieu" placeholder="Lieu de la mission">
+        
+        <strong id="title_part">Mission:</strong>
+        <div class="mission">
+    
+            <div class="container_mission">
+                <input class="checkbox-budget" type="radio" name="Mission" id="France" autocomplete="off" checked>
+						<label class="pays" for="France">
+							<span data-hover="France">France</span>
+						</label>
+                <div class="box_mission " id="France">
                     <div>
-                        <input id="code" placeholder="Code postal">
-                        <input id="ville" placeholder="Ville">
+                        <input class="checkbox-budget" type="radio" name="FRAIS" id="FRAIS_oui" autocomplete="off">
+                        <label class="oui_non" for="FRAIS_oui">
+                            <span data-hover="AVEC FRAIS">AVEC</span>
+                        </label> 
+                    </div>
+                    <p>FRAIS ?</p>
+                    <div>
+                        <input class="checkbox-budget" type="radio" name="FRAIS" id="FRAIS_non" autocomplete="off" checked>
+                        <label class="oui_non" for="FRAIS_non">
+                            <span data-hover="SANS FRAIS">SANS</span>
+                        </label>    
                     </div>
                 </div>
-                <ul id="list_ville">
-                    <li data-vicopo="#ville, #code" data-vicopo-click='{"#code": "code", "#ville": "ville"}'>
-                      <div id="code_postal" data-vicopo-code-postal></div>
-                      <div id="ville" data-vicopo-ville></div>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-
-    </div>
-
-    <strong id="title_part">Moyen de transport:</strong>
-    <div id="transport">
-            <div class="col-12 pb-5">
-                <input class="checkbox-tools" type="radio" name="Transport" id="tool-1" checked>
-                <label class="for-checkbox-tools" for="tool-1">
-                    <img class="img_vehicule" src="ressources/voiture.svg" alt="">
-                    Véhicule personnel
-                </label><!--
-                --><input class="checkbox-tools" type="radio" name="Transport" id="tool-2">
-                <label class="for-checkbox-tools" for="tool-2">
-                    <img class="img_vehicule" src="ressources/construction-automobile.svg" alt="">
-                    Véhicule de l'Université
-                </label><!--
-                --><input class="checkbox-tools" type="radio" name="Transport" id="tool-3">
-                <label class="for-checkbox-tools" for="tool-3">
-                    <img class="img_vehicule" src="ressources/former.svg" alt="">
-                    Train
-                </label><!--
-                --><input class="checkbox-tools" type="radio" name="Transport" id="tool-4">
-                <label class="for-checkbox-tools" for="tool-4">
-                    <img class="img_vehicule" src="ressources/avion-alt.svg" alt="">
-                    Avion
-                </label><!--
-                
-            </div>
-
-    </div>
-    <div id="hotel">
-
-        <input type="checkbox" name="Hotel" id="hotel">
-            <label for="Hotel">Me réserver un hôtel ?</label>
-            <div>
-                <input id="Arrondisement" placeholder="Arrondisement si existant">
-                <div>
-                    <p>Petit déjeuner compris ?</p>
-                    <input type="radio" name="PtDej_oui" id="PtDej_oui">
-                        <label for="PtDej_oui">OUI</label>
-                    <input type="radio" name="PtDej_non" id="PtDej_oui">
-                        <label for="PtDej_non">NON</label>
-                </div>
             </div>
             
-
+            <div class="container_mission">
+                <input class="checkbox-budget" type="radio" name="Mission" id="Autre" autocomplete="off" >
+                <label class="pays" for="Autre">
+                    <span data-hover="Autre">Autre</span>
+                </label> 
+                <div class="box_mission" id="Autre">
+                       <object data="list_pays.html" type="text/html"></object>
+                </div>    
+            </div> 
+    
+        </div>
+            <div id='condition_mission'>
+                    <input type="text" id="date-fr-start" class="form-control floating-label" value="" placeholder="Date de départ" autocomplete="off">
+                    <input type="text" id="date-fr-return" class="form-control floating-label" value="" placeholder="Date de retour" autocomplete="off">
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function()
+                {
+                    $('#date-fr-start').bootstrapMaterialDatePicker
+                    ({
+                        format: 'DD/MM/YYYY HH:mm',
+                        lang: 'fr',
+                        weekStart: 1, 
+                        cancelText : 'ANNULER',
+                        nowButton : false,
+                        switchOnClick : true,
+                    }).on('change', function(e, date){
+                        $('#date-fr-return').bootstrapMaterialDatePicker('setMinDate', date);
+                        $('#date-fr-return').bootstrapMaterialDatePicker('setDate', date);
+                    });
+                    ({
+                        format: 'DD/MM/YYYY HH:mm',
+                        lang: 'fr',
+                        weekStart: 1, 
+                        cancelText : 'ANNULER',
+                        nowButton : false,
+                        switchOnClick : true
+                    });
+                    let dateActuelle = new Date();
+                    dateActuelle.setHours(0)
+                    dateActuelle.setMinutes(0)
+                    let maxDate = new Date(new Date().getFullYear(), 11, 31)
+                    $("#date-fr-start").bootstrapMaterialDatePicker('setMaxDate', maxDate)
+                    $("#date-fr-return").bootstrapMaterialDatePicker('setMaxDate', maxDate)
+    
+                    dateActuelle.setDate(dateActuelle.getDate()+10);
+                    $("#date-fr-start").bootstrapMaterialDatePicker('setMinDate', dateActuelle)
+                    $.material.init()
+                });
+            </script>
+    
+                
+    
+                <div>
+                    <div>
+                        <strong id="title_part">_____Lieu de déplacement_____</strong>
+                        <input id="lieu" placeholder="Lieu de la mission">
+                        <div>
+                            <input id="code" placeholder="Code postal" autocomplete="off">
+                            <input id="ville" placeholder="Ville" autocomplete="off">
+                        </div>
+                    </div>
+                    <ul id="list_ville">
+                        <li data-vicopo="#ville, #code" data-vicopo-click='{"#code": "code", "#ville": "ville"}'>
+                          <div id="code_postal" data-vicopo-code-postal></div>
+                          <div id="ville" data-vicopo-ville></div>
+                        </li>
+                    </ul>
+                </div>
+    
+    
+        <strong id="title_part">_____Moyen de transport_____</strong>
+        <div id="transport">
+                    <input class="checkbox-tools" type="radio" name="Transport" id="tool-1" checked autocomplete="off">
+                    <label class="for-checkbox-tools" for="tool-1">
+                        <img class="img_vehicule" src="ressources/voiture.svg" alt="">
+                        Véhicule personnel
+                    </label><!--
+                    --><input class="checkbox-tools" type="radio" name="Transport" id="tool-2" autocomplete="off">
+                    <label class="for-checkbox-tools" for="tool-2">
+                        <img class="img_vehicule" src="ressources/construction-automobile.svg" alt="">
+                        Véhicule de l'Université
+                    </label><!--
+                    --><input class="checkbox-tools" type="radio" name="Transport" id="tool-3" autocomplete="off">
+                    <label class="for-checkbox-tools" for="tool-3">
+                        <img class="img_vehicule" src="ressources/former.svg" alt="">
+                        Train
+                    </label><!--
+                    --><input class="checkbox-tools" type="radio" name="Transport" id="tool-4" autocomplete="off">
+                    <label class="for-checkbox-tools" for="tool-4">
+                        <img class="img_vehicule" src="ressources/avion-alt.svg" alt="">
+                        Avion
+                    </label>
+    
+        </div>
+        <strong id="title_part">_____Hotel_____</strong>
+        <p class="sub_text"> Besoin d'un hotel?</p>
+        <div id="hotel">
+            <input class="checkbox-booking" type="checkbox" name="booking" id="booking-3" autocomplete="off" checked>
+            <label class="for-checkbox-booking" for="booking-3">							
+                    <i class="uil uil-building"></i><span class="text"> Hotel ?</span>
+            </label>
+        </div>
+        <div id="oui_hotel">
+            <input id="Arrondisement" placeholder="Arrondisement si existant" style="display: none;">
+            <div>
+                <p class="sub_text">Petit déjeuner compris ?</p>
+                <input class="checkbox-budget" type="radio" name="PtDej" id="PtDej_oui" autocomplete="off">
+                    <label class="oui_non" for="PtDej_oui">
+                        <span data-hover="OUI">OUI</span>
+                    </label>
+                    <input class="checkbox-budget" type="radio" name="PtDej" id="PtDej_non" autocomplete="off">
+                    <label class="oui_non" for="PtDej_non">
+                        <span data-hover="NON">NON</span>
+                    </label>
+            </div>
+        </div>
+        
     </div>
 </body>
 </html>
