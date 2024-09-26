@@ -50,7 +50,7 @@
                             <span data-hover="AVEC FRAIS">AVEC</span>
                         </label> 
                     </div>
-                    <p>FRAIS ?</p>
+                    <p class="FRAIS">FRAIS ?</p>
                     <div>
                         <input class="checkbox-budget" type="radio" name="FRAIS" id="FRAIS_non" autocomplete="off" checked>
                         <label class="oui_non" for="FRAIS_non">
@@ -157,27 +157,49 @@
         </div>
         <strong id="title_part">_____Hotel_____</strong>
         <p class="sub_text"> Besoin d'un hotel?</p>
+
         <div id="hotel">
-            <input class="checkbox-booking" type="checkbox" name="booking" id="booking-3" autocomplete="off" checked>
-            <label class="for-checkbox-booking" for="booking-3">							
-                    <i class="uil uil-building"></i><span class="text"> Hotel ?</span>
-            </label>
-        </div>
-        <div id="oui_hotel">
-            <input id="Arrondisement" placeholder="Arrondisement si existant" style="display: none;">
-            <div>
-                <p class="sub_text">Petit déjeuner compris ?</p>
-                <input class="checkbox-budget" type="radio" name="PtDej" id="PtDej_oui" autocomplete="off">
+            <div style="display: flex; justify-content: center;">
+                <input class="checkbox-booking" type="checkbox" name="HOTEL" id="booking-3" autocomplete="off" value="HOTEL" checked>
+                <label class="for-checkbox-booking" for="booking-3" style="position: relative; display: inline-block; ">							
+                        <i class="uil uil-building"></i><span class="text"> Hotel ?</span>
+                </label>  
+            </div>
+            
+            <div id="hotel" class="hotel_info">
+                <input id="Arrondisement" placeholder="Arrondisement si existant" style="display: none;">
+                    <p class="sub_text">Petit déjeuner compris ?</p>
+                <div style="display: flex; justify-content: center;">
+                    <input class="checkbox-budget" type="radio" name="PtDej" id="PtDej_oui" autocomplete="off">
                     <label class="oui_non" for="PtDej_oui">
                         <span data-hover="OUI">OUI</span>
                     </label>
                     <input class="checkbox-budget" type="radio" name="PtDej" id="PtDej_non" autocomplete="off">
                     <label class="oui_non" for="PtDej_non">
                         <span data-hover="NON">NON</span>
-                    </label>
+                    </label>  
+                </div>
             </div>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#booking-3').change(function() {
+                        if ($(this).is(':checked')) {
+                            $('.hotel_info').hide();  // Montre la div quand l'input est coché
+                        } else {
+                            $('.hotel_info').show();  // Cache la div quand l'input est décoché
+                        }
+                    });
+                    
+                    // Initial check on page load
+                    if ($('#booking-3').is(':checked')) {
+                        $('.hotel_info').hide();
+                    } else {
+                        $('.hotel_info').show();
+                    }
+                });
+            </script>
         </div>
-        
+
     </div>
 </body>
 </html>

@@ -94,6 +94,20 @@ mark{
 .checkbox:checked ~ div.body{
 	color: var(--dark-blue);
 }
+input[type="text"]{
+	background-image: linear-gradient(to right, var(--red) 0%, var(--yellow) 100%) 1;
+	border-image: linear-gradient(to right, var(--red) 0%, var(--yellow) 100%) 1;
+	border-radius: 20px; /* this doesn't work */
+	border-width: 5px;
+	border-style: solid;
+	padding: 5px;
+	width: max(50px,25%);
+	color: var(--light);
+	height:55px ;
+	background-color: linear-gradient(138deg, var(--red), var(--yellow));
+	font-size: medium;
+	text-align: center;
+}
 
 
 [type="checkbox"]:checked,
@@ -341,7 +355,17 @@ mark{
     text-stroke: 1px var(--dark-blue);
 	box-shadow: 0 1x 4px 0 rgba(0, 0, 0, 0.05);
 }
-@media (max-width: 400px) {
+@media (max-width: 500px) {
+	div#France.box_mission{
+			width: 372px;
+			position: relative;
+			left: 0%;
+	}
+	div#Autre.box_mission{
+		position: relative;
+		right: 25%;
+		justify-content: center;
+}
 	.checkbox-budget:checked + label.pays,
 	.checkbox-budget:not(:checked) + label.pays{
 		position: relative;
