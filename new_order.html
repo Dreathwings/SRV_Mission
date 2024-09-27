@@ -35,7 +35,14 @@
             <p>Nom: | Prenom: | Du:</p>     
         </div>
         
-        <strong id="title_part">Mission:</strong>
+        <div style="display: flex; justify-content: center; margin: 10px;">
+            <select style="width: 20%;  text-align: center;">
+                <option value="GESII">GESII</option>
+                <option value="AUTRE">AUTRE</option>
+            </select>
+            <input style="width: 50%;" type="text" id="NOM_MISSION" placeholder="NOM DE LA MISSION">   
+        </div>
+        
         <div class="mission">
     
             <div class="container_mission">
@@ -71,10 +78,15 @@
             </div> 
     
         </div>
-            <div id='condition_mission'>
-                    <input type="text" id="date-fr-start" class="form-control floating-label" value="" placeholder="Date de départ" autocomplete="off">
+        <div class="mission">
+            <div class="container_mission">
+                <input type="text" id="date-fr-start" class="form-control floating-label" value="" placeholder="Date de départ" autocomplete="off">
+            </div>
+            <div class='container_mission'>
                     <input type="text" id="date-fr-return" class="form-control floating-label" value="" placeholder="Date de retour" autocomplete="off">
             </div>
+        </div>
+            
             <script type="text/javascript">
                 $(document).ready(function()
                 {
@@ -90,7 +102,7 @@
                         $('#date-fr-return').bootstrapMaterialDatePicker('setMinDate', date);
                         $('#date-fr-return').bootstrapMaterialDatePicker('setDate', date);
                     });
-                    ({
+                    $('#date-fr-return').bootstrapMaterialDatePicker({
                         format: 'DD/MM/YYYY HH:mm',
                         lang: 'fr',
                         weekStart: 1, 
@@ -116,10 +128,16 @@
                 <div>
                     <div>
                         <strong id="title_part">_____Lieu de déplacement_____</strong>
-                        <input id="lieu" placeholder="Lieu de la mission">
-                        <div>
-                            <input id="code" placeholder="Code postal" autocomplete="off">
-                            <input id="ville" placeholder="Ville" autocomplete="off">
+                        <div style="display: flex; justify-content: center;">
+                            <input style="width: 60%; margin: 15px;" type="text" id="lieu" placeholder="Lieu de la mission">
+                        </div>
+                        <div class="mission" style="justify-content: space-evenly;">
+                            <div style="width: 50%;">
+                                <input class="Dest" type="text" id="code" placeholder="Code postal" autocomplete="off">
+                            </div>
+                            <div  style="width: 50%;">
+                                <input class="Dest" type="text" id="ville" placeholder="Ville" autocomplete="off">
+                            </div>
                         </div>
                     </div>
                     <ul id="list_ville">
@@ -199,7 +217,24 @@
                 });
             </script>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
 
+        <div id="editor">
+        <h2>Demo Content</h2>
+        <p>Preset build with <code>snow</code> theme, and some common formats.</p>
+        </div>
+
+        <script>
+        const toolbarOptions = [['bold', 'italic'], ['link', 'image']];
+        const quill = new Quill('#editor', {
+            theme: 'snow',
+            modules: {
+                toolbar: toolbarOptions
+            }
+            });
+        </script>
     </div>
+
 </body>
 </html>

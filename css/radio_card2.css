@@ -90,6 +90,7 @@ mark{
 }
 .checkbox:checked ~ div.background-color{
 	background-color: var(--white);
+	color: var(--dark-blue);
 }
 .checkbox:checked ~ div.body{
 	color: var(--dark-blue);
@@ -355,7 +356,19 @@ input[type="text"]{
     text-stroke: 1px var(--dark-blue);
 	box-shadow: 0 1x 4px 0 rgba(0, 0, 0, 0.05);
 }
+input.floating-label{
+	width: 300px;
+}
+input.Dest{
+	width: 50%;
+}
 @media (max-width: 500px) {
+	input.floating-label{
+		width: 175px;
+	}
+	input.Dest{
+		width: 75%;
+	}
 	div#France.box_mission{
 			width: 372px;
 			position: relative;
