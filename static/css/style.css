@@ -96,7 +96,7 @@ div.Header{
 p.FRAIS{
     width: 90px; text-align:center; vertical-align: top; margin-top: 12.5px;
 }
-@media (max-width: 500px) {
+@media (max-width: 550px) {
     p.FRAIS{
         width: 100px;
     }

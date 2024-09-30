@@ -5,25 +5,26 @@
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/thinline.css">
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 
-		<link rel="stylesheet" href="./css/bootstrap-material-datetimepicker.css" />
 		<link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-		<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
-		<script type="text/javascript" src="./js/bootstarp.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"></script>
-        <script type="text/javascript" src="js/JQuery.js"></script>
-        <link rel="stylesheet" href="./css/style.css">
-        <link rel="stylesheet" href="./css/radio_card2.css">
-        <script type="text/javascript" src="./js/ville.js"></script>
+		<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
 
-        <script type="text/javascript" src="./js/moment-with-locales.min.js"></script>
-        <script type="text/javascript" src="./js/bootstrap-material-datetimepicker.js"></script>
+		<script type="text/javascript" src="{{ url_for('static',filename='js/bootstarp.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static',filename='js/ville.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static',filename='js/JQuery.js') }}"></script>
+
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/radio_card2.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap-material-datetimepicker.css') }}" />
+        
+        <script type="text/javascript" src="{{ url_for('static',filename='js/moment-with-locales.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static',filename='js/bootstrap-material-datetimepicker.js') }}"></script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="./ressources/bm_gradignan_geii_rvb.png">
+    <link rel="icon" type="image/png" href="{{ url_for('static',filename='ressources/bm_gradignan_geii_rvb.png') }}">
     <title>Demande d'ordre de mission</title>
 </head>
 <body>
@@ -40,7 +41,7 @@
                 <option value="GESII">GESII</option>
                 <option value="AUTRE">AUTRE</option>
             </select>
-            <input style="width: 50%;" type="text" id="NOM_MISSION" placeholder="NOM DE LA MISSION">   
+            <input style="width: max(820px,30%);" type="text" id="NOM_MISSION" placeholder="NOM DE LA MISSION">   
         </div>
         
         <div class="mission">
@@ -153,22 +154,22 @@
         <div id="transport">
                     <input class="checkbox-tools" type="radio" name="Transport" id="tool-1" checked autocomplete="off">
                     <label class="for-checkbox-tools" for="tool-1">
-                        <img class="img_vehicule" src="ressources/voiture.svg" alt="">
+                        <img class="img_vehicule" src="{{ url_for('static',filename='ressources/voiture.svg') }}" alt="">
                         Véhicule personnel
                     </label><!--
                     --><input class="checkbox-tools" type="radio" name="Transport" id="tool-2" autocomplete="off">
                     <label class="for-checkbox-tools" for="tool-2">
-                        <img class="img_vehicule" src="ressources/construction-automobile.svg" alt="">
+                        <img class="img_vehicule" src="{{ url_for('static',filename='ressources/construction-automobile.svg') }}" alt="">
                         Véhicule de l'Université
                     </label><!--
                     --><input class="checkbox-tools" type="radio" name="Transport" id="tool-3" autocomplete="off">
                     <label class="for-checkbox-tools" for="tool-3">
-                        <img class="img_vehicule" src="ressources/former.svg" alt="">
+                        <img class="img_vehicule" src="{{ url_for('static',filename='ressources/former.svg') }}" alt="">
                         Train
                     </label><!--
                     --><input class="checkbox-tools" type="radio" name="Transport" id="tool-4" autocomplete="off">
                     <label class="for-checkbox-tools" for="tool-4">
-                        <img class="img_vehicule" src="ressources/avion-alt.svg" alt="">
+                        <img class="img_vehicule" src="{{ url_for('static',filename='ressources/avion-alt.svg') }}" alt="">
                         Avion
                     </label>
     
