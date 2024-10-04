@@ -74,7 +74,7 @@
                     <span data-hover="Autre">Autre</span>
                 </label> 
                 <div class="box_mission" id="Autre">
-                       <object data="list_pays.html" type="text/html"></object>
+                       <object data="{{ url_for('static',filename='html/list_pays.html') }}" type="text/html"></object>
                 </div>    
             </div> 
     
@@ -132,11 +132,11 @@
                         <div style="display: flex; justify-content: center;">
                             <input style="width: 60%; margin: 15px;" type="text" id="lieu" placeholder="Lieu de la mission">
                         </div>
-                        <div class="mission" style="justify-content: space-evenly;">
-                            <div style="width: 50%;">
+                        <div class="mission" style="justify-content: center;">
+                            <div style="width: 40%;">
                                 <input class="Dest" type="text" id="code" placeholder="Code postal" autocomplete="off">
                             </div>
-                            <div  style="width: 50%;">
+                            <div  style="width: 40%;">
                                 <input class="Dest" type="text" id="ville" placeholder="Ville" autocomplete="off">
                             </div>
                         </div>
@@ -219,7 +219,10 @@
             </script>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+        <script src="{{ url_for('static',filename='js\image-resize.min.js') }}"></script>
+
         <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.bubble.css" rel="stylesheet" />
 
         <div id="editor">
         <h2>Demo Content</h2>
@@ -227,11 +230,31 @@
         </div>
 
         <script>
-        const toolbarOptions = [['bold', 'italic'], ['link', 'image']];
+        const toolbarOptions = [  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+  ['blockquote', 'code-block'],
+  ['link', 'image', 'video', 'formula'],
+
+  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+  [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
+  [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+  [{ 'direction': 'rtl' }],                         // text direction
+
+  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  [{ 'font': [] }],
+  [{ 'align': [] }],
+
+  ['clean'] ];
         const quill = new Quill('#editor', {
             theme: 'snow',
             modules: {
-                toolbar: toolbarOptions
+                toolbar: toolbarOptions,
+                ImageResize: {
+                    modules: [ 'Resize', 'DisplaySize', 'Toolbar' ]
+                }
             }
             });
         </script>
