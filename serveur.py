@@ -3,10 +3,6 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def hello():
-    return 'Hello, World!'
-
-@app.route("/ordre")
 def ordre():
     return render_template('new_order.html')
 
