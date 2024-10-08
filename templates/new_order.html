@@ -9,7 +9,7 @@
 
 		<link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"></script>
 		<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
@@ -20,7 +20,7 @@
 
         <link rel="stylesheet" href="/mission/static/css/style.css">
         <link rel="stylesheet" href="/mission/static/css/radio_card2.css">
-        <link rel="stylesheet" href="/mission\static\css\bootstrap-material-datetimepicker.css" />
+        <link rel="stylesheet" href="/mission/static\css\bootstrap-material-datetimepicker.css" />
         
         <script type="text/javascript" src="/mission/static/js/moment-with-locales.min.js"></script>
         <script type="text/javascript" src="/mission/static/js/bootstrap-material-datetimepicker.js"></script>
@@ -33,7 +33,7 @@
 <body>
     <input class="checkbox" type="checkbox" name="general" id="general">
                 <label class="for-checkbox" for="general"></label>
-    <div class="background-color"></div>
+    <div class="background-color" style="background-color: black;"></div>
     <div class="body">
         <div class="Header">
             <p>Nom: | Prenom: | Du:</p>     
@@ -221,39 +221,39 @@
                 });
             </script>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
-        <script src="/mission/static/js/image-resize.min.js"></script>
+        <script src="https://cdn.bootcdn.net/ajax/libs/quill/1.3.7/quill.min.js"></script>
+        <script src="/mission/static/js/quill-resize-module.js"></script>
 
         <div id="editor" style="height: 80%;color: azure;">
         <h2>Demo Content</h2>
         <p>Preset build with <code>snow</code> theme, and some common formats.</p>
         </div>
-
         <script>
-        const toolbarOptions = [  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-  ['blockquote', 'code-block'],
-  ['link', 'image', 'video', 'formula'],
+            Quill.register("modules/resize", window.QuillResizeModule);
+            const toolbarOptions = [  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+                ['blockquote', 'code-block'],
+                ['link', 'image', 'video', 'formula'],
 
-  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-  [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
-  [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-  [{ 'direction': 'rtl' }],                         // text direction
+                [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
+                [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+                [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+                [{ 'direction': 'rtl' }],                         // text direction
 
-  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
 
-  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-  [{ 'font': [] }],
-  [{ 'align': [] }],
+                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+                [{ 'font': [] }],
+                [{ 'align': [] }],
 
-  ['clean'] ];
+                ['clean'] ];
         const quill = new Quill('#editor', {
             theme: 'snow',
             modules: {
                 toolbar: toolbarOptions,
-                ImageResize: {
-                    modules: [ 'Resize', 'DisplaySize', 'Toolbar' ]
+                resize: {
+                    locale: {},
                 }
             }
             });
