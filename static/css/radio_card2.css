@@ -362,6 +362,18 @@ input.floating-label{
 input.Dest{
 	width: 50%;
 }
+.ql-toolbar {
+	background: linear-gradient(298deg, var(--red), var(--yellow));
+}
+.ql-toolbar.ql-snow{
+	border: 2.5px solid var(--light);
+}
+.ql-container.ql-snow{
+	border: 2.5px solid var(--light);
+}
+.ql-snow .ql-fill, .ql-snow .ql-stroke.ql-fill{
+	fill: var(--light);
+}
 @media (max-width: 550px) {
 	input.floating-label{
 		width: 175px;
