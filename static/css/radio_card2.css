@@ -386,10 +386,10 @@ input.Dest{
 	color: var(--light);
 }
 
-.checkbox:checked ~ .ql-toolbar.ql-snow{
+.checkbox:checked ~ .body div.ql-toolbar.ql-snow{
 	border: 4px solid var(--dark-blue);
 }
-.checkbox:checked ~ .ql-container.ql-snow{
+.checkbox:checked ~ .body div.ql-container.ql-snow{
 	border: 4px solid var(--dark-blue);
 }
 
