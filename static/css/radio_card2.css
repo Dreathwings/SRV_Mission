@@ -362,6 +362,8 @@ input.floating-label{
 input.Dest{
 	width: 50%;
 }
+
+
 .ql-toolbar {
 	background: linear-gradient(298deg, var(--red), var(--yellow));
 }
@@ -383,6 +385,14 @@ input.Dest{
 .ql-snow .ql-picker{
 	color: var(--light);
 }
+
+.checkbox:checked ~ .ql-toolbar.ql-snow{
+	border: 2.5px solid var(--dark-blue);
+}
+.checkbox:checked ~ .ql-container.ql-snow{
+	border: 2.5px solid var(--dark-blue);
+}
+
 @media (max-width: 550px) {
 	input.floating-label{
 		width: 175px;
