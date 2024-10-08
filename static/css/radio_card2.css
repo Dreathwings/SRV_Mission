@@ -402,7 +402,7 @@ div.body .ql-snow .ql-picker-options .ql-picker-item .ql-stroke{
 .checkbox:checked ~ div.body div#editor.ql-container.ql-snow div.ql-editor{
 	color: #000;
 }
-.checkbox:checked ~ input[type="text"]{
+.checkbox:checked ~ div.body div input[type="text"]{
 	color: var(--black);
 }
 
