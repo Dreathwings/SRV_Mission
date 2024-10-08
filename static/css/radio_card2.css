@@ -387,14 +387,16 @@ input.Dest{
 }
 
 .checkbox:checked ~ .body div.ql-toolbar.ql-snow{
-	color: var(--dark-blue);
 	border-color:var(--dark-light);
 }
 .checkbox:checked ~ .body div.ql-container.ql-snow{
-	color: var(--dark-blue);
 	border-color: var(--dark-light);
 	border-top: none;
 }
+.checkbox:checked ~ div.body div.ql-toolbar.ql-snow span.ql-formats span.ql-font.ql-picker.ql-expanded span#ql-picker-options-4.ql-picker-options span.ql-picker-item{
+	color: var(--dark-blue);
+}
+
 
 @media (max-width: 550px) {
 	input.floating-label{
