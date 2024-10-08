@@ -368,10 +368,10 @@ input.Dest{
 	background: linear-gradient(298deg, var(--red), var(--yellow));
 }
 .ql-toolbar.ql-snow{
-	border: 2.5px solid var(--light);
+	border: 4px solid var(--light);
 }
 .ql-container.ql-snow{
-	border: 2.5px solid var(--light);
+	border: 4px solid var(--light);
 }
 .ql-snow .ql-fill{
 	fill: var(--light);
@@ -387,10 +387,10 @@ input.Dest{
 }
 
 .checkbox:checked ~ .ql-toolbar.ql-snow{
-	border: 2.5px solid var(--dark-blue);
+	border: 4px solid var(--dark-blue);
 }
 .checkbox:checked ~ .ql-container.ql-snow{
-	border: 2.5px solid var(--dark-blue);
+	border: 4px solid var(--dark-blue);
 }
 
 @media (max-width: 550px) {
