@@ -395,9 +395,10 @@ input.Dest{
 }
 div.body .ql-snow .ql-picker-options .ql-picker-item{
 	color: var(--dark-blue);
+}
+div.body .ql-snow .ql-picker-options .ql-picker-item .ql-stroke{
 	stroke: var(--dark-blue);
 }
-
 
 
 @media (max-width: 550px) {
