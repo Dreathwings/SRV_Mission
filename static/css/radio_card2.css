@@ -393,10 +393,9 @@ input.Dest{
 	border-color: var(--dark-light);
 	border-top: none;
 }
-
-
-.checkbox:checked ~ div.body .ql-snow .ql-picker-options .ql-picker-item{
-	color: var(--dark-blue);
+html body div.body div.ql-toolbar.ql-snow span.ql-formats span.ql-align.ql-picker.ql-icon-picker.ql-expanded span#ql-picker-options-5.ql-picker-options span.ql-picker-item svg line.ql-stroke
+div.body .ql-snow .ql-picker-options .ql-picker-item .ql-stroke{
+	stroke: var(--dark-blue);
 }
 
 
