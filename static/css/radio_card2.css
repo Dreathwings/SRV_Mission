@@ -380,6 +380,9 @@ input.Dest{
 	stroke-linecap: round;
 	stroke-linejoin: round;
 }
+.ql-snow .ql-picker{
+	color: var(--light);
+}
 @media (max-width: 550px) {
 	input.floating-label{
 		width: 175px;
