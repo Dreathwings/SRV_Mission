@@ -371,8 +371,14 @@ input.Dest{
 .ql-container.ql-snow{
 	border: 2.5px solid var(--light);
 }
-.ql-snow .ql-fill, .ql-snow .ql-stroke.ql-fill{
+.ql-snow .ql-fill{
 	fill: var(--light);
+}
+.ql-snow .ql-stroke{
+	stroke: var(--light);
+	fill: none;
+	stroke-linecap: round;
+	stroke-linejoin: round;
 }
 @media (max-width: 550px) {
 	input.floating-label{
