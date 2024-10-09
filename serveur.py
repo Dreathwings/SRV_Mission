@@ -1,5 +1,7 @@
 from flask import Flask, render_template
-app = Flask(__name__)
+app = Flask('mission',static_folder='/mission/static')
+app.config.update(
+                  TEMPLATES_AUTO_RELOAD=True)
 
 
 @app.route("/")
@@ -8,4 +10,4 @@ def ordre():
 
 # Running the API
 if __name__ == "__main__":
-    app.run(port="6969",debug=False)
+    app.run(port="6969",debug=True)
