@@ -22,6 +22,7 @@ def DBConnect():
         DB = mariadb.connect(host="localhost",
                              port=3306,
                             user="mission",
+                            password="",
                             database="mission")
         print(DB)
     except mariadb.Error as e:
