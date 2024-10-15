@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import mariadb
+import sys
 #app = Flask('mission')
 app = Flask('mission',static_url_path='/mission/static/')
 app.config.update(
@@ -15,11 +16,15 @@ def create_new_mission():
     print("POST NEW FORM")
     print(request.values)
     return "<html><body> <h1>NEW MISSION ORDER</h1></body></html>"
-
+@app.route("/DB")
 def DBConnect():
-    DB = mariadb.connect(host="127.0.0.1",
-                     user="mission",
-                     password="zB1Bm]8rnIMk4MD-")
+    try:
+        DB = mariadb.connect(host="127.0.0.1",
+                        user="mission",
+                        password="zB1Bm]8rnIMk4MD-")
+    except mariadb.Error as e:
+        print(f"Error connecting to the database: {e}")
+        sys.exit(1)
     return DB
 # Running the API
 if __name__ == "__main__":
