@@ -26,7 +26,7 @@ def DBConnect():
     except mariadb.Error as e:
         print(f"Error connecting to the database: {e}")
         sys.exit(1)
-    return DB
+    return "<html><body> <h1>DB</h1></body></html>"
 # Running the API
 if __name__ == "__main__":
     with app.app_context():
