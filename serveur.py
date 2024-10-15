@@ -19,12 +19,21 @@ def create_new_mission():
 @app.route("/mission/DB")
 def DBConnect():
     try:
-        DB = mariadb.connect(host="localhost",
+        import mysql.connector
+
+        mydb = mysql.connector.connect(
+        host="localhost",
+        user="mission",
+        password="zB1Bm]8rnIMk4MD-"
+        )
+
+        print(mydb) 
+        """DB = mariadb.connect(host="localhost",
                              port=3306,
                             user="mission",
                             password="zB1Bm]8rnIMk4MD-",
-                            database="mission")
-    except mariadb.Error as e:
+                            database="mission")"""
+    except mysql.Error as e:
         print(f"Error connecting to the database: {e}")
         sys.exit(1)
     return "<html><body> <h1>  DB  </h1></body></html>"
