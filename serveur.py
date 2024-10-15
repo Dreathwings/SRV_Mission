@@ -20,6 +20,7 @@ def create_new_mission():
 def DBConnect():
     try:
         DB = mariadb.connect(host="127.0.0.1",
+                             port="3306",
                         user="mission",
                         password="zB1Bm]8rnIMk4MD-")
     except mariadb.Error as e:
