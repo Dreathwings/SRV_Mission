@@ -26,7 +26,6 @@ def DBConnect():
                             database="mission")
     except mariadb.Error as e:
         print(f"Error connecting to the database: {e}")
-        sys.exit(1)
     return "<html><body> <h1>  DB  </h1></body></html>"
 # Running the API
 if __name__ == "__main__":
