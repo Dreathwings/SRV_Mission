@@ -19,10 +19,10 @@ def create_new_mission():
 @app.route("/mission/DB")
 def DBConnect():
     try:
-        DB = mariadb.connect(host="127.0.0.1",
+        DB = mariadb.connect(host="localhost",
                              port="3306",
-                        user="mission",
-                        password="zB1Bm]8rnIMk4MD-")
+                            user="mission",
+                            password="zB1Bm]8rnIMk4MD-")
     except mariadb.Error as e:
         print(f"Error connecting to the database: {e}")
         sys.exit(1)
