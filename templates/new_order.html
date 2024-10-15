@@ -38,7 +38,7 @@
     <input class="checkbox" type="checkbox" name="general" id="general">
                 <label class="for-checkbox" for="general"></label>
     <div class="background-color"></div>
-    <form method="get" action="/create_mission" name="theForm">
+    <form method="get" action="/mission/create_mission" name="theForm">
     <div class="body" id="body">
         <div class="Header">
             <p>Nom: | Prenom: | Du:</p>     
@@ -276,8 +276,8 @@
         <input type="submit" value="SEND" onclick="placeOrder()"><input/>
         <script>
             function placeOrder () {
-                console.log(document.body.innerHTML)
-                //document.theForm.submit()
+                //console.log(document.body.innerHTML)
+                document.theForm.submit()
             }
         </script>
     </div>
