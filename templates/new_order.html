@@ -41,7 +41,14 @@
     <form method="get" action="/mission/create_mission" name="theForm">
     <div class="body" id="body">
         <div class="Header">
-            <p>Nom: | Prenom: | Du:</p>     
+            <input type="text" id="Prenom" placeholder="Prenom" required autocomplete="off" autocapitalize="characters">
+            <input type="text" id="Nom" placeholder="Nom" required autocomplete="off" autocapitalize="characters">
+            <input type="text" id="TodayDate" disabled>
+            <script>
+                date = new Date()
+                let mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+                document.getElementById("TodayDate").value =  date.getDay()+" "+ mois[date.getMonth()]+" "+(1900+date.getYear())
+            </script>   
         </div>
         
         <div style="display: flex; justify-content: center; margin: 10px;">
@@ -55,7 +62,7 @@
         <div class="mission">
     
             <div class="container_mission">
-                <input class="checkbox-budget" type="radio" name="Mission" value='FRANCE' id="France" autocomplete="off">
+                <input class="checkbox-budget" type="radio" name="Mission" value='FRANCE' id="France" autocomplete="off" checked>
 						<label class="pays" for="France">
 							<span data-hover="France">France</span>
 						</label>
@@ -68,7 +75,7 @@
                     </div>
                     <p class="FRAIS">FRAIS ?</p>
                     <div>
-                        <input class="checkbox-budget" type="radio" name="FRAIS" value='SANS' id="FRAIS_non" autocomplete="off">
+                        <input class="checkbox-budget" type="radio" name="FRAIS" value='SANS' id="FRAIS_non" autocomplete="off" checked>
                         <label class="oui_non" for="FRAIS_non">
                             <span data-hover="SANS FRAIS">SANS</span>
                         </label>    
@@ -89,10 +96,10 @@
         </div>
         <div class="mission">
             <div class="container_mission">
-                <input type="text" id="date-fr-start" class="form-control floating-label" name="D_DEPART" value="" placeholder="Date de départ" autocomplete="off">
+                <input type="text" id="date-fr-start" class="form-control floating-label" name="D_DEPART" value="" placeholder="Date de départ" autocomplete="off" required>
             </div>
             <div class='container_mission'>
-                    <input type="text" id="date-fr-return" class="form-control floating-label" name="D_RETOUR" value="" placeholder="Date de retour" autocomplete="off">
+                    <input type="text" id="date-fr-return" class="form-control floating-label" name="D_RETOUR" value="" placeholder="Date de retour" autocomplete="off" required>
             </div>
         </div>
             
@@ -150,12 +157,44 @@
                             </div>
                         </div>
                     </div>
-                    <ul id="list_ville">
-                        <li data-vicopo="#ville, #code" data-vicopo-click='{"#code": "code", "#ville": "ville"}'>
-                          <div id="code_postal" data-vicopo-code-postal></div>
-                          <div id="ville" data-vicopo-ville></div>
-                        </li>
-                    </ul>
+                    <section id="ville_section">
+                        <div class="list">
+                            <ul id="list_ville">
+                                <li data-vicopo="#ville, #code" data-vicopo-click='{"#code": "code", "#ville": "ville"}' >
+                                  <div id="code_postal" data-vicopo-code-postal></div>
+                                  <div id="ville" data-vicopo-ville></div>
+                                </li>
+                            </ul>   
+                        </div>
+                        <div class="animation"></div>
+                    </section>
+                    <script>
+                        const input1 = document.getElementById('code');
+                        const input2 = document.getElementById('ville');
+                        const monSelector = document.getElementById('ville_section');
+                        let timeoutId; // Variable pour stocker l'identifiant du timeout
+
+                        function toggleVisibility() {
+                            clearTimeout(timeoutId); // Annuler le précédent timeout
+
+                            // Délai de 0.5s
+                            timeoutId = setTimeout(() => {
+                                // Vérifie si au moins un des inputs est sélectionné (focus)
+                                if (document.activeElement === input1 || document.activeElement === input2) {
+                                    monSelector.style.visibility = 'visible'; // Rendre visible
+                                } else {
+                                    monSelector.style.visibility = 'hidden'; // Cacher
+                                }
+                            }, 100);
+                        }
+                                        
+                        // Écoute des événements sur les deux inputs
+                        input1.addEventListener('focus', toggleVisibility);
+                        input2.addEventListener('focus', toggleVisibility);
+                        input1.addEventListener('blur', toggleVisibility);
+                        input2.addEventListener('blur', toggleVisibility);
+                    </script>
+                    
                 </div>
     
     

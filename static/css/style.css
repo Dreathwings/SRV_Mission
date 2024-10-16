@@ -1,13 +1,13 @@
 
 :root {
 	--white: #ffffff;
-	--light: #BEC5AD;
+	--light: #f0eff3;
 	--black: #000000;
-	--_5: #1f2029;
-	--_4: #2A6041;
-	--_3: #519872;
-	--_2: #a4b494;
-	--_1: #bec5ad;
+	--dark-blue: #1f2029;
+	--dark-light: #353746;
+	--red: #da2c4d;
+	--yellow: #f8ab37;
+	--grey: #ecedf3;
 }
 
 body{
@@ -89,13 +89,115 @@ object{
 }
 div.Header{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
-    height: 50px
+    height: 60px;
+}
+div.Header input[type="text"]{
+    width: 22.5%;
 }
 p.FRAIS{
     width: 90px; text-align:center; vertical-align: top; margin-top: 12.5px;
 }
+
+/* list VILLE*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+section#ville_section {
+    visibility: hidden;
+    width: 300px;
+    position: absolute;
+    top: 388px;
+    padding-right: 50px;
+    timeline-scope: --listTimeline;
+    right: 38px;
+}
+
+.list {
+  max-height: 500px;
+  border: 2px solid #37392e;
+  border-radius: 5px;
+  scroll-snap-type: y mandatory;
+  overscroll-behavior-y: contain;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-timeline: --listTimeline block;
+}
+
+.animation {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 100%;
+  background-size: 50px 40px;
+  /* background image on bottom of css for readability */
+}
+
+@supports (animation-timeline: scroll()) {
+  .animation {
+    animation: moveBackground alternate linear;
+    animation-timeline: --listTimeline;
+  }
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 calc(var(--container-height) / -1);
+  }
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--dark-light);
+}
+
+li {
+  padding: 20px;
+  border-top: 1px solid #ccc;
+  scroll-snap-align: start;
+}
+
+li:first-child {
+  border: 0;
+  visibility: hidden;
+}
+
+/* Demo styles */
+
+
+.animation {
+    
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg id='Isolation_Mode' data-name='Isolation Mode' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 633.33 680'%3E%3Cpath fill='linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73))' d='M383.33,500c27.61,0,50,22.39,50,50,0,25.99-19.83,47.35-45.18,49.77l-4.82,.23H50c-27.61,0-50-22.39-50-50,0-25.99,19.83-47.35,45.18-49.77l4.82-.23H383.33Zm200-166.67c27.61,0,50,22.39,50,50s-22.39,50-50,50H50c-27.61,0-50-22.39-50-50s22.39-50,50-50H583.33Zm-200-166.67c27.61,0,50,22.39,50,50,0,25.99-19.83,47.35-45.18,49.77l-4.82,.23H50c-27.61,0-50-22.39-50-50,0-25.99,19.83-47.35,45.18-49.77l4.82-.23H383.33ZM583.33,0c27.61,0,50,22.39,50,50,0,25.99-19.83,47.35-45.18,49.77l-4.82,.23H50C22.39,100,0,77.61,0,50,0,24.01,19.83,2.65,45.18,.23l4.82-.23H583.33Z'/%3E%3C/svg%3E");
+    background-color: linear-gradient(138deg, var(--red), var(--yellow));
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #28afb0;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #19647e;
+}
+
 @media (max-width: 550px) {
     p.FRAIS{
         width: 100px;
@@ -104,19 +206,19 @@ p.FRAIS{
 
 
 .dtp { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.4); z-index: 2000; font-size: 14px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
-.dtp > .dtp-content { background: #fff; max-width: 300px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); max-height: 520px; position: relative; left: 50%; }
+.dtp > .dtp-content { background: var(--dark-light); max-width: 300px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); max-height: 520px; position: relative; left: 50%; }
 .dtp > .dtp-content > .dtp-date-view > header.dtp-header { background: var(--_4); color: #fff; text-align: center; padding: 0.3em; }
 
-.dtp div.dtp-date, .dtp div.dtp-time { background: var(--_3); text-align: center; color: #fff; padding: 10px; }
+.dtp div.dtp-date, .dtp div.dtp-time { background: linear-gradient(298deg, var(--red), var(--yellow)); text-align: center; color: #fff; padding: 10px; }
 .dtp div.dtp-date > div { padding: 0; margin: 0; }
 .dtp div.dtp-actual-month { font-size: 1.5em; }
 .dtp div.dtp-actual-num { font-size: 3em; line-height: 0.9; }
 .dtp div.dtp-actual-maxtime { font-size: 3em; line-height: 0.9; }
-.dtp div.dtp-actual-year { font-size: 1.5em; color: #DCEDC8; }
+.dtp div.dtp-actual-year { font-size: 1.5em; color: var(--grey); }
 .dtp div.dtp-picker { padding: 1em; text-align: center; }
 
 .dtp div.dtp-picker-month, .dtp div.dtp-actual-time { font-weight: 500; text-align: center; }
-.dtp div.dtp-picker-month { padding-bottom:20px!important; text-transform: uppercase!important; }
+.dtp div.dtp-picker-month { padding-bottom:20px!important; text-transform: uppercase!important; color: var(--grey);}
 
 .dtp .dtp-close { position: absolute; top: 0.5em; right: 1em; }
 .dtp .dtp-close > a { color: #fff; }
@@ -125,10 +227,10 @@ p.FRAIS{
 .dtp table.dtp-picker-days { margin: 0; min-height: 251px;}
 .dtp table.dtp-picker-days, .dtp table.dtp-picker-days tr, .dtp table.dtp-picker-days tr > td { border: none; }
 .dtp table.dtp-picker-days tr > td {  font-weight: 700; font-size: 0.8em; text-align: center; padding: 0.5em 0.3em; }
-.dtp table.dtp-picker-days tr > td > span.dtp-select-day { color: #BDBDBD!important; padding: 0.4em 0.5em 0.5em 0.6em;}
-.dtp table.dtp-picker-days tr > td > a, .dtp .dtp-picker-time > a { color: #212121; text-decoration: none; padding: 0.4em 0.5em 0.5em 0.6em; border-radius: 50%!important; }
-.dtp table.dtp-picker-days tr > td > a.selected{ background: var(--_3); color: #fff; }
-.dtp table.dtp-picker-days tr > th { color: #757575; text-align: center; font-weight: 700; padding: 0.4em 0.3em; }
+.dtp table.dtp-picker-days tr > td > span.dtp-select-day { color: var(--dark-blue)!important; padding: 0.4em 0.5em 0.5em 0.6em;}
+.dtp table.dtp-picker-days tr > td > a, .dtp .dtp-picker-time > a { color: var(--grey); text-decoration: none; padding: 0.4em 0.5em 0.5em 0.6em; border-radius: 50%!important; }
+.dtp table.dtp-picker-days tr > td > a.selected{ background: linear-gradient(138deg, var(--red), var(--yellow)); color: #fff; }
+.dtp table.dtp-picker-days tr > th { color: var(--grey); text-align: center; font-weight: 700; padding: 0.4em 0.3em; }
 
 .dtp .p10 > a { color: var(--_4); text-decoration: none; }
 .dtp .p10 { width: 10%; display: inline-block; }
@@ -137,7 +239,7 @@ p.FRAIS{
 .dtp .p80 { width: 80%; display: inline-block; }
 
 .dtp a.dtp-meridien-am, .dtp a.dtp-meridien-pm { position: relative; top: 10px; color: #212121; font-weight: 500; padding: 0.7em 0.5em; border-radius: 50%!important;text-decoration: none; background: #eee; font-size:1em; }
-.dtp .dtp-actual-meridien a.selected { background: var(--_4); color: #fff; }
+.dtp .dtp-actual-meridien a.selected { background: linear-gradient(138deg, var(--red), var(--yellow)); color: #fff; }
 
 .dtp .dtp-picker-time > .dtp-select-hour { cursor: pointer; }
 .dtp .dtp-picker-time > .dtp-select-minute { cursor: pointer; }

@@ -206,12 +206,12 @@
         },
         hide: function () {
             return this.each(function (elt) {
-                elt.style.display = 'none';
+                elt.style.visibility = 'none';
             });
         },
         show: function () {
             return this.each(function (elt) {
-                elt.style.display = '';
+                elt.style.visibility = '';
             });
         },
         removeAttr: function (key) {
