@@ -11,10 +11,12 @@ app.config.update(
 def ordre():
     return render_template('new_order.html')
 
-@app.route("/mission/create_mission", methods=['GET'])
+@app.route("/mission/create_mission", methods=['POST'])
 def create_new_mission():
-    print("POST NEW FORM")
-    print(request.values)
+    print()
+    for value in request.values:
+        print(f"{value} | {request.values[value]}")
+    print()
     return "<html><body> <h1>NEW MISSION ORDER</h1></body></html>"
 
 

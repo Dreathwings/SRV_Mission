@@ -1,11 +1,11 @@
 
 <html lang="fr">
 <head>
-        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/solid.css">
-        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/thinline.css">
-        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-        <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.bubble.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/solid.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/thinline.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.bubble.css" rel="stylesheet" />
 
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -14,20 +14,20 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
 
 	<script type="text/javascript" src="{{url_for('static', filename='js/bootstarp.min.js')}}"></script>
-        <script type="text/javascript" src="{{url_for('static', filename='js/ville.js')}}"></script>
-        <script type="text/javascript" src="{{url_for('static', filename='/js/JQuery.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/ville.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='/js/JQuery.js')}}"></script>
 
-        <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
-        <link rel="stylesheet" href="{{url_for('static', filename='css/radio_card2.css')}}">
-        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-material-datetimepicker.css')}}" />
-        
-        <script type="text/javascript" src="{{url_for('static', filename='js/moment-with-locales.min.js')}}"></script>
-        <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap-material-datetimepicker.js')}}"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/radio_card2.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-material-datetimepicker.css')}}" />
+    
+    <script type="text/javascript" src="{{url_for('static', filename='js/moment-with-locales.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap-material-datetimepicker.js')}}"></script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,12 +38,12 @@
     <input class="checkbox" type="checkbox" name="general" id="general">
                 <label class="for-checkbox" for="general"></label>
     <div class="background-color"></div>
-    <form method="get" action="/mission/create_mission" name="theForm">
+    <form method="post" action="/mission/create_mission" name="theForm">
     <div class="body" id="body">
         <div class="Header">
-            <input type="text" id="Prenom" placeholder="Prenom" required autocomplete="off" autocapitalize="characters">
-            <input type="text" id="Nom" placeholder="Nom" required autocomplete="off" autocapitalize="characters">
-            <input type="text" id="TodayDate" disabled>
+            <input type="text" name="PRENOM"    id="Prenom"     placeholder="Prenom"    autocomplete="off" required="true">
+            <input type="text" name="NOM"       id="Nom"        placeholder="Nom"       autocomplete="off" required="true">
+            <input type="text" name="DATE_AJD"  id="TodayDate"  disabled>
             <script>
                 date = new Date()
                 let mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
@@ -56,13 +56,13 @@
                 <option value="GESII">GESII</option>
                 <option value="AUTRE">AUTRE</option>
             </select>
-            <input style="width: max(820px,30%);" type="text" id="NOM_MISSION" placeholder="NOM DE LA MISSION" >   
+            <input style="width: max(820px,30%);" type="text" name="NOM_MISSION" id="NOM_MISSION" placeholder="NOM DE LA MISSION" >   
         </div>
         
         <div class="mission">
     
             <div class="container_mission">
-                <input class="checkbox-budget" type="radio" name="Mission" value='FRANCE' id="France" autocomplete="off" checked>
+                <input class="checkbox-budget" type="radio" name="MISSION" value='FRANCE' id="France" autocomplete="off" checked>
 						<label class="pays" for="France">
 							<span data-hover="France">France</span>
 						</label>
@@ -84,7 +84,7 @@
             </div>
             
             <div class="container_mission">
-                <input class="checkbox-budget" type="radio" name="Mission" value='AUTRE' id="Autre" autocomplete="off" >
+                <input class="checkbox-budget" type="radio" name="MISSION" value='AUTRE' id="Autre" autocomplete="off" >
                 <label class="pays" for="Autre">
                     <span data-hover="Autre">Autre</span>
                 </label> 
@@ -146,14 +146,14 @@
                     <div>
                         <strong id="title_part">_____Lieu de déplacement_____</strong>
                         <div style="display: flex; justify-content: center;">
-                            <input style="width: 60%; margin: 15px;" type="text" id="lieu" placeholder="Lieu de la mission">
+                            <input style="width: 60%; margin: 15px;" type="text" name="LIEU" id="lieu" placeholder="Lieu de la mission">
                         </div>
                         <div class="mission" style="justify-content: center;">
                             <div style="width: 40%;">
-                                <input class="Dest" type="text" id="code" placeholder="Code postal" autocomplete="off">
+                                <input class="Dest" type="text" name="CODE_PTL" id="code" placeholder="Code postal" autocomplete="off">
                             </div>
                             <div  style="width: 40%;">
-                                <input class="Dest" type="text" id="ville" placeholder="Ville" autocomplete="off">
+                                <input class="Dest" type="text" id="ville" name="VILLE" placeholder="Ville" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -200,22 +200,22 @@
     
         <strong id="title_part">_____Moyen de transport_____</strong>
         <div id="transport">
-                    <input class="checkbox-tools" type="radio" name="Transport" id="tool-1" value='V_PERSO' checked autocomplete="off">
+                    <input class="checkbox-tools" type="radio" name="TRANSPORT" id="tool-1" value='V_PERSO' checked autocomplete="off">
                     <label class="for-checkbox-tools" for="tool-1">
                         <img class="img_vehicule" src="{{url_for('static', filename='ressources/voiture.svg')}}" alt="">
                         Véhicule personnel
                     </label><!--
-                    --><input class="checkbox-tools" type="radio" name="Transport" id="tool-2" value='V_UB' autocomplete="off">
+                    --><input class="checkbox-tools" type="radio" name="TRANSPORT" id="tool-2" value='V_UB' autocomplete="off">
                     <label class="for-checkbox-tools" for="tool-2">
                         <img class="img_vehicule" src="{{url_for('static', filename='ressources/construction-automobile.svg')}}" alt="">
                         Véhicule de l'Université
                     </label><!--
-                    --><input class="checkbox-tools" type="radio" name="Transport" id="tool-3" value='TRAIN' autocomplete="off">
+                    --><input class="checkbox-tools" type="radio" name="TRANSPORT" id="tool-3" value='TRAIN' autocomplete="off">
                     <label class="for-checkbox-tools" for="tool-3">
                         <img class="img_vehicule" src="{{url_for('static', filename='ressources/former.svg')}}" alt="">
                         Train
                     </label><!--
-                    --><input class="checkbox-tools" type="radio" name="Transport" id="tool-4" value='AVION' autocomplete="off">
+                    --><input class="checkbox-tools" type="radio" name="TRANSPORT" id="tool-4" value='AVION' autocomplete="off">
                     <label class="for-checkbox-tools" for="tool-4">
                         <img class="img_vehicule" src="{{url_for('static', filename='ressources/avion-alt.svg')}}" alt="">
                         Avion
@@ -239,11 +239,11 @@
                 <input id="Arrondisement" placeholder="Arrondisement si existant" style="display: none;">
                     <p class="sub_text">Petit déjeuner compris ?</p>
                 <div style="display: flex; justify-content: center;">
-                    <input class="checkbox-budget" type="radio" name="PtDej" id="PtDej_oui" value='OUI' autocomplete="off">
+                    <input class="checkbox-budget" type="radio" name="PTDEJ" id="PtDej_oui" value='OUI' autocomplete="off">
                     <label class="oui_non" for="PtDej_oui">
                         <span data-hover="OUI">OUI</span>
                     </label>
-                    <input class="checkbox-budget" type="radio" name="PtDej" id="PtDej_non" value='NON' autocomplete="off">
+                    <input class="checkbox-budget" type="radio" name="PTDEJ" id="PtDej_non" value='NON' autocomplete="off">
                     <label class="oui_non" for="PtDej_non">
                         <span data-hover="NON">NON</span>
                     </label>  

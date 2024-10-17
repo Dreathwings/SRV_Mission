@@ -92,9 +92,23 @@ mark{
 	background-color: var(--white);
 	color: var(--dark-blue);
 }
-.checkbox:checked ~ div.body{
-	color: var(--dark-blue);
+div.body{
+	color: var(--light);
 }
+
+
+.checkbox:checked ~ input::placeholder,
+.checkbox:checked ~ div.body
+{
+	color: var(--dark-light);
+}
+
+.checkbox:not(:checked) ~ ::placeholder,
+.checkbox:not(:checked) ~ div.body
+{
+	color: var(--white);
+}
+
 input[type="text"]{
 	background-image: linear-gradient(to right, var(--red) 0%, var(--yellow) 100%) 1;
 	border-image: linear-gradient(to right, var(--red) 0%, var(--yellow) 100%) 1;
@@ -103,7 +117,6 @@ input[type="text"]{
 	border-style: solid;
 	padding: 5px;
 	width: max(50px,25%);
-	color: var(--light);
 	height:55px ;
 	background-color: linear-gradient(138deg, var(--red), var(--yellow));
 	font-size: medium;
