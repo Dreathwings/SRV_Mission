@@ -97,7 +97,7 @@ div.body{
 }
 
 
-.checkbox:checked ~ input::placeholder,
+.checkbox:checked ~ ::placeholder,
 .checkbox:checked ~ div.body
 {
 	color: var(--dark-light);
