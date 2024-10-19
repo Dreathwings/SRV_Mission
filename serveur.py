@@ -6,7 +6,6 @@ app = Flask('mission',static_url_path='/mission/static/')
 app.config.update(
                   TEMPLATES_AUTO_RELOAD=True)
 
-
 @app.route("/mission", methods=['GET'])
 def ordre():
     return render_template('new_order.html')

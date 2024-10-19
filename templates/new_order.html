@@ -22,9 +22,11 @@
     <script type="text/javascript" src="{{url_for('static', filename='js/ville.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='/js/JQuery.js')}}"></script>
 
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-material-datetimepicker.css')}}" />
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/radio_card2.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-material-datetimepicker.css')}}" />
+    
     
     <script type="text/javascript" src="{{url_for('static', filename='js/moment-with-locales.min.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap-material-datetimepicker.js')}}"></script>
@@ -38,12 +40,12 @@
     <input class="checkbox" type="checkbox" name="general" id="general">
                 <label class="for-checkbox" for="general"></label>
     <div class="background-color"></div>
-    <form method="post" action="/mission/create_mission" name="theForm">
+    <form method="post" action="/mission/create_mission" name="theForm" >
     <div class="body" id="body">
         <div class="Header">
-            <input type="text" name="PRENOM"    id="Prenom"     placeholder="Prenom"    autocomplete="off" required="true">
-            <input type="text" name="NOM"       id="Nom"        placeholder="Nom"       autocomplete="off" required="true">
-            <input type="text" name="DATE_AJD"  id="TodayDate"  disabled>
+            <input type="text" name="PRENOM"    id="Prenom"     placeholder="Prenom"    autocomplete="off" required>
+            <input type="text" name="NOM"       id="Nom"        placeholder="Nom"       autocomplete="off" required>
+            <input type="text" name="DATE_AJD"  id="TodayDate"  readonly>
             <script>
                 date = new Date()
                 let mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
@@ -56,7 +58,7 @@
                 <option value="GESII">GESII</option>
                 <option value="AUTRE">AUTRE</option>
             </select>
-            <input style="width: max(820px,30%);" type="text" name="NOM_MISSION" id="NOM_MISSION" placeholder="NOM DE LA MISSION" >   
+            <input style="width: max(820px,30%);" type="text" name="NOM_MISSION" id="NOM_MISSION" placeholder="NOM DE LA MISSION" required>   
         </div>
         
         <div class="mission">
@@ -276,7 +278,7 @@
         <script src="{{url_for('static', filename='/js/quill.min.js')}}"></script>
         <script src="{{url_for('static', filename='/js/quill-resize-module.js')}}"></script>
 
-        <div id="editor" style="height: 80%;color: azure;">
+        <div id="editor" style="height: 80%">
         <h2>Demo Content</h2>
         <p>Preset build with <code>snow</code> theme, and some common formats.</p>
         </div>
@@ -316,7 +318,13 @@
         <script>
             function placeOrder () {
                 //console.log(document.body.innerHTML)
-                document.theForm.submit()
+                if( document.theForm.checkValidity()){
+                    document.theForm.submit()
+                }
+                else{
+                    window.alert("Le Formulaire n'est pas complé");
+                }
+                
             }
         </script>
     </div>
