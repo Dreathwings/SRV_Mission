@@ -148,7 +148,7 @@
                     <div>
                         <strong id="title_part">_____Lieu de déplacement_____</strong>
                         <div style="display: flex; justify-content: center;">
-                            <input style="width: 60%; margin: 15px;" type="text" name="LIEU" id="lieu" placeholder="Lieu de la mission">
+                            <input style="width: 60%; margin: 15px;" type="text" name="LIEU" id="lieu" placeholder="Lieu de la mission" autocomplete="off">
                         </div>
                         <div class="mission" style="justify-content: center;">
                             <div style="width: 40%;">
@@ -245,7 +245,7 @@
                     <label class="oui_non" for="PtDej_oui">
                         <span data-hover="OUI">OUI</span>
                     </label>
-                    <input class="checkbox-budget" type="radio" name="PTDEJ" id="PtDej_non" value='NON' autocomplete="off">
+                    <input class="checkbox-budget" type="radio" name="PTDEJ" id="PtDej_non" value='NON' autocomplete="off" checked>
                     <label class="oui_non" for="PtDej_non">
                         <span data-hover="NON">NON</span>
                     </label>  
@@ -279,9 +279,8 @@
         <script src="{{url_for('static', filename='/js/quill-resize-module.js')}}"></script>
 
         <div id="editor" style="height: 80%">
-        <h2>Demo Content</h2>
-        <p>Preset build with <code>snow</code> theme, and some common formats.</p>
         </div>
+        <input name="QUILL" id="playground" type="text" style="visibility: hidden; height: 0px; border: 0;"></input>
         <script>
             Quill.register("modules/resize", window.QuillResizeModule);
             const toolbarOptions = [  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -311,8 +310,23 @@
                 }
             }
             });
-        </script>
+            quill.on(Quill.events.TEXT_CHANGE, update);
+            const playground = document.getElementById("playground");
+            update();
+
+            function formatDelta(delta) {
+            return `<div>${JSON.stringify(delta.ops, null, 2)}</div>`;
+            }
+
+            function update(delta) {
+            const contents = quill.getContents();
+            let html = document.getElementById("editor").innerHTML;
+            playground.value = html;
+            }
+            </script>
+        
     </div>
+    
     <div>
         <input type="submit" value="SEND" onclick="placeOrder()"><input/>
         <script>
