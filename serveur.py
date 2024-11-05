@@ -20,7 +20,7 @@ def create_new_mission():
                             port=3306,
                             user="mission",
                             password="zB1Bm]8rnIMk4MD-",
-                            database="mission")
+                            database="mission",autocommit=True)
     cur = DB.cursor()
     ID = new_ID()
     if val['MISSION'] == "FRANCE":
