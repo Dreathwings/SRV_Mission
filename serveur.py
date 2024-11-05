@@ -30,8 +30,8 @@ def create_new_mission():
     try:
         a = cur.execute("INSERT INTO mission.ordre_mission(ID,NOM,PRENOM,DATE_AJD,NOM_MISSION,PAYS_MISSION,FRAIS,D_DEPART,D_RETOUR,TRANSPORT,LIEU,CODE_PTL,VILLE,HOTEL,PTDEJ,QUILL_URL) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(ID.int,val["NOM"],val["PRENOM"],val["DATE_AJD"],val["NOM_MISSION"],PAYS,val["FRAIS"],val["D_DEPART"],val["D_RETOUR"],val["TRANSPORT"],val["LIEU"],val["CODE_PTL"],val["VILLE"],val["HOTEL"],val["PTDEJ"],'BOBO'))
         print(a)
-    except Exception as e:
-        print(e)
+    except mariadb.Error as e: 
+        print(f"Error: {e}")
 
     return "<html><body> <h1>NEW MISSION ORDER</h1></body></html>"
 
