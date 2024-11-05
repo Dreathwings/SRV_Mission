@@ -54,11 +54,11 @@
         </div>
         
         <div style="display: flex; justify-content: center; margin: 10px;">
-            <select style="width: 20%;  text-align: center;">
+            <!--<select style="width: 20%;  text-align: center;">
                 <option value="GESII">GESII</option>
                 <option value="AUTRE">AUTRE</option>
-            </select>
-            <input style="width: max(820px,30%);" type="text" name="NOM_MISSION" id="NOM_MISSION" placeholder="NOM DE LA MISSION" required>   
+            </select>: max(820px,30%)-->
+            <input style="width:68.5%;" type="text" name="NOM_MISSION" id="NOM_MISSION" placeholder="NOM DE LA MISSION" required>   
         </div>
         
         <div class="mission">
@@ -90,9 +90,16 @@
                 <label class="pays" for="Autre">
                     <span data-hover="Autre">Autre</span>
                 </label> 
-                <div class="box_mission" id="Autre">
-                       <object data="{{url_for('static', filename='html/list_pays.html')}}" type="text/html"></object>
-                </div>    
+                <div class="box_mission" id="AUTRE">
+                       <!--<object data="{{url_for('static', filename='html/list_pays.html')}}" type="text/html"></object>-->
+                </div>
+                <script type="text/javascript">
+                        console.log('BITE');
+                       $( "#AUTRE" ).load( '{{url_for("static", filename="html/list_pays.html")}}', function() {
+  alert( "Load was performed." );
+});
+                    
+                </script>
             </div> 
     
         </div>
@@ -207,7 +214,7 @@
                         <img class="img_vehicule" src="{{url_for('static', filename='ressources/voiture.svg')}}" alt="">
                         Véhicule personnel
                     </label><!--
-                    --><input class="checkbox-tools" type="radio" name="TRANSPORT" id="tool-2" value='V_UB' autocomplete="off">
+                    --><input class="checkbox-tools" type="radio" name="TRANSPORT" id="tool-2" value='V_UB' autocomplete="off" onclick="V_UB()">
                     <label class="for-checkbox-tools" for="tool-2">
                         <img class="img_vehicule" src="{{url_for('static', filename='ressources/construction-automobile.svg')}}" alt="">
                         Véhicule de l'Université
@@ -328,17 +335,22 @@
     </div>
     
     <div>
-        <input type="submit" value="SEND" onclick="placeOrder()"><input/>
+        <input type="button" onclick="placeOrder()" value="Envoie demande mission">
         <script>
-            function placeOrder () {
+            function placeOrder() {
                 //console.log(document.body.innerHTML)
                 if( document.theForm.checkValidity()){
-                    document.theForm.submit()
+                    document.theForm.submit();
                 }
                 else{
-                    window.alert("Le Formulaire n'est pas complé");
+                    window.alert("Le Formulaire n'est pas complet");
                 }
                 
+            }
+            function V_UB(){
+                if (window.confirm("Pour toute mission avec un vehicule de l'Université il est necesaire de faire une demande via l'intranet")) {
+                window.open("exit.html", "Merci de votre visite !");
+                }
             }
         </script>
     </div>

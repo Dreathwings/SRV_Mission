@@ -15,7 +15,19 @@ def create_new_mission():
     print()
     for value in request.values:
         print(f"{value} | {request.values[value]}")
-    print()
+        val = request.values
+    DB = mariadb.connect(host="localhost",
+                            port=3306,
+                            user="mission",
+                            password="zB1Bm]8rnIMk4MD-",
+                            database="mission")
+    cur = DB.cursor()
+    ID = new_ID()
+    if val['MISSION'] == "FRANCE":
+        PAYS = "FRANCE"
+    else:
+        PAYS = val["pays"]
+    cur.execute("""INSERT INTO ordre_mission(ID,NOM,PRENOM,DATE_AJD,NOM_MISSION,PAYS_MISSION,FRAIS,D_DEPART,D_RETOUR,TRANSPORT,LIEU,CODE_PTL,VILLE,HOTEL,PTDEJ,QUILL_URL) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",(ID.__repr__(),val["NOM"],val["PRENOM"],val["DATE_AJD"],val["NOM_MISSION"],PAYS,val["FRAIS"],val["D_DEPART"],val["D_RETOUR"],val["TRANSPORT"],val["LIEU"],val["CODE_PTL"],val["VILLE"],val["HOTEL"],val["FRAIS"],val["PTDEJ"],'BOBO'))
     return "<html><body> <h1>NEW MISSION ORDER</h1></body></html>"
 
 
@@ -32,9 +44,13 @@ def DBConnect():
         print(f"Error connecting to the database: {e}")
     return "<html><body> <h1>  DB  </h1></body></html>"
 
+def new_ID():
+    import uuid
+    ID = uuid.uuid4()
+    return ID
 # Running the API
 if __name__ == "__main__":
     with app.app_context():
         for rule in app.url_map.iter_rules():
     	    print(f"{rule.endpoint}: {rule.methods} - {rule}")
-app.run(port="6969",debug=True)
+        app.run(port="6969",debug=True)
