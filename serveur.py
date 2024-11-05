@@ -14,7 +14,7 @@ def ordre():
 def create_new_mission():
     print()
     for value in request.values:
-        print(f"{value} | {request.values[value]}")
+        print(f"{value} | {request.values[value]} | {type(request.values[value])}")
         val = request.values
     DB = mariadb.connect(host="localhost",
                             port=3306,
