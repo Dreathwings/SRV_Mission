@@ -351,9 +351,9 @@
                 justify-content: center;
                 align-items: center;"
                 >
-        <input type="button" class="checkbox-budget" id="Valid" onclick="placeOrder()" style="visibility: hidden;">
+        <input type="button" class="checkbox-budget" id="Valid" onclick="placeOrder()" style="visibility: hidden;" checked>
         <label class="pays" for="Valid" style="width: 50%;">
-            <span data-hover="Envoyé la demande">Envoyé la demande</span>
+            <span data-hover="Envoyer la demande">Envoyer la demande</span>
         </label> 
         <script>
             function placeOrder() {
@@ -362,7 +362,7 @@
                     document.theForm.submit();
                 }
                 else{
-                    window.alert("Le Formulaire n'est pas complet");
+                    window.alert("Le formulaire n'est pas complet");
                 }
                 
             }
