@@ -20,7 +20,7 @@ def oauth():
         PARAMS = {"ticket":request.values['ticket']}
         ID = REQ.get(url = "https://cas.u-bordeaux.fr/cas/validate",params=PARAMS)
         print(ID)
-        return ID.cookies
+        return str(ID)
     else:
         return redirect("https://cas.u-bordeaux.fr/cas/login?service=http://geii.iut.u-bordeaux.fr/mission/oauth")
 
