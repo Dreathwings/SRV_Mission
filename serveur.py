@@ -1,4 +1,6 @@
 from flask import Flask, redirect, render_template, request, url_for
+import requests as REQ
+import flask
 import mariadb
 import sys
 #app = Flask('mission')
@@ -14,6 +16,10 @@ def index():
 
 @app.route("/mission/oauth/")
 def oauth():
+    if 'ticket' in request.values:
+        PARAMS = {"ticket":request.values['ticket']}
+        ID = REQ.get(url = "https://cas.u-bordeaux.fr/cas/validate",params=PARAMS)
+        print(ID)
     return redirect("https://cas.u-bordeaux.fr/cas/login?service=http://geii.iut.u-bordeaux.fr/mission/oauth")
 
 
