@@ -122,6 +122,13 @@ def DBConnect():
         print(f"Error connecting to the database: {e}")
     return "<html><body> <h1>  DB  </h1></body></html>"
 
+
+@app.route("/mission/who_is_loged")
+def DBConnect():
+    ID = request.cookies.get('SESSID')
+    name = oauth_user[ID]
+    return f"<html><body> <h1>  {name} with key {ID}  </h1></body></html>"
+
 def new_ID():
     import uuid
     ID = uuid.uuid4()
