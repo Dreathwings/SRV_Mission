@@ -5,6 +5,12 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/radio_card2.css')}}">
     
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/solid.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/thinline.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
     <title>Accueil</title>
 </head>
 <body>
@@ -13,21 +19,21 @@
     <div class="background-color"></div>
 
     <div class="body" id="body">
-        <div class="container_mission">
-            <div class="box_mission " id="France">
+        <div class="container_mission" style="width: 100%;margin-top: 25%;">
+            <div class="box_mission " style="visibility: visible;">
                 <div>
-                    <input class="checkbox-budget" type="radio" name="FRAIS" value='AVEC' id="FRAIS_oui" autocomplete="off">
-                    <label class="oui_non" for="FRAIS_oui">
-                        <span data-hover="AVEC FRAIS">Nouvelle demande mission</span>
-                    </label> 
+                    <input  class="checkbox-budget" type="radio" name="MISSION" id="Nouvelle demande mission" autocomplete="off" onclick="location.href = '/mission/create_mission';" checked>
+						<label style="width: 80%;" class="pays" for="Nouvelle demande mission">
+							<span data-hover="Nouvelle demande mission">Nouvelle demande mission</span>
+						</label> 
                 </div>
-                <p class="FRAIS">FRAIS ?</p>
                 <div>
-                    <input class="checkbox-budget" type="radio" name="FRAIS" value='SANS' id="FRAIS_non" autocomplete="off" checked>
-                    <label class="oui_non" for="FRAIS_non">
-                        <span data-hover="SANS FRAIS">Consulter les missions</span>
-                    </label>    
+                    <input class="checkbox-budget" type="radio" name="alphga" id="Consulter les missions" autocomplete="off" checked onclick="location.href = '/mission/view_mission';">
+						<label style="width: 80%;" class="pays" for="Consulter les missions">
+							<span data-hover="Consulter les missions">Consulter les missions</span>
+						</label> 
                 </div>
+                
             </div>
         </div>
 </body>

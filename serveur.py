@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request
 import mariadb
 import sys
 #app = Flask('mission')
@@ -9,9 +9,29 @@ app.config.update(
 @app.route("/mission", methods=['GET'])
 def index():
     return render_template('index.html')
+
+
 @app.route("/mission/create_mission", methods=['GET'])
 def ordre():
     return render_template('new_order.html')
+
+
+
+@app.route("/mission/create_mission", methods=['GET'])
+def view():
+    DB = mariadb.connect(host="localhost",
+                            port=3306,
+                            user="mission",
+                            password="zB1Bm]8rnIMk4MD-",
+                            database="mission",autocommit=True)
+    cur = DB.cursor()
+    try:
+        mission = Product.query.all()
+        return render_template('view.html', Mission=mission)
+    except Exception as e:
+        error_text = "<p>The error:<br>" + str(e) + "</p>"
+        hed = '<h1>Something is broken.</h1>'
+        return hed + error_text
 
 @app.route("/mission/create_mission", methods=['POST'])
 def create_new_mission():
@@ -36,7 +56,7 @@ def create_new_mission():
     except mariadb.Error as e: 
         print(f"Error: {e}")
 
-    return "<html><body> <h1>NEW MISSION ORDER</h1></body></html>"
+    return redirect("/mission/")
 
 
 @app.route("/mission/DB")

@@ -158,14 +158,26 @@
                         </div>
                         <div class="mission" style="justify-content: center;">
                             <div style="width: 40%;">
-                                <input class="Dest" type="text" name="CODE_PTL" id="code" placeholder="Code postal" autocomplete="off">
+                                <input class="Dest numeric" type="text" name="CODE_PTL" id="code" placeholder="Code postal" pattern="[\d]{9}" autocomplete="off">
+                                <script>
+                                    $(".numeric").on("input", function () {
+                                    var inputValue = $(this).val();
+                                    var validChars = /^[0-9]+$/;
+
+                                    if (!validChars.test(inputValue)) {
+                                        // Remove invalid characters
+                                        $(this).val(inputValue.replace(/[^0-9]+/g, ''));
+                                    }
+                                });
+                                </script>
                             </div>
                             <div  style="width: 40%;">
-                                <input class="Dest" type="text" id="ville" name="VILLE" placeholder="Ville" autocomplete="off">
+                                <input class="Dest" type="text" id="ville" name="VILLE" placeholder="Ville" autocomplete="off"onkeypress="return (event.charCode > 64 && 
+	event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
                             </div>
                         </div>
                     </div>
-                    <section id="ville_section">
+                    <section id="ville_section" style="z-index: 1000;">
                         <div class="list">
                             <ul id="list_ville">
                                 <li data-vicopo="#ville, #code" data-vicopo-click='{"#code": "code", "#ville": "ville"}' >
@@ -333,8 +345,16 @@
         
     </div>
     
-    <div>
-        <input type="button" onclick="placeOrder()" value="Envoie demande mission">
+    <div style="display: flex;
+                margin-left: auto;
+                margin-right: auto;
+                justify-content: center;
+                align-items: center;"
+                >
+        <input type="button" class="checkbox-budget" id="Valid" onclick="placeOrder()" style="visibility: hidden;">
+        <label class="pays" for="Valid" style="width: 50%;">
+            <span data-hover="Envoyé la demande">Envoyé la demande</span>
+        </label> 
         <script>
             function placeOrder() {
                 //console.log(document.body.innerHTML)

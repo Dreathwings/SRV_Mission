@@ -85,7 +85,7 @@ img.img_vehicule{
 	background-color: var(--_4);
 }
 
-
+[type="button"].checkbox-budget,
 [type="checkbox"]:checked,
 [type="checkbox"]:not(:checked),
 [type="radio"]:checked.checkbox-tools,
@@ -206,8 +206,8 @@ img.img_vehicule{
 	box-shadow: 0 1x 4px 0 rgba(0, 0, 0, 0.05);
 }
 
-.checkbox-budget:checked + label,
-.checkbox-budget:not(:checked) + label{
+.checkbox-budget + label,
+.checkbox-budget + label{
 	position: relative;
 	display: inline-block;
 	padding: 0;
