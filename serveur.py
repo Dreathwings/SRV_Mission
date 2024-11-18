@@ -55,7 +55,7 @@ def oauth():
                 print(f"USER {id} authorized")
             else:return abort(403)
                 
-            return redirect("/mission")
+            return resp
         else:
             return redirect("https://cas.u-bordeaux.fr/cas/login?service=http://geii.iut.u-bordeaux.fr/mission/oauth")
     else:
