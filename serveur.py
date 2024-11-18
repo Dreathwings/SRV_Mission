@@ -10,11 +10,11 @@ def index():
     if 'SESSID' in request.cookies:
         return render_template('index.html')
     else:
-        redirect("/mission/oauth")
+        return redirect("/mission/oauth")
 
 @app.route("/mission/oauth/")
 def oauth():
-    redirect("https://cas.u-bordeaux.fr/cas/login?service=http://geii.iut.u-bordeaux.fr/mission/oauth")
+    return redirect("https://cas.u-bordeaux.fr/cas/login?service=http://geii.iut.u-bordeaux.fr/mission/oauth")
 
 
 @app.route("/mission/create_mission", methods=['GET'])
