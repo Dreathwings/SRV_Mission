@@ -10,13 +10,13 @@ app.config.update(TEMPLATES_AUTO_RELOAD=True)
 
 oauth_user = dict()
 ### Activate CAS oauth ###
-CAS = False
+CAS = True
 ##########################
 
 @app.route("/mission/", methods=['GET'])
 def index():
-    if  not CAS or 'SESSID' in request.cookies :
-        if  not CAS or request.cookies["SESSID"] in oauth_user.keys() :
+    if not CAS or 'SESSID' in request.cookies.keys() :
+        if not CAS or request.cookies["SESSID"] in oauth_user.keys() :
             return render_template('index.html')
         else:
             return redirect("/mission/oauth")
