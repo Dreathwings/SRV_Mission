@@ -124,7 +124,7 @@ def DBConnect():
 
 
 @app.route("/mission/who_is_loged")
-def DBConnect():
+def WHO_IS():
     ID = request.cookies.get('SESSID')
     name = oauth_user[ID]
     return f"<html><body> <h1>  {name} with key {ID}  </h1></body></html>"
