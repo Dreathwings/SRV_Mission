@@ -1,14 +1,20 @@
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template, request, url_for
 import mariadb
 import sys
 #app = Flask('mission')
 app = Flask('mission',static_url_path='/mission/static/')
-app.config.update(
-                  TEMPLATES_AUTO_RELOAD=True)
+app.config.update(TEMPLATES_AUTO_RELOAD=True)
 
-@app.route("/mission", methods=['GET'])
+@app.route("/mission/", methods=['GET'])
 def index():
-    return render_template('index.html')
+    if 'SESSID' in request.cookies:
+        return render_template('index.html')
+    else:
+        redirect("http://geii.iut.u-bordeaux.fr/mission/oauth")
+
+@app.route("/mission/oauth/")
+def oauth():
+    redirect("https://cas.u-bordeaux.fr/cas/login?service=http://geii.iut.u-bordeaux.fr/mission/oauth")
 
 
 @app.route("/mission/create_mission", methods=['GET'])
@@ -17,7 +23,7 @@ def ordre():
 
 
 
-@app.route("/mission/create_mission", methods=['GET'])
+@app.route("/mission/view_mission", methods=['GET'])
 def view():
     DB = mariadb.connect(host="localhost",
                             port=3306,
@@ -26,7 +32,7 @@ def view():
                             database="mission",autocommit=True)
     cur = DB.cursor()
     try:
-        mission = Product.query.all()
+        mission = cur.execute("")
         return render_template('view.html', Mission=mission)
     except Exception as e:
         error_text = "<p>The error:<br>" + str(e) + "</p>"
@@ -52,6 +58,8 @@ def create_new_mission():
         PAYS = val["pays"]
     try:
         cur.execute("INSERT INTO mission.ordre_mission(ID,NOM,PRENOM,DATE_AJD,NOM_MISSION,PAYS_MISSION,FRAIS,D_DEPART,D_RETOUR,TRANSPORT,LIEU,CODE_PTL,VILLE,HOTEL,PTDEJ,QUILL_URL) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(ID.__repr__(),val["NOM"],val["PRENOM"],val["DATE_AJD"],val["NOM_MISSION"],PAYS,val["FRAIS"],val["D_DEPART"],val["D_RETOUR"],val["TRANSPORT"],val["LIEU"],val["CODE_PTL"],val["VILLE"],val["HOTEL"],val["PTDEJ"],'BOBO'))
+        statu_crea = 0
+        cur.execute("INSERT INTO mission.suivi_mission(ID,ID_USER,DATE_CREA,STATUE) VALUES (?,?,?,?)",(ID.__repr__(),"Bob",val["DATE_AJD"],statu_crea))
         print(f"Ordre mission {ID} success")
     except mariadb.Error as e: 
         print(f"Error: {e}")
@@ -81,4 +89,4 @@ if __name__ == "__main__":
     with app.app_context():
         for rule in app.url_map.iter_rules():
     	    print(f"{rule.endpoint}: {rule.methods} - {rule}")
-        app.run(port="6969",debug=True)
+        app.run(port=6969,debug=True)
