@@ -48,9 +48,11 @@ def oauth():
                     key = {i for i in oauth_user if oauth_user[i]==id}
                     oauth_user.pop(key)
 
-                SESSID = uuid4()
+                SESSID = uuid4().__repr__()
                 oauth_user[SESSID] = id
-                session["SESSID"] = SESSID
+                resp = flask.make_response(redirect("/mission"))  
+                resp.set_cookie("SESSID", value = SESSID, max_age = None, expires = None, path = '/', domain = None, 
+                    secure = None, httponly = False)
                 print(f"USER {id} authorized")
             else:return abort(403)
                 
