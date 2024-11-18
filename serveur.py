@@ -15,8 +15,8 @@ CAS = False
 
 @app.route("/mission/", methods=['GET'])
 def index():
-    if 'SESSID' in request.cookies or not CAS:
-        if request.cookies["SESSID"] in oauth_user.keys() or not CAS:
+    if  not CAS or 'SESSID' in request.cookies :
+        if  not CAS or request.cookies["SESSID"] in oauth_user.keys() :
             return render_template('index.html')
         else:
             return redirect("/mission/oauth")
