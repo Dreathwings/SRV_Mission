@@ -141,7 +141,8 @@ def connect_to_DB_mission():
                             port=3306,
                             user="mission",
                             password="zB1Bm]8rnIMk4MD-",
-                            database="mission")
+                            database="mission",
+                            autocommit=True)
         return DB
     except mariadb.Error as e:
         raise Exception(f"Error connecting to the database: {e}")
