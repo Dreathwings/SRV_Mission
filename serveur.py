@@ -36,8 +36,8 @@ def oauth():
         RESP = REQ.get(url = "https://cas.u-bordeaux.fr/cas/serviceValidate",params=PARAMS)
         if "authenticationSuccess" in str(RESP.content):
             id = str(RESP.content).split('cas:user')[1].removeprefix('>').removesuffix("</")
-            DB = connect_to_DB_mission()
-            cur = DB.cursor()
+            #DB = connect_to_DB_mission()
+            #cur = DB.cursor()
             if id in authorized_user.keys(): # Verif si user autorised sinon 403 list(cur.execute("SELECT ID FROM "))
                 if id in oauth_user.items(): #Verif si user deja un SESSID
                     key = {i for i in oauth_user if oauth_user[i]==id}
@@ -46,6 +46,7 @@ def oauth():
                 SESSID = uuid4()
                 oauth_user[SESSID] = id
                 session["SESSID"] = SESSID
+                print(f"USER {id} authorized")
             else:return abort(403)
                 
             return redirect(url_for("/mission/"))
