@@ -49,8 +49,8 @@
             <script>
                 date = new Date()
                 let mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-                document.getElementById("TodayDate").value =  date.getDay()+" "+ mois[date.getMonth()]+" "+(1900+date.getYear())
-                console.log(date.getDay())
+                document.getElementById("TodayDate").value =  date.getDate()+" "+ mois[date.getMonth()]+" "+(1900+date.getYear())
+                
             </script>   
         </div>
         
@@ -95,9 +95,7 @@
                        <!--<object data="{{url_for('static', filename='html/list_pays.html')}}" type="text/html"></object>-->
                 </div>
                 <script type="text/javascript">
-                        console.log('BITE');
                        $( "#AUTRE" ).load( '{{url_for("static", filename="html/list_pays.html")}}', function() {
-  alert( "Load was performed." );
 });
                     
                 </script>

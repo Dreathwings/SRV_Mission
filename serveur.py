@@ -7,6 +7,9 @@ app.config.update(
                   TEMPLATES_AUTO_RELOAD=True)
 
 @app.route("/mission", methods=['GET'])
+def index():
+    return render_template('index.html')
+@app.route("/mission/create_mission", methods=['GET'])
 def ordre():
     return render_template('new_order.html')
 

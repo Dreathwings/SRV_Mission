@@ -3,9 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/radio_card2.css')}}">
+    
     <title>Document</title>
 </head>
 <body>
-    <p>HELLO WORLD</p>
+    <div class="container_mission">
+        <div class="box_mission " id="France">
+            <div>
+                <input class="checkbox-budget" type="radio" name="FRAIS" value='AVEC' id="FRAIS_oui" autocomplete="off">
+                <label class="oui_non" for="FRAIS_oui">
+                    <span data-hover="AVEC FRAIS">Nouvelle demande mission</span>
+                </label> 
+            </div>
+            <p class="FRAIS">FRAIS ?</p>
+            <div>
+                <input class="checkbox-budget" type="radio" name="FRAIS" value='SANS' id="FRAIS_non" autocomplete="off" checked>
+                <label class="oui_non" for="FRAIS_non">
+                    <span data-hover="SANS FRAIS">Consulter les missions</span>
+                </label>    
+            </div>
+        </div>
+    </div>
 </body>
 </html>
