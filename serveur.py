@@ -17,7 +17,8 @@ def index():
 @app.route("/mission/oauth/")
 def oauth():
     if 'ticket' in request.values:
-        PARAMS = {"ticket":request.values['ticket']}
+        PARAMS = {"ticket":request.values['ticket'],
+                  'service':"http://geii.iut.u-bordeaux.fr/mission/oauth"}
         print(f"Ticket :{request.values['ticket']}")
         ID = REQ.get(url = "https://cas.u-bordeaux.fr/cas/serviceValidate",params=PARAMS)
         print(ID.cookies)
