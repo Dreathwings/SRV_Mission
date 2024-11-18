@@ -1,5 +1,5 @@
 from uuid import uuid4
-from flask import Flask, abort, redirect, render_template, request, session
+from flask import Flask, abort, redirect, render_template, request, session, url_for
 import requests as REQ
 import flask
 import mariadb
@@ -48,7 +48,7 @@ def oauth():
                 session["SESSID"] = SESSID
             else:return abort(403)
                 
-            return redirect("/mission/")
+            return redirect(url_for("/mission/"))
         else:
             return redirect("https://cas.u-bordeaux.fr/cas/login?service=http://geii.iut.u-bordeaux.fr/mission/oauth")
     else:
