@@ -116,7 +116,8 @@ def DBConnect():
                             port=3306,
                             user="mission",
                             password="zB1Bm]8rnIMk4MD-",
-                            database="mission")
+                            database="mission",
+                            autocommit=True)
         print(DB)
     except mariadb.Error as e:
         print(f"Error connecting to the database: {e}")
