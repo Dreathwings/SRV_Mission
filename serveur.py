@@ -9,6 +9,8 @@ app = Flask('mission',static_url_path='/mission/static/')
 app.config.update(TEMPLATES_AUTO_RELOAD=True)
 
 oauth_user = dict()
+authorized_user = {"wprivat":"ADMIN",
+                   "vgalland":"GESTION"}
 ### Activate CAS oauth ###
 CAS = True
 ##########################
@@ -35,7 +37,7 @@ def oauth():
             id = str(RESP.content).split('cas:user')[1].removeprefix('>').removesuffix("</")
             DB = connect_to_DB_mission()
             cur = DB.cursor()
-            if id in list(cur.execute("SELECT ID FROM ")) : # Verif si user autorised sinon 403
+            if id in authorized_user.keys(): # Verif si user autorised sinon 403 list(cur.execute("SELECT ID FROM "))
                 if id in oauth_user.items(): #Verif si user deja un SESSID
                     key = {i for i in oauth_user if oauth_user[i]==id}
                     oauth_user.pop(key)
