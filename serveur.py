@@ -19,9 +19,9 @@ CAS = True
 @app.route("/mission/", methods=['GET'])
 def index():
     if CAS:
-        if 'SESSID' in request.cookies :
+        if request.cookies.get("SESSID") != None:
             print("SESSID exist")
-            if request.cookies["SESSID"] in oauth_user.keys() :
+            if request.cookies.get("SESSID") in oauth_user.keys() :
                 print("SESSID autorized")
                 return render_template('index.html')
             else:
@@ -51,8 +51,7 @@ def oauth():
                 SESSID = uuid4().__repr__()
                 oauth_user[SESSID] = id
                 resp = flask.make_response(redirect("/mission"))  
-                resp.set_cookie("SESSID", value = SESSID, max_age = None, expires = None, path = '/', domain = None, 
-                    secure = None, httponly = False)
+                resp.set_cookie("SESSID", value = SESSID)
                 print(f"USER {id} authorized")
             else:return abort(403)
                 
