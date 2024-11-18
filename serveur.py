@@ -21,6 +21,7 @@ def oauth():
                   'service':"http://geii.iut.u-bordeaux.fr/mission/oauth"}
         print(f"Ticket :{request.values['ticket']}")
         RESP = REQ.get(url = "https://cas.u-bordeaux.fr/cas/serviceValidate",params=PARAMS)
+        print(str(RESP.content))
         id = str(RESP.content).split('cas:user')[1].removeprefix('>').removesuffix("</")
         return id
     else:
