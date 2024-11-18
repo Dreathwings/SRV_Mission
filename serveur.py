@@ -48,7 +48,7 @@ def oauth():
                     key = {i for i in oauth_user if oauth_user[i]==id}
                     oauth_user.pop(key)
 
-                SESSID = uuid4().__str__().split("'")
+                SESSID = uuid4().__str__()
                 print(SESSID)
                 oauth_user[SESSID] = id
                 resp = flask.make_response(redirect("/mission"))  
