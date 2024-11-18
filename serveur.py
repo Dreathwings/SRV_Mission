@@ -91,7 +91,7 @@ def create_new_mission():
         cur.execute("INSERT INTO mission.ordre_mission(ID,NOM,PRENOM,DATE_AJD,NOM_MISSION,PAYS_MISSION,FRAIS,D_DEPART,D_RETOUR,TRANSPORT,LIEU,CODE_PTL,VILLE,HOTEL,PTDEJ,QUILL_URL) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(ID.__repr__(),val["NOM"],val["PRENOM"],val["DATE_AJD"],val["NOM_MISSION"],PAYS,val["FRAIS"],val["D_DEPART"],val["D_RETOUR"],val["TRANSPORT"],val["LIEU"],val["CODE_PTL"],val["VILLE"],val["HOTEL"],val["PTDEJ"],'BOBO'))
         statu_crea = 0
         cur.execute("INSERT INTO mission.suivi_mission(ID,ID_USER,DATE_CREA,STATUE) VALUES (?,?,?,?)",(ID.__repr__(),"Bob",val["DATE_AJD"],statu_crea))
-        print(f"Ordre mission {ID} success")
+        #print(f"Ordre mission {ID} success")
     except mariadb.Error as e: 
         print(f"Error: {e}")
 
