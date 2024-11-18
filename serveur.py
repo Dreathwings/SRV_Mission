@@ -19,7 +19,7 @@ def oauth():
     if 'ticket' in request.values:
         PARAMS = {"ticket":request.values['ticket']}
         print(f"Ticket :{request.values['ticket']}")
-        ID = REQ.get(url = "https://cas.u-bordeaux.fr/cas/validate",params=PARAMS)
+        ID = REQ.get(url = "https://cas.u-bordeaux.fr/cas/serviceValidate",params=PARAMS)
         print(ID.cookies)
         return str(ID._content)
     else:
