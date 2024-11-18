@@ -6,6 +6,7 @@ import mariadb
 import sys
 #app = Flask('mission')
 app = Flask('mission',static_url_path='/mission/static/')
+app.secret_key='CECIESTLACLEFSECRETDEGEII'
 app.config.update(TEMPLATES_AUTO_RELOAD=True)
 
 oauth_user = dict()
