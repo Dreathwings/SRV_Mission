@@ -87,9 +87,8 @@ def view():
 
 @app.route("/mission/create_mission", methods=['POST'])
 def create_new_mission():
-    print()
     for value in request.values:
-        #print(f"{value} | {request.values[value]} | {type(request.values[value])}")
+        print(f"{value} | {request.values[value]} | {type(request.values[value])}")
         val = request.values
     DB = connect_to_DB_mission()
     cur = DB.cursor()
