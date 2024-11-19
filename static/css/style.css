@@ -292,18 +292,15 @@ body.view{
 }
 ul.view{
     background: none;
-    width: 100%;
+    width: 98%;
     list-style-type: none;
 }
 li.view{
     font-size: large;
     display: flex;
     height: 90%;
-    width: 90%;
     align-items: center;
     padding: inherit;
-    border: 4px solid;
-    border-color: linear-gradient(to right, var(--red) 0%, var(--yellow) 100%);
     border-radius: 7.5px;
     height: 5%;
     margin: 7.5px;
