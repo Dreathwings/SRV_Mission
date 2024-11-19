@@ -45,10 +45,10 @@ def oauth():
             DB = connect_to_DB_cas()
             
             cur = DB.cursor()
-            cur.execute("SELECT nom,login FROM personnels WHERE login=?", (id,))
+            data = cur.execute("SELECT nom,login FROM personnels WHERE login=?", (id))
             #ids = cur.execute("SELECT * FROM db_cas.personnels")
             
-            print(f" {DB.user} | Login {cur._data}")
+            print(f" {DB.user} | Login {data}")
 
             if id in authorized_user.keys(): # Verif si user autorised sinon 403 list(cur.execute("SELECT ID FROM "))
                 if id in oauth_user.items(): #Verif si user deja un SESSID
