@@ -44,7 +44,7 @@ def oauth():
             DB = connect_to_DB_cas()
             cur = DB.cursor()
             ids = cur.execute("SELECT * FROM db_cas.personnels LIMIT 1000;")
-            print(f" {DB.server_version_info} | Login {ids}")
+            print(f" {DB.user} | Login {ids}")
             if id in authorized_user.keys(): # Verif si user autorised sinon 403 list(cur.execute("SELECT ID FROM "))
                 if id in oauth_user.items(): #Verif si user deja un SESSID
                     key = {i for i in oauth_user if oauth_user[i]==id}
