@@ -1,4 +1,4 @@
-from uuid import uuid4
+from uuid import uuid1
 from flask import Flask, abort, redirect, render_template, request, session, url_for
 import requests as REQ
 import flask
@@ -57,7 +57,7 @@ def oauth():
                     key = {i for i in oauth_user if oauth_user[i]==id}
                     oauth_user.pop(key)
 
-                SESSID = uuid4().__str__()
+                SESSID = uuid1().__str__()
                 status = admin_user.get(id,"BASIC")
                 oauth_user[SESSID] = [id,login,status]
                 #print(oauth_user[SESSID])
@@ -157,7 +157,7 @@ def WHO_IS():
 
 def new_ID():
     import uuid
-    ID = uuid.uuid4()
+    ID = uuid.uuid1()
     return ID.__str__()
 
 
