@@ -96,7 +96,7 @@ def view():
             cur.execute(f"SELECT * FROM suivi_mission")
             mission = cur.fetchall()
 
-        return render_template('view.html', Mission=mission)
+        return render_template('view.html', Missions=mission)
     
     except Exception as e:
         error_text = "<p>The error:<br>" + str(e) + "</p>"
