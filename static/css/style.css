@@ -296,6 +296,7 @@ ul.view{
     list-style-type: none;
 }
 li.view{
+    font-size: medium;
     display: flex;
     border: 2px solid var(--dark-blue);
     border-radius: 7.5px;
@@ -305,6 +306,4 @@ li.view{
     background-color: var(--dark-light);
     color: var(--grey);
     align-items: center;
-    gap: 17%;
-    width: 80%;
 }
