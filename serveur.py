@@ -41,7 +41,7 @@ def oauth():
         RESP = REQ.get(url = "https://cas.u-bordeaux.fr/cas/serviceValidate",params=PARAMS)
         if "authenticationSuccess" in str(RESP.content):
             id = str(RESP.content).split('cas:user')[1].removeprefix('>').removesuffix("</")
-            DB = connect_to_DB_mission()
+            DB = connect_to_DB_cas()
             cur = DB.cursor()
             ids = cur.execute("SELECT login FROM personnels")
             print(ids)
