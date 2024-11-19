@@ -160,7 +160,7 @@ def connect_to_DB_cas():
                             port=3306,
                             user="mission",
                             password="zB1Bm]8rnIMk4MD-",
-                            database="db_cas",
+                            database="db_cass",
                             autocommit=True)
         DB.autocommit = True
         return DB
