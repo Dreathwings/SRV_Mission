@@ -8,7 +8,7 @@
 <body>
     <ul>
         {% for mission in Missions %}
-            <li>{{mission}} | {{mission.ID}} {{mission.ID_USER}} {{mission.DATE_CREA}} {{mission.STATUE}}</li>
+            <li>{{mission}} | {{mission[0]}} {{mission[1]}} {{mission[2]}} {{mission[3]}}</li>
         {% endfor %}
     </ul>
     
