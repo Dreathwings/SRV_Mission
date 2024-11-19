@@ -308,7 +308,15 @@ li.view{
     align-items: center;
     padding: inherit;
 }
+div.view#id_mission{
+    width: 25%;
+}
 div.view#id_user{
-    position: relative;
-    left: 40%
+    width: 25%;
+}
+div.view#date{
+    width: 25%;
+}
+div.view#status{
+    width: 25%;
 }
