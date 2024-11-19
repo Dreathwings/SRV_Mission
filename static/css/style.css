@@ -299,13 +299,13 @@ li.view{
     font-size: large;
     display: flex;
     align-items: center;
-    border-radius: 25px;
+    border-radius: 15px;
     height: 50px;
     margin: 7.5px;
     text-align: center;
     background-image: linear-gradient(298deg, var(--red), var(--yellow));
     color: var(--grey);
-    padding-left: 1%;
+    padding-left: 0.25%;
     
 }
 li.view#title{
@@ -316,11 +316,12 @@ li.view#title{
 }
 div.view#background{
     display: flex;
-    height: 30px;
-    width: 99%;
+    height: 40px;
+    width: 99.5%;
     align-items: center;
     background-color:var(--dark-light);
     border-radius: 15px /15px;
+    border: 2px solid var(--light);
 }
 div.view#id_mission{
     width: 25%;
