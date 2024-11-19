@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="{{url_for('static', filename='ressources/bm_gradignan_geii_rvb.png')}}">
     <title>List Mission</title>
 </head>
-<body>
+<body class="view">
     <ul class="view">
         {% for mission in Missions %}
             <li class="view">{{mission[0]}} {{mission[1]}} {{mission[2]}} {{mission[3]}}</li>
