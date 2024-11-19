@@ -45,7 +45,7 @@ def oauth():
             DB = connect_to_DB_cas()
             
             cur = DB.cursor()
-            data = cur.execute(f"SELECT nom,login FROM personnels WHERE login={id}")
+            data = cur.execute(f"SELECT nom,login FROM personnels WHERE login='{id}'")
             #ids = cur.execute("SELECT * FROM db_cas.personnels")
             
             print(f" {DB.user} | Login {data}")
