@@ -293,6 +293,7 @@ body.view{
 ul.view{
     background: none;
     width: 100%;
+    list-style-type: none;
 }
 li.view{
     display: flex;
@@ -303,5 +304,7 @@ li.view{
     text-align: center;
     background-color: var(--dark-light);
     color: var(--grey);
-    
+    align-items: center;
+    gap: 17%;
+    width: 80%;
 }
