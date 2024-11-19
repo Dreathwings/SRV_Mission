@@ -1,4 +1,4 @@
-from uuid import uuid4()
+from uuid import uuid4
 from flask import Flask, abort, redirect, render_template, request, session, url_for
 import requests as REQ
 import flask
