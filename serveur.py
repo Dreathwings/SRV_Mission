@@ -118,7 +118,7 @@ def create_new_mission():
     cur_cas = DB_cas.cursor()
     cur_cas.execute(f"SELECT nom FROM personnels WHERE login = '{user_id}' ")
     nom = cur_cas.fetchall()
-    print(f"NOMMMMMM {nom}")
+    print(f"NOMMMMMM {nom[0][0]}")
     if val['MISSION'] == "FRANCE":
         PAYS = "FRANCE"
     else:
