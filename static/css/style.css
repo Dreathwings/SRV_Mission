@@ -300,7 +300,6 @@ li.view{
     display: flex;
     height: 90%;
     align-items: center;
-    padding: inherit;
     border-radius: 7.5px;
     height: 5%;
     margin: 7.5px;
@@ -320,7 +319,6 @@ div.view#background{
     height: 75%;
     width: 99%;
     align-items: center;
-    padding: inherit;
     background-color:var(--dark-light);
     margin: 7.5px;
 }
