@@ -288,7 +288,7 @@ li:first-child.ville {
     width: 100%;
 }
 body.view{
-    background-image: var(--dark-blue);
+    background-color: var(--dark-blue);
 }
 ul.view{
     background: none;
@@ -298,7 +298,7 @@ ul.view{
 li.view{
     font-size: large;
     display: flex;
-    border: 2px solid linear-gradient(298deg, var(--red), var(--yellow));
+    border: 4px solid linear-gradient(298deg, var(--red), var(--yellow));
     border-radius: 7.5px;
     height: 5%;
     margin: 7.5px;
@@ -307,6 +307,9 @@ li.view{
     color: var(--grey);
     align-items: center;
     padding: inherit;
+}
+li.view#title{
+    background-color:linear-gradient(298deg, var(--red), var(--yellow));
 }
 div.view#id_mission{
     width: 25%;
