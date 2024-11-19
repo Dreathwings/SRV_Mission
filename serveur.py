@@ -45,9 +45,10 @@ def oauth():
             DB = connect_to_DB_cas()
             
             cur = DB.cursor()
-            ids = cur.execute("SELECT * FROM db_cas.personnels")
+            cur.execute("SELECT nom,login FROM personnels WHERE login=?", (id,))
+            #ids = cur.execute("SELECT * FROM db_cas.personnels")
             
-            print(f" {DB.user} | Login {ids}")
+            print(f" {DB.user} | Login {cur}")
 
             if id in authorized_user.keys(): # Verif si user autorised sinon 403 list(cur.execute("SELECT ID FROM "))
                 if id in oauth_user.items(): #Verif si user deja un SESSID
@@ -160,7 +161,7 @@ def connect_to_DB_cas():
                             port=3306,
                             user="mission",
                             password="zB1Bm]8rnIMk4MD-",
-                            database="db_cass",
+                            database="db_cas",
                             autocommit=True)
         DB.autocommit = True
         return DB
