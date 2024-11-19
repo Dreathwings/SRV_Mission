@@ -320,11 +320,12 @@ li.view#title{
 }
 div.view#background{
     display: flex;
-    height: 90%;
-    width: 90%;
+    height: 75%;
+    width: 99%;
     align-items: center;
     padding: inherit;
     background-image:var(--dark-light);
+    margin: 7.5px;
 }
 div.view#id_mission{
     width: 25%;
