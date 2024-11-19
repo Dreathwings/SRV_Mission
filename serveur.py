@@ -43,7 +43,7 @@ def oauth():
             id = str(RESP.content).split('cas:user')[1].removeprefix('>').removesuffix("</")
             DB = connect_to_DB_mission()
             cur = DB.cursor()
-            ids = cur.execute("SELECT id IN personnels")
+            ids = cur.execute("SELECT login FROM personnels")
             print(ids)
             if id in authorized_user.keys(): # Verif si user autorised sinon 403 list(cur.execute("SELECT ID FROM "))
                 if id in oauth_user.items(): #Verif si user deja un SESSID
