@@ -11,7 +11,12 @@
     <ul class="view">
         <li class="view"><div class="view" id="id_mission">ID Mission</div> <div class="view" id="id_user">Demandeur</div> <div class="view" id="date">Date</div> <div>Status</div></li>
         {% for mission in Missions %}
-            <li class="view"><div class="view" id="id_mission">{{mission[0]}}</div> <div class="view" id="id_user">{{mission[1]}}</div> <div class="view" id="date">{{mission[2]}}</div> <div>{{mission[3]}}</div></li>
+            <li class="view">
+                <div class="view" id="id_mission">{{mission[0]}}</div> 
+                <div class="view" id="id_user">{{mission[1]}}</div> 
+                <div class="view" id="date">{{mission[2]}}</div> 
+                <div>{{mission[3]}}</div>
+            </li>
         {% endfor %}
     </ul>
     
