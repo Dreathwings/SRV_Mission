@@ -12,7 +12,6 @@ app.config.update(TEMPLATES_AUTO_RELOAD=True)
 oauth_user = dict()
 admin_user = {"wprivat":"ADMIN",
                    "vgalland":"GESTION"}
-admin_user.setdefault()
 ### Activate CAS oauth ###
 CAS = True
 ##########################
