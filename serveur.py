@@ -48,19 +48,19 @@ def oauth():
             
             cur = DB.cursor()
             cur.execute(f"SELECT nom FROM personnels WHERE login = '{id}' ")
-            data = str(cur.fetchone()[0])
+            login = str(cur.fetchone()[0])
             
             #print(f" {DB.user} | Login {data}")
 
-            if data != None: # Verif si user autorised sinon 403 list(cur.execute("SELECT ID FROM "))
+            if login != None: # Verif si user autorised sinon 403 list(cur.execute("SELECT ID FROM "))
                 if id in oauth_user.items(): #Verif si user deja un SESSID
                     key = {i for i in oauth_user if oauth_user[i]==id}
                     oauth_user.pop(key)
 
                 SESSID = uuid4().__str__()
                 status = admin_user.get(id,"BASIC")
-                oauth_user[SESSID] = [id,data,status]
-                print(oauth_user[SESSID])
+                oauth_user[SESSID] = [id,login,status]
+                #print(oauth_user[SESSID])
                 resp = flask.make_response(redirect("/mission"))  
                 resp.set_cookie("SESSID", value = SESSID)
 
@@ -111,14 +111,11 @@ def create_new_mission():
     for value in request.values:
         print(f"{value} | {request.values[value]} | {type(request.values[value])}")
         val = request.values
-    DB_cas = connect_to_DB_cas()
     DB = connect_to_DB_mission()
     cur = DB.cursor()
     ID = new_ID()
     user_id = oauth_user[request.cookies.get("SESSID")][0]
-    cur_cas = DB_cas.cursor()
-    cur_cas.execute(f"SELECT nom FROM personnels WHERE login = '{user_id}' ")
-    nom = str(cur_cas.fetchone())
+    nom = oauth_user[request.cookies.get("SESSID")][1]
     if val['MISSION'] == "FRANCE":
         PAYS = "FRANCE"
     else:
