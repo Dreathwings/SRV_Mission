@@ -295,6 +295,7 @@ ul.view{
     width: 100%;
 }
 li.view{
+    display: flex;
     border: 2px solid var(--dark-blue);
     border-radius: 7.5px;
     height: 5%;
