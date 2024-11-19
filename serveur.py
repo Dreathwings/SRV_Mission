@@ -48,7 +48,7 @@ def oauth():
             
             cur = DB.cursor()
             cur.execute(f"SELECT nom FROM personnels WHERE login = '{id}' ")
-            data = str(cur.fetchone()).split("'")[1]
+            data = str(cur.fetchone())
             
             #print(f" {DB.user} | Login {data}")
 
@@ -60,6 +60,7 @@ def oauth():
                 SESSID = uuid4().__str__()
                 status = admin_user.get(id,"BASIC")
                 oauth_user[SESSID] = [id,data,status]
+                print(oauth_user[SESSID])
                 resp = flask.make_response(redirect("/mission"))  
                 resp.set_cookie("SESSID", value = SESSID)
 
@@ -117,7 +118,7 @@ def create_new_mission():
     user_id = oauth_user[request.cookies.get("SESSID")][0]
     cur_cas = DB_cas.cursor()
     cur_cas.execute(f"SELECT nom FROM personnels WHERE login = '{user_id}' ")
-    nom = str(cur_cas.fetchone()).split("'")[1]
+    nom = str(cur_cas.fetchone())
     if val['MISSION'] == "FRANCE":
         PAYS = "FRANCE"
     else:
