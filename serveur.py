@@ -10,7 +10,7 @@ app.secret_key='CECIESTLACLEFSECRETDEGEII'
 app.config.update(TEMPLATES_AUTO_RELOAD=True)
 
 oauth_user = dict()
-authorized_user = {"wprivats":"ADMIN",
+authorized_user = {"wprivat":"ADMIN",
                    "vgalland":"GESTION"}
 ### Activate CAS oauth ###
 CAS = True
@@ -41,8 +41,10 @@ def oauth():
         RESP = REQ.get(url = "https://cas.u-bordeaux.fr/cas/serviceValidate",params=PARAMS)
         if "authenticationSuccess" in str(RESP.content):
             id = str(RESP.content).split('cas:user')[1].removeprefix('>').removesuffix("</")
-            #DB = connect_to_DB_mission()
-            #cur = DB.cursor()
+            DB = connect_to_DB_mission()
+            cur = DB.cursor()
+            ids = cur.execute("SELECT id IN personnels")
+            print(ids)
             if id in authorized_user.keys(): # Verif si user autorised sinon 403 list(cur.execute("SELECT ID FROM "))
                 if id in oauth_user.items(): #Verif si user deja un SESSID
                     key = {i for i in oauth_user if oauth_user[i]==id}
@@ -142,6 +144,18 @@ def connect_to_DB_mission():
                             user="mission",
                             password="zB1Bm]8rnIMk4MD-",
                             database="mission",
+                            autocommit=True)
+        return DB
+    except mariadb.Error as e:
+        raise Exception(f"Error connecting to the database: {e}")
+    
+def connect_to_DB_cas():
+    try:
+        DB = mariadb.connect(host="localhost",
+                            port=3306,
+                            user="mission",
+                            password="zB1Bm]8rnIMk4MD-",
+                            database="db_cas",
                             autocommit=True)
         return DB
     except mariadb.Error as e:
