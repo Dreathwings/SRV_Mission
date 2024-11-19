@@ -1,14 +1,16 @@
 
 <html lang="fr">
 <head>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" type="image/png" href="{{url_for('static', filename='ressources/bm_gradignan_geii_rvb.png')}}">
+    <title>List Mission</title>
 </head>
 <body>
-    <ul>
+    <ul class="view">
         {% for mission in Missions %}
-            <li>{{mission}} | {{mission[0]}} {{mission[1]}} {{mission[2]}} {{mission[3]}}</li>
+            <li class="view">{{mission[0]}} {{mission[1]}} {{mission[2]}} {{mission[3]}}</li>
         {% endfor %}
     </ul>
     

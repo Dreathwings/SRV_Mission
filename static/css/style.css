@@ -150,20 +150,20 @@ section#ville_section {
   }
 }
 
-ul {
+ul.ville {
   margin: 0;
   padding: 0;
   list-style: none;
   background: var(--dark-light);
 }
 
-li {
+li.ville {
   padding: 20px;
   border-top: 1px solid #ccc;
   scroll-snap-align: start;
 }
 
-li:first-child {
+li:first-child.ville {
   border: 0;
   visibility: hidden;
 }
@@ -286,4 +286,12 @@ li:first-child {
     display: inline-block;
     text-align: center;
     width: 100%;
+}
+
+ul.view{
+    background-color: linear-gradient(298deg, var(--red), var(--yellow));
+}
+li.view{
+    background-color: var(--dark-light);
+    color: var(--grey);
 }
