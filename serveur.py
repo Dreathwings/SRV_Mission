@@ -31,6 +31,8 @@ def index():
     else:
         return render_template('index.html')
 
+#################################
+
 @app.route("/mission/oauth/")
 def oauth():
     if 'ticket' in request.values:
@@ -75,37 +77,50 @@ def oauth():
 def ordre():
     return render_template('new_order.html')
 
-
+#################################
 
 @app.route("/mission/view_mission", methods=['GET'])
 def view():
-    DB = mariadb.connect(host="localhost",
-                            port=3306,
-                            user="mission",
-                            password="zB1Bm]8rnIMk4MD-",
-                            database="mission",autocommit=True)
+    if request.cookies.get('SESSID', None) == None:
+        abort(403)
+    data = oauth_user[request.cookies.get("SESSID")]
+    DB = connect_to_DB_mission()
     cur = DB.cursor()
+
     try:
-        mission = cur.execute("")
+
+        if data[2] == "BASIC":
+            cur.execute(f"SELECT * FROM suivi_mission WHERE ID_USER = '{data[0]}'")
+            mission = cur.fetchall()
+        else:
+            cur.execute(f"SELECT * FROM suivi_mission")
+            mission = cur.fetchall()
+
         return render_template('view.html', Mission=mission)
+    
     except Exception as e:
         error_text = "<p>The error:<br>" + str(e) + "</p>"
         hed = '<h1>Something is broken.</h1>'
         return hed + error_text
+
+#################################
 
 @app.route("/mission/create_mission", methods=['POST'])
 def create_new_mission():
     for value in request.values:
         print(f"{value} | {request.values[value]} | {type(request.values[value])}")
         val = request.values
+
     DB = connect_to_DB_mission()
     cur = DB.cursor()
     ID = new_ID()
-    user_id = oauth_user[request.cookies.get("SESSID")]
+    user_id = oauth_user[request.cookies.get("SESSID")][0]
+
     if val['MISSION'] == "FRANCE":
         PAYS = "FRANCE"
     else:
         PAYS = val["pays"]
+
     try:
         cur.execute("INSERT INTO mission.ordre_mission(ID,NOM,PRENOM,DATE_AJD,NOM_MISSION,PAYS_MISSION,FRAIS,D_DEPART,D_RETOUR,TRANSPORT,LIEU,CODE_PTL,VILLE,HOTEL,PTDEJ,QUILL_URL) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(ID.__repr__(),val["NOM"],val["PRENOM"],val["DATE_AJD"],val["NOM_MISSION"],PAYS,val["FRAIS"],val["D_DEPART"],val["D_RETOUR"],val["TRANSPORT"],val["LIEU"],val["CODE_PTL"],val["VILLE"],val["HOTEL"],val["PTDEJ"],'BOBO'))
         statu_crea = 0
@@ -116,6 +131,7 @@ def create_new_mission():
 
     return redirect("/mission/")
 
+#################################
 
 @app.route("/mission/DB")
 def DBConnect():
@@ -131,6 +147,7 @@ def DBConnect():
         print(f"Error connecting to the database: {e}")
     return "<html><body> <h1>  DB  </h1></body></html>"
 
+#################################
 
 @app.route("/mission/who_is_loged")
 def WHO_IS():
@@ -142,6 +159,11 @@ def new_ID():
     import uuid
     ID = uuid.uuid4()
     return ID.__str__()
+
+
+#################################
+#################################
+#################################
 
 def connect_to_DB_mission():
     try:
@@ -168,7 +190,9 @@ def connect_to_DB_cas():
         return DB
     except mariadb.Error as e:
         raise Exception(f"Error connecting to the database: {e}")
-    
+
+#################################
+
 @app.errorhandler(403)
 def access_denied(e):
     # note that we set the 403 status explicitly
