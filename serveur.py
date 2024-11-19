@@ -10,7 +10,7 @@ app.secret_key='CECIESTLACLEFSECRETDEGEII'
 app.config.update(TEMPLATES_AUTO_RELOAD=True)
 
 oauth_user = dict()
-authorized_user = {"wprivat":"ADMIN",
+authorized_user = {"wprivats":"ADMIN",
                    "vgalland":"GESTION"}
 ### Activate CAS oauth ###
 CAS = True
