@@ -10,8 +10,9 @@ app.secret_key='CECIESTLACLEFSECRETDEGEII'
 app.config.update(TEMPLATES_AUTO_RELOAD=True)
 
 oauth_user = dict()
-authorized_user = {"wprivat":"ADMIN",
+admin_user = {"wprivat":"ADMIN",
                    "vgalland":"GESTION"}
+admin_user.setdefault()
 ### Activate CAS oauth ###
 CAS = True
 ##########################
@@ -47,21 +48,21 @@ def oauth():
             cur = DB.cursor()
             cur.execute(f"SELECT nom FROM personnels WHERE login = '{id}' ")
             data = str(cur.fetchone()).split("'")[1]
-            #ids = cur.execute("SELECT * FROM db_cas.personnels")
             
-            print(f" {DB.user} | Login {data}")
+            #print(f" {DB.user} | Login {data}")
 
-            if id in authorized_user.keys(): # Verif si user autorised sinon 403 list(cur.execute("SELECT ID FROM "))
+            if data != None: # Verif si user autorised sinon 403 list(cur.execute("SELECT ID FROM "))
                 if id in oauth_user.items(): #Verif si user deja un SESSID
                     key = {i for i in oauth_user if oauth_user[i]==id}
                     oauth_user.pop(key)
 
                 SESSID = uuid4().__str__()
-                print(SESSID)
-                oauth_user[SESSID] = id
+                status = admin_user.get(id,"BASIC")
+                oauth_user[SESSID] = [id,data,status]
                 resp = flask.make_response(redirect("/mission"))  
                 resp.set_cookie("SESSID", value = SESSID)
-                print(f"USER {id} authorized")
+
+                print(f"USER {id} authorized with {status} authority")
             else:return abort(403)
                 
             return resp
