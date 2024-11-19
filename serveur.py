@@ -115,7 +115,9 @@ def create_new_mission():
     cur = DB.cursor()
     ID = new_ID()
     user_id = oauth_user[request.cookies.get("SESSID")][0]
-    nom = DB_cas.cursor().execute(f"SELECT nom FROM personnels WHERE login = '{user_id}' ").fetchall()
+    cur_cas = DB_cas.cursor()
+    cur_cas.execute(f"SELECT nom FROM personnels WHERE login = '{user_id}' ")
+    nom = cur_cas.fetchall()
     if val['MISSION'] == "FRANCE":
         PAYS = "FRANCE"
     else:
