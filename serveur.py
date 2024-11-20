@@ -20,9 +20,7 @@ CAS = True
 def index():
     if CAS:
         if request.cookies.get("SESSID") != None:
-            print("SESSID exist")
             if request.cookies.get("SESSID") in oauth_user.keys() :
-                print("SESSID autorized")
                 return render_template('index.html')
             else:
                 return redirect("/mission/oauth")
@@ -57,7 +55,7 @@ def oauth():
                     key = {i for i in oauth_user if oauth_user[i]==id}
                     oauth_user.pop(key)
 
-                SESSID = uuid4().int.__str__()
+                SESSID = uuid4().int.__str__()[:10]
                 status = admin_user.get(id,"BASIC")
                 oauth_user[SESSID] = [id,login,status]
                 #print(oauth_user[SESSID])
@@ -76,14 +74,15 @@ def oauth():
 
 @app.route("/mission/create_mission", methods=['GET'])
 def ordre():
+    Verif_Connection(request)
     return render_template('new_order.html')
 
 #################################
 
 @app.route("/mission/view_mission", methods=['GET'])
 def view():
-    if request.cookies.get('SESSID', None) == None:
-        abort(403)
+    Verif_Connection(request)
+    
     data = oauth_user[request.cookies.get("SESSID")]
     DB = connect_to_DB_mission()
     cur = DB.cursor()
@@ -108,6 +107,8 @@ def view():
 
 @app.route("/mission/create_mission", methods=['POST'])
 def create_new_mission():
+    Verif_Connection(request)
+
     for value in request.values:
         print(f"{value} | {request.values[value]} | {type(request.values[value])}")
         val = request.values
@@ -158,7 +159,7 @@ def WHO_IS():
 def new_ID():
     import uuid
     ID = uuid.uuid4().int
-    return ID.__str__()
+    return ID.__str__()[:10]
 
 
 #################################
@@ -191,6 +192,9 @@ def connect_to_DB_cas():
     except mariadb.Error as e:
         raise Exception(f"Error connecting to the database: {e}")
 
+def Verif_Connection(request):
+    if oauth_user.get(request.cookies.get("SESSID",None),None) == None:
+        abort(403)
 #################################
 
 @app.errorhandler(403)
