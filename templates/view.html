@@ -21,13 +21,12 @@
                     </div>
                 </li>
             </template>
-            
     </ul>
     <script>
         const list = ["Ouvert","En cours de traitement","Validé","Cloturé"]
         const Mission = '{{ Missions }}';
         console.log(Mission)
-        const template = document.getElementById('#mission');
+        const template = document.getElementById('mission');
         for(const element in Mission ) {
             const li = template.content.cloneNode(true);
             const id_mission = li.querySelector('#id_mision');
