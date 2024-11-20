@@ -29,10 +29,10 @@
         const template = document.getElementById('mission');
         for(const element in Mission ) {
             const li = template.content.cloneNode(true);
-            const id_mission = li.querySelector('#id_mision');
-            const id_user = li.querySelector('#id_user');
-            const date = li.querySelector('#date');
-            const status = li.querySelector('#status');
+            const id_mission = li.getElementById('id_mision');
+            const id_user = li.getElementById('id_user');
+            const date = li.getElementById('#ate');
+            const status = li.getElementById('status');
 
             id_mission.content = element[0]
 
