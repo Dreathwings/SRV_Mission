@@ -28,7 +28,7 @@
         const Mission = '{{ Missions }}';
         console.log(Mission)
         const template = document.querySelector('#mission');
-        Mission.forEach(element => {
+        for(const element in Mission ) {
             const li = template.content.cloneNode(true);
             const id_mission = li.querySelector('#id_mision');
             const id_user = li.querySelector('#id_user');
@@ -38,7 +38,7 @@
             id_mission.content = element[0]
 
             document.getElementById("list_view").appendChild(li)
-        });
+        };
                             
     </script>
 </body>
