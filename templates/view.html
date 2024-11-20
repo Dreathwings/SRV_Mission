@@ -28,6 +28,7 @@
         console.log(Mission)
         const template = document.getElementById('mission');
         for(const element in Mission ) {
+            console.log(element)
             const li = template.content.cloneNode(true);
             const id_mission = li.getElementById('id_mission');
             const id_user = li.getElementById('id_user');
