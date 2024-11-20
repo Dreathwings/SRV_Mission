@@ -25,7 +25,7 @@
     </ul>
     <script>
         const list = ["Ouvert","En cours de traitement","Validé","Cloturé"]
-        const Mission = '{{ Mission|tojson }}';
+        const Mission = '{{ Missions }}';
         console.log(Mission)
         const template = document.querySelector('#mission');
         Mission.forEach(element => {
