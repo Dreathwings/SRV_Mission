@@ -25,7 +25,7 @@
     <script>
         const list = ["Ouvert","En cours de traitement","Validé","Cloturé"]
         const Mission = '{{ Missions|tojson }}';
-        console.log(Mission)
+        console.log(Mission.length)
         const template = document.getElementById('mission');
         for(const element in Mission ) {
             console.log(element)
