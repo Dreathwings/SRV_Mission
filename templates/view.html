@@ -22,10 +22,10 @@
                 </li>
             </template>
     </ul>
-    <script>
+    <script type="text/javascript">
         const list = ["Ouvert","En cours de traitement","Validé","Cloturé"]
         const Mission = '{{ Missions }}';
-        console.log(Mission.length)
+        console.log(req)
         const template = document.getElementById('mission');
         for(const element in Mission ) {
             console.log(element)
