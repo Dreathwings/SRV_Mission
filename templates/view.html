@@ -19,7 +19,7 @@
                     <div class="view" id="date">{{mission[3]}}</div> 
                     <div class="view" id="status">{{mission[4]}}</div>
                     <script>
-                        status=document.getElementById("status");
+                        const status=document.getElementById("status");
                         if (status.innerText == "0"){
                             status.innerText == 'Ouvert'
                         }
