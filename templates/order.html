@@ -1,0 +1,377 @@
+
+<html lang="fr">
+<head>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/solid.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/thinline.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.bubble.css" rel="stylesheet" />
+
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="{{url_for('static', filename='js/bootstarp.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/ville.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='/js/JQuery.js')}}"></script>
+
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-material-datetimepicker.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/radio_card2.css')}}">
+    
+    
+    <script type="text/javascript" src="{{url_for('static', filename='js/moment-with-locales.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap-material-datetimepicker.js')}}"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{url_for('static', filename='ressources/bm_gradignan_geii_rvb.png')}}">
+    <title>Demande d'ordre de mission</title>
+</head>
+<body>
+    <input class="checkbox" type="checkbox" name="general" id="general">
+                <label class="for-checkbox" for="general"></label>
+    <div class="background-color"></div>
+    <form method="post" action="/mission/create_mission" name="theForm" >
+    <div class="body" id="body">
+        <div class="Header">
+            <input type="text" name="PRENOM"    id="Prenom"     placeholder="Prenom"    autocomplete="off" required>
+            <input type="text" name="NOM"       id="Nom"        placeholder="Nom"       autocomplete="off" required>
+            <input type="text" name="DATE_AJD"  id="TodayDate"  readonly>
+            <script>
+                date = new Date()
+                let mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+                document.getElementById("TodayDate").value =  date.getDate()+" "+ mois[date.getMonth()]+" "+(1900+date.getYear())
+                
+            </script>   
+        </div>
+        
+        <div style="display: flex; justify-content: center; margin: 10px;">
+            <!--<select style="width: 20%;  text-align: center;">
+                <option value="GESII">GESII</option>
+                <option value="AUTRE">AUTRE</option>
+            </select>: max(820px,30%)-->
+            <input style="width:68.5%;" type="text" name="NOM_MISSION" id="NOM_MISSION" placeholder="NOM DE LA MISSION" required>   
+        </div>
+        
+        <div class="mission">
+    
+            <div class="container_mission">
+                <input class="checkbox-budget" type="radio" name="MISSION" value='FRANCE' id="France" autocomplete="off" checked>
+						<label class="pays" for="France">
+							<span data-hover="France">France</span>
+						</label>
+                <div class="box_mission " id="France">
+                    <div>
+                        <input class="checkbox-budget" type="radio" name="FRAIS" value='AVEC' id="FRAIS_oui" autocomplete="off">
+                        <label class="oui_non" for="FRAIS_oui">
+                            <span data-hover="AVEC FRAIS">AVEC</span>
+                        </label> 
+                    </div>
+                    <p class="FRAIS">FRAIS ?</p>
+                    <div>
+                        <input class="checkbox-budget" type="radio" name="FRAIS" value='SANS' id="FRAIS_non" autocomplete="off" checked>
+                        <label class="oui_non" for="FRAIS_non">
+                            <span data-hover="SANS FRAIS">SANS</span>
+                        </label>    
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container_mission">
+                <input class="checkbox-budget" type="radio" name="MISSION" value='AUTRE' id="Autre" autocomplete="off" >
+                <label class="pays" for="Autre">
+                    <span data-hover="Autre">Autre</span>
+                </label> 
+                <div class="box_mission" id="AUTRE">
+                       <!--<object data="{{url_for('static', filename='html/list_pays.html')}}" type="text/html"></object>-->
+                </div>
+                <script type="text/javascript">
+                       $( "#AUTRE" ).load( '{{url_for("static", filename="html/list_pays.html")}}', function() {
+});
+                    
+                </script>
+            </div> 
+    
+        </div>
+        <div class="mission">
+            <div class="container_mission">
+                <input type="text" id="date-fr-start" class="form-control floating-label" name="D_DEPART" value="" placeholder="Date de départ" autocomplete="off" required>
+            </div>
+            <div class='container_mission'>
+                    <input type="text" id="date-fr-return" class="form-control floating-label" name="D_RETOUR" value="" placeholder="Date de retour" autocomplete="off" required>
+            </div>
+        </div>
+            
+            <script type="text/javascript">
+                $(document).ready(function()
+                {
+                    $('#date-fr-start').bootstrapMaterialDatePicker
+                    ({
+                        format: 'DD/MM/YYYY HH:mm',
+                        lang: 'fr',
+                        weekStart: 1, 
+                        cancelText : 'ANNULER',
+                        nowButton : false,
+                        switchOnClick : true,
+                    }).on('change', function(e, date){
+                        $('#date-fr-return').bootstrapMaterialDatePicker('setMinDate', date);
+                        $('#date-fr-return').bootstrapMaterialDatePicker('setDate', date);
+                        //document.getElementById("date-fr-start").value = date;
+                    });
+                    $('#date-fr-return').bootstrapMaterialDatePicker({
+                        format: 'DD/MM/YYYY HH:mm',
+                        lang: 'fr',
+                        weekStart: 1, 
+                        cancelText : 'ANNULER',
+                        nowButton : false,
+                        switchOnClick : true
+                    });
+                    let dateActuelle = new Date();
+                    dateActuelle.setHours(0)
+                    dateActuelle.setMinutes(0)
+                    let maxDate = new Date(new Date().getFullYear(), 11, 31)
+                    $("#date-fr-start").bootstrapMaterialDatePicker('setMaxDate', maxDate)
+                    $("#date-fr-return").bootstrapMaterialDatePicker('setMaxDate', maxDate)
+    
+                    dateActuelle.setDate(dateActuelle.getDate()+10);
+                    $("#date-fr-start").bootstrapMaterialDatePicker('setMinDate', dateActuelle)
+                    $.material.init()
+                });
+            </script>
+    
+                
+    
+                <div>
+                    <div>
+                        <strong id="title_part">_____Lieu de déplacement_____</strong>
+                        <div style="display: flex; justify-content: center;">
+                            <input style="width: 60%; margin: 15px;" type="text" name="LIEU" id="lieu" placeholder="Lieu de la mission" autocomplete="off">
+                        </div>
+                        <div class="mission" style="justify-content: center;">
+                            <div style="width: 40%;">
+                                <input class="Dest numeric" type="text" name="CODE_PTL" id="code" placeholder="Code postal" autocomplete="off">
+                                <script>
+                                    $(".numeric").on("input", function () {
+                                    var inputValue = $(this).val();
+                                    var validChars = /^[0-9]+$/;
+
+                                    if (!validChars.test(inputValue)) {
+                                        // Remove invalid characters
+                                        $(this).val(inputValue.replace(/[^0-9]+/g, ''));
+                                    }
+                                });
+                                </script>
+                            </div>
+                            <div  style="width: 40%;">
+                                <input class="Dest" type="text" id="ville" name="VILLE" placeholder="Ville" autocomplete="off"onkeypress="return (event.charCode > 64 && 
+	                                event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
+                            </div>
+                        </div>
+                    </div>
+                    <section id="ville_section" style="z-index: 1000;">
+                        <div class="list">
+                            <ul class="ville" id="list_ville">
+                                <li class="ville" data-vicopo="#ville, #code" data-vicopo-click='{"#code": "code", "#ville": "ville"}' >
+                                  <div id="code_postal" data-vicopo-code-postal></div>
+                                  <div id="ville" data-vicopo-ville></div>
+                                </li>
+                            </ul>   
+                        </div>
+                        <div class="animation"></div>
+                    </section>
+                    <script>
+                        const input1 = document.getElementById('code');
+                        const input2 = document.getElementById('ville');
+                        const monSelector = document.getElementById('ville_section');
+                        let timeoutId; // Variable pour stocker l'identifiant du timeout
+
+                        function toggleVisibility() {
+                            clearTimeout(timeoutId); // Annuler le précédent timeout
+
+                            // Délai de 0.5s
+                            timeoutId = setTimeout(() => {
+                                // Vérifie si au moins un des inputs est sélectionné (focus)
+                                if (document.activeElement === input1 || document.activeElement === input2) {
+                                    monSelector.style.visibility = 'visible'; // Rendre visible
+                                } else {
+                                    monSelector.style.visibility = 'hidden'; // Cacher
+                                }
+                            }, 100);
+                        }
+                                        
+                        // Écoute des événements sur les deux inputs
+                        input1.addEventListener('focus', toggleVisibility);
+                        input2.addEventListener('focus', toggleVisibility);
+                        input1.addEventListener('blur', toggleVisibility);
+                        input2.addEventListener('blur', toggleVisibility);
+                    </script>
+                    
+                </div>
+    
+    
+        <strong id="title_part">_____Moyen de transport_____</strong>
+        <div id="transport">
+                    <input class="checkbox-tools" type="radio" name="TRANSPORT" id="tool-1" value='V_PERSO' checked autocomplete="off">
+                    <label class="for-checkbox-tools" for="tool-1">
+                        <img class="img_vehicule" src="{{url_for('static', filename='ressources/voiture.svg')}}" alt="">
+                        Véhicule personnel
+                    </label><!--
+                    --><input class="checkbox-tools" type="radio" name="TRANSPORT" id="tool-2" value='V_UB' autocomplete="off" onclick="V_UB()">
+                    <label class="for-checkbox-tools" for="tool-2">
+                        <img class="img_vehicule" src="{{url_for('static', filename='ressources/construction-automobile.svg')}}" alt="">
+                        Véhicule de l'Université
+                    </label><!--
+                    --><input class="checkbox-tools" type="radio" name="TRANSPORT" id="tool-3" value='TRAIN' autocomplete="off">
+                    <label class="for-checkbox-tools" for="tool-3">
+                        <img class="img_vehicule" src="{{url_for('static', filename='ressources/former.svg')}}" alt="">
+                        Train
+                    </label><!--
+                    --><input class="checkbox-tools" type="radio" name="TRANSPORT" id="tool-4" value='AVION' autocomplete="off">
+                    <label class="for-checkbox-tools" for="tool-4">
+                        <img class="img_vehicule" src="{{url_for('static', filename='ressources/avion-alt.svg')}}" alt="">
+                        Avion
+                    </label>
+    
+        </div>
+        <strong id="title_part">_____Hotel_____</strong>
+        <p class="sub_text"> Besoin d'un hotel?</p>
+
+        <div id="hotel">
+            <div style="display: flex; justify-content: center;">
+                <input type = "hidden" id = "booking-3_H" name = "HOTEL" value = "OUI"/>
+                <input class="checkbox-booking" type="checkbox" name="HOTEL" id="booking-3" value="NON" autocomplete="off" checked>
+                
+                <label class="for-checkbox-booking" for="booking-3" style="position: relative; display: inline-block; ">							
+                        <i class="uil uil-building"></i><span class="text"> Hotel ?</span>
+                </label>  
+            </div>
+            
+            <div id="hotel" class="hotel_info">
+                <input id="Arrondisement" placeholder="Arrondisement si existant" style="display: none;">
+                    <p class="sub_text">Petit déjeuner compris ?</p>
+                <div style="display: flex; justify-content: center;">
+                    <input class="checkbox-budget" type="radio" name="PTDEJ" id="PtDej_oui" value='OUI' autocomplete="off">
+                    <label class="oui_non" for="PtDej_oui">
+                        <span data-hover="OUI">OUI</span>
+                    </label>
+                    <input class="checkbox-budget" type="radio" name="PTDEJ" id="PtDej_non" value='NON' autocomplete="off" checked>
+                    <label class="oui_non" for="PtDej_non">
+                        <span data-hover="NON">NON</span>
+                    </label>  
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#booking-3').change(function() {
+                        if ($(this).is(':checked')) {
+                            document.getElementById("booking-3_H").disabled = true;
+                            $('.hotel_info').hide();  // Montre la div quand l'input est coché
+                        } else {
+                            document.getElementById("booking-3_H").disabled = false;
+                            $('.hotel_info').show();  // Cache la div quand l'input est décoché
+                        }
+                    });
+                    
+                    // Initial check on page load
+                    if ($('#booking-3').is(':checked')) {
+                        document.getElementById("booking-3_H").disabled = true;
+                        $('.hotel_info').hide();
+                    } else {
+                        document.getElementById("booking-3_H").disabled = false;
+                        $('.hotel_info').show();
+                    }
+                });
+            </script>
+        </div>
+        </form>
+        <script src="{{url_for('static', filename='/js/quill.min.js')}}"></script>
+        <script src="{{url_for('static', filename='/js/quill-resize-module.js')}}"></script>
+
+        <div id="editor" style="height: 80%">
+        </div>
+        <input name="QUILL" id="playground" type="text" style="visibility: hidden; height: 0px; border: 0;"></input>
+        <script>
+            Quill.register("modules/resize", window.QuillResizeModule);
+            const toolbarOptions = [  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+                ['blockquote', 'code-block'],
+                ['link', 'image', 'video', 'formula'],
+
+                [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
+                [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+                [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+                [{ 'direction': 'rtl' }],                         // text direction
+
+                [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+                [{ 'font': [] }],
+                [{ 'align': [] }],
+
+                ['clean'] ];
+        const quill = new Quill('#editor', {
+            theme: 'snow',
+            modules: {
+                toolbar: toolbarOptions,
+                resize: {
+                    locale: {},
+                }
+            }
+            });
+            quill.on(Quill.events.TEXT_CHANGE, update);
+            const playground = document.getElementById("playground");
+            update();
+
+            function formatDelta(delta) {
+            return `<div>${JSON.stringify(delta.ops, null, 2)}</div>`;
+            }
+
+            function update(delta) {
+            const contents = quill.getContents();
+            let html = document.getElementById("editor").innerHTML;
+            playground.value = html;
+            }
+            </script>
+        
+    </div>
+    
+    <div style="display: flex;
+                margin-left: auto;
+                margin-right: auto;
+                justify-content: center;
+                align-items: center;"
+                >
+        <input type="button" class="checkbox-budget" id="Valid" onclick="placeOrder()" style="visibility: hidden;" checked>
+        <label class="pays" for="Valid" style="width: 50%;">
+            <span data-hover="Envoyer la demande">Envoyer la demande</span>
+        </label> 
+        <script>
+            function placeOrder() {
+                //console.log(document.body.innerHTML)
+                if( document.theForm.checkValidity()){
+                    document.theForm.submit();
+                }
+                else{
+                    window.alert("Le formulaire n'est pas complet");
+                }
+                
+            }
+            function V_UB(){
+                if (window.confirm("Pour toute mission avec un vehicule de l'Université il est necesaire de faire une demande via l'intranet")) {
+                window.open("exit.html", "Merci de votre visite !");
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>

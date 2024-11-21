@@ -336,9 +336,9 @@ div.view#date{
 div.view#status{
     width: 25%;
 }
-div.view#status[value="0"]{
+div.view#status[value="Ouvert"]{
     width: 25%;
-    background-color: #da2c4d;
+    background-color: green;
 }
 div.view#status{
     width: 25%;
