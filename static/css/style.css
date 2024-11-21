@@ -332,6 +332,7 @@ div.view#id_user{
     display: flex;
     align-content: center;
     vertical-align: auto;
+    
 }
 div.view#date{
     width: 25%;
