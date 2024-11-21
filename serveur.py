@@ -92,7 +92,7 @@ def view():
     data = oauth_user[request.cookies.get("SESSID")]
     DB = connect_to_DB_mission()
     cur = DB.cursor()
-
+    ADMIN = False
     try:
 
         if data[2] == "BASIC":
@@ -101,8 +101,8 @@ def view():
         elif data[2] == "ADMIN" or data[2] == "GESTION":
             cur.execute(f"SELECT * FROM suivi_mission")
             mission = cur.fetchall()
-
-        return render_template('view.html', Missions=mission)
+            ADMIN = True
+        return render_template('view.html', Missions=mission , ADMIN=ADMIN)
     
     except Exception as e:
         error_text = "<p>The error:<br>" + str(e) + "</p>"
