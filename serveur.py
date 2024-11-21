@@ -8,10 +8,16 @@ import sys
 app = Flask('mission',static_url_path='/mission/static/')
 app.secret_key='CECIESTLACLEFSECRETDEGEII'
 app.config.update(TEMPLATES_AUTO_RELOAD=True)
-
+app.config["MAIL_SERVER"]="smtp.gmail.com"
+app.config["MAIL_PORT"] = 465
+app.config["MAIL_USERNAME"] = "serveur.mission.geii@gmail.com"
+app.config["MAIL_PASSWORD"] = "missiongeii"
+app.config["MAIL_USE_TLS"] = True
+app.config["MAIL_USE_SSL"] = False
+           
 oauth_user = dict()
 admin_user = {"wprivat":"ADMIN",
-                   "vgalland":"GESTION"}
+              "vgalland":"GESTION"}
 ### Activate CAS oauth ###
 CAS = True
 ##########################
@@ -92,7 +98,7 @@ def view():
         if data[2] == "BASIC":
             cur.execute(f"SELECT * FROM suivi_mission WHERE ID_USER = '{data[0]}'")
             mission = cur.fetchall()
-        else:
+        elif data[2] == "ADMIN" or data[2] == "GESTION":
             cur.execute(f"SELECT * FROM suivi_mission")
             mission = cur.fetchall()
 
