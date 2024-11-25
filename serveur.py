@@ -233,7 +233,7 @@ Courage
     message["Subject"] = subject
 
     # Ajout du corps de texte
-    message.attach(MIMEText(body, "plain"))
+    message.attach(MIMEText(body, "html"))
 
     try:
         with smtplib.SMTP("smtpauth.u-bordeaux.fr", 587) as server:
