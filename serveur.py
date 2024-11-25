@@ -3,17 +3,17 @@ from flask import Flask, abort, redirect, render_template, request, session, url
 import requests as REQ
 import flask
 import mariadb
+import smtplib
+
+from email.mime.text import MIMEText
+
+from email.mime.multipart import MIMEMultipart
+    
 import sys
 #app = Flask('mission')
 app = Flask('mission',static_url_path='/mission/static/')
 app.secret_key='CECIESTLACLEFSECRETDEGEII'
 app.config.update(TEMPLATES_AUTO_RELOAD=True)
-app.config["MAIL_SERVER"]="smtp.gmail.com"
-app.config["MAIL_PORT"] = 465
-app.config["MAIL_USERNAME"] = "serveur.mission.geii@gmail.com"
-app.config["MAIL_PASSWORD"] = "missiongeii"
-app.config["MAIL_USE_TLS"] = True
-app.config["MAIL_USE_SSL"] = False
            
 oauth_user = dict()
 admin_user = {"wprivat":"ADMIN",
@@ -101,8 +101,10 @@ def view():
         elif data[2] == "ADMIN" or data[2] == "GESTION":
             cur.execute(f"SELECT * FROM suivi_mission")
             mission = cur.fetchall()
+            cur.execute(f"SELECT DISTINCT ID_USER FROM suivi_mission")
+            all_user = cur.fetchall()
             ADMIN = True
-        return render_template('view.html', Missions=mission , ADMIN=ADMIN)
+        return render_template('view.html', Missions=mission , ADMIN=ADMIN, All_User=all_user)
     
     except Exception as e:
         error_text = "<p>The error:<br>" + str(e) + "</p>"
@@ -110,7 +112,11 @@ def view():
         return hed + error_text
 
 #################################
+@app.route("/mission/view_mission/<id_mission>")
+def show_mission(id_mission):
+    return f"<html><body> <h1>  {id_mission}  </h1></body></html>"
 
+#################################
 @app.route("/mission/create_mission", methods=['POST'])
 def create_new_mission():
     Verif_Connection(request)
@@ -132,6 +138,8 @@ def create_new_mission():
         cur.execute("INSERT INTO mission.ordre_mission(ID,NOM,PRENOM,DATE_AJD,NOM_MISSION,PAYS_MISSION,FRAIS,D_DEPART,D_RETOUR,TRANSPORT,LIEU,CODE_PTL,VILLE,HOTEL,PTDEJ,QUILL_URL) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(ID.__repr__(),val["NOM"],val["PRENOM"],val["DATE_AJD"],val["NOM_MISSION"],PAYS,val["FRAIS"],val["D_DEPART"],val["D_RETOUR"],val["TRANSPORT"],val["LIEU"],val["CODE_PTL"],val["VILLE"],val["HOTEL"],val["PTDEJ"],'BOBO'))
         statu_crea = 0
         cur.execute("INSERT INTO mission.suivi_mission(ID,ID_USER,NAME,DATE_CREA,STATUE) VALUES (?,?,?,?,?)",(ID.__str__(),user_id,nom,val["DATE_AJD"],statu_crea))
+
+        Send_Mail(nom,ID)
         print(f"Ordre mission {ID} success")
     except mariadb.Error as e: 
         print(f"Error: {e}")
@@ -201,6 +209,39 @@ def connect_to_DB_cas():
 def Verif_Connection(request):
     if oauth_user.get(request.cookies.get("SESSID",None),None) == None:
         abort(403)
+
+def Send_Mail(user,id_mission):
+    
+    # Informations de connexion et de l'expéditeur
+    sender_email = "serveur.mission.geii@gmail.com"
+    receiver_email = "warren.privat@u-bordeaux.fr"
+
+    # Configuration du message
+    subject = "Nouvelle demande de mission"
+    body = f"""Hey, Valerie
+    
+    {user} a ouvert une nouvelle demande de mission: <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" target="_blank" rel="noopener" data-mce-href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" data-mce-selected="inline-boundary">{id_mission}</a>
+    
+Courage
+@+
+    """
+
+    # Création de l'objet message
+    message = MIMEMultipart()
+    message["From"] = sender_email
+    message["To"] = receiver_email
+    message["Subject"] = subject
+
+    # Ajout du corps de texte
+    message.attach(MIMEText(body, "plain"))
+
+    try:
+        with smtplib.SMTP("smtpauth.u-bordeaux.fr", 587) as server:
+            server.starttls()  # Sécurise la connexion
+            server.sendmail(sender_email, receiver_email, message.as_string())
+            print("Email envoyé avec succès")
+    except Exception as e:
+        print(f"Erreur lors de l'envoi de l'email : {e}")
 #################################
 
 @app.errorhandler(403)
