@@ -218,8 +218,14 @@ def Send_Mail(user,id_mission):
 
     # Configuration du message
     subject = "Nouvelle demande de mission"
-    body = f"""<div>Hey, Valerie<br>&nbsp;&nbsp; &nbsp;<br>&nbsp;&nbsp; &nbsp;Warren Privat a ouvert une nouvelle demande de mission: &lt;a href="<span class="Object" role="link" id="OBJ_PREFIX_DWT321_com_zimbra_url"><span class="Object" role="link" id="OBJ_PREFIX_DWT324_com_zimbra_url"><a target="_blank" href="http://geii.iut.u-bordeaux.fr/mission/view_mission/2809920749">http://geii.iut.u-bordeaux.fr/mission/view_mission/2809920749</a></span></span>" target="_blank" rel="noopener" data-mce-href="<span class="Object-hover" role="link" id="OBJ_PREFIX_DWT322_com_zimbra_url"><span class="Object" role="link" id="OBJ_PREFIX_DWT325_com_zimbra_url"><a target="_blank" href="http://geii.iut.u-bordeaux.fr/mission/view_mission/2809920749">http://geii.iut.u-bordeaux.fr/mission/view_mission/2809920749</a></span></span>" data-mce-selected="inline-boundary"&gt;<span class="Object" role="link" id="OBJ_PREFIX_DWT323_com_zimbra_phone"><a href="callto:2809920749" onclick="window.top.Com_Zimbra_Phone.unsetOnbeforeunload()">2809920749</a></span>&lt;/a&gt;<br>&nbsp;&nbsp; &nbsp;<br>Courage<br>@+<br>&nbsp;&nbsp; &nbsp;</div>
-    """
+    body =f"""
+<div>Hey, Valerie
+<br>&nbsp;&nbsp; &nbsp;<br>&nbsp;&nbsp; &nbsp;
+{user} a ouvert une nouvelle demande de mission: <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" target="_blank" rel="noopener" data-mce-href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" data-mce-selected="inline-boundary">{id_mission}</a>
+&lt;/a&gt;<br>&nbsp;&nbsp; &nbsp;<br>
+Courage<br>
+@+<br>&nbsp;&nbsp; &nbsp;</div>
+"""
 
     # Création de l'objet message
     message = MIMEMultipart()
