@@ -218,11 +218,11 @@ def Send_Mail(user,id_mission):
 
     # Configuration du message
     subject = "Nouvelle demande de mission"
-    body = f"""Hey, Valerie
+    body = f"""Hey, Valerie \n
     
-    {user} a ouvert une nouvelle demande de mission: <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" target="_blank" rel="noopener" data-mce-href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" data-mce-selected="inline-boundary">{id_mission}</a>
+    {user} a ouvert une nouvelle demande de mission: <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" target="_blank" rel="noopener" data-mce-href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" data-mce-selected="inline-boundary">{id_mission}</a>\n
     
-Courage
+Courage\n
 @+
     """
 
