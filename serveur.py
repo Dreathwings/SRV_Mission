@@ -139,7 +139,7 @@ def create_new_mission():
         statu_crea = 0
         cur.execute("INSERT INTO mission.suivi_mission(ID,ID_USER,NAME,DATE_CREA,STATUE) VALUES (?,?,?,?,?)",(ID.__str__(),user_id,nom,val["DATE_AJD"],statu_crea))
 
-        Send_Mail(nom,ID)
+        Send_Mail_NM(nom,ID)
         print(f"Ordre mission {ID} success")
     except mariadb.Error as e: 
         print(f"Error: {e}")
@@ -210,18 +210,18 @@ def Verif_Connection(request):
     if oauth_user.get(request.cookies.get("SESSID",None),None) == None:
         abort(403)
 
-def Send_Mail(user,id_mission):
+def Send_Mail_NM(user,id_mission):
     
     # Informations de connexion et de l'expéditeur
     sender_email = "serveur.mission.geii@gmail.com"
     receiver_email = "warren.privat@u-bordeaux.fr"
 
     # Configuration du message
-    subject = "Nouvelle demande de mission"
+    subject = f"Nouvelle demande de mission de {user}"
     body =f"""
 <div>Hey, Valerie
 <br>&nbsp;&nbsp; &nbsp;<br>&nbsp;&nbsp; &nbsp;
-{user} a ouvert une nouvelle demande de mission: <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" target="_blank" rel="noopener" data-mce-href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" data-mce-selected="inline-boundary">{id_mission}</a>
+{user} a ouvert une nouvelle demande de mission: <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" target="_blank" rel="noopener" data-mce-href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" data-mce-selected="inline-boundary">{id_mission}
 &lt;/a&gt;<br>&nbsp;&nbsp; &nbsp;<br>
 Courage<br>
 @+<br>&nbsp;&nbsp; &nbsp;</div>
