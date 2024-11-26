@@ -99,6 +99,8 @@ def view():
     data = oauth_user[request.cookies.get("SESSID")]
     DB = connect_to_DB_mission()
     cur = DB.cursor()
+    DB_CAS= connect_to_DB_cas()
+    cur_cas = DB_CAS.cursor()
     ADMIN = False
     try:
 
@@ -109,7 +111,7 @@ def view():
             cur.execute(f"SELECT * FROM suivi_mission")
             mission = list(cur.fetchall())
             cur.execute(f"SELECT DISTINCT ID_USER FROM suivi_mission")
-            all_user = list(cur.fetchall()[0])
+            all_user = cur_cas.execute(f"SELECT DISTINCT nom from personnels WHERE login = '{cur.fetchall()}'")
             ADMIN = True
         return render_template('view.html', Missions=mission , ADMIN=ADMIN, All_User=all_user)
     
