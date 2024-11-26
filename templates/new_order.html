@@ -130,6 +130,10 @@
                         $('#date-fr-return').bootstrapMaterialDatePicker('setDate', date);
                         //document.getElementById("date-fr-start").value = date;
                     });
+                    $('#time-fr-start').bootstrapMaterialDatePicker({
+                        date: false,
+                        format: 'HH:mm'
+                    }); 
                     $('#date-fr-return').bootstrapMaterialDatePicker({
                         format: 'DD/MM/YYYY',
                         time: false,
@@ -139,6 +143,11 @@
                         nowButton : false,
                         switchOnClick : true
                     });
+                    $('#time-fr-return').bootstrapMaterialDatePicker({
+                        date: false,
+                        format: 'HH:mm'
+                    }); 
+
                     let dateActuelle = new Date();
                     dateActuelle.setHours(0)
                     dateActuelle.setMinutes(0)
