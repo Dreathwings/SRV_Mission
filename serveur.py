@@ -113,6 +113,7 @@ def view():
             cur.execute(f"SELECT DISTINCT ID_USER FROM suivi_mission")
             all_user=[]
             for login in list(item[0] for item in cur.fetchall()):
+                print(login)
                 all_user.append(cur_cas.execute(f"SELECT nom FROM personnels WHERE login = '{login}'"))
             print(all_user)
             ADMIN = True
