@@ -57,12 +57,12 @@
             console.log(node)
             if (selector.value != "ALL"){
                 if (node.getAttribute('user') != selector.value){
-                    node.style = "display: none;"
+                    node.style.display = "none";
                 }else{
-                    node.style = "display: flex;"
+                    node.style.display = "flex";
                 }
             }else{
-                node.style = "display: flex;"
+                node.style.display = "flex";
             }
             
         }
