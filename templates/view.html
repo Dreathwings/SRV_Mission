@@ -52,6 +52,7 @@
     function select_user(){
         Nodelist = document.querySelectorAll('[id*="view_mission"]')
         for (node in Nodelist){
+            console.log(node)
             if (selector.value != "ALL"){
                 if (node.getAttribute('user') != selector.value){
                     node.style = "display: none;"
