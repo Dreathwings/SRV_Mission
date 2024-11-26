@@ -50,7 +50,15 @@
     const selector = document.getElementById("selected_user")
     selector.addEventListener("change",select_user)
     function select_user(){
-        console.log(document.querySelectorAll('[id*="view_mission"]'))
+        Nodelist = document.querySelectorAll('[id*="view_mission"]')
+        for (node in Nodelist){
+            if (selector.value != "ALL"){
+                if (node.getAttribute('user') != selector.value){
+                    node.style = "display: none;"
+                }  
+            }
+            
+        }
     }
 </script>
 </html>
