@@ -15,7 +15,7 @@
                 <div class="view" id="id_user">Demandeur
                     <select name="zdz" id="">
                         {% for user in All_User %}
-                            <option value={{user}}>{{user}}</option>
+                            <option value={{user[0]}}>{{user[0]}}</option>
                         {% endfor %}
                     </select></div>
                     <div class="view" id="date">Date</div> 
