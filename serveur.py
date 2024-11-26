@@ -107,7 +107,7 @@ def view():
             mission = cur.fetchall()
         elif data[2] == "ADMIN" or data[2] == "GESTION":
             cur.execute(f"SELECT * FROM suivi_mission")
-            mission = list(cur.fetchall()[0])
+            mission = list(cur.fetchall())
             cur.execute(f"SELECT DISTINCT ID_USER FROM suivi_mission")
             all_user = list(cur.fetchall()[0])
             ADMIN = True
