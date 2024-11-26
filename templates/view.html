@@ -58,9 +58,10 @@
             if (selector.value != "ALL"){
                 if (node.getAttribute('user') != selector.value){
                     node.style = "display: none;"
-                }  
-            }
-            else{
+                }else{
+                    node.style = "display: flex;"
+                }
+            }else{
                 node.style = "display: flex;"
             }
             
