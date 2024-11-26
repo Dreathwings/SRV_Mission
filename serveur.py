@@ -107,9 +107,9 @@ def view():
             mission = cur.fetchall()
         elif data[2] == "ADMIN" or data[2] == "GESTION":
             cur.execute(f"SELECT * FROM suivi_mission")
-            mission = list(cur.fetchall())
+            mission = list(cur.fetchall()[0])
             cur.execute(f"SELECT DISTINCT ID_USER FROM suivi_mission")
-            all_user = list(cur.fetchone())
+            all_user = list(cur.fetchall()[0])
             ADMIN = True
         return render_template('view.html', Missions=mission , ADMIN=ADMIN, All_User=all_user)
     
