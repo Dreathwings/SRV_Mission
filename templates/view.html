@@ -55,14 +55,19 @@
             
             let node = Nodelist[i]
             console.log(node)
-            if (selector.value != "ALL"){
-                if (node.getAttribute('user') != selector.value){
-                    node.style.display = "none";
-                }else{
-                    node.style.display = "flex";
-                }
-            }else{
+            if (selector.value == "ALL"){
+                console.log("SET ALL")
                 node.style.display = "flex";
+            }else{
+                if (node.getAttribute('user') == selector.value){
+                    console.log("SET ",node.getAttribute('user')," to flex")
+                    node.style.display = "flex";
+                }else{
+                    console.log("SET ",node.getAttribute('user')," to none")
+                    node.style.display = "none";
+                    
+                }
+                
             }
             
         }
