@@ -116,7 +116,7 @@
                 {
                     $('#date-fr-start').bootstrapMaterialDatePicker
                     ({
-                        format: 'DD/MM/YYYY HH:mm',
+                        format: 'DD/MM/YYYY',
                         lang: 'fr',
                         weekStart: 1, 
                         cancelText : 'ANNULER',
@@ -128,7 +128,7 @@
                         //document.getElementById("date-fr-start").value = date;
                     });
                     $('#date-fr-return').bootstrapMaterialDatePicker({
-                        format: 'DD/MM/YYYY HH:mm',
+                        format: 'DD/MM/YYYY',
                         lang: 'fr',
                         weekStart: 1, 
                         cancelText : 'ANNULER',
@@ -138,7 +138,7 @@
                     let dateActuelle = new Date();
                     dateActuelle.setHours(0)
                     dateActuelle.setMinutes(0)
-                    let maxDate = new Date(new Date().getFullYear(), 11, 31)
+                    let maxDate = new Date(new Date().getFullYear()+1, 11, 31)
                     $("#date-fr-start").bootstrapMaterialDatePicker('setMaxDate', maxDate)
                     $("#date-fr-return").bootstrapMaterialDatePicker('setMaxDate', maxDate)
     
