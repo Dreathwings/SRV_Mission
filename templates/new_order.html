@@ -105,9 +105,11 @@
         <div class="mission">
             <div class="container_mission">
                 <input type="text" id="date-fr-start" class="form-control floating-label" name="D_DEPART" value="" placeholder="Date de départ" autocomplete="off" required>
+                <input type="text" id="time-fr-start" class="form-control floating-label" name="D_DEPART" value="" placeholder="Date de départ" autocomplete="off" required>
             </div>
             <div class='container_mission'>
                     <input type="text" id="date-fr-return" class="form-control floating-label" name="D_RETOUR" value="" placeholder="Date de retour" autocomplete="off" required>
+                    <input type="text" id="time-fr-return" class="form-control floating-label" name="D_RETOUR" value="" placeholder="Date de retour" autocomplete="off" required>
             </div>
         </div>
             
@@ -116,7 +118,6 @@
                 {
                     $('#date-fr-start').bootstrapMaterialDatePicker
                     ({
-                        format: 'DD/MM/YYYY',
                         lang: 'fr',
                         weekStart: 1, 
                         cancelText : 'ANNULER',
@@ -128,7 +129,6 @@
                         //document.getElementById("date-fr-start").value = date;
                     });
                     $('#date-fr-return').bootstrapMaterialDatePicker({
-                        format: 'DD/MM/YYYY',
                         lang: 'fr',
                         weekStart: 1, 
                         cancelText : 'ANNULER',
