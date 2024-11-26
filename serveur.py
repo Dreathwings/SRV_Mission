@@ -232,14 +232,15 @@ def Send_Mail_NM(user,id_mission):
     
     # Informations de connexion et de l'expéditeur
     sender_email = "serveur.mission.geii@gmail.com"
-    receiver_email = "valerie.galland@u-bordeaux.fr"
+    #receiver_email = "valerie.galland@u-bordeaux.fr"
+    receiver_email = "warren.privat@u-bordeaux.fr"
 
     # Configuration du message
     subject = f"Nouvelle demande de mission de {user}"
     body =f"""
 <div>Hey, Valerie
 <br>&nbsp;&nbsp; &nbsp;<br>&nbsp;&nbsp; &nbsp;
-{user} a ouvert une nouvelle demande de mission: <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" target="_blank" rel="noopener" data-mce-href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" data-mce-selected="inline-boundary">{id_mission}
+{user} a ouvert une nouvelle demande de mission: <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" target="_blank" rel="noopener" data-mce-href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" data-mce-selected="inline-boundary">{id_mission}</a>
 &lt;/a&gt;<br>&nbsp;&nbsp; &nbsp;<br>
 Courage<br>
 @+<br>&nbsp;&nbsp; &nbsp;</div>
