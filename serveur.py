@@ -15,7 +15,14 @@ app = Flask('mission',static_url_path='/mission/static/')
 app.secret_key='CECIESTLACLEFSECRETDEGEII'
 app.config.update(TEMPLATES_AUTO_RELOAD=True)
            
-oauth_user = dict()
+oauth_user = dict()#
+### Structure ####
+### {[0] id     : Random ID gen a la connection validé par le CAS,
+#    [1] login  : Login recup via le CAS,
+#    [2] status : Privilege de l'utilisateur "BASIC" "ADMIN" "GESTION"
+#}
+
+
 admin_user = {"wprivat":"ADMIN",
               "vgalland":"GESTION"}
 ### Activate CAS oauth ###
@@ -114,8 +121,16 @@ def view():
 #################################
 @app.route("/mission/view_mission/<id_mission>")
 def show_mission(id_mission):
-    return f"<html><body> <h1>  {id_mission}  </h1></body></html>"
-
+    Verif_Connection(request)
+    DB = connect_to_DB_mission()
+    cur = DB.cursor()
+    cur.execute(f"SELECT ID_USER FROM ordre_mission WHERE ID ='{id_mission}'")
+    data = oauth_user[request.cookies.get("SESSID")]
+    user = cur.fetchall()
+    if data[2] == "ADMIN" or data[2] == "GESTION" or data[2] == user:
+        return f"<html><body> <h1>  {id_mission}  </h1></body></html>"
+    else:
+        return abort(403)
 #################################
 @app.route("/mission/create_mission", methods=['POST'])
 def create_new_mission():
