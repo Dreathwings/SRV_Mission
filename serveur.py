@@ -112,6 +112,7 @@ def view():
             mission = list(cur.fetchall())
             cur.execute(f"SELECT DISTINCT ID_USER FROM suivi_mission")
             all_user = cur_cas.execute(f"SELECT nom FROM personnels WHERE login IN {tuple(item[0] for item in cur.fetchall())}")
+            print(all_user)
             ADMIN = True
         return render_template('view.html', Missions=mission , ADMIN=ADMIN, All_User=all_user)
     
