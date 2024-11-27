@@ -9,21 +9,9 @@
 
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"></script>
-	<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
-
-	<script type="text/javascript" src="{{url_for('static', filename='js/bootstarp.min.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='js/ville.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='/js/JQuery.js')}}"></script>
 
 
-    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-material-datetimepicker.css')}}" />
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/radio_card2.css')}}">
     
@@ -188,33 +176,6 @@
                         </div>
                         <div class="animation"></div>
                     </section>
-                    <script>
-                        const input1 = document.getElementById('code');
-                        const input2 = document.getElementById('ville');
-                        const monSelector = document.getElementById('ville_section');
-                        let timeoutId; // Variable pour stocker l'identifiant du timeout
-
-                        function toggleVisibility() {
-                            clearTimeout(timeoutId); // Annuler le précédent timeout
-
-                            // Délai de 0.5s
-                            timeoutId = setTimeout(() => {
-                                // Vérifie si au moins un des inputs est sélectionné (focus)
-                                if (document.activeElement === input1 || document.activeElement === input2) {
-                                    monSelector.style.visibility = 'visible'; // Rendre visible
-                                } else {
-                                    monSelector.style.visibility = 'hidden'; // Cacher
-                                }
-                            }, 100);
-                        }
-                                        
-                        // Écoute des événements sur les deux inputs
-                        input1.addEventListener('focus', toggleVisibility);
-                        input2.addEventListener('focus', toggleVisibility);
-                        input1.addEventListener('blur', toggleVisibility);
-                        input2.addEventListener('blur', toggleVisibility);
-                    </script>
-                    
                 </div>
     
     
@@ -298,7 +259,7 @@
 
         <div id="editor" style="height: 80%">
         </div>
-        <input name="QUILL" id="playground" type="text" style="visibility: hidden; height: 0px; border: 0;"></input>
+        <input name="QUILL" id="playground" type="text" style="visibility: hidden; height: 0px; border: 0;">
         <script>
             Quill.register("modules/resize", window.QuillResizeModule);
             const toolbarOptions = [  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -343,35 +304,6 @@
             }
             </script>
         
-    </div>
-    
-    <div style="display: flex;
-                margin-left: auto;
-                margin-right: auto;
-                justify-content: center;
-                align-items: center;"
-                >
-        <input type="button" class="checkbox-budget" id="Valid" onclick="placeOrder()" style="visibility: hidden;" checked>
-        <label class="pays" for="Valid" style="width: 50%;">
-            <span data-hover="Envoyer la demande">Envoyer la demande</span>
-        </label> 
-        <script>
-            function placeOrder() {
-                //console.log(document.body.innerHTML)
-                if( document.theForm.checkValidity()){
-                    document.theForm.submit();
-                }
-                else{
-                    window.alert("Le formulaire n'est pas complet");
-                }
-                
-            }
-            function V_UB(){
-                if (window.confirm("Pour toute mission avec un vehicule de l'Université il est necesaire de faire une demande via l'intranet")) {
-                window.open("exit.html", "Merci de votre visite !");
-                }
-            }
-        </script>
     </div>
 </body>
 </html>

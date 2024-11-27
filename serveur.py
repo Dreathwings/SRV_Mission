@@ -136,8 +136,8 @@ def show_mission(id_mission):
     if data[2] == "ADMIN" or data[2] == "GESTION" or data[2] == user:
         cur.execute(f"SELECT * FROM ordre_mission WHERE ID ='{id_mission}'")
         mission = cur.fetchall()#list(item[0] for item in cur.fetchall())
-        print(mission)
-        return f"<html><body> <h1>  {id_mission} {mission}  </h1></body></html>"
+        return render_template('order.html', Mission=mission)
+        #return f"<html><body> <h1>  {id_mission} {mission}  </h1></body></html>"
     else:
         return abort(403)
 #################################
