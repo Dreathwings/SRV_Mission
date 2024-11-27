@@ -31,7 +31,7 @@
     <form method="post" action="/mission/create_mission" name="theForm" >
     <div class="body" id="body">
         <div class="Header">
-            <input type="text" name="PRENOM"    id="Prenom"     placeholder="Prenom"    autocomplete="off" value="{{ Mission[2] }}">
+            <input type="text" name="PRENOM"    id="Prenom"     placeholder="Prenom"    autocomplete="off" value="{{ Mission }}" readonly>
             <input type="text" name="NOM"       id="Nom"        placeholder="Nom"       autocomplete="off"  value="{{Mission[1]}}" readonly>
             <input type="text" name="DATE_AJD"  id="TodayDate"  readonly>
             <script>
