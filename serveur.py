@@ -117,6 +117,7 @@ def view():
         return render_template('view.html', Missions=mission , ADMIN=ADMIN, All_User=all_user)
     except mariadb.Error as e: 
         print(f"Error: {e}")
+        return "oups"
     except Exception as e:
         error_text = "<p>The error:<br>" + str(e) + "</p>"
         hed = '<h1>Something is broken.</h1>'
