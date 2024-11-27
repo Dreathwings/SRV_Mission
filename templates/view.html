@@ -75,12 +75,12 @@
     function Dated(){
         Nodelist = document.querySelectorAll('[id*="view_mission"]')
         for (i in Nodelist){
-            let node = Nodelist[i]
-            console.log(node)
-            let nodedate = node.querySelectorAll('[id*="date"]')
-            console.log(parseInt(nodedate.innerText))
-            let date = new Date(parseInt(nodedate.innerText))
-            console.log(date.toDateString())
+            let node = Nodelist[i];
+            console.log(node);
+            let nodedate = node.querySelectorAll('[id*="date"]');
+            console.log(parseInt(nodedate.innerText));
+            let date = new Date(parseInt(nodedate.innerText));
+            console.log(date.toString());
         }
     }
     Dated()
