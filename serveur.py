@@ -115,13 +115,12 @@ def view():
             all_user = list(item[0] for item in cur_cas.fetchall())
             ADMIN = True
         return render_template('view.html', Missions=mission , ADMIN=ADMIN, All_User=all_user)
-    
+    except mariadb.Error as e: 
+        print(f"Error: {e}")
     except Exception as e:
         error_text = "<p>The error:<br>" + str(e) + "</p>"
         hed = '<h1>Something is broken.</h1>'
         return hed + error_text
-    except mariadb.Error as e: 
-        print(f"Error: {e}")
 
 #################################
 @app.route("/mission/view_mission/<id_mission>")
