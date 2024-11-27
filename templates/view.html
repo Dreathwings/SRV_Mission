@@ -78,8 +78,8 @@
             let node = Nodelist[i];
             console.log(node);
             let nodedate = node.querySelectorAll('[id*="date"]');
-            console.log(nodedate.innerHTML);
-            let date = new Date(parseInt(nodedate.innerHTML));
+            console.log(nodedate[0].innerHTML);
+            let date = new Date(parseInt(nodedate[0].innerHTML));
             console.log(date.toString());
         }
     }
