@@ -31,8 +31,8 @@
     <form method="post" action="/mission/create_mission" name="theForm" >
     <div class="body" id="body">
         <div class="Header">
-            <input type="text" name="PRENOM"    id="Prenom"     placeholder="Prenom"    autocomplete="off" value={{Mission[2]}} readonly>
-            <input type="text" name="NOM"       id="Nom"        placeholder="Nom"       autocomplete="off" required value={{Mission[1]}} readonly>
+            <input type="text" name="PRENOM"    id="Prenom"     placeholder="Prenom"    autocomplete="off" value="{{Mission[2]}}" readonly>
+            <input type="text" name="NOM"       id="Nom"        placeholder="Nom"       autocomplete="off" required value="{{Mission[1]}}" readonly>
             <input type="text" name="DATE_AJD"  id="TodayDate"  readonly>
             <script>
                 date = new Date({{Mission[3]}})
@@ -47,7 +47,7 @@
                 <option value="GESII">GESII</option>
                 <option value="AUTRE">AUTRE</option>
             </select>: max(820px,30%)-->
-            <input style="width:68.5%;" type="text" name="NOM_MISSION" id="NOM_MISSION" placeholder="NOM DE LA MISSION" value={{Mission[4]}} readonly>   
+            <input style="width:68.5%;" type="text" name="NOM_MISSION" id="NOM_MISSION" placeholder="NOM DE LA MISSION" value="{{Mission[4]}}" readonly>   
         </div>
         
         <div class="mission">
