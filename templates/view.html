@@ -52,25 +52,31 @@
     function select_user(){
         Nodelist = document.querySelectorAll('[id*="view_mission"]')
         for (i in Nodelist){
-            
             let node = Nodelist[i]
-            console.log(node)
+            //console.log(node)
             if (selector.value == "ALL"){
-                console.log("SET ALL")
+                /*console.log("SET ALL")*/
                 node.style.display = "flex";
             }else{
                 if (node.getAttribute('user') == selector.value){
-                    console.log("SET ",node.getAttribute('user')," to flex")
+                    /*console.log("SET ",node.getAttribute('user')," to flex")*/
                     node.style.display = "flex";
                 }else{
-                    console.log("SET ",node.getAttribute('user')," to none")
-                    console.log(selector.value)
+                    /*console.log("SET ",node.getAttribute('user')," to none")*/
+                    //console.log(selector.value)
                     node.style.display = "none";
                     
                 }
                 
             }
             
+        }
+    }
+    function Dated(){
+        Nodelist = document.querySelectorAll('[id*="view_mission"]')
+        for (i in Nodelist){
+            let node = Nodelist[i]
+            date = Date.parse(node.querySelectorAll('[id*="date"]').content)
         }
     }
 </script>
