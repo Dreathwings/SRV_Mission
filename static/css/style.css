@@ -333,7 +333,10 @@ div.view#id_user{
     align-content: center;
     vertical-align: auto;
     justify-content: center;
-    gap: 15px;
+    flex-direction: column;
+    text-align: center;
+    align-content: center;
+    text-align-last: center;
 
 }
 div.view#date{
