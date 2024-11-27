@@ -120,6 +120,8 @@ def view():
         error_text = "<p>The error:<br>" + str(e) + "</p>"
         hed = '<h1>Something is broken.</h1>'
         return hed + error_text
+    except mariadb.Error as e: 
+        print(f"Error: {e}")
 
 #################################
 @app.route("/mission/view_mission/<id_mission>")
