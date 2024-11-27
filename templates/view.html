@@ -81,8 +81,8 @@
             let node = Nodelist[i];
             console.log(node);
             let nodedate = node.querySelectorAll('[id*="date"]');
-            console.log(nodedate[0].date);
-            let date = new Date(parseInt(nodedate[0].date));
+            console.log(nodedate[0].getAttribute("date"));
+            let date = new Date(parseInt(nodedate[0].getAttribute("date")));
             nodedate[0].innerHTML = date.getDate()+" "+ mois[date.getMonth()]+" "+(1900+date.getYear());
         }
     }
