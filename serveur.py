@@ -112,6 +112,7 @@ def view():
             mission = list(cur.fetchall())
             cur.execute(f"SELECT DISTINCT ID_USER FROM suivi_mission")
             users = tuple(item[0] for item in cur.fetchall())
+            print(f'USERS:{users}')
             cur_cas.execute(f"SELECT nom FROM personnels WHERE login IN {users}")
             all_user = list(item[0] for item in cur_cas.fetchall())
             ADMIN = True
