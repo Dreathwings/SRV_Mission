@@ -74,13 +74,14 @@
     }
     function Dated(){
         Nodelist = document.querySelectorAll('[id*="view_mission"]')
+        let mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
         for (i in Nodelist){
             let node = Nodelist[i];
             console.log(node);
             let nodedate = node.querySelectorAll('[id*="date"]');
             console.log(nodedate[0].innerHTML);
             let date = new Date(parseInt(nodedate[0].innerHTML));
-            console.log(date.toString());
+            nodedate[0].innerHTML = date.getDate()+" "+ mois[date.getMonth()]+" "+(1900+date.getYear());
         }
     }
     Dated()
