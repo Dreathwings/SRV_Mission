@@ -31,7 +31,7 @@
     <form method="post" action="/mission/create_mission" name="theForm" >
     <div class="body" id="body">
         <div class="Header">
-            <input type="text" name="PRENOM"    id="Prenom"     placeholder="Prenom"    autocomplete="off" value="{{Mission[2]}}" readonly>
+            <input type="text" name="PRENOM"    id="Prenom"     placeholder="Prenom"    autocomplete="off" value="{{ Mission[2] }}" readonly>
             <input type="text" name="NOM"       id="Nom"        placeholder="Nom"       autocomplete="off" required value="{{Mission[1]}}" readonly>
             <input type="text" name="DATE_AJD"  id="TodayDate"  readonly>
             <script>
@@ -258,6 +258,7 @@
         <script src="{{url_for('static', filename='/js/quill-resize-module.js')}}"></script>
 
         <div id="editor" style="height: 80%">
+            {{Mission}}
         </div>
         <input name="QUILL" id="playground" type="text" style="visibility: hidden; height: 0px; border: 0;">
         <script>
