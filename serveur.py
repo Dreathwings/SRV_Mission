@@ -246,8 +246,8 @@ def Send_Mail_NM(user,id_mission):
     body =f"""
 <div>Hey, Valerie
 <br>&nbsp;&nbsp; &nbsp;<br>&nbsp;&nbsp; &nbsp;
-{user} a ouvert une nouvelle demande de mission: <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" target="_blank" rel="noopener" data-mce-href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" data-mce-selected="inline-boundary">{id_mission}
-&lt;/a&gt;<br>&nbsp;&nbsp; &nbsp;<br>
+{user} a ouvert une nouvelle demande de mission: <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" target="_blank" rel="noopener" data-mce-href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" data-mce-selected="inline-boundary">{id_mission} </a>
+&nbsp;<br>
 Courage<br>
 @+<br>&nbsp;&nbsp; &nbsp;</div>
 """
