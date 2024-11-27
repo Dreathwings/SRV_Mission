@@ -79,7 +79,7 @@
             console.log(node)
             let val = node.querySelectorAll('[id*="date"]')
             console.log(val)
-            let date = new Date(val.innerHTML)
+            let date = new Date(val.innerText)
             console.log(date.toDateString())
         }
     }
