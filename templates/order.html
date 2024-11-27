@@ -92,10 +92,12 @@
         </div>
         <div class="mission">
             <div class="container_mission">
-                <input type="text" id="date-fr-start" class="form-control floating-label" name="D_DEPART" value="" placeholder="Date de départ" autocomplete="off" required>
+                <input type="text" id="date-fr-start" class="form-control floating-label" name="D_DEPART" value="{{Mission[7]}}" placeholder="Date de départ" autocomplete="off" required>
+                <input type="text" id="time-fr-start" class="form-control floating-label" name="H_DEPART" value="{{Mission[8]}}" placeholder="Heure de départ" autocomplete="off" required>
             </div>
             <div class='container_mission'>
-                    <input type="text" id="date-fr-return" class="form-control floating-label" name="D_RETOUR" value="" placeholder="Date de retour" autocomplete="off" required>
+                    <input type="text" id="date-fr-return" class="form-control floating-label" name="D_RETOUR" value="{{Mission[9]}}" placeholder="Date de retour" autocomplete="off" required>
+                    <input type="text" id="time-fr-return" class="form-control floating-label" name="H_RETOUR" value="{{Mission[10]}}" placeholder="Heure de retour" autocomplete="off" required>
             </div>
         </div>
             
