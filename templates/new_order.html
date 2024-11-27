@@ -45,12 +45,13 @@
         <div class="Header">
             <input type="text" name="PRENOM"    id="Prenom"     placeholder="Prenom"    autocomplete="off" required>
             <input type="text" name="NOM"       id="Nom"        placeholder="Nom"       autocomplete="off" required>
-            <input type="text" name="DATE_AJD"  id="TodayDate"  readonly>
+            <input type="text"  id="TodayDateDisplay"  readonly>
+            <input type="text" name="DATE_AJD"  id="TodayDate"  readonly style="visibility: hidden; height:0; width:0" >
             <script>
                 date = new Date()
                 let mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
                 document.getElementById("TodayDate").value = Date.now()
-                document.getElementById("TodayDate").textContent =  date.getDate()+" "+ mois[date.getMonth()]+" "+(1900+date.getYear());
+                document.getElementById("TodayDateDisplay").value =  date.getDate()+" "+ mois[date.getMonth()]+" "+(1900+date.getYear());
                 
             </script>   
         </div>
