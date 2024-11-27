@@ -161,7 +161,7 @@ def create_new_mission():
     try:
         cur.execute("INSERT INTO mission.ordre_mission(ID,NOM,PRENOM,DATE_AJD,NOM_MISSION,PAYS_MISSION,FRAIS,D_DEPART,H_DEPART,D_RETOUR,H_RETOUR,TRANSPORT,LIEU,CODE_PTL,VILLE,HOTEL,PTDEJ,QUILL) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(ID.__repr__(),val["NOM"],val["PRENOM"],val["DATE_AJD"],val["NOM_MISSION"],PAYS,val["FRAIS"],val["D_DEPART"],val["H_DEPART"],val["D_RETOUR"],val["H_RETOUR"],val["TRANSPORT"],val["LIEU"],val["CODE_PTL"],val["VILLE"],val["HOTEL"],val["PTDEJ"],val["QUILL"]))
         statu_crea = 0
-        cur.execute("INSERT INTO mission.suivi_mission(ID,ID_USER,NAME,DATE_CREA,STATUE) VALUES (%s,%s,%s,%s,?)",(ID,user_id,nom,val["DATE_AJD"],statu_crea))
+        cur.execute("INSERT INTO mission.suivi_mission(ID,ID_USER,NAME,DATE_CREA,STATUE) VALUES (%s,%s,%s,%s,%i)",(ID,user_id,nom,val["DATE_AJD"],statu_crea))
 
         Send_Mail_NM(nom,ID)
         print(f"Ordre mission {ID} success")
