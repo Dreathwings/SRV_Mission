@@ -76,8 +76,7 @@
         Nodelist = document.querySelectorAll('[id*="view_mission"]')
         for (i in Nodelist){
             let node = Nodelist[i]
-            let date = new Date()
-            date.parse(node.querySelectorAll('[id*="date"]').content)
+            let date = new Date(node.querySelectorAll('[id*="date"]').value)
             console.log(date.toDateString())
         }
     }
