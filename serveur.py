@@ -112,7 +112,6 @@ def view():
             mission = list(cur.fetchall())
             cur.execute(f"SELECT DISTINCT ID_USER FROM suivi_mission")
             users = tuple(item[0] for item in cur.fetchall())
-            print(f'USERS:{users}')
             cur_cas.execute(f"SELECT nom FROM personnels WHERE login IN {users}")
             all_user = list(item[0] for item in cur_cas.fetchall())
             ADMIN = True
@@ -131,11 +130,13 @@ def show_mission(id_mission):
     Verif_Connection(request)
     DB = connect_to_DB_mission()
     cur = DB.cursor()
-    cur.execute(f"SELECT ID FROM ordre_mission WHERE ID ='{id_mission}'")
+    cur.execute(f"SELECT ID_USER FROM suivi_mission WHERE ID ='{id_mission}'")
     data = oauth_user[request.cookies.get("SESSID")]
-    user = cur.fetchall()
+    user = cur.fetchall()[0]
     if data[2] == "ADMIN" or data[2] == "GESTION" or data[2] == user:
-        return f"<html><body> <h1>  {id_mission}  </h1></body></html>"
+        cur.execute(f"SELECT * FROM ordre_mission WHERE ID ='{id_mission}'")
+        mission = list(item[0] for item in cur.fetchall())
+        return f"<html><body> <h1>  {id_mission} {mission}  </h1></body></html>"
     else:
         return abort(403)
 #################################
@@ -244,7 +245,7 @@ def Send_Mail_NM(user,id_mission):
     body =f"""
 <div>Hey, Valerie
 <br>&nbsp;&nbsp; &nbsp;<br>&nbsp;&nbsp; &nbsp;
-{user} a ouvert une nouvelle demande de mission: <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" target="_blank" rel="noopener" data-mce-href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" data-mce-selected="inline-boundary">{id_mission}</a>
+{user} a ouvert une nouvelle demande de mission: <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" target="_blank" rel="noopener" data-mce-href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" data-mce-selected="inline-boundary">{id_mission}
 &lt;/a&gt;<br>&nbsp;&nbsp; &nbsp;<br>
 Courage<br>
 @+<br>&nbsp;&nbsp; &nbsp;</div>
