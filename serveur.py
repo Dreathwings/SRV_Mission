@@ -127,7 +127,7 @@ def show_mission(id_mission):
     Verif_Connection(request)
     DB = connect_to_DB_mission()
     cur = DB.cursor()
-    cur.execute(f"SELECT ID_USER FROM ordre_mission WHERE ID ='{id_mission}'")
+    cur.execute(f"SELECT ID FROM ordre_mission WHERE ID ='{id_mission}'")
     data = oauth_user[request.cookies.get("SESSID")]
     user = cur.fetchall()
     if data[2] == "ADMIN" or data[2] == "GESTION" or data[2] == user:
