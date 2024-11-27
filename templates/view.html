@@ -78,7 +78,7 @@
             let node = Nodelist[i]
             console.log(node)
             let val = node.querySelectorAll('[id*="date"]')
-            console.log(val)
+            console.log(val.innerHTML)
             let date = new Date(val)
             console.log(date.toDateString())
         }
