@@ -112,7 +112,8 @@ def view():
             mission = list(cur.fetchall())
             cur.execute(f"SELECT DISTINCT ID_USER FROM suivi_mission")
             #cur_cas.execute(f"SELECT nom FROM personnels WHERE login in {tuple(item[0] for item in cur.fetchall())}")
-            all_user = list(item[0] for item in cur_cas.fetchall())
+            #all_user = list(item[0] for item in cur_cas.fetchall())
+            all_user = [""]
             ADMIN = True
         return render_template('view.html', Missions=mission , ADMIN=ADMIN, All_User=all_user)
     except mariadb.Error as e: 
