@@ -92,63 +92,23 @@
         </div>
         <div class="mission">
             <div class="container_mission">
-                <input type="text" id="date-fr-start" class="form-control floating-label" name="D_DEPART" value="{{Mission[7]}}" placeholder="Date de départ" autocomplete="off" required>
-                <input type="text" id="time-fr-start" class="form-control floating-label" name="H_DEPART" value="{{Mission[8]}}" placeholder="Heure de départ" autocomplete="off" required>
+                <input type="text" id="date-fr-start" class="form-control floating-label" name="D_DEPART" value="{{Mission[7]}}" placeholder="Date de départ" autocomplete="off" required readonly>
+                <input type="text" id="time-fr-start" class="form-control floating-label" name="H_DEPART" value="{{Mission[8]}}" placeholder="Heure de départ" autocomplete="off" required readonly>
             </div>
             <div class='container_mission'>
-                    <input type="text" id="date-fr-return" class="form-control floating-label" name="D_RETOUR" value="{{Mission[9]}}" placeholder="Date de retour" autocomplete="off" required>
-                    <input type="text" id="time-fr-return" class="form-control floating-label" name="H_RETOUR" value="{{Mission[10]}}" placeholder="Heure de retour" autocomplete="off" required>
+                    <input type="text" id="date-fr-return" class="form-control floating-label" name="D_RETOUR" value="{{Mission[9]}}" placeholder="Date de retour" autocomplete="off" required readonly>
+                    <input type="text" id="time-fr-return" class="form-control floating-label" name="H_RETOUR" value="{{Mission[10]}}" placeholder="Heure de retour" autocomplete="off" required readonly>
             </div>
         </div>
-            
-            <script type="text/javascript">
-                $(document).ready(function()
-                {
-                    $('#date-fr-start').bootstrapMaterialDatePicker
-                    ({
-                        format: 'DD/MM/YYYY HH:mm',
-                        lang: 'fr',
-                        weekStart: 1, 
-                        cancelText : 'ANNULER',
-                        nowButton : false,
-                        switchOnClick : true,
-                    }).on('change', function(e, date){
-                        $('#date-fr-return').bootstrapMaterialDatePicker('setMinDate', date);
-                        $('#date-fr-return').bootstrapMaterialDatePicker('setDate', date);
-                        //document.getElementById("date-fr-start").value = date;
-                    });
-                    $('#date-fr-return').bootstrapMaterialDatePicker({
-                        format: 'DD/MM/YYYY HH:mm',
-                        lang: 'fr',
-                        weekStart: 1, 
-                        cancelText : 'ANNULER',
-                        nowButton : false,
-                        switchOnClick : true
-                    });
-                    let dateActuelle = new Date();
-                    dateActuelle.setHours(0)
-                    dateActuelle.setMinutes(0)
-                    let maxDate = new Date(new Date().getFullYear(), 11, 31)
-                    $("#date-fr-start").bootstrapMaterialDatePicker('setMaxDate', maxDate)
-                    $("#date-fr-return").bootstrapMaterialDatePicker('setMaxDate', maxDate)
-    
-                    dateActuelle.setDate(dateActuelle.getDate()+10);
-                    $("#date-fr-start").bootstrapMaterialDatePicker('setMinDate', dateActuelle)
-                    $.material.init()
-                });
-            </script>
-    
-                
-    
                 <div>
                     <div>
                         <strong id="title_part">_____Lieu de déplacement_____</strong>
                         <div style="display: flex; justify-content: center;">
-                            <input style="width: 60%; margin: 15px;" type="text" name="LIEU" id="lieu" placeholder="Lieu de la mission" autocomplete="off">
+                            <input style="width: 60%; margin: 15px;" type="text" name="LIEU" id="lieu" placeholder="Lieu de la mission" value="{{Mission[12]}}" autocomplete="off" readonly>
                         </div>
                         <div class="mission" style="justify-content: center;">
                             <div style="width: 40%;">
-                                <input class="Dest numeric" type="text" name="CODE_PTL" id="code" placeholder="Code postal" autocomplete="off">
+                                <input class="Dest numeric" type="text" name="CODE_PTL" id="code" placeholder="Code postal" value="{{Mission[13]}}" autocomplete="off" readonly>
                                 <script>
                                     $(".numeric").on("input", function () {
                                     var inputValue = $(this).val();
@@ -162,22 +122,11 @@
                                 </script>
                             </div>
                             <div  style="width: 40%;">
-                                <input class="Dest" type="text" id="ville" name="VILLE" placeholder="Ville" autocomplete="off"onkeypress="return (event.charCode > 64 && 
+                                <input class="Dest" type="text" id="ville" name="VILLE" placeholder="Ville" value="{{Mission[14]}}" readonly autocomplete="off"onkeypress="return (event.charCode > 64 && 
 	                                event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
                             </div>
                         </div>
                     </div>
-                    <section id="ville_section" style="z-index: 1000;">
-                        <div class="list">
-                            <ul class="ville" id="list_ville">
-                                <li class="ville" data-vicopo="#ville, #code" data-vicopo-click='{"#code": "code", "#ville": "ville"}' >
-                                  <div id="code_postal" data-vicopo-code-postal></div>
-                                  <div id="ville" data-vicopo-ville></div>
-                                </li>
-                            </ul>   
-                        </div>
-                        <div class="animation"></div>
-                    </section>
                 </div>
     
     
