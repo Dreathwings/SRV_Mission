@@ -35,7 +35,7 @@
                 <div class="view" id="background" >
                     <div class="view" id="id_mission">{{mission[0]}}</div> 
                     <div class="view" id="id_user">{{mission[2]}}</div> 
-                    <div class="view" id="date">{{mission[3]}}</div>
+                    <div class="view" id="date" date="{{mission[3]}}"></div>
                     <div class="view" id="status">{{list[mission[4]]}}</div>
                 </div>
                 <style>
@@ -81,8 +81,8 @@
             let node = Nodelist[i];
             console.log(node);
             let nodedate = node.querySelectorAll('[id*="date"]');
-            console.log(nodedate[0].innerHTML);
-            let date = new Date(parseInt(nodedate[0].innerHTML));
+            console.log(nodedate[0].date);
+            let date = new Date(parseInt(nodedate[0].date));
             nodedate[0].innerHTML = date.getDate()+" "+ mois[date.getMonth()]+" "+(1900+date.getYear());
         }
     }
