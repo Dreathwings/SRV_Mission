@@ -197,7 +197,7 @@ def WHO_IS():
 def new_ID():
     import uuid
     ID = uuid.uuid4().int
-    return ID.__str__()[:10]
+    return int(ID.__str__()[:10])
 
 
 #################################
