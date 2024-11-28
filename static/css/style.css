@@ -351,6 +351,8 @@ div.list {
     width: 18rem;
     margin-top: 0px;
     height: 70px;
+    overflow-x: visible;
+    overflow-y: visible;
   }
 .chosen-value,
 .value-list {
@@ -417,7 +419,7 @@ div.list {
    max-height: 320px;
    margin-left: 0;
    padding: 0;
-   overflow: auto;
+   overflow: visible;
   }
   
   .value-list li {
