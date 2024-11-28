@@ -260,10 +260,10 @@
                     // FILLER FOR FRANCE/AUTRE //
                     if ('{{Mission[5]}}' === 'FRANCE'){
                         console.log(document.querySelectorAll('[filler*="FRANCE"]'));
-                        document.querySelectorAll('[filler="FRANCE"]').checked = true;
+                        document.querySelectorAll('[filler*="FRANCE"]')[0].checked = true;
                     }
                     else if('{{Mission[5]}}' === 'AUTRE'){
-                        document.querySelectorAll('[filler*="AUTRE"]').checked = true;
+                        document.querySelectorAll('[filler*="AUTRE"]')[0].checked = true;
                     }
                     else{
                         throw new Error('Parameter is not valid');
@@ -271,10 +271,10 @@
                     //////////////////////////////
                     // FILLER FOR FRAIS //
                     if ('{{Mission[6]}}' === 'AVEC'){
-                        document.querySelectorAll('[filler*="AFRAIS"]').checked = true;
+                        document.querySelectorAll('[filler*="AFRAIS"]')[0].checked = true;
                     }
                     else if('{{Mission[6]}}' === 'SANS'){
-                        document.querySelectorAll('[filler*="SFRAIS"]').checked = true;
+                        document.querySelectorAll('[filler*="SFRAIS"]')[0].checked = true;
                     }
                     else{
                         throw new Error('Parameter is not valid');
