@@ -162,7 +162,7 @@ line-height: 1.5;
 	font-size: medium;
 	text-align: center;
 }
-input[type="text"]:focus{
+.intext:focus{
 	outline: none;
 	
 }

@@ -41,60 +41,61 @@
 
 
 
-
-        <input class="chosen-value" type="text" value="" placeholder="Type to filter">
-                <ul class="value-list">
-                  <li>Alabama</li>
-                  <li>Alaska</li>
-                  <li>Arizona</li>
-                  <li>Arkansas</li>
-                  <li>California</li>
-                  <li>Colorado</li>
-                  <li>Connecticut</li>
-                  <li>Delaware</li>
-                  <li>Florida</li>
-                  <li>Georgia</li>
-                  <li>Hawaii</li>
-                  <li>Idaho</li>
-                  <li>Illinois</li>
-                  <li>Indiana</li>
-                  <li>Iowa</li>
-                  <li>Kansas</li>
-                  <li>Kentucky</li>
-                  <li>Louisiana</li>
-                  <li>Maine</li>
-                  <li>Maryland</li>
-                  <li>Massachusetts</li>
-                  <li>Michigan</li>
-                  <li>Minnesota</li>
-                  <li>Mississippi</li>
-                  <li>Missouri</li>
-                  <li>Montana</li>
-                  <li>Nebraska</li>
-                  <li>Nevada</li>
-                  <li>New Hampshire</li>
-                  <li>New Jersey</li>
-                  <li>New Mexico</li>
-                  <li>New York</li>
-                  <li>North Carolina</li>
-                  <li>North Dakota</li>
-                  <li>Ohio</li>
-                  <li>Oklahoma</li>
-                  <li>Oregon</li>
-                  <li>Pennsylvania</li>
-                  <li>Rhode Island</li>
-                  <li>South Carolina</li>
-                  <li>South Dakota</li>
-                  <li>Tennessee</li>
-                  <li>Texas</li>
-                  <li>Utah</li>
-                  <li>Vermont</li>
-                  <li>Virginia</li>
-                  <li>Washington</li>
-                  <li>West Virginia</li>
-                  <li>Wisconsin</li>
-                  <li>Wyoming</li>
-                </ul>
+        <form>
+          <input class="chosen-value" type="text" value="" placeholder="Type to filter">
+          <ul class="value-list">
+            <li>Alabama</li>
+            <li>Alaska</li>
+            <li>Arizona</li>
+            <li>Arkansas</li>
+            <li>California</li>
+            <li>Colorado</li>
+            <li>Connecticut</li>
+            <li>Delaware</li>
+            <li>Florida</li>
+            <li>Georgia</li>
+            <li>Hawaii</li>
+            <li>Idaho</li>
+            <li>Illinois</li>
+            <li>Indiana</li>
+            <li>Iowa</li>
+            <li>Kansas</li>
+            <li>Kentucky</li>
+            <li>Louisiana</li>
+            <li>Maine</li>
+            <li>Maryland</li>
+            <li>Massachusetts</li>
+            <li>Michigan</li>
+            <li>Minnesota</li>
+            <li>Mississippi</li>
+            <li>Missouri</li>
+            <li>Montana</li>
+            <li>Nebraska</li>
+            <li>Nevada</li>
+            <li>New Hampshire</li>
+            <li>New Jersey</li>
+            <li>New Mexico</li>
+            <li>New York</li>
+            <li>North Carolina</li>
+            <li>North Dakota</li>
+            <li>Ohio</li>
+            <li>Oklahoma</li>
+            <li>Oregon</li>
+            <li>Pennsylvania</li>
+            <li>Rhode Island</li>
+            <li>South Carolina</li>
+            <li>South Dakota</li>
+            <li>Tennessee</li>
+            <li>Texas</li>
+            <li>Utah</li>
+            <li>Vermont</li>
+            <li>Virginia</li>
+            <li>Washington</li>
+            <li>West Virginia</li>
+            <li>Wisconsin</li>
+            <li>Wyoming</li>
+          </ul>
+        </form>
                 <script>
                     const inputField = document.querySelector('.chosen-value');
                     const dropdown = document.querySelector('.value-list');
@@ -160,93 +161,5 @@
                       }
                     });
                 </script>
-                <style>
-                    .chosen-value,
-                    .value-list {
-                      position: absolute;
-                      top: 0;
-                      left: 0;
-                      width: 100%;
-                    }
-                    
-                    .chosen-value {
-                      font-family: 'Ek Mukta';
-                      text-transform: uppercase;
-                      font-weight: 600;
-                      letter-spacing: 4px;
-                      height: 4rem;
-                      font-size: 1.1rem;
-                      padding: 1rem;
-                      background-color: #FAFCFD;
-                      border: 3px solid transparent;
-                      transition: .3s ease-in-out;
-                      border-radius: 0;
-                    }
-                    .chosen-value::-webkit-input-placeholder {
-                        color: #333;
-                      }
-                      
-                      .chosen-value:hover {
-                        background-color: #FF908B;
-                        cursor: pointer;
-                        }
-                    .chosen-value:hover:-webkit-input-placeholder {
-                          color: #333;
-                        }
-                    
-                    
-                      .chosen-value:focus,
-                      .chosen-value.open {
-                        box-shadow: 0px 5px 8px 0px rgba(0,0,0,0.2);
-                        outline: 0;
-                        background-color: #FF908B;
-                        color: #000;
-                        }
-                    
-                        .chosen-value.open:-webkit-input-placeholder,
-                        .chosen-value:focus:-webkit-input-placeholder{
-                          color: #000;
-                        }
-                    
-                    
-                    .value-list {
-                        width: 5%;
-                      list-style: none;
-                      margin-top: 4rem;
-                      box-shadow: 0px 5px 8px 0px rgba(0,0,0,0.2);
-                      overflow: hidden;
-                      max-height: 0;
-                      transition: .3s ease-in-out;
-                      }
-                      .value-list.open {
-                       max-height: 320px;
-                       overflow: auto;
-                      }
-                      
-                      .value-list li {
-                        position: relative;
-                        height: 4rem;
-                        background-color: #FAFCFD;
-                        padding: 1rem;
-                        font-size: 1.1rem;
-                        display: flex;
-                        align-items: center;
-                        cursor: pointer;
-                        transition: background-color .3s;
-                        opacity: 1;
-                        }
-                        .value-list li:hover {
-                          background-color: #FF908B;
-                        }
-                        
-                        .value-list li.closed {
-                          max-height: 0;
-                          overflow: hidden;
-                          padding: 0;
-                          opacity: 0;
-                        }
-                    
-                    
-                </style>
 </body>
 </html>
