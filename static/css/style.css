@@ -366,32 +366,33 @@ div.view#status{
   background-color: #FAFCFD;
   border: 3px solid transparent;
   transition: .3s ease-in-out;
-  
-  &::-webkit-input-placeholder {
+}
+.chosen-value::-webkit-input-placeholder {
     color: #333;
   }
   
-  &:hover {
+  .chosen-value:hover {
     background-color: #FF908B;
     cursor: pointer;
-    
-    &::-webkit-input-placeholder {
+    }
+.chosen-value:hover:-webkit-input-placeholder {
       color: #333;
     }
-  }
   
-  &:focus,
-  &.open {
+  
+  .chosen-value:focus,
+  .chosen-value.open {
     box-shadow: 0px 5px 8px 0px rgba(0,0,0,0.2);
     outline: 0;
     background-color: #FF908B;
     color: #000;
-    
-    &::-webkit-input-placeholder {
+    }
+
+    .chosen-value.open:-webkit-input-placeholder,
+    .chosen-value:focus:-webkit-input-placeholder{
       color: #000;
     }
-  }
-}
+  
 
 .value-list {
   list-style: none;
@@ -400,13 +401,13 @@ div.view#status{
   overflow: hidden;
   max-height: 0;
   transition: .3s ease-in-out;
-  
-  &.open {
+  }
+  .value-list.open {
    max-height: 320px;
    overflow: auto;
   }
   
-  li {
+  .value-list li {
     position: relative;
     height: 4rem;
     background-color: #FAFCFD;
@@ -417,16 +418,15 @@ div.view#status{
     cursor: pointer;
     transition: background-color .3s;
     opacity: 1;
-    
-    &:hover {
+    }
+    .value-list li:hover {
       background-color: #FF908B;
     }
     
-    &.closed {
+    .value-list li.closed {
       max-height: 0;
       overflow: hidden;
       padding: 0;
       opacity: 0;
     }
-  }
-}
+  
