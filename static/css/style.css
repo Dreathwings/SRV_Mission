@@ -351,8 +351,6 @@ div.listsearch {
     width: 18rem;
     margin-top: 0px;
     height: 70px;
-    overflow-x: hidden;
-    overflow-y: hidden;
   }
 .chosen-value,
 .value-list {
@@ -419,7 +417,7 @@ div.listsearch {
    max-height: 320px;
    margin-left: 0;
    padding: 0;
-   overflow: visible;
+   overflow: auto;
   }
   
   .value-list li {
