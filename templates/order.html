@@ -209,7 +209,6 @@
         <script src="{{url_for('static', filename='/js/quill-resize-module.js')}}"></script>
 
         <div id="editor" style="height: 80%">
-            {{Mission}}
         </div>
         <input name="QUILL" id="playground" type="text" style="visibility: hidden; height: 0px; border: 0;">
         <script>
@@ -314,7 +313,7 @@
                     else{
                         throw new Error('Parameter is not valid');
                     }
-                    const playground = document.getElementById("playground");
+                    const playground = document.getElementById("editor");
                     playground.innerHTML = '{{Mission[17]}}';
                 
                 
