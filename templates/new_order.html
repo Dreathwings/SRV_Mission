@@ -388,18 +388,15 @@
             }
             function V_UB(){
                 let popupAlreadyShowed = false
-
-                window.addEventListener('scroll', function(e) {
-                  if( ! popupAlreadyShowed ) {
+                if( ! popupAlreadyShowed ) {
                     setTimeout( () => {
                       document.getElementById('popup').style.display = 'block'
                     }, 3000 )
                     popupAlreadyShowed = true
-                  }
-                });
+                }
                 
                 document.getElementById('popup-fermeture').addEventListener('click', function(e) {
-                  document.getElementById('popup').style.display = 'none'
+                document.getElementById('popup').style.display = 'none'
                 })
             }
         </script>
