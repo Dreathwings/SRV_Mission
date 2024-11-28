@@ -98,6 +98,9 @@ mark{
 	background-image: linear-gradient(138deg, var(--red), var(--yellow));
 	transform: translate(-50%, -50%);
 	border: var(--light) solid 1px;
+	height: 160px;
+	text-align: center;
+	justify-self: center;
   }
 .background-color{
 	position: fixed;
