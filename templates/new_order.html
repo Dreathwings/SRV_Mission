@@ -94,13 +94,329 @@
                     <span data-hover="Autre">Autre</span>
                 </label> 
                 <div class="box_mission" id="AUTRE">
-                       <!--<object data="{{url_for('static', filename='html/list_pays.html')}}" type="text/html"></object>-->
+                    <div class="list">
+                        <input class="chosen-value" type="text" value="" placeholder="PAYS">
+                        <ul class="value-list">
+                            <li value="---" selected="selected">Selectionner un pays </li>
+                            <li value="Afghanistan">Afghanistan </li>
+                            <li value="Afrique_Centrale">Afrique_Centrale </li>
+                            <li value="Afrique_du_sud">Afrique_du_Sud </li>
+                            <li value="Albanie">Albanie </li>
+                            <li value="Algerie">Algerie </li>
+                            <li value="Allemagne">Allemagne </li>
+                            <li value="Andorre">Andorre </li>
+                            <li value="Angola">Angola </li>
+                            <li value="Anguilla">Anguilla </li>
+                            <li value="Arabie_Saoudite">Arabie_Saoudite </li>
+                            <li value="Argentine">Argentine </li>
+                            <li value="Armenie">Armenie </li>
+                            <li value="Australie">Australie </li>
+                            <li value="Autriche">Autriche </li>
+                            <li value="Azerbaidjan">Azerbaidjan </li>
+                            
+                            <li value="Bahamas">Bahamas </li>
+                            <li value="Bangladesh">Bangladesh </li>
+                            <li value="Barbade">Barbade </li>
+                            <li value="Bahrein">Bahrein </li>
+                            <li value="Belgique">Belgique </li>
+                            <li value="Belize">Belize </li>
+                            <li value="Benin">Benin </li>
+                            <li value="Bermudes">Bermudes </li>
+                            <li value="Bielorussie">Bielorussie </li>
+                            <li value="Bolivie">Bolivie </li>
+                            <li value="Botswana">Botswana </li>
+                            <li value="Bhoutan">Bhoutan </li>
+                            <li value="Boznie_Herzegovine">Boznie_Herzegovine </li>
+                            <li value="Bresil">Bresil </li>
+                            <li value="Brunei">Brunei </li>
+                            <li value="Bulgarie">Bulgarie </li>
+                            <li value="Burkina_Faso">Burkina_Faso </li>
+                            <li value="Burundi">Burundi </li>
+                            <li value="Caiman">Caiman </li>
+                            <li value="Cambodge">Cambodge </li>
+                            <li value="Cameroun">Cameroun </li>
+                            <li value="Canada">Canada </li>
+                            <li value="Canaries">Canaries </li>
+                            <li value="Cap_vert">Cap_Vert </li>
+                            <li value="Chili">Chili </li>
+                            <li value="Chine">Chine </li>
+                            <li value="Chypre">Chypre </li>
+                            <li value="Colombie">Colombie </li>
+                            <li value="Comores">Colombie </li>
+                            <li value="Congo">Congo </li>
+                            <li value="Congo_democratique">Congo_democratique </li>
+                            <li value="Cook">Cook </li>
+                            <li value="Coree_du_Nord">Coree_du_Nord </li>
+                            <li value="Coree_du_Sud">Coree_du_Sud </li>
+                            <li value="Costa_Rica">Costa_Rica </li>
+                            <li value="Cote_d_Ivoire">Côte_d_Ivoire </li>
+                            <li value="Croatie">Croatie </li>
+                            <li value="Cuba">Cuba </li>
+                            
+                            <li value="Danemark">Danemark </li>
+                            <li value="Djibouti">Djibouti </li>
+                            <li value="Dominique">Dominique </li>
+                            
+                            <li value="Egypte">Egypte </li>
+                            <li value="Emirats_Arabes_Unis">Emirats_Arabes_Unis </li>
+                            <li value="Equateur">Equateur </li>
+                            <li value="Erythree">Erythree </li>
+                            <li value="Espagne">Espagne </li>
+                            <li value="Estonie">Estonie </li>
+                            <li value="Etats_Unis">Etats_Unis </li>
+                            <li value="Ethiopie">Ethiopie </li>
+                            
+                            <li value="Falkland">Falkland </li>
+                            <li value="Feroe">Feroe </li>
+                            <li value="Fidji">Fidji </li>
+                            <li value="Finlande">Finlande </li>
+                            <li value="France">France </li>
+                            
+                            <li value="Gabon">Gabon </li>
+                            <li value="Gambie">Gambie </li>
+                            <li value="Georgie">Georgie </li>
+                            <li value="Ghana">Ghana </li>
+                            <li value="Gibraltar">Gibraltar </li>
+                            <li value="Grece">Grece </li>
+                            <li value="Grenade">Grenade </li>
+                            <li value="Groenland">Groenland </li>
+                            <li value="Guadeloupe">Guadeloupe </li>
+                            <li value="Guam">Guam </li>
+                            <li value="Guatemala">Guatemala</li>
+                            <li value="Guernesey">Guernesey </li>
+                            <li value="Guinee">Guinee </li>
+                            <li value="Guinee_Bissau">Guinee_Bissau </li>
+                            <li value="Guinee equatoriale">Guinee_Equatoriale </li>
+                            <li value="Guyana">Guyana </li>
+                            <li value="Guyane_Francaise ">Guyane_Francaise </li>
+                            
+                            <li value="Haiti">Haiti </li>
+                            <li value="Hawaii">Hawaii </li>
+                            <li value="Honduras">Honduras </li>
+                            <li value="Hong_Kong">Hong_Kong </li>
+                            <li value="Hongrie">Hongrie </li>
+                            
+                            <li value="Inde">Inde </li>
+                            <li value="Indonesie">Indonesie </li>
+                            <li value="Iran">Iran </li>
+                            <li value="Iraq">Iraq </li>
+                            <li value="Irlande">Irlande </li>
+                            <li value="Islande">Islande </li>
+                            <li value="Israel">Israel </li>
+                            <li value="Italie">italie </li>
+                            
+                            <li value="Jamaique">Jamaique </li>
+                            <li value="Jan Mayen">Jan Mayen </li>
+                            <li value="Japon">Japon </li>
+                            <li value="Jersey">Jersey </li>
+                            <li value="Jordanie">Jordanie </li>
+                            
+                            <li value="Kazakhstan">Kazakhstan </li>
+                            <li value="Kenya">Kenya </li>
+                            <li value="Kirghizstan">Kirghizistan </li>
+                            <li value="Kiribati">Kiribati </li>
+                            <li value="Koweit">Koweit </li>
+                            
+                            <li value="Laos">Laos </li>
+                            <li value="Lesotho">Lesotho </li>
+                            <li value="Lettonie">Lettonie </li>
+                            <li value="Liban">Liban </li>
+                            <li value="Liberia">Liberia </li>
+                            <li value="Liechtenstein">Liechtenstein </li>
+                            <li value="Lituanie">Lituanie </li>
+                            <li value="Luxembourg">Luxembourg </li>
+                            <li value="Lybie">Lybie </li>
+                            
+                            <li value="Macao">Macao </li>
+                            <li value="Macedoine">Macedoine </li>
+                            <li value="Madagascar">Madagascar </li>
+                            <li value="Madère">Madère </li>
+                            <li value="Malaisie">Malaisie </li>
+                            <li value="Malawi">Malawi </li>
+                            <li value="Maldives">Maldives </li>
+                            <li value="Mali">Mali </li>
+                            <li value="Malte">Malte </li>
+                            <li value="Man">Man </li>
+                            <li value="Mariannes du Nord">Mariannes du Nord </li>
+                            <li value="Maroc">Maroc </li>
+                            <li value="Marshall">Marshall </li>
+                            <li value="Martinique">Martinique </li>
+                            <li value="Maurice">Maurice </li>
+                            <li value="Mauritanie">Mauritanie </li>
+                            <li value="Mayotte">Mayotte </li>
+                            <li value="Mexique">Mexique </li>
+                            <li value="Micronesie">Micronesie </li>
+                            <li value="Midway">Midway </li>
+                            <li value="Moldavie">Moldavie </li>
+                            <li value="Monaco">Monaco </li>
+                            <li value="Mongolie">Mongolie </li>
+                            <li value="Montserrat">Montserrat </li>
+                            <li value="Mozambique">Mozambique </li>
+                            
+                            <li value="Namibie">Namibie </li>
+                            <li value="Nauru">Nauru </li>
+                            <li value="Nepal">Nepal </li>
+                            <li value="Nicaragua">Nicaragua </li>
+                            <li value="Niger">Niger </li>
+                            <li value="Nigeria">Nigeria </li>
+                            <li value="Niue">Niue </li>
+                            <li value="Norfolk">Norfolk </li>
+                            <li value="Norvege">Norvege </li>
+                            <li value="Nouvelle_Caledonie">Nouvelle_Caledonie </li>
+                            <li value="Nouvelle_Zelande">Nouvelle_Zelande </li>
+                            
+                            <li value="Oman">Oman </li>
+                            <li value="Ouganda">Ouganda </li>
+                            <li value="Ouzbekistan">Ouzbekistan </li>
+                            
+                            <li value="Pakistan">Pakistan </li>
+                            <li value="Palau">Palau </li>
+                            <li value="Palestine">Palestine </li>
+                            <li value="Panama">Panama </li>
+                            <li value="Papouasie_Nouvelle_Guinee">Papouasie_Nouvelle_Guinee </li>
+                            <li value="Paraguay">Paraguay </li>
+                            <li value="Pays_Bas">Pays_Bas </li>
+                            <li value="Perou">Perou </li>
+                            <li value="Philippines">Philippines </li>
+                            <li value="Pologne">Pologne </li>
+                            <li value="Polynesie">Polynesie </li>
+                            <li value="Porto_Rico">Porto_Rico </li>
+                            <li value="Portugal">Portugal </li>
+                            
+                            <li value="Qatar">Qatar </li>
+                            
+                            <li value="Republique_Dominicaine">Republique_Dominicaine </li>
+                            <li value="Republique_Tcheque">Republique_Tcheque </li>
+                            <li value="Reunion">Reunion </li>
+                            <li value="Roumanie">Roumanie </li>
+                            <li value="Royaume_Uni">Royaume_Uni </li>
+                            <li value="Russie">Russie </li>
+                            <li value="Rwanda">Rwanda </li>
+                            
+                            <li value="Sahara Occidental">Sahara Occidental </li>
+                            <li value="Sainte_Lucie">Sainte_Lucie </li>
+                            <li value="Saint_Marin">Saint_Marin </li>
+                            <li value="Salomon">Salomon </li>
+                            <li value="Salvador">Salvador </li>
+                            <li value="Samoa_Occidentales">Samoa_Occidentales</li>
+                            <li value="Samoa_Americaine">Samoa_Americaine </li>
+                            <li value="Sao_Tome_et_Principe">Sao_Tome_et_Principe </li>
+                            <li value="Senegal">Senegal </li>
+                            <li value="Seychelles">Seychelles </li>
+                            <li value="Sierra Leone">Sierra Leone </li>
+                            <li value="Singapour">Singapour </li>
+                            <li value="Slovaquie">Slovaquie </li>
+                            <li value="Slovenie">Slovenie</li>
+                            <li value="Somalie">Somalie </li>
+                            <li value="Soudan">Soudan </li>
+                            <li value="Sri_Lanka">Sri_Lanka </li>
+                            <li value="Suede">Suede </li>
+                            <li value="Suisse">Suisse </li>
+                            <li value="Surinam">Surinam </li>
+                            <li value="Swaziland">Swaziland </li>
+                            <li value="Syrie">Syrie </li>
+                            
+                            <li value="Tadjikistan">Tadjikistan </li>
+                            <li value="Taiwan">Taiwan </li>
+                            <li value="Tonga">Tonga </li>
+                            <li value="Tanzanie">Tanzanie </li>
+                            <li value="Tchad">Tchad </li>
+                            <li value="Thailande">Thailande </li>
+                            <li value="Tibet">Tibet </li>
+                            <li value="Timor_Oriental">Timor_Oriental </li>
+                            <li value="Togo">Togo </li>
+                            <li value="Trinite_et_Tobago">Trinite_et_Tobago </li>
+                            <li value="Tristan da cunha">Tristan de cuncha </li>
+                            <li value="Tunisie">Tunisie </li>
+                            <li value="Turkmenistan">Turmenistan </li>
+                            <li value="Turquie">Turquie </li>
+                            
+                            <li value="Ukraine">Ukraine </li>
+                            <li value="Uruguay">Uruguay </li>
+                            
+                            <li value="Vanuatu">Vanuatu </li>
+                            <li value="Vatican">Vatican </li>
+                            <li value="Venezuela">Venezuela </li>
+                            <li value="Vierges_Americaines">Vierges_Americaines </li>
+                            <li value="Vierges_Britanniques">Vierges_Britanniques </li>
+                            <li value="Vietnam">Vietnam </li>
+                            
+                            <li value="Wake">Wake </li>
+                            <li value="Wallis et Futuma">Wallis et Futuma </li>
+                            
+                            <li value="Yemen">Yemen </li>
+                            <li value="Yougoslavie">Yougoslavie </li>
+                            
+                            <li value="Zambie">Zambie </li>
+                            <li value="Zimbabwe">Zimbabwe </li>
+                        </ul>
+                    </div>
+                      <script>
+                        const inputField = document.querySelector('.chosen-value');
+                        const dropdown = document.querySelector('.value-list');
+                        const dropdownArray = [... document.querySelectorAll('li')];
+                        console.log(typeof dropdownArray)
+                        dropdown.classList.add('open');
+                        inputField.focus(); // Demo purposes only
+                        let valueArray = [];
+                        dropdownArray.forEach(item => {
+                          valueArray.push(item.textContent);
+                        });
+                        
+                        const closeDropdown = () => {
+                          dropdown.classList.remove('open');
+                        }
+                        
+                        inputField.addEventListener('input', () => {
+                          dropdown.classList.add('open');
+                          let inputValue = inputField.value.toLowerCase();
+                          let valueSubstring;
+                          if (inputValue.length > 0) {
+                            for (let j = 0; j < valueArray.length; j++) {
+                              if (!(inputValue.substring(0, inputValue.length) === valueArray[j].substring(0, inputValue.length).toLowerCase())) {
+                                dropdownArray[j].classList.add('closed');
+                              } else {
+                                dropdownArray[j].classList.remove('closed');
+                              }
+                            }
+                          } else {
+                            for (let i = 0; i < dropdownArray.length; i++) {
+                              dropdownArray[i].classList.remove('closed');
+                            }
+                          }
+                        });
+                        
+                        dropdownArray.forEach(item => {
+                          item.addEventListener('click', (evt) => {
+                            inputField.value = item.textContent;
+                            dropdownArray.forEach(dropdown => {
+                              dropdown.classList.add('closed');
+                            });
+                          });
+                        })
+                        
+                        inputField.addEventListener('focus', () => {
+                           inputField.placeholder = 'Type to filter';
+                           dropdown.classList.add('open');
+                           dropdownArray.forEach(dropdown => {
+                             dropdown.classList.remove('closed');
+                           });
+                        });
+                        
+                        inputField.addEventListener('blur', () => {
+                           inputField.placeholder = 'Select state';
+                          dropdown.classList.remove('open');
+                        });
+                        
+                        document.addEventListener('click', (evt) => {
+                          const isDropdown = dropdown.contains(evt.target);
+                          const isInput = inputField.contains(evt.target);
+                          if (!isDropdown && !isInput) {
+                            dropdown.classList.remove('open');
+                          }
+                        });
+                    </script>
                 </div>
-                <script type="text/javascript">
-                       $( "#AUTRE" ).load( '{{url_for("static", filename="html/list_pays.html")}}', function() {
-});
-                    
-                </script>
             </div> 
     
         </div>
