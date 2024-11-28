@@ -371,6 +371,7 @@ form {
   border: 3px solid transparent;
   transition: .3s ease-in-out;
   border-radius: 0;
+  border: 2px solid var(--light);
 }
 .chosen-value::-webkit-input-placeholder {
     color: #333;
