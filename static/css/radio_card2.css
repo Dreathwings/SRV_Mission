@@ -387,7 +387,7 @@ input[type="text"]:focus{
 	box-shadow: 0 1x 4px 0 rgba(0, 0, 0, 0.05);
 }
 input.floating-label{
-	width: 300px;
+	width: 150px;
 }
 input.Dest{
 	width: 50%;
