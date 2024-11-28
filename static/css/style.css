@@ -349,7 +349,8 @@ div.view#status{
 div.list {
     position: relative;
     width: 18rem;
-    margin-top: 8vh;
+    margin-top: 0px;
+    height: 70px;
   }
 .chosen-value,
 .value-list {
