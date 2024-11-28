@@ -75,7 +75,30 @@ mark{
     z-index: 100 !important;
 }
 
-
+.defilement {
+	height: 3000px;
+  }
+  .popup {
+	display: none;
+  }
+  .popup-encart {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-image: rgba( 0, 0, 0, .25 )
+  }
+  .popup-contenu {
+	z-index: 1000;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	padding: 25px;
+	background-image: linear-gradient(to right, var(--red) 0%, var(--yellow) 100%) 1;
+	transform: translate(-50%, -50%);
+	border: var(--light) solid 1px;
+  }
 .background-color{
 	position: fixed;
 	top: 0;
