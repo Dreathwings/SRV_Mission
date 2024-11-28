@@ -75,7 +75,7 @@
             </div>
             
             <div class="container_mission">
-                <input class="checkbox-budget" type="radio" name="MISSION" value='AUTRE' id="Autre" autocomplete="off" readonly disabled >
+                <input class="checkbox-budget" type="radio" name="MISSION" value='AUTRE' id="Autre" autocomplete="off" filler="AUTRE" readonly disabled >
                 <label class="pays" for="Autre">
                     <span data-hover="Autre">Autre</span>
                 </label> 
@@ -249,11 +249,12 @@
                         console.log(document.querySelectorAll('[filler*="FRANCE"]'));
                         document.querySelectorAll('[filler*="FRANCE"]')[0].checked = true;
                     }
-                    else if('{{Mission[5]}}' === 'AUTRE'){
-                        document.querySelectorAll('[filler*="AUTRE"]')[0].checked = true;
-                    }
                     else{
-                        throw new Error('Parameter5 {{Mission[5]}} is not valid');
+                        document.querySelectorAll('[filler*="AUTRE"]')[0].checked = true;
+                        document.querySelectorAll('[filler*="PAYS"]')[0].value = {{Mission[5]}};
+                        document.querySelectorAll('[filler*="PAYS"]')[0].ariaReadOnly = true;
+                        document.querySelectorAll('[filler*="PAYS"]')[0].disabled = true;
+
                     }
                     //////////////////////////////
                     // FILLER FOR FRAIS //
