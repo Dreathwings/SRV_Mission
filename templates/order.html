@@ -171,11 +171,11 @@
                 <input id="Arrondisement" placeholder="Arrondisement si existant" style="display: none;">
                     <p class="sub_text">Petit déjeuner compris ?</p>
                 <div style="display: flex; justify-content: center;">
-                    <input class="checkbox-budget" type="radio" name="PTDEJ" id="PtDej_oui" value='OUI' autocomplete="off" readonly disabled>
+                    <input class="checkbox-budget" type="radio" name="PTDEJ" id="PtDej_oui" value='OUI' filler="PTDJO" autocomplete="off" readonly disabled>
                     <label class="oui_non" for="PtDej_oui">
                         <span data-hover="OUI">OUI</span>
                     </label>
-                    <input class="checkbox-budget" type="radio" name="PTDEJ" id="PtDej_non" value='NON' autocomplete="off" readonly disabled>
+                    <input class="checkbox-budget" type="radio" name="PTDEJ" id="PtDej_non" value='NON' filler="PTDJN" autocomplete="off" readonly disabled>
                     <label class="oui_non" for="PtDej_non">
                         <span data-hover="NON">NON</span>
                     </label>  
@@ -280,6 +280,40 @@
                         throw new Error('Parameter is not valid');
                     }
                     //////////////////////////////
+                    // FILLER FOR VEHICULE //
+                    if ('{{Mission[11]}}' === 'VP'){
+                        document.querySelectorAll('[filler*="VP"]')[0].checked = true;
+                    }
+                    else if('{{Mission[11]}}' === 'VUB'){
+                        document.querySelectorAll('[filler*="VUB"]')[0].checked = true;
+                    }
+                    else if('{{Mission[11]}}' === 'TRAIN'){
+                        document.querySelectorAll('[filler*="TRAIN"]')[0].checked = true;
+                    }
+                    else if('{{Mission[11]}}' === 'AVION'){
+                        document.querySelectorAll('[filler*="AVION"]')[0].checked = true;
+                    }
+                    else{
+                        throw new Error('Parameter is not valid');
+                    }
+                    //////////////////////////////
+                    // FILLER FOR HOTEL //
+                    if ('{{Mission[15]}}' === 'NON'){
+                        document.querySelectorAll('[filler*="HOTEL"]')[0].checked = true;
+                    }
+                    else{
+                        throw new Error('Parameter is not valid');
+                    }
+                    // FILLER FOR PTEDJ //
+                    if ('{{Mission[16]}}' === 'OUI'){
+                        document.querySelectorAll('[filler*="PTDJO"]')[0].checked = true;
+                    }
+                    else if('{{Mission[16]}}' === 'NON'){
+                        document.querySelectorAll('[filler*="PTDJN"]')[0].checked = true;
+                    }
+                    else{
+                        throw new Error('Parameter is not valid');
+                    }
                 
                 
                 
