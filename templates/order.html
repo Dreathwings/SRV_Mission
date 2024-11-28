@@ -80,13 +80,9 @@
                     <span data-hover="Autre">Autre</span>
                 </label> 
                 <div class="box_mission" id="AUTRE">
-                       <!--<object data="{{url_for('static', filename='html/list_pays.html')}}" type="text/html"></object>-->
+                    <select name="PAYS" filler="PAYS" disabled>
+                        <option value="{Mission[5]}" selected="selected" disabled>{{Mission[5]}} </option>
                 </div>
-                <script type="text/javascript">
-                       $( "#AUTRE" ).load( '{{url_for("static", filename="html/list_pays.html")}}', function() {
-});
-                    
-                </script>
             </div> 
     
         </div>
