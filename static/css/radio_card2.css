@@ -101,7 +101,8 @@ mark{
 	height: 160px;
 	text-align: center;
 	justify-self: center;
-  }
+	width: 50%;}
+	
 .background-color{
 	position: fixed;
 	top: 0;
