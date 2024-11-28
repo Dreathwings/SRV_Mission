@@ -367,7 +367,7 @@ form {
   height: 4rem;
   font-size: 1.1rem;
   padding: 1rem;
-  background-color: #FAFCFD;
+  background-color: linear-gradient(138deg, var(--red), var(--yellow));
   border: 3px solid transparent;
   transition: .3s ease-in-out;
   border-radius: 0;
@@ -409,6 +409,7 @@ form {
   }
   .value-list.open {
    max-height: 320px;
+   margin-left: 0;
    overflow: auto;
   }
   
