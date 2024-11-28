@@ -360,6 +360,7 @@ form {
 }
 
 .chosen-value {
+    color: var(--light);
     font-family: 'Ek Mukta';
     text-transform: uppercase;
     font-weight: 600;
@@ -383,7 +384,7 @@ form {
     cursor: pointer;
     }
 .chosen-value:hover:-webkit-input-placeholder {
-      color: #333;
+      color: var(--light);
     }
 
 
