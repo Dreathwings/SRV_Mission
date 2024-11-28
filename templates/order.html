@@ -208,7 +208,7 @@
         <script src="{{url_for('static', filename='/js/quill.min.js')}}"></script>
         <script src="{{url_for('static', filename='/js/quill-resize-module.js')}}"></script>
 
-        <div id="editor" style="height: 80%">{{Mission[17]}}</div>
+        <div id="editor" style="height: 80%">{{Mission[17] | safe}}</div>
         </div>
             <script>
                 function fillContent(){
