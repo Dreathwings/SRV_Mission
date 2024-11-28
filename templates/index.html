@@ -19,26 +19,7 @@
     <input class="checkbox" type="checkbox" name="general" id="general">
                 <label class="for-checkbox" for="general"></label>
     <div class="background-color"></div>
-
     <div class="body" id="body">
-      <div class="container_mission" style="width: 100%;margin-top: 25%;">
-            <div class="box_mission " style="visibility: visible;">
-              <div>
-                <input  class="checkbox-budget" type="radio" name="MISSION" id="Nouvelle demande mission" autocomplete="off" onclick="location.href = '/mission/create_mission';" checked>
-					    	<label style="width: 80%;" class="pays" for="Nouvelle demande mission">
-					    		<span data-hover="Nouvelle demande mission">Nouvelle demande mission</span>
-					    	</label> 
-              </div>
-
-              <div>
-                <input class="checkbox-budget" type="radio" name="alphga" id="Consulter les missions" autocomplete="off" checked onclick="location.href = '/mission/view_mission';">
-					    	<label style="width: 80%;" class="pays" for="Consulter les missions">
-					    		<span data-hover="Consulter les missions">Consulter les missions</span>
-					    	</label> 
-              </div>
-                
-            </div>
-      </div>
       <form>
         <input class="chosen-value" type="text" value="" placeholder="Type to filter">
         <ul class="value-list">
@@ -94,7 +75,24 @@
           <li>Wyoming</li>
         </ul>
       </form>
-      
+      <div class="container_mission" style="width: 100%;margin-top: 25%;">
+            <div class="box_mission " style="visibility: visible;">
+              <div>
+                <input  class="checkbox-budget" type="radio" name="MISSION" id="Nouvelle demande mission" autocomplete="off" onclick="location.href = '/mission/create_mission';" checked>
+					    	<label style="width: 80%;" class="pays" for="Nouvelle demande mission">
+					    		<span data-hover="Nouvelle demande mission">Nouvelle demande mission</span>
+					    	</label> 
+              </div>
+
+              <div>
+                <input class="checkbox-budget" type="radio" name="alphga" id="Consulter les missions" autocomplete="off" checked onclick="location.href = '/mission/view_mission';">
+					    	<label style="width: 80%;" class="pays" for="Consulter les missions">
+					    		<span data-hover="Consulter les missions">Consulter les missions</span>
+					    	</label> 
+              </div>
+                
+            </div>
+      </div> 
     </div>
                 <script>
                     const inputField = document.querySelector('.chosen-value');
