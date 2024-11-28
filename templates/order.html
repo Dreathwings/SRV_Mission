@@ -259,6 +259,7 @@
                 function fillContent(){
                     // FILLER FOR FRANCE/AUTRE //
                     if ({{Mission[5]}} == 'FRANCE'){
+                        console.log(document.querySelectorAll('[filler*="FRANCE"]'));
                         document.querySelectorAll('[filler*="FRANCE"]').checked = true;
                     }
                     else if({{Mission[5]}} == 'AUTRE'){
