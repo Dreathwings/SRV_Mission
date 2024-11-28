@@ -283,11 +283,13 @@
                     if ('{{Mission[15]}}' === 'NON'){
                         document.querySelectorAll('[filler*="HOTEL"]')[0].checked = true;
                     }
+                    else if('{{Mission[15]}}' === 'OUI'){
+                        document.querySelectorAll('[filler*="HOTEL"]')[0].checked = false;
+                    }
                     else{
                         throw new Error('Parameter15 {{Mission[15]}} is not valid');
                     }
                     // FILLER FOR PTEDJ //
-                    console.log(document.querySelectorAll('[filler*="PTDJO"]')[0])
                     if ('{{Mission[16]}}' === 'OUI'){
                         document.querySelectorAll('[filler*="PTDJO"]')[0].checked = true;
                     }
