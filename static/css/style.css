@@ -372,6 +372,7 @@ form {
   transition: .3s ease-in-out;
   border-radius: 0;
   border: 2px solid var(--light);
+  border-radius: 2rem;
 }
 .chosen-value::-webkit-input-placeholder {
     color: #333;
