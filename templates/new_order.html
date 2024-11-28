@@ -43,10 +43,10 @@
     <form method="post" action="/mission/create_mission" name="theForm" >
     <div class="body" id="body">
         <div class="Header">
-            <input type="text" name="PRENOM"    id="Prenom"     placeholder="Prenom"    autocomplete="off" required>
-            <input type="text" name="NOM"       id="Nom"        placeholder="Nom"       autocomplete="off" required>
-            <input type="text"  id="TodayDateDisplay"  readonly>
-            <input type="text" name="DATE_AJD"  id="TodayDate"  readonly style="visibility: hidden; height:0; width:0" >
+            <input type="text" class="intext" name="PRENOM"    id="Prenom"     placeholder="Prenom"    autocomplete="off" required>
+            <input type="text" class="intext" name="NOM"       id="Nom"        placeholder="Nom"       autocomplete="off" required>
+            <input type="text" class="intext"  id="TodayDateDisplay"  readonly>
+            <input type="text" class="intext" name="DATE_AJD"  id="TodayDate"  readonly style="visibility: hidden; height:0; width:0" >
             <script>
                 date = new Date()
                 let mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
@@ -61,7 +61,7 @@
                 <option value="GESII">GESII</option>
                 <option value="AUTRE">AUTRE</option>
             </select>: max(820px,30%)-->
-            <input style="width:68.5%;" type="text" name="NOM_MISSION" id="NOM_MISSION" placeholder="NOM DE LA MISSION" required>   
+            <input style="width:68.5%;" type="text" class="intext" name="NOM_MISSION" id="NOM_MISSION" placeholder="NOM DE LA MISSION" required>   
         </div>
         
         <div class="mission">
@@ -106,12 +106,12 @@
         </div>
         <div class="mission">
             <div class="container_mission">
-                <input type="text" id="date-fr-start" class="form-control floating-label" name="D_DEPART" value="" placeholder="Date de départ" autocomplete="off" required>
-                <input type="text" id="time-fr-start" class="form-control floating-label" name="H_DEPART" value="" placeholder="Heure de départ" autocomplete="off" required>
+                <input type="text" id="date-fr-start" class="form-control floating-label intext" name="D_DEPART" value="" placeholder="Date de départ" autocomplete="off" required>
+                <input type="text" id="time-fr-start" class="form-control floating-label intext" name="H_DEPART" value="" placeholder="Heure de départ" autocomplete="off" required>
             </div>
             <div class='container_mission'>
-                    <input type="text" id="date-fr-return" class="form-control floating-label" name="D_RETOUR" value="" placeholder="Date de retour" autocomplete="off" required>
-                    <input type="text" id="time-fr-return" class="form-control floating-label" name="H_RETOUR" value="" placeholder="Heure de retour" autocomplete="off" required>
+                    <input type="text" id="date-fr-return" class="form-control floating-label intext" name="D_RETOUR" value="" placeholder="Date de retour" autocomplete="off" required>
+                    <input type="text" id="time-fr-return" class="form-control floating-label intext" name="H_RETOUR" value="" placeholder="Heure de retour" autocomplete="off" required>
             </div>
         </div>
             
@@ -169,11 +169,11 @@
                     <div>
                         <strong id="title_part">_____Lieu de déplacement_____</strong>
                         <div style="display: flex; justify-content: center;">
-                            <input style="width: 60%; margin: 15px;" type="text" name="LIEU" id="lieu" placeholder="Lieu de la mission" autocomplete="off">
+                            <input class="intext" style="width: 60%; margin: 15px;" type="text" name="LIEU" id="lieu" placeholder="Lieu de la mission" autocomplete="off">
                         </div>
                         <div class="mission" style="justify-content: center;">
                             <div style="width: 40%;">
-                                <input class="Dest numeric" type="text" name="CODE_PTL" id="code" placeholder="Code postal" autocomplete="off">
+                                <input class="Dest numeric intext" type="text" name="CODE_PTL" id="code" placeholder="Code postal" autocomplete="off">
                                 <script>
                                     $(".numeric").on("input", function () {
                                     var inputValue = $(this).val();
@@ -187,7 +187,7 @@
                                 </script>
                             </div>
                             <div  style="width: 40%;">
-                                <input class="Dest" type="text" id="ville" name="VILLE" placeholder="Ville" autocomplete="off"onkeypress="return (event.charCode > 64 && 
+                                <input class="Dest intext" type="text" id="ville" name="VILLE" placeholder="Ville" autocomplete="off"onkeypress="return (event.charCode > 64 && 
 	                                event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 32">
                             </div>
                         </div>
@@ -322,7 +322,7 @@
 
         <div id="editor" style="height: 80%">
         </div>
-        <input name="QUILL" id="playground" name="QUILL" type="text" style="visibility: hidden; height: 0px; border: 0;"></input>
+        <input class="intext" name="QUILL" id="playground" name="QUILL" type="text" style="visibility: hidden; height: 0px; border: 0;"></input>
         <script>
             Quill.register("modules/resize", window.QuillResizeModule);
             const toolbarOptions = [  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
