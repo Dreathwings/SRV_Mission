@@ -346,7 +346,7 @@ div.view#status{
     width: 25%;
 }
 
-form.list {
+div.list {
     position: relative;
     width: 18rem;
     margin-top: 8vh;
