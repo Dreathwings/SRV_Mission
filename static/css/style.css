@@ -360,19 +360,20 @@ form {
 }
 
 .chosen-value {
-  font-family: 'Ek Mukta';
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 4px;
-  height: 4rem;
-  font-size: 1.1rem;
-  padding: 1rem;
-  background-image: linear-gradient(138deg, var(--red), var(--yellow));
-  border: 3px solid transparent;
-  transition: .3s ease-in-out;
-  border-radius: 0;
-  border: 2px solid var(--light);
-  border-radius: 2rem;
+    font-family: 'Ek Mukta';
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 4px;
+    height: 4rem;
+    font-size: 1.1rem;
+    padding-left: 4rem;
+    background-image: linear-gradient(138deg, var(--red), var(--yellow));
+    border: 3px solid transparent;
+    transition: .3s ease-in-out;
+    border-radius: 0;
+    border: 2px solid var(--light);
+    border-radius: 1rem;
+    text-align: center;
 }
 .chosen-value::-webkit-input-placeholder {
     color: #333;
