@@ -258,11 +258,11 @@
             <script>
                 function fillContent(){
                     // FILLER FOR FRANCE/AUTRE //
-                    if ({{Mission[5]}} == 'FRANCE'){
+                    if ('{{Mission[5]}}' === 'FRANCE'){
                         console.log(document.querySelectorAll('[filler*="FRANCE"]'));
-                        document.querySelectorAll('[filler*="FRANCE"]').checked = true;
+                        document.querySelectorAll('[filler="FRANCE"]').checked = true;
                     }
-                    else if({{Mission[5]}} == 'AUTRE'){
+                    else if('{{Mission[5]}}' === 'AUTRE'){
                         document.querySelectorAll('[filler*="AUTRE"]').checked = true;
                     }
                     else{
@@ -270,10 +270,10 @@
                     }
                     //////////////////////////////
                     // FILLER FOR FRAIS //
-                    if ({{Mission[6]}} == 'AVEC'){
+                    if ('{{Mission[6]}}' === 'AVEC'){
                         document.querySelectorAll('[filler*="AFRAIS"]').checked = true;
                     }
-                    else if({{Mission[6]}} == 'SANS'){
+                    else if('{{Mission[6]}}' === 'SANS'){
                         document.querySelectorAll('[filler*="SFRAIS"]').checked = true;
                     }
                     else{
