@@ -735,6 +735,6 @@ img.img_vehicule{
 .checkbox:checked ~ form div#body.body div.mission div.container_mission div#France.box_mission div label.oui_non{
 	border-color: var(--dark-blue);
 }
-form div#body.body div.mission div.container_mission input#Autre.checkbox-budget:checked ~ form div#body.body div div div.mission div.div_codeptl{
+html body form div#body.body div.mission div.container_mission input#Autre.checkbox-budget:checked ~ html body form div#body.body div div div.mission div.div_codeptl{
 	display: none;
 }
