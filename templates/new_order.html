@@ -95,7 +95,7 @@
                 </label> 
                 <div class="box_mission" id="AUTRE">
                     <div class="listsearch">
-                        <input class="chosen-value" type="text" value="---" placeholder="Recherche" autocomplete="off" required>
+                        <input class="chosen-value" type="text" value="" placeholder="" autocomplete="off" required>
                         <ul class="value-list">
                             <li value="Afghanistan">Afghanistan</li>
                             <li value="Afrique_Centrale">Afrique_Centrale</li>
@@ -395,7 +395,7 @@
                         })
                         
                         inputField.addEventListener('focus', () => {
-                           inputField.placeholder = 'Type to filter';
+                           inputField.placeholder = 'Recherche';
                            dropdown.classList.add('open');
                            dropdownArray.forEach(dropdown => {
                              dropdown.classList.remove('closed');
