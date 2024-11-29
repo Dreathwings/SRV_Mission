@@ -414,14 +414,15 @@ div.listsearch {
   padding: 0;
   transition: .3s ease-in-out;
   z-index: 999;
-  border-radius: 0.5rem;
-  border: 2px solid white;
+  
   }
   .value-list.open {
-   max-height: 320px;
-   margin-left: 0;
-   padding: 0;
-   overflow: auto;
+    max-height: 320px;
+    margin-left: 0;
+    padding: 0;
+    overflow: auto;
+    border-radius: 0.5rem;
+    border: 2px solid white;
   }
   
   .value-list li {
