@@ -503,9 +503,11 @@
                                 document.getElementById('Autre').addEventListener("change", (e) => {
                                     if (stat = 0){
                                         stat = 1
+                                        console.log(stat)
                                         document.getElementById('div_ville').style.display = "none"
                                     } else{
                                         stat = 0
+                                        console.log(stat)
                                         document.getElementById('div_ville').style.display = "initial"
                                     }
                                 });
