@@ -75,7 +75,7 @@
                 </div> 
                 <div class="view" id="id_user">Demandeur
                     <div class="listsearch" style="height: 40px;">
-                        <input class="chosen-value_user" id="selected_user_choose" type="text" value="" placeholder="NOM" autocomplete="off" style="height: 2.5rem;">
+                        <input class="chosen-value" id="selected_user_choose" type="text" value="" placeholder="NOM" autocomplete="off" style="height: 2.5rem;">
                         <ul class="value-list" id="selected_user_list" style="margin-top: 40px;">
                             {% for user in All_User %}
                                 <li michel="NAME" value="{{user}}">{{user}}</li>
@@ -196,7 +196,7 @@
     </ul>
 </body>
 <script>
-    const selector = document.getElementById("selected_user")
+    const selector = document.getElementById("selected_user_choose")
     selector.addEventListener("change",select_user)
     function select_user(){
         Nodelist = document.querySelectorAll('[id*="view_mission"]')
