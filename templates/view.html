@@ -316,7 +316,7 @@
             let node = Nodelist[i]
             //console.log(node)
             console.log(selector2.value.includes(node.getAttribute('mois')))
-            if (selector2.value == ""){
+            if (selector2.value == "" && node.style.display != 'none'){
                 /*console.log("SET ALL")*/
                 node.style.display = "flex";
             }else{
