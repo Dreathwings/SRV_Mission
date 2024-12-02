@@ -543,11 +543,11 @@ height: 70px;
 }
 .third
 {
-   margin-left:3.2em;
+   margin-left:3.25em;
 }
 .FABMenu input:checked ~ .hamburger .dots .first
 {
- top:15px;
+ top:15.5px;
   height:55px;
   transform-origin:top;
   transform:rotate(-45deg);
@@ -556,7 +556,7 @@ height: 70px;
 }
 .FABMenu input:checked ~ .hamburger .dots .third
 {
- top:15px;
+ top:15.5px;
   height:55px;
   transform-origin:top;
   transform:rotate(45deg);
