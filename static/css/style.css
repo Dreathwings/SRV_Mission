@@ -539,16 +539,16 @@ height: 70px;
 .second
 {
   
-  margin-left:2.1em;
+  margin-left:2em;
 }
 .third
 {
-   margin-left:3.45em;
+   margin-left:3.2em;
 }
 .FABMenu input:checked ~ .hamburger .dots .first
 {
  top:15px;
-  height:60px;
+  height:55px;
   transform-origin:top;
   transform:rotate(-45deg);
    transition: all .3s ease-in-out;
@@ -557,7 +557,7 @@ height: 70px;
 .FABMenu input:checked ~ .hamburger .dots .third
 {
  top:15px;
-  height:60px;
+  height:55px;
   transform-origin:top;
   transform:rotate(45deg);
    transition: all .3s ease-in-out;
