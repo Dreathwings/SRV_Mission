@@ -390,8 +390,6 @@ text-align: center;
 align-content: center;
 text-align-last: center;
 align-items: center;
-border: 2px solid var(--light);
-background-image: linear-gradient(138deg, var(--red), var(--yellow));
 }
 
 div.listsearch {
