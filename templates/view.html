@@ -98,7 +98,7 @@
                           let valueSubstring;
                           if (inputValue.length > 0) {
                             for (let j = 0; j < valueArray.length; j++) {
-                              if (!(inputValue.substring(0, inputValue.length) in valueArray[j].substring(0, inputValue.length).toLowerCase())) {
+                              if (!(inputValue.substring(0, inputValue.length) in valueArray[j].substring(0, inputValue.length).toLowerCase() === true)) {
                                 dropdownArray[j].classList.add('closed');
                               } else {
                                 dropdownArray[j].classList.remove('closed');
