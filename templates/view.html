@@ -99,7 +99,7 @@
                           if (inputValue.length > 0) {
                             for (let j = 0; j < valueArray.length; j++) {
                                 console.log(inputValue.substring(0, inputValue.length) in valueArray[j].substring(0, inputValue.length).toLowerCase() === true)
-                              if (!(inputValue.substring(0, inputValue.length) in valueArray[j].substring(0).toLowerCase() === true)) {
+                              if (!(valueArray[j].substring(0).toLowerCase().include(inputValue.toLowerCase()))) {
                                 dropdownArray[j].classList.add('closed');
                               } else {
                                 dropdownArray[j].classList.remove('closed');
