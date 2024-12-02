@@ -75,16 +75,16 @@
                 </div> 
                 <div class="view" id="id_user">Demandeur
                     <div class="listsearch" style="height: 40px;">
-                        <input class="chosen-value" id="selected_user" type="text" value="" placeholder="NOM" autocomplete="off" style="height: 2.5rem;">
-                        <ul class="value-list" style="margin-top: 40px;">
+                        <input class="chosen-value_user" id="selected_user" type="text" value="" placeholder="NOM" autocomplete="off" style="height: 2.5rem;">
+                        <ul class="value-list_user" style="margin-top: 40px;">
                             {% for user in All_User %}
                                 <li michel="NAME" value="{{user}}">{{user}}</li>
                             {% endfor %}
                         </ul>
                     </div>
                     <script>
-                        const inputField = document.querySelector('.chosen-value');
-                        const dropdown = document.querySelector('.value-list');
+                        const inputField = document.querySelector('.chosen-value_user');
+                        const dropdown = document.querySelector('.value-list_user');
                         const dropdownArray = [... document.querySelectorAll('[michel*="NAME"]')];
                         console.log(typeof dropdownArray)
                         dropdown.classList.add('open');
