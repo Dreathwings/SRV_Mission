@@ -72,14 +72,14 @@
                         <input class="chosen-value" type="text" value="" placeholder="Choisir un Pays" autocomplete="off" required>
                         <ul class="value-list">
                             {% for user in All_User %}
-                                <li value="{{user}}">{{user}}</li>
+                                <li michel="1" value="{{user}}">{{user}}</li>
                             {% endfor %}
                         </ul>
                     </div>
                     <script>
                         const inputField = document.querySelector('.chosen-value');
                         const dropdown = document.querySelector('.value-list');
-                        const dropdownArray = [... document.querySelectorAll('li')];
+                        const dropdownArray = [... document.querySelectorAll('michel="1"')];
                         console.log(typeof dropdownArray)
                         dropdown.classList.add('open');
                         inputField.focus(); // Demo purposes only
