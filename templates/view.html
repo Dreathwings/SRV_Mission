@@ -213,7 +213,7 @@
                                   dropdown2.classList.add('closed');
                                   const selector2 = document.getElementById("selected_mois_choose")
                                   selector2.dispatchEvent(new Event("change"));
-                                  console.log('Event click bobo')
+                                  //console.log('Event click bobo')
                                 });
                               });
                             })
@@ -289,7 +289,7 @@
         Nodelist = document.querySelectorAll('[id*="view_mission"]')
         for (i in Nodelist){
             let node = Nodelist[i]
-            //console.log(node)
+            console.log(node)
             console.log(selector22.value.includes(node.getAttribute('mois')))
             if (selector22.value == "" && node.style.display == 'flex'){
                 /*console.log("SET ALL")*/
