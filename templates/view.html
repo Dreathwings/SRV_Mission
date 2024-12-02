@@ -192,7 +192,7 @@
                               let valueSubstring;
                               if (inputValue.length > 0) {
                                 for (let j = 0; j < valueArray2.length; j++) {
-                                    console.log(valueArray2[j].toLowerCase().includes(inputValue))
+                                    /*console.log(valueArray2[j].toLowerCase().includes(inputValue))*/
                                   if (!(valueArray2[j].toLowerCase().includes(inputValue))) {
                                     dropdownArray2[j].classList.add('closed');
                                   } else {
@@ -213,7 +213,7 @@
                                   dropdown2.classList.add('closed');
                                   const selector2 = document.getElementById("selected_mois_choose")
                                   selector2.dispatchEvent(new Event("change"));
-                                  //console.log('Event click bobo')
+                                  /*console.log('Event click bobo')*/
                                 });
                               });
                             })
@@ -283,7 +283,7 @@
     </ul>
 </body>
 <script>
-    const selector22 = document.getElementById("selected_mois_choose")
+    let selector22 = document.getElementById("selected_mois_choose")
     selector22.addEventListener("change",select_mois)
     function select_mois(){
         Nodelist = document.querySelectorAll('[id*="view_mission"]')
@@ -326,7 +326,7 @@
     Dated()
 </script>
 <script>
-    const selector = document.getElementById("selected_user_choose")
+    let selector = document.getElementById("selected_user_choose")
     selector.addEventListener("change",select_user)
     function select_user(){
         Nodelist = document.querySelectorAll('[id*="view_mission"]')
