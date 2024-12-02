@@ -283,32 +283,6 @@
     </ul>
 </body>
 <script>
-    const selector = document.getElementById("selected_user_choose")
-    selector.addEventListener("change",select_user)
-    function select_user(){
-        Nodelist = document.querySelectorAll('[id*="view_mission"]')
-        for (i in Nodelist){
-            let node = Nodelist[i]
-            //console.log(node)
-            //console.log(selector.value)
-            if (selector.value == ""){
-                /*console.log("SET ALL")*/
-                node.style.display = "flex";
-            }else{
-                if (node.getAttribute('user') == selector.value){
-                    /*console.log("SET ",node.getAttribute('user')," to flex")*/
-                    node.style.display = "flex";
-                }else{
-                    /*console.log("SET ",node.getAttribute('user')," to none")*/
-                    //console.log(selector.value)
-                    node.style.display = "none";
-                    
-                }
-                
-            }
-            
-        }
-    }
     const selector22 = document.getElementById("selected_mois_choose")
     selector22.addEventListener("change",select_mois)
     function select_mois(){
@@ -350,5 +324,33 @@
         }
     }
     Dated()
+</script>
+<script>
+    const selector = document.getElementById("selected_user_choose")
+    selector.addEventListener("change",select_user)
+    function select_user(){
+        Nodelist = document.querySelectorAll('[id*="view_mission"]')
+        for (i in Nodelist){
+            let node = Nodelist[i]
+            //console.log(node)
+            //console.log(selector.value)
+            if (selector.value == ""){
+                /*console.log("SET ALL")*/
+                node.style.display = "flex";
+            }else{
+                if (node.getAttribute('user') == selector.value){
+                    /*console.log("SET ",node.getAttribute('user')," to flex")*/
+                    node.style.display = "flex";
+                }else{
+                    /*console.log("SET ",node.getAttribute('user')," to none")*/
+                    //console.log(selector.value)
+                    node.style.display = "none";
+                    
+                }
+                
+            }
+            
+        }
+    }
 </script>
 </html>
