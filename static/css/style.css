@@ -520,7 +520,7 @@ height: 70px;
   cursor:pointer;
   border: 2px solid white;
 }
-.dots a
+.dots span
 {
   position: absolute;
   top: 45%;
@@ -584,7 +584,7 @@ height: 70px;
 {
   transform:scaleX(1);
 }
-.action_items span
+.action_items a
 {
   position: absolute;
   top: 25%;
