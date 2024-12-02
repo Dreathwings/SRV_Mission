@@ -155,8 +155,8 @@
                 </div>
                 <div class="view" id="date">Date
                     <div class="listsearch" style="height: 40px;">
-                        <input class="chosen-value" id="selected_mission" type="text" value="" placeholder="Mois" autocomplete="off" style="font-size:0.9rem;height: 2.5rem;width: 50%;">
-                        <ul class="value-list" style="margin-top: 40px;width: 50%;">
+                        <input class="chosen-value" id="selected_mois_choose" type="text" value="" placeholder="Mois" autocomplete="off" style="font-size:0.9rem;height: 2.5rem;width: 50%;">
+                        <ul class="value-list" id="selected_mois_list" style="margin-top: 40px;width: 50%;">
                             <li michel="MOIS" value="Janvier">Janvier</li>
                             <li michel="MOIS" value="Février">Février</li>
                             <li michel="MOIS" value="Mars">Mars</li>
@@ -171,9 +171,9 @@
                             <li michel="MOIS" value="Décembre">Décembre</li>
                         </ul>
                         <script>
-                            const inputField2 = document.querySelector('#selected_user_choose');
-                            const dropdown2 = document.querySelector('#selected_user_list');
-                            const dropdownArray2 = [... document.querySelectorAll('[michel*="NAME"]')];
+                            const inputField2 = document.querySelector('#selected_mois_choose');
+                            const dropdown2 = document.querySelector('#selected_mois_list');
+                            const dropdownArray2 = [... document.querySelectorAll('[michel*="MOIS"]')];
                             //console.log(typeof dropdownArray2)
                             dropdown2.classList.add('open');
                             inputField2.focus(); // Demo purposes only
