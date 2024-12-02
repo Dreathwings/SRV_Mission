@@ -316,11 +316,11 @@
             let node = Nodelist[i]
             //console.log(node)
             //console.log(selector2.value)
-            if (selector.value == ""){
+            if (selector2.value == ""){
                 /*console.log("SET ALL")*/
                 node.style.display = "flex";
             }else{
-                if (selector.value.includes(node.getAttribute('mois'))){
+                if (selector2.value.includes(node.getAttribute('mois'))){
                     /*console.log("SET ",node.getAttribute('user')," to flex")*/
                     node.style.display = "flex";
                 }else{
