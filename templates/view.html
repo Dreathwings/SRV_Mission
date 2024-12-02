@@ -185,10 +185,10 @@
                 node.style.display = "flex";
             }else{
                 if (node.getAttribute('user') == selector.value){
-                    /*console.log("SET ",node.getAttribute('user')," to flex")*/
+                    console.log("SET ",node.getAttribute('user')," to flex")
                     node.style.display = "flex";
                 }else{
-                    /*console.log("SET ",node.getAttribute('user')," to none")*/
+                    console.log("SET ",node.getAttribute('user')," to none")
                     //console.log(selector.value)
                     node.style.display = "none";
                     
@@ -204,7 +204,7 @@
         for (i in Nodelist){
             let node = Nodelist[i];
             console.log(node);
-            let nodedate = node.querySelectorAll('[id*="date"]');
+            let nodedate = node.getElementById('date');
             console.log(nodedate[0].getAttribute("date"));
             let date = new Date(parseInt(nodedate[0].getAttribute("date")));
             nodedate[0].innerHTML = date.getDate()+" "+ mois[date.getMonth()]+" "+(1900+date.getYear());
