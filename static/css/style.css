@@ -563,10 +563,10 @@ div.listsearch {
 }
 .action_items_bar
 {
-  position:absolute;
-  top:4.5%;
-  left:25%;
-  width:380px;
+  position: relative;
+  top: 7.5%;
+  left: 5%;
+  width: 325px;
   height:60px;
   background-color: #E84F3E;
   border-radius:60px;
