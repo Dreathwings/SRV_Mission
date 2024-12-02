@@ -334,11 +334,11 @@
             let node = Nodelist[i]
             //console.log(node)
             //console.log(selector.value)
-            if (selector.value == ""){
+            if (selector.value == "" && node.style.display == 'flex'){
                 /*console.log("SET ALL")*/
                 node.style.display = "flex";
             }else{
-                if (node.getAttribute('user') == selector.value){
+                if (node.getAttribute('user') == selector.value && node.style.display == 'flex'){
                     /*console.log("SET ",node.getAttribute('user')," to flex")*/
                     node.style.display = "flex";
                 }else{
