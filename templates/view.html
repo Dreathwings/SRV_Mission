@@ -174,7 +174,7 @@
 </body>
 <script>
     const selector = document.getElementById("selected_user")
-    selector.addEventListener("change",select_user)
+    selector.addEventListener("input",select_user)
     function select_user(){
         Nodelist = document.querySelectorAll('[id*="view_mission"]')
         for (i in Nodelist){
