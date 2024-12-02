@@ -98,8 +98,8 @@
                           let valueSubstring;
                           if (inputValue.length > 0) {
                             for (let j = 0; j < valueArray.length; j++) {
-                                console.log(valueArray[j].toLowerCase().includes(inputValue.toLowerCase()))
-                              if (!(valueArray[j].substring(0).toLowerCase().include(inputValue.toLowerCase()))) {
+                                console.log(valueArray[j].toLowerCase().includes(inputValue))
+                              if (!(valueArray[j].toLowerCase().includes(inputValue))) {
                                 dropdownArray[j].classList.add('closed');
                               } else {
                                 dropdownArray[j].classList.remove('closed');
