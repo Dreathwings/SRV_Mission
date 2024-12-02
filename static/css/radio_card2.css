@@ -167,8 +167,6 @@ line-height: 1.5;
 	
 }
 
-[type="checkbox"]:checked,
-[type="checkbox"]:not(:checked),
 [type="radio"]:checked.checkbox-tools,
 [type="radio"]:checked.checkbox-budget,
 [type="radio"]:not(:checked).checkbox-tools,
