@@ -489,6 +489,13 @@ div.listsearch {
       color: #161919;
   }
   
+
+
+  .nav, .menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
   .nav input {
       width: 40px;
       height: 40px;
