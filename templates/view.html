@@ -8,6 +8,52 @@
     <title>List Mission</title>
 </head>
 <body class="view">
+    <input class="checkbox" type="checkbox" name="general" id="general">
+                <label class="for-checkbox" for="general"></label>
+                <div class="FABMenu">
+                    <input type="checkbox" autocomplete="off"/>
+                    <div class="hamburger">
+                      <div class="dots">
+                        <span class="first"></span>
+                        <span class="second"></span>
+                        <span class="third"></span>
+                      </div>
+                    </div>
+                    <div class="action_items_bar">
+                      <div class="action_items">
+                        <a class="first_item" href="http://geii.iut.u-bordeaux.fr/mission">
+                          <i class="material-icons">
+                          home
+                          </i>
+                        </a>
+                        <a class="second_item" id="go-back">
+                            <script>
+                                document.getElementById("go-back").addEventListener("click", () => {
+                                    history.back();
+                                  });
+                            </script>
+                          <i class="material-icons">
+                            keyboard_double_arrow_left
+                          </i>
+                        </a>
+                        <a class="third_item">
+                            <i class="material-icons">
+                                admin_panel_settings
+                            </i>
+                        </a>
+                        <a class="fourth_item" id="go-reload">
+                            <script>
+                                document.getElementById("go-reload").addEventListener("click", () => {
+                                    window.location.reload()
+                                  });
+                            </script>
+                            <i class="material-icons">
+                                refresh
+                            </i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
     <ul class="view" id="list_view">
         {% if ADMIN %}
             <li class="view" id="title"><div style="width: 99%; background: none;display: flex;align-items: center;margin: 7.5px;">
