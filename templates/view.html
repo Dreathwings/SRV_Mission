@@ -98,7 +98,7 @@
                           let valueSubstring;
                           if (inputValue.length > 0) {
                             for (let j = 0; j < valueArray.length; j++) {
-                                console.log(inputValue.substring(0, inputValue.length) in valueArray[j].substring(0, inputValue.length).toLowerCase() === true)
+                                console.log(valueArray[j].substring(0).toLowerCase().include(inputValue.toLowerCase()))
                               if (!(valueArray[j].substring(0).toLowerCase().include(inputValue.toLowerCase()))) {
                                 dropdownArray[j].classList.add('closed');
                               } else {
@@ -179,7 +179,7 @@
         Nodelist = document.querySelectorAll('[id*="view_mission"]')
         for (i in Nodelist){
             let node = Nodelist[i]
-            console.log(node)
+            //console.log(node)
             if (selector.value == ""){
                 /*console.log("SET ALL")*/
                 node.style.display = "flex";
@@ -203,9 +203,9 @@
         let mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
         for (i in Nodelist){
             let node = Nodelist[i];
-            console.log(node);
+            //console.log(node);
             let nodedate = node.querySelectorAll('[id*="date"]');
-            console.log(nodedate[0].getAttribute("date"));
+            //console.log(nodedate[0].getAttribute("date"));
             let date = new Date(parseInt(nodedate[0].getAttribute("date")));
             nodedate[0].innerHTML = date.getDate()+" "+ mois[date.getMonth()]+" "+(1900+date.getYear());
         }
