@@ -68,14 +68,14 @@
                 <div class="view" id="id_mission">ID Mission</div>
                 <div class="view" id="nom_mission">NOM Mission
                     <div class="listsearch" style="height: 40px;">
-                        <input class="chosen-value" id="selected_mission" type="text" value="" placeholder="Choisir un Pays" autocomplete="off" style="height: 2.5rem;">
+                        <input class="chosen-value" id="selected_mission" type="text" value="" placeholder="NOM_MISSION" autocomplete="off" style="height: 2.5rem;">
                         <ul class="value-list" style="margin-top: 40px;">
                         </ul>
                     </div>
                 </div> 
                 <div class="view" id="id_user">Demandeur
                     <div class="listsearch" style="height: 40px;">
-                        <input class="chosen-value" id="selected_user" type="text" value="" placeholder="Choisir un Pays" autocomplete="off" style="height: 2.5rem;">
+                        <input class="chosen-value" id="selected_user" type="text" value="" placeholder="NOM" autocomplete="off" style="height: 2.5rem;">
                         <ul class="value-list" style="margin-top: 40px;">
                             {% for user in All_User %}
                                 <li michel="NAME" value="{{user}}">{{user}}</li>
@@ -155,7 +155,12 @@
                 </div>
                 <div class="view" id="date">Date
                     <div class="listsearch" style="height: 40px;">
-
+                        <input class="chosen-value" id="selected_mission" type="text" value="" placeholder="Mois" autocomplete="off" style="height: 2.5rem;">
+                        <ul class="value-list" style="margin-top: 40px;">
+                        </ul>
+                        <input class="chosen-value" id="selected_mission" type="text" value="" placeholder="Annee" autocomplete="off" style="height: 2.5rem;">
+                        <ul class="value-list" style="margin-top: 40px;">
+                        </ul>
                     </div>
                 </div> 
                 <div class="view" id="status">Status
