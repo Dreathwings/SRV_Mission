@@ -167,7 +167,10 @@ line-height: 1.5;
 	
 }
 [type="checkbox"]:checked.checkbox,
-[type="checkbox"]:not(:checked).checkbox{
+[type="checkbox"]:not(:checked).checkbox,
+[type="checkbox"]:checked.checkbox-booking,
+[type="checkbox"]:not(:checked).checkbox-booking
+{
 	position: absolute;
 	left: -9999px;
 	width: 0;
