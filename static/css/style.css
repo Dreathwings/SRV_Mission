@@ -518,6 +518,7 @@ div.listsearch {
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
   z-index:10;
   cursor:pointer;
+  border: 2px solid white;
 }
 .dots span
 {
@@ -570,8 +571,8 @@ div.listsearch {
   height:60px;
   background-color: #E84F3E;
   border-radius:60px;
-  box-shadow: 0px 5px 20px #F19181;
   z-index:5;
+  border: 2px solid white;
   
 /*   animation-name: expand-the-bar;
   animation-duration: 2s;
