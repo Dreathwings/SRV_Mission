@@ -490,7 +490,7 @@ div.listsearch {
   left:0;
   bottom:0;
   right:0;
-  width:600px;
+  width:285px;
   height:200px;
   font-size: initial;
 }
@@ -509,7 +509,7 @@ div.listsearch {
 .hamburger
 {
   position:absolute;
-  top:0%;
+  top:3%;
   left:50%;
   width: 80px;
   height:80px;
