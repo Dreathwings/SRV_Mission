@@ -293,9 +293,13 @@ body.view{
     background-color: var(--dark-blue);
 }
 ul.view{
-    background: none;
-    width: 98%;
-    list-style-type: none;
+  background: none;
+  width: 90%;
+  list-style-type: none;
+  right: 10%;
+  position: absolute;
+  left: 2.5%;
+  top: 6%;
 }
 li.view{
     font-size: large;
