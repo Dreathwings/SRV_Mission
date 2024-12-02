@@ -490,9 +490,9 @@ div.listsearch {
   left:0;
   bottom:0;
   right:0;
-  margin:auto;
   width:600px;
   height:200px;
+  font-size: initial;
 }
 .FABMenu input
 {
