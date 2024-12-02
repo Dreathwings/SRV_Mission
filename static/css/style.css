@@ -468,7 +468,7 @@ div.listsearch {
       transition: 0.5s;
   }
   
-  .nav input:checked ~ .menu {
+  .nav .navin:checked ~ .menu {
       width: 450px;
   }
   
