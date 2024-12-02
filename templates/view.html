@@ -263,7 +263,7 @@
         {% set color = ["#008000","#caac00","#ca0000","#2c2c2c"] %}. 
         {% for mission in Missions %}
             <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{{mission[0]}}" style="text-decoration:none;">
-            <li class="view" id="view_mission" user="{{mission[2]}}" >
+            <li class="view" id="view_mission" user="{{mission[2]}}" nom_mission="" mois="" annee="" status="{{mission[4]}}">
                 <div class="view" id="background" >
                     <div class="view" id="id_mission">{{mission[0]}}</div> 
                     <div class="view" id="nom_mission">NOM Mission</div> 
@@ -289,7 +289,33 @@
         for (i in Nodelist){
             let node = Nodelist[i]
             //console.log(node)
-            console.log(selector.value)
+            //console.log(selector.value)
+            if (selector.value == ""){
+                /*console.log("SET ALL")*/
+                node.style.display = "flex";
+            }else{
+                if (node.getAttribute('user') == selector.value){
+                    /*console.log("SET ",node.getAttribute('user')," to flex")*/
+                    node.style.display = "flex";
+                }else{
+                    /*console.log("SET ",node.getAttribute('user')," to none")*/
+                    //console.log(selector.value)
+                    node.style.display = "none";
+                    
+                }
+                
+            }
+            
+        }
+    }
+    const selector2 = document.getElementById("selected_mois_choose")
+    selector.addEventListener("change",select_mois)
+    function select_mois(){
+        Nodelist = document.querySelectorAll('[id*="view_mission"]')
+        for (i in Nodelist){
+            let node = Nodelist[i]
+            //console.log(node)
+            //console.log(selector2.value)
             if (selector.value == ""){
                 /*console.log("SET ALL")*/
                 node.style.display = "flex";
@@ -317,6 +343,8 @@
             let nodedate = node.querySelectorAll('[id*="date"]');
             //console.log(nodedate[0].getAttribute("date"));
             let date = new Date(parseInt(nodedate[0].getAttribute("date")));
+            node.setAttribute('mois',mois[date.getMonth()])
+            node.setAttribute('annee',(1900+date.getYear()))
             nodedate[0].innerHTML = date.getDate()+" "+ mois[date.getMonth()]+" "+(1900+date.getYear());
         }
     }
