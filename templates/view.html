@@ -69,7 +69,7 @@
                 <div class="view" id="nom_mission">NOM Mission</div> 
                 <div class="view" id="id_user">Demandeur
                     <div class="listsearch">
-                        <input class="chosen-value" type="text" value="" placeholder="Choisir un Pays" autocomplete="off" required>
+                        <input class="chosen-value" id="selected_user" type="text" value="" placeholder="Choisir un Pays" autocomplete="off" required>
                         <ul class="value-list">
                             {% for user in All_User %}
                                 <li michel="NAME" value="{{user}}">{{user}}</li>
