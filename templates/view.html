@@ -170,6 +170,77 @@
                             <li michel="MOIS" value="Novembre">Novembre</li>
                             <li michel="MOIS" value="Décembre">Décembre</li>
                         </ul>
+                        <script>
+                            const inputField2 = document.querySelector('#selected_user_choose');
+                            const dropdown2 = document.querySelector('#selected_user_list');
+                            const dropdownArray2 = [... document.querySelectorAll('[michel*="NAME"]')];
+                            //console.log(typeof dropdownArray2)
+                            dropdown2.classList.add('open');
+                            inputField2.focus(); // Demo purposes only
+                            let valueArray2 = [];
+                            dropdownArray2.forEach(item => {
+                              valueArray2.push(item.textContent);
+                            });
+                            
+                            const closeDropdown2 = () => {
+                              dropdown2.classList.remove('open');
+                            }
+                            
+                            inputField2.addEventListener('input', () => {
+                              dropdown2.classList.add('open');
+                              let inputValue = inputField2.value.toLowerCase();
+                              let valueSubstring;
+                              if (inputValue.length > 0) {
+                                for (let j = 0; j < valueArray.length; j++) {
+                                    console.log(valueArray[j].toLowerCase().includes(inputValue))
+                                  if (!(valueArray[j].toLowerCase().includes(inputValue))) {
+                                    dropdownArray2[j].classList.add('closed');
+                                  } else {
+                                    dropdownArray2[j].classList.remove('closed');
+                                  }
+                                }
+                              } else {
+                                for (let i = 0; i < dropdownArray2.length; i++) {
+                                  dropdownArray2[i].classList.remove('closed');
+                                }
+                              }
+                            });
+                            
+                            dropdownArray2.forEach(item => {
+                              item.addEventListener('click', (evt) => {
+                                inputField2.value = item.textContent;
+                                dropdownArray2.forEach(dropdown => {
+                                  dropdown2.classList.add('closed');
+                                  const selector2 = document.getElementById("selected_mois_choose")
+                                  selector2.dispatchEvent(new Event("change"));
+                                });
+                              });
+                            })
+                            
+                            inputField2.addEventListener('focus', () => {
+                               inputField2.placeholder = 'Recherche';
+                               dropdown2.classList.add('open');
+                               dropdownArray2.forEach(dropdown => {
+                                 dropdown2.classList.remove('closed');
+                               });
+                            });
+                            
+                            inputField2.addEventListener('blur', () => {
+                               inputField2.placeholder = 'Choisir un Pays';
+                              dropdown2.classList.remove('open');
+                            });
+                            
+                            document.addEventListener('click', (evt) => {
+                              const isDropdown2 = dropdown2.contains(evt.target);
+                              const isInput2 = inputField2.contains(evt.target);
+                              if (!isDropdown2 && !isInput2) {
+                                dropdown2.classList.remove('open');
+                                const selector2 = document.getElementById("selected_mois_choose")
+                                selector2.dispatchEvent(new Event("change"));
+                              }
+                            });
+                        </script> 
+
                         <input class="chosen-value" id="selected_mission" type="text" value="" placeholder="Annee" autocomplete="off" style="font-size:0.9rem;left:50%;height: 2.5rem;width: 50%;">
                         <ul class="value-list" style="margin-top: 40px;width: 50%;">
                             <li michel="ANNEE" value="2024">2024</li>
