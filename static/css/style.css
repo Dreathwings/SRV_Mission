@@ -331,10 +331,13 @@ div.view#background{
     border: 1px solid var(--black);
 }
 div.view#id_mission{
-    width: 25%;
+    width: 20%;
+}
+div.view#nom_mission{
+  width: 20%;
 }
 div.view#id_user{
-    width: 25%;
+    width: 20%;
     display: flex;
     align-content: center;
     vertical-align: auto;
@@ -346,10 +349,10 @@ div.view#id_user{
 
 }
 div.view#date{
-    width: 25%;
+    width: 20%;
 }
 div.view#status{
-    width: 25%;
+    width: 20%;
 }
 
 div.listsearch {
