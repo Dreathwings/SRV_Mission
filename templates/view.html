@@ -315,12 +315,12 @@
         for (i in Nodelist){
             let node = Nodelist[i]
             //console.log(node)
-            console.log(selector2.value.includes(node.getAttribute('mois')))
-            if (selector2.value == "" && node.style.display == 'flex'){
+            console.log(selector22.value.includes(node.getAttribute('mois')))
+            if (selector22.value == "" && node.style.display == 'flex'){
                 /*console.log("SET ALL")*/
                 node.style.display = "flex";
             }else{
-                if(selector2.value.includes(node.getAttribute('mois')) && node.style.display == 'flex'){
+                if(selector22.value.includes(node.getAttribute('mois')) && node.style.display == 'flex'){
                     /*console.log("SET ",node.getAttribute('user')," to flex")*/
                     node.style.display = "flex";
                 }else{
