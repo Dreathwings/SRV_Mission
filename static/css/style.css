@@ -520,7 +520,7 @@ height: 70px;
   cursor:pointer;
   border: 2px solid white;
 }
-.dots span
+.dots a
 {
   position: absolute;
   top: 45%;
