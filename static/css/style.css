@@ -332,9 +332,11 @@ div.view#background{
 }
 div.view#id_mission{
     width: 20%;
+    align-items: center;
 }
 div.view#nom_mission{
   width: 20%;
+  align-items: center;
 }
 div.view#id_user{
     width: 20%;
@@ -351,9 +353,11 @@ div.view#id_user{
 }
 div.view#date{
     width: 20%;
+    align-items: center;
 }
 div.view#status{
     width: 20%;
+    align-items: center;
 }
 
 div.listsearch {
