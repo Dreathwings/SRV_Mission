@@ -209,7 +209,7 @@
                             dropdownArray2.forEach(item => {
                               item.addEventListener('click', (evt) => {
                                 inputField2.value = item.textContent;
-                                dropdownArray2.forEach(dropdown => {
+                                dropdownArray2.forEach(dropdown2 => {
                                   dropdown2.classList.add('closed');
                                   const selector2 = document.getElementById("selected_mois_choose")
                                   selector2.dispatchEvent(new Event("change"));
