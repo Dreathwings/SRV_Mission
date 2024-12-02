@@ -117,6 +117,8 @@
                             inputField.value = item.textContent;
                             dropdownArray.forEach(dropdown => {
                               dropdown.classList.add('closed');
+                              const selector = document.getElementById("selected_user")
+                              selector.dispatchEvent(new Event("change"));
                             });
                           });
                         })
