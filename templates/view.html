@@ -68,12 +68,16 @@
                 <div class="view" id="id_mission">ID Mission</div>
                 <div class="view" id="nom_mission">NOM Mission</div> 
                 <div class="view" id="id_user">Demandeur
-                    <select name="selected_user" id="selected_user">
-                        <option value="ALL">ALL</option>
-                        {% for user in All_User %}
-                            <option value="{{user}}">{{user}}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="listsearch">
+                        <input class="chosen-value" type="text" value="ALL" placeholder="Choisir un Pays" autocomplete="off" required>
+                        <ul class="value-list">
+                            <li value="ALL">ALL</li>
+                            {% for user in All_User %}
+                                <li value="{{user}}">{{user}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                        
                 </div>
                 <div class="view" id="date">Date</div> 
                 <div class="view" id="status">Status</div>
