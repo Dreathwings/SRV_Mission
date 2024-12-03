@@ -677,10 +677,10 @@ height: 70px;
 }
 
 
-#selected_annee_choose_0 ~ label i{
+#selected_annee_choose_0 ~ label i::before{
   content: "visibility";
 }
 
-#selected_annee_choose_0:checked ~ label i{
+#selected_annee_choose_0:checked ~ label i::before{
   content: "visibility_off";
 }
