@@ -333,7 +333,7 @@
     function update_filter(){
         Nodelist = document.querySelectorAll('[id*="view_mission"]')
         for (i in Nodelist){
-            let node = Nodelist[i][0]
+            let node = Nodelist[i]
             /*console.log(node)*/
             values = new Array(selector_user.value,selector_mois.value)
             let filtre = 0
