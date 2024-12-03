@@ -411,7 +411,7 @@
               
               if(val === ""){
                 /*console.log("Rien");*/
-              } else if(val.includes(node.getAttribute("mois")) || val.includes(node.getAttribute("annee")) || val.includes(node.getAttribute("user")) || node.getAttribute("nom_mission").toLowerCase().includes(val) || val === node.getAttribute("status")){
+              } else if(val.includes(node.getAttribute("mois")) || val.includes(node.getAttribute("annee")) || val.includes(node.getAttribute("user")) || node.getAttribute("nom_mission").toLowerCase().includes(val) || val != node.getAttribute("status")){
                 /*console.log("Filtré");*/
                 if(node.style.display === "flex" || !filtre){
                   node.style.display = 'flex'; 
@@ -443,7 +443,7 @@
       document.getElementById("selected_annee_choose_3"))
       for(v in vis){
         if (vis[v].checked){
-          vis[v].value = ""
+          vis[v].value = "off"
         }else{
           vis[v].value = vis[v].name
         }
