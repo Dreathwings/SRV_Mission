@@ -345,7 +345,7 @@
               if(val === ""){
                 console.log("Rien");
                 filtre += 1;
-              } else if(val === node.getAttribute("mois") || val === node.getAttribute("user") || val === node.getAttribute("annee")){
+              } else if(val === node.getAttribute("mois") || val === node.getAttribute("user") || val === node.getAttribute("annee") && node.style.display == "flex"){
                 console.log("Filtré");
                 node.style.display = 'flex'; 
                 filtre += 1;
