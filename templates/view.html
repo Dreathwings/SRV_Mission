@@ -338,13 +338,14 @@
             values = new Array(selector_user.value,selector_mois.value)
             let filtre = 0
             console.log(values);
+            console.log("node:", node );
             for(value in values){
               let val = values[value]
               console.log("VALLL:", val);
-              console.log("node:", node );
+              
               if(val === ""){
                 console.log("Rien");
-              } else if(node.style.display === 'flex' && val.includes(node.getAttribute("mois")) || val.includes(node.getAttribute("annee")) || val.includes(node.getAttribute("user"))){
+              } else if(filtre === 0 && val.includes(node.getAttribute("mois")) || val.includes(node.getAttribute("annee")) || val.includes(node.getAttribute("user"))){
                 console.log("Filtré");
                 node.style.display = 'flex'; 
                 filtre += 1;
