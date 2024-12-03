@@ -68,9 +68,7 @@
                 <div class="view" id="id_mission">ID Mission</div>
                 <div class="view" id="nom_mission">NOM Mission
                     <div class="listsearch" style="height: 40px;">
-                        <input class="chosen-value" id="selected_mission" type="text" value="" placeholder="NOM_MISSION" autocomplete="off" style="height: 2.5rem;">
-                        <ul class="value-list" style="margin-top: 40px;">
-                        </ul>
+                        <input class="chosen-value" id="selected_mission_choose" type="text" value="" placeholder="NOM_MISSION" autocomplete="off" style="height: 2.5rem;">
                     </div>
                 </div> 
                 <div class="view" id="id_user">Demandeur
@@ -264,7 +262,7 @@
         {% set color = ["#008000","#caac00","#ca0000","#2c2c2c"] %}. 
         {% for mission in Missions %}
             <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{{mission[0]}}" style="text-decoration:none;">
-            <li class="view" id="view_mission" user="{{mission[2]}}" nom_mission="" mois="" annee="" status="{{mission[5]}}">
+            <li class="view" id="view_mission" user="{{mission[2]}}" nom_mission="{{mission[3]}}" mois="" annee="" status="{{mission[5]}}">
                 <div class="view" id="background" >
                     <div class="view" id="id_mission">{{mission[0]}}</div> 
                     <div class="view" id="nom_mission">{{mission[3]}}</div> 
@@ -329,13 +327,15 @@
     selector_user.addEventListener("change",update_filter)
     let selector_mois = document.getElementById("selected_mois_choose")
     selector_mois.addEventListener("change",update_filter)
+    let selector_mission = document.getElementById("selected_mission_choose")
+    selector_mois.addEventListener("change",update_filter)
 
     function update_filter(){
         Nodelist = document.querySelectorAll('[id*="view_mission"]')
         for (i in Nodelist){
             let node = Nodelist[i]
             /*console.log(node)*/
-            values = new Array(selector_user.value,selector_mois.value)
+            values = new Array(selector_user.value,selector_mois.value,selector_mission.value)
             let filtre = false
             console.log(values);
             console.log("node:", node );
@@ -345,7 +345,7 @@
               
               if(val === ""){
                 console.log("Rien");
-              } else if(val.includes(node.getAttribute("mois")) || val.includes(node.getAttribute("annee")) || val.includes(node.getAttribute("user"))){
+              } else if(val.includes(node.getAttribute("mois")) || val.includes(node.getAttribute("annee")) || val.includes(node.getAttribute("user") || val.includes(node.getAttribute("mission")) )){
                 console.log("Filtré");
                 if(node.style.display === "flex" || !filtre){
                   node.style.display = 'flex'; 
