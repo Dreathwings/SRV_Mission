@@ -283,8 +283,7 @@
     </ul>
 </body>
 <script>
-    let selector22 = document.getElementById("selected_mois_choose")
-    selector22.addEventListener("change",select_mois)
+    
     function select_mois(){
         Nodelist = document.querySelectorAll('[id*="view_mission"]')
         for (i in Nodelist){
@@ -326,29 +325,24 @@
     Dated()
 </script>
 <script>
-    let selector = document.getElementById("selected_user_choose")
-    selector.addEventListener("change",select_user)
-    function select_user(){
+    let selector_user = document.getElementById("selected_user_choose")
+    selector.addEventListener("change",update_filter)
+    let selector_mois = document.getElementById("selected_mois_choose")
+    selector22.addEventListener("change",update_filter)
+
+    function update_filter(){
         Nodelist = document.querySelectorAll('[id*="view_mission"]')
         for (i in Nodelist){
             let node = Nodelist[i]
-            //console.log(node)
+            console.log(node)
+            values = (selector_user.value,selector_mois.value)
+            let filtre = 0
             //console.log(selector.value)
-            if (selector.value == ""){
-                /*console.log("SET ALL")*/
-                node.style.display = "flex";
-            }else{
-                if (node.getAttribute('user') == selector.value && node.style.display == 'flex'){
-                    /*console.log("SET ",node.getAttribute('user')," to flex")*/
-                    node.style.display = "flex";
-                }else{
-                    /*console.log("SET ",node.getAttribute('user')," to none")*/
-                    //console.log(selector.value)
-                    node.style.display = "none";
-                    
-                }
-                
+            for( value in values){
+              if(value == ''){node.style.display = 'flex'; filtre += 1}
+              else{node.style.display = 'none';}
             }
+            if(filtre == 0 ){node.style.display = 'flex';}
             
         }
     }
