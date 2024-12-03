@@ -677,31 +677,31 @@ height: 70px;
 }
 
 
-#selected_annee_choose_0 ~ label i::before{
+#selected_annee_choose_0 ~ #selected_annee_choose_0 label i::before{
   content: "visibility";
 }
 
-#selected_annee_choose_0:checked ~ label i::before{
+#selected_annee_choose_0:checked ~ #selected_annee_choose_0 label i::before{
   content: "visibility_off";
 }
-#selected_annee_choose_1 ~ label i::before{
+#selected_annee_choose_1 ~ #selected_annee_choose_1 label i::before{
   content: "visibility";
 }
 
-#selected_annee_choose_1:checked ~ label i::before{
+#selected_annee_choose_1:checked ~ #selected_annee_choose_1 label i::before{
   content: "visibility_off";
 }
-#selected_annee_choose_2 ~ label i::before{
+#selected_annee_choose_2 ~  #selected_annee_choose_2label i::before{
   content: "visibility";
 }
 
-#selected_annee_choose_2:checked ~ label i::before{
+#selected_annee_choose_2:checked ~ #selected_annee_choose_2 label i::before{
   content: "visibility_off";
 }
-#selected_annee_choose_3 ~ label i::before{
+#selected_annee_choose_3 ~ #selected_annee_choose_3 label i::before{
   content: "visibility";
 }
 
-#selected_annee_choose_3:checked ~ label i::before{
+#selected_annee_choose_3:checked ~ #selected_annee_choose_3 label i::before{
   content: "visibility_off";
 }
