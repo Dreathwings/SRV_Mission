@@ -340,12 +340,12 @@
             console.log(values);
             for(value in values){
               let val = values[value]
-              console.log(val);
+              console.log("VALLL:", val);
               if(val === ""){
                 console.log("Rien");
                 node.style.display = 'flex'; 
                 filtre += 1;
-              } else if(val === node.mois || val === node.user || val === annee){
+              } else if(val == node.mois || val == node.user || val == annee){
                 console.log("Filtré");
                 node.style.display = 'flex'; 
                 filtre += 1;
