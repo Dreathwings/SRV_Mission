@@ -375,13 +375,15 @@
     selector_mois.addEventListener("change",update_filter)
     let selector_mission = document.getElementById("selected_mission_choose")
     selector_mission.addEventListener("change",update_filter)
+    let selector_annee = document.getElementById("selected_annee_choose")
+    selector_annee.addEventListener("change",update_filter)
 
     function update_filter(){
         Nodelist = document.querySelectorAll('[id*="view_mission"]')
         for (i in Nodelist){
             let node = Nodelist[i]
             /*console.log(node)*/
-            values = new Array(selector_user.value,selector_mois.value,selector_mission.value.toLowerCase())
+            values = new Array(selector_user.value,selector_mois.value,selector_mission.value.toLowerCase(),selector_annee.value)
             let filtre = false
             /*console.log(values);*/
             /*console.log("node:", node );*/
