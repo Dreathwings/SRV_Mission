@@ -704,4 +704,5 @@ height: 70px;
 
 #selected_annee_choose_3:checked + label i::before{
   content: "visibility_off";
+  
 }
