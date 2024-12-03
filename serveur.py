@@ -281,6 +281,6 @@ def access_denied(e):
 # Running the API
 if __name__ == "__main__":
     with app.app_context():
-        for rule in app.url_map.iter_rules():
+        #for rule in app.url_map.iter_rules():
     	    #print(f"{rule.endpoint}: {rule.methods} - {rule}")
         app.run(port=6969,debug=True)
