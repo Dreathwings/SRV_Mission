@@ -263,8 +263,8 @@
         {% set list = ["Ouvert","En cours de traitement","Validé","Cloturé"] %}.
         {% set color = ["#008000","#caac00","#ca0000","#2c2c2c"] %}. 
         {% for mission in Missions %}
-            <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{{mission[0]}}" style="text-decoration:none;"user="{{mission[2]}}" nom_mission="" mois="" annee="" status="{{mission[4]}}">
-            <li class="view" id="view_mission" >
+            <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{{mission[0]}}" style="text-decoration:none;">
+            <li class="view" id="view_mission" user="{{mission[2]}}" nom_mission="" mois="" annee="" status="{{mission[4]}}">
                 <div class="view" id="background" >
                     <div class="view" id="id_mission">{{mission[0]}}</div> 
                     <div class="view" id="nom_mission">NOM Mission</div> 
@@ -346,7 +346,7 @@
                 console.log("Rien");
                 node.style.display = 'flex'; 
                 filtre += 1;
-              } else if(val === node.mois || val === node.user || val === annee){
+              } else if(val === node.getAttribute("mois") || val === node.getAttribute("user") || val === node.getAttribute("annee")){
                 console.log("Filtré");
                 node.style.display = 'flex'; 
                 filtre += 1;
