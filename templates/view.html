@@ -326,9 +326,9 @@
 </script>
 <script>
     let selector_user = document.getElementById("selected_user_choose")
-    selector.addEventListener("change",update_filter)
+    selector_user.addEventListener("change",update_filter)
     let selector_mois = document.getElementById("selected_mois_choose")
-    selector22.addEventListener("change",update_filter)
+    selector_mois.addEventListener("change",update_filter)
 
     function update_filter(){
         Nodelist = document.querySelectorAll('[id*="view_mission"]')
