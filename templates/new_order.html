@@ -139,7 +139,7 @@
                 </label> 
                 <div class="box_mission" id="AUTRE">
                     <div class="listsearch">
-                        <input class="chosen-value" type="text" value="" name="pays" placeholder="Choisir un Pays" autocomplete="off" required>
+                        <input class="chosen-value" id="pays_list" type="text" value="" name="pays" placeholder="Choisir un Pays" autocomplete="off">
                         <ul class="value-list">
                             <li value="Afghanistan">Afghanistan</li>
                             <li value="Afrique_Centrale">Afrique_Centrale</li>
@@ -546,11 +546,13 @@
                                 document.getElementById('Autre').addEventListener("change", (e) => {
                                         document.getElementById('div_codeptl').style.display = "none";
                                         document.getElementById('ville').style.width = "69%";
+                                        document.getElementById("pays_list").required = true;
                                         
                                 });
                                 document.getElementById('France').addEventListener("change", (e) => {
                                         document.getElementById('div_codeptl').style.display = "initial";
                                         document.getElementById('ville').style.width = "40%";
+                                        document.getElementById("pays_list").required = false;
                                 });
 
 
