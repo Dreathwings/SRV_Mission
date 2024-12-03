@@ -342,7 +342,7 @@
               let val = values[value]
               console.log("VALLL:", val);
               console.log("node:", node.getAttribute("user") );
-              if(val === ""){
+              if(val === "" && node.style.display != "none"){
                 console.log("Rien");
                 node.style.display = 'flex'; 
                 filtre += 1;
