@@ -678,9 +678,9 @@ height: 70px;
 
 
 #selected_annee_choose_0 ~ label i{
-  content: "visibility";
+  content: visibility;
 }
 
 #selected_annee_choose_0:checked ~ label i{
-  content: "visibility_off";
+  content: visibility_off;
 }
