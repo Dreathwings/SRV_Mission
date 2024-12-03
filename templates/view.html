@@ -340,7 +340,7 @@
             console.log(values)
             for( value in values){
               console.log(value)
-              if(value == ''){node.style.display = 'flex'; filtre += 1}
+              if(values[value] == ''){node.style.display = 'flex'; filtre += 1}
               else{node.style.display = 'none';}
             }
             if(filtre == 0 ){node.style.display = 'flex';}
