@@ -342,9 +342,8 @@
               let val = values[value]
               console.log("VALLL:", val);
               console.log("node:", node.getAttribute("user") );
-              if(val === "" && node.style.display != "none"){
+              if(val === ""){
                 console.log("Rien");
-                node.style.display = 'flex'; 
                 filtre += 1;
               } else if(val === node.getAttribute("mois") || val === node.getAttribute("user") || val === node.getAttribute("annee")){
                 console.log("Filtré");
