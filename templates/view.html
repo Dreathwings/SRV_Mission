@@ -340,11 +340,25 @@
             console.log(values);
             for( value in values){
               console.log(values[value]);
-              if(values[value] == ''){node.style.display = 'flex'; filtre += 1}
-              else if(values[value] == node.mois || values[value] == node.user || values[value] == annee){console.log("Filtré");node.style.display = 'flex'; filtre += 1}
-              else{node.style.display = 'none';console.log("Masquée");}
+              if(values[value] == ''){
+                node.style.display = 'flex'; 
+                filtre += 1
+              }
+              else if(values[value] == node.mois || values[value] == node.user || values[value] == annee){
+                console.log("Filtré");
+                node.style.display = 'flex'; 
+                filtre += 1
+              }
+              else{
+                node.style.display = 'none';
+                console.log("Masquée");
+              }
             }
-            if(filtre === 0 ){console.log(values); node.style.display = 'flex';console.log("Aucun filtre");}
+            if(filtre === 0 ){
+              console.log(values); 
+              node.style.display = 'flex';
+              console.log("Aucun filtre");
+            }
             
         }
     }
