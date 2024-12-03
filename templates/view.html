@@ -334,11 +334,12 @@
         Nodelist = document.querySelectorAll('[id*="view_mission"]')
         for (i in Nodelist){
             let node = Nodelist[i]
-            console.log(node)
+            /*console.log(node)*/
             values = (selector_user.value,selector_mois.value)
             let filtre = 0
             //console.log(selector.value)
             for( value in values){
+              console.log(value)
               if(value == ''){node.style.display = 'flex'; filtre += 1}
               else{node.style.display = 'none';}
             }
