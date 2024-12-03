@@ -281,31 +281,6 @@
     </ul>
 </body>
 <script>
-    
-    function select_mois(){
-        Nodelist = document.querySelectorAll('[id*="view_mission"]')
-        for (i in Nodelist){
-            let node = Nodelist[i]
-            console.log(node)
-            console.log(selector22.value.includes(node.getAttribute('mois')))
-            if (selector22.value == ""){
-                console.log("SET ALL")
-                node.style.display = "flex";
-            }else{
-                if(selector22.value.includes(node.getAttribute('mois')) && node.style.display == 'flex'){
-                    console.log("SET ",node.getAttribute('mois')," to flex")
-                    node.style.display = "flex";
-                }else{
-                    console.log("SET ",node.getAttribute('mois')," to none")
-                    //console.log(selector.value)
-                    node.style.display = "none";
-                    
-                }
-                
-            }
-            
-        }
-    }
     function Dated(){
         Nodelist = document.querySelectorAll('[id*="view_mission"]')
         let mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
@@ -337,37 +312,37 @@
             /*console.log(node)*/
             values = new Array(selector_user.value,selector_mois.value,selector_mission.value.toLowerCase())
             let filtre = false
-            console.log(values);
-            console.log("node:", node );
+            /*console.log(values);*/
+            /*console.log("node:", node );*/
             for(value in values){
               let val = values[value]
-              console.log("VALLL:", val);
+              /*console.log("VALLL:", val);*/
               
               if(val === ""){
-                console.log("Rien");
-              } else if(val.includes(node.getAttribute("mois")) || val.includes(node.getAttribute("annee")) || val.includes(node.getAttribute("user") || val.includes(node.getAttribute("mission").toLowerCase()) )){
-                console.log("Filtré");
+                /*console.log("Rien");*/
+              } else if(val.includes(node.getAttribute("mois")) || val.includes(node.getAttribute("annee")) || val.includes(node.getAttribute("user") || node.getAttribute("mission").toLowerCase().includes(val) )){
+                /*console.log("Filtré");*/
                 if(node.style.display === "flex" || !filtre){
                   node.style.display = 'flex'; 
                   filtre = true;
                 }else{
-                  console.log("DEJA Filtré");
+                  /*console.log("DEJA Filtré");*/
                   node.style.display = 'none'; 
                 }
               } else{
                 node.style.display = "none";
-                console.log("Masquée");
+                /*console.log("Masquée");*/
                 filtre = true;
               }
               
             }
-            console.log(filtre)
+            /*console.log(filtre)*/
             if(!filtre ){
-              console.log(values); 
+              /*console.log(values); */
               node.style.display = 'flex';
-              console.log("Aucun filtre");
+              /*console.log("Aucun filtre");*/
             }
-            console.log("next");
+            /*console.log("next");*/
         }
     }
 </script>
