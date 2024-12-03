@@ -320,7 +320,7 @@
               
               if(val === ""){
                 /*console.log("Rien");*/
-              } else if(val.includes(node.getAttribute("mois")) || val.includes(node.getAttribute("annee")) || val.includes(node.getAttribute("user")) || node.getAttribute("mission").toLowerCase().includes(val) ){
+              } else if(val.includes(node.getAttribute("mois")) || val.includes(node.getAttribute("annee")) || val.includes(node.getAttribute("user")) || node.getAttribute("nom_mission").toLowerCase().includes(val) ){
                 /*console.log("Filtré");*/
                 if(node.style.display === "flex" || !filtre){
                   node.style.display = 'flex'; 
