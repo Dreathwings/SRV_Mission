@@ -347,10 +347,10 @@
                 console.log("Rien");
               } else if(filtre === 0 && val.includes(node.getAttribute("mois")) || val.includes(node.getAttribute("annee")) || val.includes(node.getAttribute("user"))){
                 console.log("Filtré");
-                node.style.display = 'flex'; 
+                node.style.display = 'none'; 
                 filtre += 1;
               } else{
-                node.style.display = 'none';
+                node.style.display = 'flex';
                 console.log("Masquée");
               }
               
