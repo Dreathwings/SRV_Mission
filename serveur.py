@@ -49,7 +49,7 @@ def oauth():
     if 'ticket' in request.values:
         PARAMS = {"ticket":request.values['ticket'],
                   'service':"http://geii.iut.u-bordeaux.fr/mission/oauth"}
-        # print(f"Ticket :{request.values['ticket']}")
+        # #print(f"Ticket :{request.values['ticket']}")
 
         RESP = REQ.get(url = "https://cas.u-bordeaux.fr/cas/serviceValidate",params=PARAMS)
         if "authenticationSuccess" in str(RESP.content):
@@ -61,7 +61,7 @@ def oauth():
             cur.execute(f"SELECT nom FROM personnels WHERE login = '{id}' ")
             login = str(cur.fetchone()[0])
             
-            #print(f" {DB.user} | Login {data}")
+            ##print(f" {DB.user} | Login {data}")
 
             if login != None: # Verif si user autorised sinon 403 list(cur.execute("SELECT ID FROM "))
                 if id in oauth_user.items(): #Verif si user deja un SESSID
@@ -71,11 +71,11 @@ def oauth():
                 SESSID = uuid4().int.__str__()[:10]
                 status = admin_user.get(id,"BASIC")
                 oauth_user[SESSID] = [id,login,status]
-                #print(oauth_user[SESSID])
+                ##print(oauth_user[SESSID])
                 resp = flask.make_response(redirect("/mission"))  
                 resp.set_cookie("SESSID", value = SESSID)
 
-                #print(f"USER {id} authorized with {status} authority")
+                ##print(f"USER {id} authorized with {status} authority")
             else:return abort(403)
                 
             return resp
@@ -117,7 +117,7 @@ def view():
             ADMIN = True
         return render_template('view.html', Missions=mission , ADMIN=ADMIN, All_User=all_user)
     except mariadb.Error as e: 
-        print(f"Error: {e}")
+        #print(f"Error: {e}")
         return "oups"
     except Exception as e:
         error_text = "<p>The error:<br>" + str(e) + "</p>"
@@ -145,9 +145,9 @@ def show_mission(id_mission):
 def create_new_mission():
     Verif_Connection(request)
 
-    for value in request.values:
-        print(f"{value} | {request.values[value]} | {type(request.values[value])}")
-        val = request.values
+    #for value in request.values:
+        #print(f"{value} | {request.values[value]} | {type(request.values[value])}")
+    val = request.values
     DB = connect_to_DB_mission()
     cur = DB.cursor()
     ID = new_ID()
@@ -161,12 +161,13 @@ def create_new_mission():
     try:
         cur.execute("INSERT INTO mission.ordre_mission(ID,NOM,PRENOM,DATE_AJD,NOM_MISSION,PAYS_MISSION,FRAIS,D_DEPART,H_DEPART,D_RETOUR,H_RETOUR,TRANSPORT,LIEU,CODE_PTL,VILLE,HOTEL,PTDEJ,QUILL) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(ID.__repr__(),val["NOM"],val["PRENOM"],val["DATE_AJD"],val["NOM_MISSION"],PAYS,val["FRAIS"],val["D_DEPART"],val["H_DEPART"],val["D_RETOUR"],val["H_RETOUR"],val["TRANSPORT"],val["LIEU"],val["CODE_PTL"],val["VILLE"],val["HOTEL"],val["PTDEJ"],val["QUILL"]))
         statu_crea = 0
-        cur.execute("INSERT INTO mission.suivi_mission(ID,ID_USER,NAME,DATE_CREA,STATUE) VALUES (%s,%s,%s,%s,%d)",(ID,user_id,nom,val["DATE_AJD"],statu_crea))
+        cur.execute("INSERT INTO mission.suivi_mission(ID,ID_USER,NAME,NOM_MISSION,DATE_CREA,STATUE) VALUES (%s,%s,%s,%s,%s,%d)",(ID,user_id,nom,val["NOM_MISSION"],val["DATE_AJD"],statu_crea))
 
         Send_Mail_NM(nom,ID)
-        print(f"Ordre mission {ID} success")
-    except mariadb.Error as e: 
-        print(f"Error: {e}")
+        ##print(f"Ordre mission {ID} success")
+    except mariadb.Error as e:
+        e = 0
+        ##print(f"Error: {e}")
 
     return redirect("/mission/")
 
@@ -181,9 +182,10 @@ def DBConnect():
                             password="zB1Bm]8rnIMk4MD-",
                             database="mission",
                             autocommit=True)
-        print(DB)
+        #print(DB)
     except mariadb.Error as e:
-        print(f"Error connecting to the database: {e}")
+        #print(f"Error connecting to the database: {e}")
+        e=0
     return "<html><body> <h1>  DB  </h1></body></html>"
 
 #################################
@@ -265,9 +267,10 @@ Courage<br>
         with smtplib.SMTP("smtpauth.u-bordeaux.fr", 587) as server:
             server.starttls()  # Sécurise la connexion
             server.sendmail(sender_email, receiver_email, message.as_string())
-            print("Email envoyé avec succès")
+            #print("Email envoyé avec succès")
     except Exception as e:
-        print(f"Erreur lors de l'envoi de l'email : {e}")
+        #print(f"Erreur lors de l'envoi de l'email : {e}")
+        e=0
 #################################
 
 @app.errorhandler(403)
@@ -279,5 +282,5 @@ def access_denied(e):
 if __name__ == "__main__":
     with app.app_context():
         for rule in app.url_map.iter_rules():
-    	    print(f"{rule.endpoint}: {rule.methods} - {rule}")
+    	    #print(f"{rule.endpoint}: {rule.methods} - {rule}")
         app.run(port=6969,debug=True)
