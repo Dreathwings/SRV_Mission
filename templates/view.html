@@ -337,13 +337,14 @@
             /*console.log(node)*/
             values = new Array(selector_user.value,selector_mois.value)
             let filtre = 0
-            console.log(values)
+            console.log(values);
             for( value in values){
+              console.log(values[value]);
               if(values[value] == ''){node.style.display = 'flex'; filtre += 1}
-              else if(values[value] == node.mois || values[value] == node.user || values[value] == annee){node.style.display = 'flex'; filtre += 1}
-              else{node.style.display = 'none';}
+              else if(values[value] == node.mois || values[value] == node.user || values[value] == annee){console.log("Filtré");node.style.display = 'flex'; filtre += 1}
+              else{node.style.display = 'none';console.log("Masquée");}
             }
-            if(filtre == 0 ){node.style.display = 'flex';}
+            if(filtre === 0 ){console.log(values); node.style.display = 'flex';console.log("Aucun filtre");}
             
         }
     }
