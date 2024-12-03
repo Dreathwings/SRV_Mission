@@ -675,3 +675,12 @@ height: 70px;
     opacity:1;
   transition-delay:.45s;
 }
+
+
+#selected_annee_choose_0 ~ label i{
+  content: "visibility";
+}
+
+#selected_annee_choose_0:checked ~ label i{
+  content: "visibility_off";
+}
