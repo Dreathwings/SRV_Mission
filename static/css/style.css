@@ -684,3 +684,24 @@ height: 70px;
 #selected_annee_choose_0:checked ~ label i::before{
   content: "visibility_off";
 }
+#selected_annee_choose_1 ~ label i::before{
+  content: "visibility";
+}
+
+#selected_annee_choose_1:checked ~ label i::before{
+  content: "visibility_off";
+}
+#selected_annee_choose_2 ~ label i::before{
+  content: "visibility";
+}
+
+#selected_annee_choose_2:checked ~ label i::before{
+  content: "visibility_off";
+}
+#selected_annee_choose_3 ~ label i::before{
+  content: "visibility";
+}
+
+#selected_annee_choose_3:checked ~ label i::before{
+  content: "visibility_off";
+}
