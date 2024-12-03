@@ -347,9 +347,9 @@
                 console.log("Rien");
               } else if(val.includes(node.getAttribute("mois")) || val.includes(node.getAttribute("annee")) || val.includes(node.getAttribute("user"))){
                 console.log("Filtré");
-                filtre = true;
                 if(node.style.display === "flex" || !filtre){
                   node.style.display = 'flex'; 
+                  filtre = true;
                 }else{
                   console.log("DEJA Filtré");
                   node.style.display = 'none'; 
