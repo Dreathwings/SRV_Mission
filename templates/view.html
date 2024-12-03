@@ -348,7 +348,7 @@
               } else if(val.includes(node.getAttribute("mois")) || val.includes(node.getAttribute("annee")) || val.includes(node.getAttribute("user"))){
                 console.log("Filtré");
                 filtre =+ 1;
-                if(node.style.display === "flex"){
+                if(node.style.display === "flex" || filtre ===0){
                   node.style.display = 'flex'; 
                 }else{
                   console.log("DEJA Filtré");
