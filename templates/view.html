@@ -345,7 +345,7 @@
               
               if(val === ""){
                 console.log("Rien");
-              } else if(val.includes(node.getAttribute("mois")) || val.includes(node.getAttribute("annee")) || val.includes(node.getAttribute("user") || val.includes(node.getAttribute("mission")) )){
+              } else if(val.includes(node.getAttribute("mois")) || val.includes(node.getAttribute("annee")) || val.includes(node.getAttribute("user") || val.toLowerCase().includes(node.getAttribute("mission").toLowerCase()) )){
                 console.log("Filtré");
                 if(node.style.display === "flex" || !filtre){
                   node.style.display = 'flex'; 
