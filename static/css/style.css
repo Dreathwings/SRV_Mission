@@ -530,12 +530,12 @@ div.listsearch {
 .FABMenu
 {
   position:absolute;
-  top:0;
+  top:10px;
   left:0;
   bottom:0;
   right:0;
   width:285px;
-  height:200px;
+  height:100px;
   font-size: initial;
 }
 .FABMenu input
