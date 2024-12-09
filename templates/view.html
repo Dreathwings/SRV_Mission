@@ -416,7 +416,7 @@
               console.log(val+ " || " + (att.includes(val)) + " || " + att);
               if(val === ""){
                 console.log("Rien");
-              } else if( att.includes(val)){
+              } else if(att.includes(val) || val.includes(att)){
                 if(node.style.display === "flex" || !filtre){
                   console.log("Filtré");
                   node.style.display = 'flex'; 
