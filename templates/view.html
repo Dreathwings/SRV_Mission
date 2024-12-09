@@ -411,6 +411,7 @@
               let val = values[value]
               /*console.log("VALLL:", val);*/
               console.log(val+ " annee " + (node.getAttribute("annee")===(val)));
+              console.log(val+ " mois " + (node.getAttribute("mois")===(val)));
               if(val === ""){
                 /*console.log("Rien");*/
               } else if(val.includes(node.getAttribute("mois")) || (node.getAttribute("annee") === (val)) || val.includes(node.getAttribute("user")) || node.getAttribute("nom_mission").toLowerCase().includes(val) || val.includes(node.getAttribute("status"))){
