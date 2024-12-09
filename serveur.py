@@ -144,6 +144,7 @@ def show_mission(id_mission):
         return render_template('order.html', Mission=mission, STAT=BOB)
         #return f"<html><body> <h1>  {id_mission} {mission}  </h1></body></html>"
     else:
+        print(f'Connection refusé to {data[1]}')
         return abort(403)
 
 @app.route("/mission/view_mission/<id_mission>",methods=['POST'])
