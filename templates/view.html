@@ -373,7 +373,7 @@
             let date = new Date(parseInt(nodedate[0].getAttribute("date")));
             node.setAttribute('mois',mois[date.getMonth()])
             let bob = String((1900+date.getYear())).replace('20',"")
-            node.setAttribute('annee',bob)
+            node.setAttribute("annee",bob)
             nodedate[0].innerHTML = date.getDate()+" "+ mois[date.getMonth()]+" "+(1900+date.getYear());
         }
     }
@@ -406,14 +406,14 @@
             
             let filtre = false
             console.log(values);
-            console.log("node:", node );
+            console.log(val, "annee", val.includes(node.getAttribute("annee")) );
             for(value in values){
               let val = values[value]
               /*console.log("VALLL:", val);*/
               
               if(val === ""){
                 /*console.log("Rien");*/
-              } else if(val.includes(node.getAttribute("mois")) || node.getAttribute("annee").includes(val) || val.includes(node.getAttribute("user")) || node.getAttribute("nom_mission").toLowerCase().includes(val) || val.includes(node.getAttribute("status"))){
+              } else if(val.includes(node.getAttribute("mois")) || val.includes(node.getAttribute("annee")) || val.includes(node.getAttribute("user")) || node.getAttribute("nom_mission").toLowerCase().includes(val) || val.includes(node.getAttribute("status"))){
                 /*console.log("Filtré");*/
                 if(node.style.display === "flex" || !filtre){
                   node.style.display = 'flex'; 
