@@ -71,7 +71,7 @@
           </div>
         </div>
     </div>
-    <div class="adminMenu">
+    <form class="adminMenu">
         <input class="chosen-value" id="selected_annee_choose" type="text" value="" placeholder="Status" autocomplete="off" style="font-size:0.9rem;left:50%;height: 2.5rem;width: 50%;">
                         <ul class="value-list" id="selected_annee_list" style="left:50%;margin-top: 40px;width: 50%;">
                             <li michel="ANNEE" value="0">Ouvert</li>
@@ -149,8 +149,12 @@
                               selector3.dispatchEvent(new Event("change"));
                             }
                           });
-                        </script> 
-    </div>
+                        </script>
+        <input name = "bpbob" type="submit">
+        <label for="bpbob">Update <span class="material-symbols-outlined">
+            update
+            </span></label>
+    </form>
     <div class="background-color"></div>
     <form method="post" action="/mission/create_mission" name="theForm" >
     <div class="body" id="body">
