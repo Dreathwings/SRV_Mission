@@ -413,7 +413,7 @@
               console.log(val+ " annee " + (node.getAttribute("annee")===(val)));
               if(val === ""){
                 /*console.log("Rien");*/
-              } else if(val.includes(node.getAttribute("mois")) || node.getAttribute("annee")===(val) || val.includes(node.getAttribute("user")) || node.getAttribute("nom_mission").toLowerCase().includes(val) || val.includes(node.getAttribute("status"))){
+              } else if(val.includes(node.getAttribute("mois")) || (node.getAttribute("annee") === (val)) || val.includes(node.getAttribute("user")) || node.getAttribute("nom_mission").toLowerCase().includes(val) || val.includes(node.getAttribute("status"))){
                 console.log("Filtré");
                 if(node.style.display === "flex" || !filtre){
                   node.style.display = 'flex'; 
