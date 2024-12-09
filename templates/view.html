@@ -402,8 +402,8 @@
         for (i in Nodelist){
             let node = Nodelist[i]
             console.log(node)
-            values =    new Array(selector_user.value,           selector_mois.value,        selector_mission.value.toLowerCase(),   selector_annee.value,         [selector_annee_0.value,selector_annee_1.value,selector_annee_2.value,selector_annee_3.value])
-            attribute = new Array(node.getAttribute("user"),     node.getAttribute("mois"),  node.getAttribute("nom_mission").toLowerCase(),       node.getAttribute("annee"),   node.getAttribute("status"))
+            values =    new Array(selector_user.value,           selector_mois.value,        selector_mission.value.toLowerCase(),             selector_annee.value,         [selector_annee_0.value,selector_annee_1.value,selector_annee_2.value,selector_annee_3.value])
+            attribute = new Array(node.getAttribute("user"),     node.getAttribute("mois"),  node.getAttribute("nom_mission").toLowerCase(),   node.getAttribute("annee"),   node.getAttribute("status"))
             
             let filtre = false
             console.log(values);
@@ -413,10 +413,10 @@
               let val = values[value]
               let att = attribute[value]
               /*console.log("VALLL:", val);*/
-              console.log(val+ " || " +(val.includes(att))+ " || " + att);
+              console.log(val+ " || " +(att.includes(val))+ " || " + att);
               if(val === ""){
                 /*console.log("Rien");*/
-              } else if(val.includes(att)){
+              } else if(att.includes(val)){
                 if(node.style.display === "flex" || !filtre){
                   console.log("Filtré");
                   node.style.display = 'flex'; 
