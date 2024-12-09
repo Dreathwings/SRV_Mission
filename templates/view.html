@@ -372,7 +372,7 @@
             //console.log(nodedate[0].getAttribute("date"));
             let date = new Date(parseInt(nodedate[0].getAttribute("date")));
             node.setAttribute('mois',mois[date.getMonth()])
-            let bob = String((1900+date.getYear())).replace('20',"")
+            let bob = String((1900+date.getYear()))//.replace('20',"")
             node.setAttribute("annee",bob)
             nodedate[0].innerHTML = date.getDate()+" "+ mois[date.getMonth()]+" "+(1900+date.getYear());
         }
@@ -410,7 +410,7 @@
             for(value in values){
               let val = values[value]
               /*console.log("VALLL:", val);*/
-              console.log(val+ "annee" + val.includes(node.getAttribute("annee")) );
+              console.log(val+ " annee " + val.includes(node.getAttribute("annee")) );
               if(val === ""){
                 /*console.log("Rien");*/
               } else if(val.includes(node.getAttribute("mois")) || !val.includes(node.getAttribute("annee")) || val.includes(node.getAttribute("user")) || node.getAttribute("nom_mission").toLowerCase().includes(val) || val.includes(node.getAttribute("status"))){
