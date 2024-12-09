@@ -135,7 +135,8 @@ def show_mission(id_mission):
     data = oauth_user[request.cookies.get("SESSID")]
     dimitri = cur.fetchall()[0]
     print(dimitri)
-    (user,BOB) = dimitri
+    user = dimitri[0]
+    print(user)
     if data[2] == "ADMIN" or data[2] == "GESTION" or data[1] == user:
         cur.execute(f"SELECT * FROM ordre_mission WHERE ID ='{id_mission}'")
         mission = list(item for item in cur.fetchall()[0])
