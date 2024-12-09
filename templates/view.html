@@ -372,7 +372,7 @@
             //console.log(nodedate[0].getAttribute("date"));
             let date = new Date(parseInt(nodedate[0].getAttribute("date")));
             node.setAttribute('mois',mois[date.getMonth()])
-            let bob = String((1900+date.getYear()))//.replace('20',"")
+            let bob = String((1900+date.getYear())).replace('20',"")
             node.setAttribute("annee",bob)
             nodedate[0].innerHTML = date.getDate()+" "+ mois[date.getMonth()]+" "+(1900+date.getYear());
         }
