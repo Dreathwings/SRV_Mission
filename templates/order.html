@@ -74,7 +74,8 @@
         </div>
     </div>
     <form class="adminMenu">
-        <input class="chosen-value" id="selected_annee_choose" type="text" value="{{STAT}}" placeholder="Status" autocomplete="off" style="font-size:0.9rem;;height: 2.5rem;width: 100%;">
+        {% set list = ["Ouvert","En cours de traitement","Validé","Cloturé"] %}.
+        <input class="chosen-value" id="selected_annee_choose" type="text" value="{{list[STAT]}}" placeholder="Status" autocomplete="off" style="font-size:0.9rem;;height: 2.5rem;width: 100%;">
         <ul class="value-list" id="selected_annee_list" style="left:50%;margin-top: 40px;width: 50%;">
             <li michel="ANNEE" value="0">Ouvert</li>
             <li michel="ANNEE" value="1">En cours de validation</li>
@@ -138,7 +139,7 @@
                           });
                           
                           inputField3.addEventListener('blur', () => {
-                             inputField3.placeholder = '{{STAT}}';
+                             inputField3.placeholder = '{{list[STAT]}}';
                             dropdown3.classList.remove('open');
                           });
                           
