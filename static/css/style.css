@@ -631,7 +631,6 @@ height: 70px;
 .action_items a
 {
   position: absolute;
-  top: 25%;
   width:20px;
   padding-left:35px;
   opacity:0;
