@@ -372,7 +372,7 @@
             //console.log(nodedate[0].getAttribute("date"));
             let date = new Date(parseInt(nodedate[0].getAttribute("date")));
             node.setAttribute('mois',mois[date.getMonth()])
-            node.setAttribute('annee',(1900+date.getYear()))
+            node.setAttribute('annee',(1900+date.getYear()).replace('20',""))
             nodedate[0].innerHTML = date.getDate()+" "+ mois[date.getMonth()]+" "+(1900+date.getYear());
         }
     }
@@ -412,7 +412,7 @@
               
               if(val === ""){
                 /*console.log("Rien");*/
-              } else if(val.includes(node.getAttribute("mois")) || val === node.getAttribute("annee") || val.includes(node.getAttribute("user")) || node.getAttribute("nom_mission").toLowerCase().includes(val) || val.includes(node.getAttribute("status"))){
+              } else if(val.includes(node.getAttribute("mois")) || val.includes(node.getAttribute("annee")) || val.includes(node.getAttribute("user")) || node.getAttribute("nom_mission").toLowerCase().includes(val) || val.includes(node.getAttribute("status"))){
                 /*console.log("Filtré");*/
                 if(node.style.display === "flex" || !filtre){
                   node.style.display = 'flex'; 
