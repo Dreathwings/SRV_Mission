@@ -147,6 +147,7 @@ def show_mission(id_mission):
 
 @app.route("/mission/view_mission/<id_mission>",methods=['POST'])
 def upstatmiss_mission(id_mission):
+    print(f"UPDATE {id_mission} to {request.form["STAT"]}")
     return redirect('mission/view_mission')
 #################################
 @app.route("/mission/create_mission", methods=['POST'])
