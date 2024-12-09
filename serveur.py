@@ -107,6 +107,7 @@ def view():
         if data[2] == "BASIC":
             cur.execute(f"SELECT * FROM suivi_mission WHERE ID_USER = '{data[0]}'")
             mission = cur.fetchall()
+            return render_template('view.html', Missions=mission , ADMIN=ADMIN)
         elif data[2] == "ADMIN" or data[2] == "GESTION":
             cur.execute(f"SELECT * FROM suivi_mission")
             mission = list(cur.fetchall())
@@ -115,7 +116,7 @@ def view():
             cur_cas.execute(f"SELECT nom FROM personnels WHERE login IN {users}")
             all_user = list(item[0] for item in cur_cas.fetchall())
             ADMIN = True
-        return render_template('view.html', Missions=mission , ADMIN=ADMIN, All_User=all_user)
+            return render_template('view.html', Missions=mission , ADMIN=ADMIN, All_User=all_user)
     except mariadb.Error as e: 
         #print(f"Error: {e}")
         return "oups"
@@ -130,13 +131,14 @@ def show_mission(id_mission):
     Verif_Connection(request)
     DB = connect_to_DB_mission()
     cur = DB.cursor()
-    cur.execute(f"SELECT ID_USER FROM suivi_mission WHERE ID ='{id_mission}'")
+    cur.execute(f"SELECT ID_USER , STATUE FROM suivi_mission WHERE ID ='{id_mission}'")
     data = oauth_user[request.cookies.get("SESSID")]
-    user = cur.fetchall()[0]
-    if data[2] == "ADMIN" or data[2] == "GESTION" or data[2] == user:
+    user = cur.fetchall()[0][0]
+    stat = cur.fetchall()[0][1]
+    if data[2] == "ADMIN" or data[2] == "GESTION" or data[1] == user:
         cur.execute(f"SELECT * FROM ordre_mission WHERE ID ='{id_mission}'")
         mission = list(item for item in cur.fetchall()[0])
-        return render_template('order.html', Mission=mission)
+        return render_template('order.html', Mission=mission STAT=stat)
         #return f"<html><body> <h1>  {id_mission} {mission}  </h1></body></html>"
     else:
         return abort(403)
