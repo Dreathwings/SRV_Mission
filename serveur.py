@@ -126,7 +126,7 @@ def view():
         return hed + error_text
 
 #################################
-@app.route("/mission/view_mission/<id_mission>")
+@app.route("/mission/view_mission/<id_mission>", methods=['GET'])
 def show_mission(id_mission):
     Verif_Connection(request)
     DB = connect_to_DB_mission()
@@ -144,6 +144,10 @@ def show_mission(id_mission):
         #return f"<html><body> <h1>  {id_mission} {mission}  </h1></body></html>"
     else:
         return abort(403)
+
+@app.route("/mission/view_mission/<id_mission>",methods=['POST'])
+def upstatmiss_mission(id_mission):
+    return redirect('mission/view_mission')
 #################################
 @app.route("/mission/create_mission", methods=['POST'])
 def create_new_mission():

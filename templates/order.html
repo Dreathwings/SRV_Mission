@@ -75,7 +75,7 @@
     </div>
     <form class="adminMenu">
         {% set list = ["Ouvert","En cours de traitement","Validé","Cloturé"] %}.
-        <input class="chosen-value" id="selected_annee_choose" type="text" value="{{list[STAT]}}" placeholder="Status" autocomplete="off" style="font-size:0.9rem;;height: 2.5rem;width: 100%;">
+        <input class="chosen-value" id="selected_annee_choose" type="text" value="{{list[STAT]}}" placeholder="Status" name = 'STAT' autocomplete="off" style="font-size:0.9rem;;height: 2.5rem;width: 100%;">
         <ul class="value-list" id="selected_annee_list" style="left:50%;margin-top: 40px;width: 50%;">
             <li michel="ANNEE" value="0">Ouvert</li>
             <li michel="ANNEE" value="1">En cours de validation</li>
@@ -83,77 +83,82 @@
             <li michel="ANNEE" value="3">Cloturé</li>
         </ul>
         <script>
-                          const inputField3 = document.querySelector('#selected_annee_choose');
-                          const dropdown3 = document.querySelector('#selected_annee_list');
-                          const dropdownArray3 = [... document.querySelectorAll('[michel*="ANNEE"]')];
-                          //console.log(typeof dropdownArray3)
-                          dropdown3.classList.add('open');
-                          inputField3.focus(); // Demo purposes only
-                          let valueArray3 = [];
-                          dropdownArray3.forEach(item => {
-                            valueArray3.push(item.textContent);
-                          });
-                          
-                          const closeDropdown3 = () => {
-                            dropdown3.classList.remove('open');
-                          }
-                          
-                          inputField3.addEventListener('input', () => {
-                            dropdown3.classList.add('open');
-                            let inputValue = inputField3.value.toLowerCase();
-                            let valueSubstring;
-                            if (inputValue.length > 0) {
-                              for (let j = 0; j < valueArray3.length; j++) {
-                                  /*console.log(valueArray3[j].toLowerCase().includes(inputValue))*/
-                                if (!(valueArray3[j].toLowerCase().includes(inputValue))) {
-                                  dropdownArray3[j].classList.add('closed');
-                                } else {
-                                  dropdownArray3[j].classList.remove('closed');
-                                }
-                              }
-                            } else {
-                              for (let i = 0; i < dropdownArray3.length; i++) {
-                                dropdownArray3[i].classList.remove('closed');
-                              }
-                            }
-                          });
-                          
-                          dropdownArray3.forEach(item => {
-                            item.addEventListener('click', (evt) => {
-                              inputField3.value = item.textContent;
-                              dropdownArray3.forEach(dropdown3 => {
-                                dropdown3.classList.add('closed');
-                                const selector3 = document.getElementById("selected_annee_choose")
-                                selector3.dispatchEvent(new Event("change"));
-                                /*console.log('Event click bobo')*/
-                              });
-                            });
-                          })
-                          
-                          inputField3.addEventListener('focus', () => {
-                             inputField3.placeholder = '???';
-                             dropdown3.classList.add('open');
-                             dropdownArray3.forEach(dropdown3 => {
-                               dropdown3.classList.remove('closed');
-                             });
-                          });
-                          
-                          inputField3.addEventListener('blur', () => {
-                             inputField3.placeholder = '{{list[STAT]}}';
-                            dropdown3.classList.remove('open');
-                          });
-                          
-                          document.addEventListener('click', (evt) => {
-                            const isDropdown3 = dropdown3.contains(evt.target);
-                            const isInput3 = inputField3.contains(evt.target);
-                            if (!isDropdown3 && !isInput3) {
-                              dropdown3.classList.remove('open');
-                              const selector3 = document.getElementById("selected_annee_choose")
-                              selector3.dispatchEvent(new Event("change"));
-                            }
-                          });
+            const inputField3 = document.querySelector('#selected_annee_choose');
+            const dropdown3 = document.querySelector('#selected_annee_list');
+            const dropdownArray3 = [... document.querySelectorAll('[michel*="ANNEE"]')];
+            //console.log(typeof dropdownArray3)
+            dropdown3.classList.add('open');
+            inputField3.focus(); // Demo purposes only
+            let valueArray3 = [];
+            dropdownArray3.forEach(item => {
+              valueArray3.push(item.textContent);
+            });
+
+            const closeDropdown3 = () => {
+              dropdown3.classList.remove('open');
+            }
+
+            inputField3.addEventListener('input', () => {
+              dropdown3.classList.add('open');
+              let inputValue = inputField3.value.toLowerCase();
+              let valueSubstring;
+              if (inputValue.length > 0) {
+                for (let j = 0; j < valueArray3.length; j++) {
+                    /*console.log(valueArray3[j].toLowerCase().includes(inputValue))*/
+                  if (!(valueArray3[j].toLowerCase().includes(inputValue))) {
+                    dropdownArray3[j].classList.add('closed');
+                  } else {
+                    dropdownArray3[j].classList.remove('closed');
+                  }
+                }
+              } else {
+                for (let i = 0; i < dropdownArray3.length; i++) {
+                  dropdownArray3[i].classList.remove('closed');
+                }
+              }
+            });
+
+            dropdownArray3.forEach(item => {
+              item.addEventListener('click', (evt) => {
+                inputField3.value = item.textContent;
+                dropdownArray3.forEach(dropdown3 => {
+                  dropdown3.classList.add('closed');
+                  const selector3 = document.getElementById("selected_annee_choose")
+                  selector3.dispatchEvent(new Event("change"));
+                  /*console.log('Event click bobo')*/
+                });
+              });
+            })
+
+            inputField3.addEventListener('focus', () => {
+               inputField3.placeholder = '???';
+               dropdown3.classList.add('open');
+               dropdownArray3.forEach(dropdown3 => {
+                 dropdown3.classList.remove('closed');
+               });
+            });
+
+            inputField3.addEventListener('blur', () => {
+               inputField3.placeholder = '{{list[STAT]}}';
+              dropdown3.classList.remove('open');
+            });
+
+            document.addEventListener('click', (evt) => {
+              const isDropdown3 = dropdown3.contains(evt.target);
+              const isInput3 = inputField3.contains(evt.target);
+              if (!isDropdown3 && !isInput3) {
+                dropdown3.classList.remove('open');
+                const selector3 = document.getElementById("selected_annee_choose")
+                selector3.dispatchEvent(new Event("change"));
+              }
+            });
         </script>
-        <input class="checkbox-budget" type="checkbox" name="update" id="Update" autocomplete="off" >
+        <script>
+            let stat = document.getElementById("selected_annee_choose").value
+            post(window.location, {STAT: stat});
+            
+        </script> 
+        <input class="checkbox-budget" type="checkbox" name="update" id="Update" autocomplete="off" onclick="updatestat">
 		<label class="pays" for="Update" style="margin-left: 0px;margin-right: 0px;margin-top: 10px;width: -moz-available;top: 1vh;">
             <span data-hover="UPDATE update" class="material-icons">
                 UPDATE update
@@ -174,7 +179,6 @@
                 
             </script>   
         </div>
-        
         <div style="display: flex; justify-content: center; margin: 10px;">
             <!--<select style="width: 20%;  text-align: center;">
                 <option value="GESII">GESII</option>
