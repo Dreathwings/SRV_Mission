@@ -134,11 +134,11 @@ def show_mission(id_mission):
     cur.execute(f"SELECT ID_USER , STATUE FROM suivi_mission WHERE ID ='{id_mission}'")
     data = oauth_user[request.cookies.get("SESSID")]
     user = cur.fetchall()[0][0]
-    stat = cur.fetchall()[0][1]
+    BOB = cur.fetchall()[0][1]
     if data[2] == "ADMIN" or data[2] == "GESTION" or data[1] == user:
         cur.execute(f"SELECT * FROM ordre_mission WHERE ID ='{id_mission}'")
         mission = list(item for item in cur.fetchall()[0])
-        return render_template('order.html', Mission=mission STAT=stat)
+        return render_template('order.html', Mission=mission, STAT=BOB)
         #return f"<html><body> <h1>  {id_mission} {mission}  </h1></body></html>"
     else:
         return abort(403)
