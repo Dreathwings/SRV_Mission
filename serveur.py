@@ -138,7 +138,7 @@ def show_mission(id_mission):
     BOB = dimitri[1]
     if data[2] == "ADMIN" or data[2] == "GESTION" or data[1] == user:
         cur.execute(f"SELECT * FROM ordre_mission WHERE ID ='{id_mission}'")
-        mission = list(item for item in cur.fetchall()[0])
+        mission = list(item for item in cur.fetchall())
         return render_template('order.html', Mission=mission, STAT=BOB)
         #return f"<html><body> <h1>  {id_mission} {mission}  </h1></body></html>"
     else:
