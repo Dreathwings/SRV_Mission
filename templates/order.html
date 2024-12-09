@@ -76,7 +76,7 @@
     <form class="adminMenu" method="post" action="">
         {% set list = ["Ouvert","En cours de traitement","Validé","Cloturé"] %}.
         <input class="chosen-value" id="selected_annee_choose" type="text" value="{{list[STAT]}}" placeholder="Status" name = 'STAT' autocomplete="off" style="font-size:0.9rem;;height: 2.5rem;width: 100%;">
-        <ul class="value-list" id="selected_annee_list" style="left:50%;margin-top: 40px;width: 50%;">
+        <ul class="value-list" id="selected_annee_list" style="margin-top: 40px;width: 0%;">
             <li michel="ANNEE" value="0">Ouvert</li>
             <li michel="ANNEE" value="1">En cours de validation</li>
             <li michel="ANNEE" value="2">Validé</li>
@@ -153,14 +153,6 @@
               }
             });
         </script>
-        <script>
-            function updatestat(){
-                console.log("UPDATE STAT")
-                let stat = document.getElementById("selected_annee_choose").value
-
-                url_to_post(window.location, {"STAT": stat});
-            }
-        </script> 
         <input class="checkbox-budget" type="submit" name="update" id="Update" autocomplete="off" onclick="updatestat()">
 		<label class="pays" for="Update" style="margin-left: 0px;margin-right: 0px;margin-top: 10px;width: -moz-available;top: 1vh;">
             <span data-hover="UPDATE update" class="material-icons">
