@@ -710,3 +710,13 @@ height: 70px;
 fieldset{
   padding-top: 0px;
 }
+
+.adminMenu{
+  width: 100px;
+  height: 10%;
+  position: fixed;
+  left: 2%;
+  top: 15%;
+  border: 2px solid var(--white);
+  border-radius: 1rem;
+}
