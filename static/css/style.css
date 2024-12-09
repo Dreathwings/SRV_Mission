@@ -641,18 +641,22 @@ height: 70px;
 .first_item
 {
   left:0%;
+  top: 0.55rem;
 }
 .second_item
 {
   left:15%;
+  top: 0.55rem;
 }
 .third_item
 {
   left:55%;
+  top: 0.55rem;
 }
 .fourth_item
 {
   left:70%;
+  top: 0.55rem;
 }
 .FABMenu input:checked ~ .action_items_bar .action_items .first_item
 {
