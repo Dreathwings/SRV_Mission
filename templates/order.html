@@ -73,13 +73,13 @@
     </div>
     <form class="adminMenu">
         <input class="chosen-value" id="selected_annee_choose" type="text" value="" placeholder="Status" autocomplete="off" style="font-size:0.9rem;left:50%;height: 2.5rem;width: 100%;">
-                        <ul class="value-list" id="selected_annee_list" style="left:50%;margin-top: 40px;width: 50%;">
-                            <li michel="ANNEE" value="0">Ouvert</li>
-                            <li michel="ANNEE" value="1">En cours de validation</li>
-                            <li michel="ANNEE" value="2">Validé</li>
-                            <li michel="ANNEE" value="3">Cloturé</li>
-                        </ul>
-                        <script>
+        <ul class="value-list" id="selected_annee_list" style="left:50%;margin-top: 40px;width: 50%;">
+            <li michel="ANNEE" value="0">Ouvert</li>
+            <li michel="ANNEE" value="1">En cours de validation</li>
+            <li michel="ANNEE" value="2">Validé</li>
+            <li michel="ANNEE" value="3">Cloturé</li>
+        </ul>
+        <script>
                           const inputField3 = document.querySelector('#selected_annee_choose');
                           const dropdown3 = document.querySelector('#selected_annee_list');
                           const dropdownArray3 = [... document.querySelectorAll('[michel*="ANNEE"]')];
@@ -149,7 +149,13 @@
                               selector3.dispatchEvent(new Event("change"));
                             }
                           });
-                        </script>
+        </script>
+        <input class="checkbox-budget" type="radio" name="update" value='update' id="Update" autocomplete="off" filler="UPDATE" >
+		<label class="pays" for="Update">
+			<span class="material-symbols-outlined" data-hover="UPDATE">
+                UPDATE
+            </span>
+		</label>
         <input name = "bpbob" type="submit">
         <label for="bpbob">Update 
             <span class="material-symbols-outlined">
