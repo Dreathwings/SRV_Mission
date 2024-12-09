@@ -410,7 +410,7 @@
             for(value in values){
               let val = values[value]
               /*console.log("VALLL:", val);*/
-              console.log(val+ " annee " + val.includes(node.getAttribute("annee")));
+              console.log(val+ " annee " + node.getAttribute("annee").includes(val));
               if(val === ""){
                 /*console.log("Rien");*/
               } else if(val.includes(node.getAttribute("mois")) || node.getAttribute("annee").includes(val) || val.includes(node.getAttribute("user")) || node.getAttribute("nom_mission").toLowerCase().includes(val) || val.includes(node.getAttribute("status"))){
