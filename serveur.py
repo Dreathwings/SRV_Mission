@@ -17,8 +17,8 @@ app.config.update(TEMPLATES_AUTO_RELOAD=True)
            
 oauth_user = dict()#
 ### Structure ####
-### {[0] id     : Random ID gen a la connection validé par le CAS,
-#    [1] login  : Login recup via le CAS,
+### {[0] login     : login gen a la connection validé par le CAS,
+#    [1] nom  : nom recup via le CAS,
 #    [2] status : Privilege de l'utilisateur "BASIC" "ADMIN" "GESTION"
 #}
 
@@ -138,7 +138,7 @@ def show_mission(id_mission):
     user = dimitri[0]
     print("USER", user)
     BOB = dimitri[1]
-    if data[2] == "ADMIN" or data[2] == "GESTION" or data[1] == user:
+    if data[2] == "ADMIN" or data[2] == "GESTION" or data[0] == user:
         cur.execute(f"SELECT * FROM ordre_mission WHERE ID ='{id_mission}'")
         mission = list(item for item in cur.fetchall()[0])
         return render_template('order.html', Mission=mission, STAT=BOB)
