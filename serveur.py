@@ -133,7 +133,7 @@ def show_mission(id_mission):
     cur = DB.cursor()
     cur.execute(f"SELECT ID_USER , STATUE FROM suivi_mission WHERE ID ='{id_mission}'")
     data = oauth_user[request.cookies.get("SESSID")]
-    dimitri = cur.fetchone()[0]
+    dimitri = cur.fetchone()
     print(dimitri)
     user = dimitri[0]
     print("USER", user)
