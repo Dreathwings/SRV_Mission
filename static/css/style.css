@@ -717,7 +717,7 @@ fieldset{
 .adminMenu{
   width: 15vw;
   height: 275px;
-  position: fixed;
+  position: absolute;
   left: 2%;
   top: 100px;
   border: 2px solid var(--white);
