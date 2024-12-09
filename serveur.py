@@ -133,8 +133,9 @@ def show_mission(id_mission):
     cur = DB.cursor()
     cur.execute(f"SELECT ID_USER , STATUE FROM suivi_mission WHERE ID ='{id_mission}'")
     data = oauth_user[request.cookies.get("SESSID")]
-    user = cur.fetchall()[0]
-    #BOB = cur.fetchall()[0]
+    dimitri = list(item for item in cur.fetchall()[0])
+    user = dimitri[0]
+    BOB = dimitri[1]
     print(user)
     if data[2] == "ADMIN" or data[2] == "GESTION" or data[1] == user:
         cur.execute(f"SELECT * FROM ordre_mission WHERE ID ='{id_mission}'")
