@@ -73,7 +73,7 @@
           </div>
         </div>
     </div>
-    <form class="adminMenu" method="post" action="">
+    <form class="adminMenu" method="post" action="http://geii.iut.u-bordeaux.fr/mission/view_mission/">
         {% set list = ["Ouvert","En cours de traitement","Validé","Cloturé"] %}.
         <input class="chosen-value" id="selected_annee_choose" type="text" value="{{list[STAT]}}" placeholder="Status" name = 'STAT' autocomplete="off" style="font-size:0.9rem;;height: 2.5rem;width: 100%;">
         <ul class="value-list" id="selected_annee_list" style="left:0%;margin-top: 40px;width: 100%;">
@@ -154,9 +154,13 @@
             });
         </script>
         <input class="checkbox-budget" type="submit" name="update" id="Update" autocomplete="off" onclick="updatestat()">
-		<label class="pays" for="Update" style="margin-left: 0px;margin-right: 0px;margin-top: 10px;width: -moz-available;top: 1vh;">
-            <span data-hover="UPDATE update" class="material-icons">
-                UPDATE update
+		<label class="pays" for="Update" style="margin-left: 0px;margin-right: 0px;margin-top: 10px;width: -moz-available;top: 1vh;   line-height: 0.5;
+            letter-spacing: 0.082em;
+            font-weight: 900;
+            font-style: normal;
+            ">
+            UPDATE<span data-hover="UPDATE update" class="material-icons">
+                 update
             </span>
 		</label>
     </form>
