@@ -73,6 +73,7 @@
           </div>
         </div>
     </div>
+    {% if ADMIN %}
     <form class="adminMenu" method="post" action="">
         {% set list = ["Ouvert","En cours de validation","Validé","Cloturé"] %}
         <input class="chosen-value" id="selected_annee_choose" type="text" value="{{list[STAT]}}" placeholder="Status" name = 'STAT' autocomplete="off" style="font-size:0.9rem;;height: 2.5rem;width: 100%;">
@@ -163,6 +164,7 @@
             </span>
 		</label>
     </form>
+    {% endif %}
     <div class="background-color"></div>
     <form method="post" action="/mission/create_mission" name="theForm" >
     <div class="body" id="body">
