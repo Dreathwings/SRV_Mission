@@ -157,6 +157,7 @@ def upstatmiss_mission(id_mission):
     val = aa.index(request.form.get('STAT')) # type: ignore
     cur.execute(f"UPDATE mission.suivi_mission SET STATUE='{val}' WHERE  ID='{id_mission}'")
     print(f"UPDATE {id_mission} to {request.form.get('STAT')}")
+    print(f"UPDATE {id_mission} to {request.form.get('DEL')}")
 
     return redirect(url_for('view'))
 #################################
