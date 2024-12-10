@@ -150,7 +150,7 @@ def upstatmiss_mission(id_mission):
     Verif_Connection(request)
     DB = connect_to_DB_mission()
     cur =DB.cursor()
-    aa = ["Ouvert","En cours de traitement","Validé","Cloturé"]
+    aa = ["Ouvert","En cours de validation","Validé","Cloturé"]
     val = aa.index(request.form.get('STAT')) # type: ignore
     cur.execute(f"UPDATE mission.suivi_mission SET STATUE='{val}' WHERE  ID='{id_mission}'")
     print(f"UPDATE {id_mission} to {request.form.get('STAT')}")
