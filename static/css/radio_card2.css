@@ -173,7 +173,9 @@ line-height: 1.5;
 [type="checkbox"]:checked.checkbox-tools,
 [type="checkbox"]:checked.checkbox-budget,
 [type="checkbox"]:not(:checked).checkbox-tools,
-[type="checkbox"]:not(:checked).checkbox-budget
+[type="checkbox"]:not(:checked).checkbox-budget,
+[type="submit"]:checked.checkbox-budget,
+[type="submit"]:not(:checked).checkbox-budget
 {
 	position: absolute;
 	left: -9999px;
