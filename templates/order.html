@@ -152,7 +152,16 @@
               }
             });
         </script>
-        <input class="checkbox-budget" type="checkbox" name="DEL" id="Delete" autocomplete="off">
+        <script>
+            function alertdelete(){
+                if (confirm("ATTENTION VOUS ALLER SUPRIMER LA MISSION") == true) {
+                    document.getElementById("Delete").checked = true;
+                  } else {
+                    document.getElementById("Delete").checked = false;
+                  }
+            }
+        </script>
+        <input class="checkbox-budget" type="checkbox" name="DEL" id="Delete" autocomplete="off" onclick="alertdelete">
 		<label class="pays" for="Delete" style="margin-left: 0px;margin-right: 0px;margin-top: 30px;width: -moz-available;top: 1vh;
             letter-spacing: 0.082em;
             font-weight: 900;
