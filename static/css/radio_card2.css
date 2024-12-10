@@ -764,6 +764,9 @@ img.img_vehicule{
 .checkbox:checked ~ div#body.body div.container_mission div.box_mission div label.pays{
 	border-color: var(--dark-blue);
 }
-.checkbox:checked ~ div.FABMenu div.hamburger{
+.checkbox:checked ~ body.view ul#list_view.view li#title.view div{
+	border-color: var(--dark-blue);
+}
+.checkbox:checked ~ body.view ul#list_view.view a li#view_mission.view{
 	border-color: var(--dark-blue);
 }
