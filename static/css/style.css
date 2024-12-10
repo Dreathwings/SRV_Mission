@@ -473,7 +473,6 @@ div.listsearch {
   .value-list li {
     position: relative;
     height: 4rem;
-    background-image: linear-gradient(138deg, var(--red), var(--yellow));
     padding: 1rem;
     font-size: 1.03rem;
     display: flex;
