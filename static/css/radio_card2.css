@@ -169,7 +169,11 @@ line-height: 1.5;
 [type="checkbox"]:checked.checkbox,
 [type="checkbox"]:not(:checked).checkbox,
 [type="checkbox"]:checked.checkbox-booking,
-[type="checkbox"]:not(:checked).checkbox-booking
+[type="checkbox"]:not(:checked).checkbox-booking,
+[type="checkbox"]:checked.checkbox-tools,
+[type="checkbox"]:checked.checkbox-budget,
+[type="checkbox"]:not(:checked).checkbox-tools,
+[type="checkbox"]:not(:checked).checkbox-budget
 {
 	position: absolute;
 	left: -9999px;
