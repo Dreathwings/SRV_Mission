@@ -300,6 +300,7 @@ ul.view{
   position: absolute;
   left: 2.5%;
   top: 6%;
+  color: transparent;
 }
 li.view{
     font-size: large;
