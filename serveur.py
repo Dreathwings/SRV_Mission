@@ -136,10 +136,13 @@ def show_mission(id_mission):
     dimitri = cur.fetchone()
     user = dimitri[0]
     BOB = dimitri[1]
+    ADMIN = False
+    if data[2] == "ADMIN" or data[2] == "GESTION":
+        ADMIN = True
     if data[2] == "ADMIN" or data[2] == "GESTION" or data[0] == user:
         cur.execute(f"SELECT * FROM ordre_mission WHERE ID ='{id_mission}'")
         mission = list(item for item in cur.fetchall()[0])
-        return render_template('order.html', Mission=mission, STAT=BOB)
+        return render_template('order.html', Mission=mission, STAT=BOB, ADMIN=ADMIN)
         #return f"<html><body> <h1>  {id_mission} {mission}  </h1></body></html>"
     else:
         print(f'Connection refusé to {data[1]}')
