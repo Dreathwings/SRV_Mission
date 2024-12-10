@@ -472,7 +472,7 @@ div.listsearch {
   
   .value-list li {
     position: relative;
-    height: 4rem;
+    height: 2rem;
     padding: 1rem;
     font-size: 1.03rem;
     display: flex;
