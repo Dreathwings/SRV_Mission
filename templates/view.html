@@ -85,7 +85,6 @@
                         const dropdown = document.querySelector('#selected_user_list');
                         const dropdownArray = [... document.querySelectorAll('[michel*="NAME"]')];
                         console.log(typeof dropdownArray)
-                        dropdown.classList.add('open');
                         let valueArray = [];
                         dropdownArray.forEach(item => {
                           valueArray.push(item.textContent);
@@ -172,7 +171,6 @@
                             const dropdown2 = document.querySelector('#selected_mois_list');
                             const dropdownArray2 = [... document.querySelectorAll('[michel*="MOIS"]')];
                             //console.log(typeof dropdownArray2)
-                            dropdown2.classList.add('open');
                             let valueArray2 = [];
                             dropdownArray2.forEach(item => {
                               valueArray2.push(item.textContent);
@@ -248,7 +246,6 @@
                           const dropdown3 = document.querySelector('#selected_annee_list');
                           const dropdownArray3 = [... document.querySelectorAll('[michel*="ANNEE"]')];
                           //console.log(typeof dropdownArray3)
-                          dropdown3.classList.add('open');
                           let valueArray3 = [];
                           dropdownArray3.forEach(item => {
                             valueArray3.push(item.textContent);
