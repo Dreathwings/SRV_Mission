@@ -344,18 +344,13 @@
         {% for mission in Missions %}
             <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{{mission[0]}}" style="text-decoration:none;">
             <li class="view" id="view_mission" user="{{mission[2]}}" nom_mission="{{mission[3]}}" mois="" annee="" status="{{mission[5]}}">
-                <div class="view" id="background" >
+                <div class="view" id="background" style="background-color: {{color[mission[5]]}}; ">
                     <div class="view" id="id_mission">{{mission[0]}}</div> 
                     <div class="view" id="nom_mission">{{mission[3]}}</div> 
                     <div class="view" id="id_user">{{mission[2]}}</div> 
                     <div class="view" id="date" date="{{mission[4]}}"></div>
                     <div class="view" id="status">{{list[mission[5]]}}</div>
                 </div>
-                <style>
-                    div.view#background{
-                        background-color: {{color[mission[5]]}};
-                    }
-                </style>
             </li>
             </a>
         {% endfor %}
