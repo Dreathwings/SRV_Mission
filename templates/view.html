@@ -86,7 +86,6 @@
                         const dropdownArray = [... document.querySelectorAll('[michel*="NAME"]')];
                         console.log(typeof dropdownArray)
                         dropdown.classList.add('open');
-                        inputField.focus(); // Demo purposes only
                         let valueArray = [];
                         dropdownArray.forEach(item => {
                           valueArray.push(item.textContent);
@@ -174,7 +173,6 @@
                             const dropdownArray2 = [... document.querySelectorAll('[michel*="MOIS"]')];
                             //console.log(typeof dropdownArray2)
                             dropdown2.classList.add('open');
-                            inputField2.focus(); // Demo purposes only
                             let valueArray2 = [];
                             dropdownArray2.forEach(item => {
                               valueArray2.push(item.textContent);
