@@ -77,7 +77,7 @@
     <form class="adminMenu" method="post" action="">
         {% set list = ["Ouvert","En cours de validation","Validé","Cloturé"] %}
         <input class="chosen-value" id="selected_annee_choose" type="text" value="{{list[STAT]}}" placeholder="Status" name = 'STAT' autocomplete="off" style="font-size:0.9rem;;height: 2.5rem;width: 100%;">
-        <ul class="value-list" id="selected_annee_list" style="left:0%;margin-top: 40px;width: 100%;">
+        <ul class="value-list" id="selected_annee_list" style="left:0%;margin-top: 40px;width: 100%;background-image:none">
             <li michel="ANNEE" value="0" style="background-color: #88665D;">Ouvert</li>
             <li michel="ANNEE" value="1" style="background-color: #1B263B;">En cours de validation</li>
             <li michel="ANNEE" value="2" style="background-color: #4B644A;">Validé</li>
