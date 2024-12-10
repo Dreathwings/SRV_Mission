@@ -73,7 +73,7 @@
           </div>
         </div>
     </div>
-    <form class="adminMenu" method="post" action="http://geii.iut.u-bordeaux.fr/mission/view_mission">
+    <form class="adminMenu" method="post" action="">
         {% set list = ["Ouvert","En cours de traitement","Validé","Cloturé"] %}.
         <input class="chosen-value" id="selected_annee_choose" type="text" value="{{list[STAT]}}" placeholder="Status" name = 'STAT' autocomplete="off" style="font-size:0.9rem;;height: 2.5rem;width: 100%;">
         <ul class="value-list" id="selected_annee_list" style="left:0%;margin-top: 40px;width: 100%;">
@@ -158,7 +158,7 @@
             letter-spacing: 0.082em;
             font-weight: 900;
             font-style: normal;
-            ">
+        ">
             <span data-hover="UPDATE update" class="material-icons">
                 UPDATE update
             </span>
