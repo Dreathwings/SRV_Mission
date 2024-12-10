@@ -147,7 +147,12 @@ def show_mission(id_mission):
 
 @app.route("/mission/view_mission/<id_mission>",methods=['POST'])
 def upstatmiss_mission(id_mission):
+    Verif_Connection(request)
+    DB = connect_to_DB_mission()
+    cur =DB.cursor()
+    cur.execute(f"UPDATE mission.suivi_mission SET STATUE={request.form.get('STAT')} WHERE  ID={id_mission}")
     print(f"UPDATE {id_mission} to {request.form.get('STAT')}")
+
     return redirect(url_for('view'))
 #################################
 @app.route("/mission/create_mission", methods=['POST'])
