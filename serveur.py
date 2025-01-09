@@ -88,7 +88,11 @@ def oauth():
 @app.route("/mission/create_mission", methods=['GET'])
 def ordre():
     Verif_Connection(request)
-    return render_template('new_order.html')
+    ADMIN = False
+    data = oauth_user[request.cookies.get("SESSID")]
+    if data[2] == "ADMIN" or data[2] == "GESTION":
+        ADMIN = True
+    return render_template('new_order.html',ADMIN=ADMIN)
 
 #################################
 

@@ -513,8 +513,12 @@
                     let maxDate = new Date(new Date().getFullYear()+1, 11, 32)
                     $("#date-fr-start").bootstrapMaterialDatePicker('setMaxDate', maxDate)
                     $("#date-fr-return").bootstrapMaterialDatePicker('setMaxDate', maxDate)
-    
+                    {% if ADMIN %}
                     dateActuelle.setDate(dateActuelle.getDate()+10);
+                    {% else %}
+                    dateActuelle.setDate(dateActuelle.getDate()+10);
+                    {% endif %}
+                    
                     $("#date-fr-start").bootstrapMaterialDatePicker('setMinDate', dateActuelle)
                     $.material.init()
                 });
