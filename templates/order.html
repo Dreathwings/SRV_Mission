@@ -399,7 +399,7 @@
             });
             </script>
             <script>
-                console.log("{{Mission}}");
+                //console.log("{{Mission}}");
                 function fillContent(){
                     // FILLER FOR FRANCE/AUTRE //
                     if ('{{Mission[5]}}' === 'FRANCE'){
@@ -422,10 +422,10 @@
                     }
                     //////////////////////////////
                     // FILLER FOR VEHICULE //
-                    if ('{{Mission[11]}}' === 'VP'){
+                    if ('{{Mission[11]}}' === 'V_PERSO'){
                         document.querySelectorAll('[filler*="VP"]')[0].checked = true;
                     }
-                    else if('{{Mission[11]}}' === 'VUB'){
+                    else if('{{Mission[11]}}' === 'V_UB'){
                         document.querySelectorAll('[filler*="VUB"]')[0].checked = true;
                     }
                     else if('{{Mission[11]}}' === 'TRAIN'){
