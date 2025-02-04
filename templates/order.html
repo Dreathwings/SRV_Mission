@@ -319,7 +319,7 @@
                 <input class="checkbox-booking" type="checkbox" name="HOTEL" id="booking-3" value="NON" filler="HOTEL" autocomplete="off" readonly disabled>
                 
                 <label class="for-checkbox-booking" for="booking-3" style="position: relative; display: inline-block; ">							
-                        <i class="uil uil-building"></i><span class="text"> Hotel ?</span>
+                        <i class="uil uil-building"></i><span filler="TEXTHOTEL" class="text"> Hotel ?</span>
                 </label>  
             </div>
             
@@ -441,8 +441,8 @@
                     // FILLER FOR HOTEL //
                     if ('{{Mission[15]}}' === 'NON'){
                         document.querySelectorAll('[filler*="HOTEL"]')[0].checked = true;
-                        document.querySelectorAll('[filler*="HOTEL"]')[0].getElementsByClassName('text').value="HOTEL: OUI";}
-                        
+                        document.querySelectorAll('[filler*="TEXTHOTEL"]')[0].value="HOTEL: OUI";}
+
                     else if('{{Mission[15]}}' === 'OUI'){
                         document.querySelectorAll('[filler*="HOTEL"]')[0].checked = false;
                     }
