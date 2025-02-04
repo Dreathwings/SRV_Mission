@@ -441,10 +441,11 @@
                     // FILLER FOR HOTEL //
                     if ('{{Mission[15]}}' === 'NON'){
                         document.querySelectorAll('[filler*="HOTEL"]')[0].checked = true;
-                        document.querySelectorAll('[filler*="TEXTHOTEL"]')[0].textContent ="HOTEL: OUI";}
-
+                        document.querySelectorAll('[filler*="TEXTHOTEL"]')[0].textContent ="HOTEL: NON";
+                    }
                     else if('{{Mission[15]}}' === 'OUI'){
                         document.querySelectorAll('[filler*="HOTEL"]')[0].checked = false;
+                        document.querySelectorAll('[filler*="TEXTHOTEL"]')[0].textContent ="HOTEL: OUI";
                     }
                     else{
                         throw new Error('Parameter15 {{Mission[15]}} is not valid');
