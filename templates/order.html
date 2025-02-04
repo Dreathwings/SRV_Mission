@@ -441,6 +441,7 @@
                     // FILLER FOR HOTEL //
                     if ('{{Mission[15]}}' === 'NON'){
                         document.querySelectorAll('[filler*="HOTEL"]')[0].checked = true;
+                        document.querySelectorAll('[filler*="HOTEL"]')[0].value = "OUI"
                     }
                     else if('{{Mission[15]}}' === 'OUI'){
                         document.querySelectorAll('[filler*="HOTEL"]')[0].checked = false;
