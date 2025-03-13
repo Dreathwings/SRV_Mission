@@ -160,7 +160,7 @@ def upstatmiss_mission(id_mission):
     aa = ["Ouvert","En cours de validation","Validé","Cloturé"]
     val = aa.index(request.form.get('STAT')) # type: ignore
     cur.execute(f"UPDATE mission.suivi_mission SET STATUE='{val}' WHERE  ID='{id_mission}'")
-    print(f"UPDATE {id_mission} to {request.form.get('STAT')}")
+    print(f"UPDATE {id_mission} to {val}")
     if request.form.get('DEL') == "on":
         cur.execute(f"DELETE FROM mission.ordre_mission WHERE ID='{id_mission}'")
         cur.execute(f"DELETE FROM mission.suivi_mission WHERE ID='{id_mission}'")
@@ -191,7 +191,7 @@ def create_new_mission():
         statu_crea = 0
         cur.execute("INSERT INTO mission.suivi_mission(ID,ID_USER,NAME,NOM_MISSION,DATE_CREA,STATUE) VALUES (%s,%s,%s,%s,%s,%d)",(ID,user_id,nom,val["NOM_MISSION"],val["DATE_AJD"],statu_crea))
 
-        Send_Mail_NM(nom,ID)
+        Send_Mail_NM((ID.__repr__(),val["NOM"],val["PRENOM"],val["DATE_AJD"],val["NOM_MISSION"],PAYS,val["FRAIS"],val["D_DEPART"],val["H_DEPART"],val["D_RETOUR"],val["H_RETOUR"],val["TRANSPORT"],val["LIEU"],val["CODE_PTL"],val["VILLE"],val["HOTEL"],val["PTDEJ"],val["QUILL"]))
         ##print(f"Ordre mission {ID} success")
     except mariadb.Error as e:
         e = 0
@@ -264,23 +264,27 @@ def Verif_Connection(request):
     if oauth_user.get(request.cookies.get("SESSID",None),None) == None:
         abort(403)
 
-def Send_Mail_NM(user,id_mission):
+def Send_Mail_NM(*data):
     
     # Informations de connexion et de l'expéditeur
     sender_email = "serveur.mission.geii@gmail.com"
-    receiver_email = "valerie.galland@u-bordeaux.fr"
-    #receiver_email = "warren.privat@u-bordeaux.fr"
+    #receiver_email = "valerie.galland@u-bordeaux.fr"
+    receiver_email = "warren.privat@u-bordeaux.fr"
 
     # Configuration du message
-    subject = f"Nouvelle demande de mission de {user}"
-    body =f"""
-<div>Hey, Valerie
-<br>&nbsp;&nbsp; &nbsp;<br>&nbsp;&nbsp; &nbsp;
-{user} a ouvert une nouvelle demande de mission: <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" target="_blank" rel="noopener" data-mce-href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{id_mission}" data-mce-selected="inline-boundary">{id_mission} </a>
-&nbsp;<br>
-Courage<br>
-@+<br>&nbsp;&nbsp; &nbsp;</div>
-"""
+    subject = f"Nouvelle demande de mission"
+    body=f"""
+<div>Hey, Valérie <br><br>Une nouvelle demande de mission: 
+<a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{data[0]}" target="_blank" rel="noopener" data-mce-href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{data[0]}" data-mce-selected="inline-boundary">{data[0]} </a><br></div><div><br data-mce-bogus=3D"1"></div>
+<div>Demandeur: {data[1]} {data[2]} le {data[3]}<br data-mce-bogus=3D"1"></div>
+<div>Intitulé de mission: {data[4]}<br data-mce-bogus=3D"1"></div>
+<div>Date de départ: le {data[7]} {data[8]}<br data-mce-bogus=3D"1"></div><div>Date de retour: le {data[9]} {data[10]}</div>
+<div>Lieu du déplacement: {data[12]} {data[13]} {data[14]} {data[5]}<br data-mce-bogus=3D"1"></div>
+<div>Frais ? : {data[6]}<br data-mce-bogus=3D"1"></div>
+<div>Moyen de Transport: {data[11]}<br data-mce-bogus=3D"1"></div>
+<div>Hôtel?: {data[15]}</div>
+<div>Petit déjeuner: {data[16]}<br data-mce-bogus=3D"1"></div><div><br data-mce-bogus=3D"1"></div>
+<div>@+<br data-mce-bogus=3D"1"></div>"""
 
     # Création de l'objet message
     message = MIMEMultipart()
