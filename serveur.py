@@ -50,7 +50,7 @@ def oauth():
     if 'ticket' in request.values:
         PARAMS = {"ticket":request.values['ticket'],
                   'service':"http://geii.iut.u-bordeaux.fr/mission/oauth"}
-        print(jsonify({'ip': request.environ['HTTP_X_FORWARDED_FOR']}), 200)
+        print(request.environ.get('REMOTE_PORT'))
 
         RESP = REQ.get(url = "https://cas.u-bordeaux.fr/cas/serviceValidate",params=PARAMS)
         if "authenticationSuccess" in str(RESP.content):
