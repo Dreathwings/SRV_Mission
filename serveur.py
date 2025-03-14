@@ -191,7 +191,7 @@ def create_new_mission():
         statu_crea = 0
         cur.execute("INSERT INTO mission.suivi_mission(ID,ID_USER,NAME,NOM_MISSION,DATE_CREA,STATUE) VALUES (%s,%s,%s,%s,%s,%d)",(ID,user_id,nom,val["NOM_MISSION"],val["DATE_AJD"],statu_crea))
 
-        Send_Mail_NM((ID.__repr__(),val["NOM"],val["PRENOM"],val["DATE_AJD"],val["NOM_MISSION"],PAYS,val["FRAIS"],val["D_DEPART"],val["H_DEPART"],val["D_RETOUR"],val["H_RETOUR"],val["TRANSPORT"],val["LIEU"],val["CODE_PTL"],val["VILLE"],val["HOTEL"],val["PTDEJ"],val["QUILL"]))
+        Send_Mail_NM(ID.__repr__(),val["NOM"],val["PRENOM"],val["DATE_AJD"],val["NOM_MISSION"],PAYS,val["FRAIS"],val["D_DEPART"],val["H_DEPART"],val["D_RETOUR"],val["H_RETOUR"],val["TRANSPORT"],val["LIEU"],val["CODE_PTL"],val["VILLE"],val["HOTEL"],val["PTDEJ"],val["QUILL"])
         ##print(f"Ordre mission {ID} success")
     except mariadb.Error as e:
         e = 0
