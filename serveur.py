@@ -32,6 +32,7 @@ CAS = True
 
 @app.route("/mission/", methods=['GET'])
 def index():
+    print("PORT:",request.environ.get('REMOTE_PORT'))
     if CAS:
         if request.cookies.get("SESSID") != None:
             if request.cookies.get("SESSID") in oauth_user.keys() :
@@ -50,7 +51,7 @@ def oauth():
     if 'ticket' in request.values:
         PARAMS = {"ticket":request.values['ticket'],
                   'service':"http://geii.iut.u-bordeaux.fr/mission/oauth"}
-        print(request.environ.get('REMOTE_PORT'))
+        
 
         RESP = REQ.get(url = "https://cas.u-bordeaux.fr/cas/serviceValidate",params=PARAMS)
         if "authenticationSuccess" in str(RESP.content):
