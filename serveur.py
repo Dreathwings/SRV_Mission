@@ -1,6 +1,6 @@
 from datetime import datetime
 from uuid import uuid4
-from flask import Flask, abort, redirect, render_template, request, session, url_for
+from flask import Flask, abort, redirect, render_template, request, session, url_for,jsonify
 import requests as REQ
 import flask
 import mariadb
@@ -50,7 +50,7 @@ def oauth():
     if 'ticket' in request.values:
         PARAMS = {"ticket":request.values['ticket'],
                   'service':"http://geii.iut.u-bordeaux.fr/mission/oauth"}
-        # #print(f"Ticket :{request.values['ticket']}")
+        print(jsonify({'ip': request.environ['HTTP_X_FORWARDED_FOR']}), 200)
 
         RESP = REQ.get(url = "https://cas.u-bordeaux.fr/cas/serviceValidate",params=PARAMS)
         if "authenticationSuccess" in str(RESP.content):
