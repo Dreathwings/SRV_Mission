@@ -1,3 +1,4 @@
+from datetime import datetime
 from uuid import uuid4
 from flask import Flask, abort, redirect, render_template, request, session, url_for
 import requests as REQ
@@ -273,15 +274,22 @@ def Send_Mail_NM(*data):
 
     # Configuration du message
     subject = f"Nouvelle demande de mission"
+
+    if data[11] == "V_PERSO":vehicule="Véhicule personnel"
+    elif data[11] == "V_UB":vehicule="Véhicule de l'université"
+    else:
+        vehicule = data[11]
+
+    date = datetime.fromtimestamp(data[3])
     body=f"""
 <div>Hey, Valérie <br><br>Une nouvelle demande de mission: 
 <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{data[0]}" target="_blank" rel="noopener" data-mce-href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{data[0]}" data-mce-selected="inline-boundary">{data[0]} </a><br></div><div><br data-mce-bogus=3D"1"></div>
-<div>Demandeur: {data[1]} {data[2]} le {data[3]}<br data-mce-bogus=3D"1"></div>
+<div>Demandeur: {data[1]} {data[2]} le {date}<br data-mce-bogus=3D"1"></div>
 <div>Intitulé de mission: {data[4]}<br data-mce-bogus=3D"1"></div>
 <div>Date de départ: le {data[7]} {data[8]}<br data-mce-bogus=3D"1"></div><div>Date de retour: le {data[9]} {data[10]}</div>
 <div>Lieu du déplacement: {data[12]} {data[13]} {data[14]} {data[5]}<br data-mce-bogus=3D"1"></div>
 <div>Frais ? : {data[6]}<br data-mce-bogus=3D"1"></div>
-<div>Moyen de Transport: {data[11]}<br data-mce-bogus=3D"1"></div>
+<div>Moyen de Transport: {vehicule}<br data-mce-bogus=3D"1"></div>
 <div>Hôtel?: {data[15]}</div>
 <div>Petit déjeuner: {data[16]}<br data-mce-bogus=3D"1"></div><div><br data-mce-bogus=3D"1"></div>
 <div>@+<br data-mce-bogus=3D"1"></div>"""
