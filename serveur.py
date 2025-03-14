@@ -269,8 +269,8 @@ def Send_Mail_NM(*data):
     
     # Informations de connexion et de l'expéditeur
     sender_email = "serveur.mission.geii@gmail.com"
-    #receiver_email = "valerie.galland@u-bordeaux.fr"
-    receiver_email = "warren.privat@u-bordeaux.fr"
+    receiver_email = "valerie.galland@u-bordeaux.fr"
+    #receiver_email = "warren.privat@u-bordeaux.fr"
 
     # Configuration du message
     subject = f"Nouvelle demande de mission"
