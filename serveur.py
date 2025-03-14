@@ -32,7 +32,6 @@ CAS = True
 
 @app.route("/mission/", methods=['GET'])
 def index():
-    print("PORT:",request.environ)
     if CAS:
         if request.cookies.get("SESSID") != None:
             if request.cookies.get("SESSID") in oauth_user.keys() :
