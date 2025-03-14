@@ -52,6 +52,7 @@ def oauth():
         PARAMS = {"ticket":request.values['ticket'],
                   'service':f"http://{request.environ.get('HTTP_X_FORWARDED_HOST')}/mission/oauth"}
         
+        
 
         RESP = REQ.get(url = "https://cas.u-bordeaux.fr/cas/serviceValidate",params=PARAMS)
         if "authenticationSuccess" in str(RESP.content):
@@ -82,9 +83,9 @@ def oauth():
                 
             return resp
         else:
-            return redirect("https://cas.u-bordeaux.fr/cas/login?service=http://geii.iut.u-bordeaux.fr/mission/oauth")
+            return redirect(f"https://cas.u-bordeaux.fr/cas/login?service=http://{request.environ.get('HTTP_X_FORWARDED_HOST')}/mission/oauth")
     else:
-        return redirect("https://cas.u-bordeaux.fr/cas/login?service=http://geii.iut.u-bordeaux.fr/mission/oauth")
+        return redirect(f"https://cas.u-bordeaux.fr/cas/login?service=http://{request.environ.get('HTTP_X_FORWARDED_HOST')}/mission/oauth")
 
 
 @app.route("/mission/create_mission", methods=['GET'])
