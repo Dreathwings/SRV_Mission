@@ -280,7 +280,7 @@ def Send_Mail_NM(*data):
     else:
         vehicule = data[11]
 
-    date = datetime.fromtimestamp(int(data[3]))
+    date = datetime.fromtimestamp(int(data[3])/1000).strftime("%Y-%m-%d %H:%M:%S")
     body=f"""
 <div>Hey, Valérie <br><br>Une nouvelle demande de mission: 
 <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{data[0]}" target="_blank" rel="noopener" data-mce-href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{data[0]}" data-mce-selected="inline-boundary">{data[0]} </a><br></div><div><br data-mce-bogus=3D"1"></div>
