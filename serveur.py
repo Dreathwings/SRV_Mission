@@ -50,7 +50,7 @@ def index():
 def oauth():
     if 'ticket' in request.values:
         PARAMS = {"ticket":request.values['ticket'],
-                  'service':"http://geii.iut.u-bordeaux.fr/mission/oauth"}
+                  'service':f"http://{request.environ.get("HTTP_X_FORWARDED_HOST")}/mission/oauth"}
         
 
         RESP = REQ.get(url = "https://cas.u-bordeaux.fr/cas/serviceValidate",params=PARAMS)
