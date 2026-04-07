@@ -9,9 +9,8 @@
    - `MISSION_SECRET_KEY`
    - `MISSION_DB_PASSWORD`
    - `MISSION_CAS_DB_PASSWORD`
-   - `MISSION_PUBLIC_BASE_URL`
+   - `MISSION_PUBLIC_BASE_URL` en `https://...`
 4. Demarrer en production:
    `bash start.sh`
 
 Le serveur demarre via `gunicorn` sur `wsgi:app`.
-

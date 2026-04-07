@@ -5,6 +5,7 @@ import flask
 import mariadb
 import smtplib
 import os
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from email.mime.text import MIMEText
 
@@ -41,7 +42,17 @@ app.config.update(
     SESSION_COOKIE_HTTPONLY=True,
     SESSION_COOKIE_SAMESITE=os.getenv("MISSION_SESSION_COOKIE_SAMESITE", "Lax"),
     SESSION_COOKIE_SECURE=env_flag("MISSION_SESSION_COOKIE_SECURE", IS_PRODUCTION),
+    PREFERRED_URL_SCHEME=os.getenv("MISSION_PREFERRED_URL_SCHEME", "https" if IS_PRODUCTION else "http"),
 )
+
+if env_flag("MISSION_PROXY_FIX_ENABLED", True):
+    app.wsgi_app = ProxyFix(
+        app.wsgi_app,
+        x_for=env_int("MISSION_PROXY_FIX_X_FOR", 1),
+        x_proto=env_int("MISSION_PROXY_FIX_X_PROTO", 1),
+        x_host=env_int("MISSION_PROXY_FIX_X_HOST", 1),
+        x_port=env_int("MISSION_PROXY_FIX_X_PORT", 1),
+    )
            
 ### Structure ####
 ### {[0] login     : login gen a la connection validé par le CAS,
@@ -113,7 +124,17 @@ def db_unavailable_response(message=DB_UNAVAILABLE_TEXT):
 def public_url(path, request_context=None):
     base_url = PUBLIC_BASE_URL
     if not base_url and request_context is not None:
+        forwarded_proto = request_context.headers.get("X-Forwarded-Proto", "").split(",")[0].strip()
+        scheme = forwarded_proto or request_context.scheme or app.config.get("PREFERRED_URL_SCHEME", "http")
         base_url = request_context.host_url.rstrip("/")
+        if "://" in base_url:
+            _, _, host_part = base_url.partition("://")
+            base_url = f"{scheme}://{host_part}"
+    if not base_url and IS_PRODUCTION:
+        scheme = app.config.get("PREFERRED_URL_SCHEME", "https")
+        host = os.getenv("MISSION_PUBLIC_HOST", "")
+        if host:
+            base_url = f"{scheme}://{host.strip().strip('/')}"
     if not base_url:
         base_url = f"http://localhost:{env_int('PORT', 6969)}"
     return f"{base_url.rstrip('/')}{path}"
