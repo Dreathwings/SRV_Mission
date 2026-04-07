@@ -1,5 +1,4 @@
 from datetime import datetime
-from uuid import uuid4
 from flask import Flask, abort, redirect, render_template, request, session, url_for,jsonify
 import requests as REQ
 import flask
@@ -44,7 +43,6 @@ app.config.update(
     SESSION_COOKIE_SECURE=env_flag("MISSION_SESSION_COOKIE_SECURE", IS_PRODUCTION),
 )
            
-oauth_user = dict()#
 ### Structure ####
 ### {[0] login     : login gen a la connection validé par le CAS,
 #    [1] nom  : nom recup via le CAS,
@@ -264,18 +262,19 @@ def render_mission_form(page_mode, admin=False, mission_values=None, can_edit_mi
         detail_stat=detail_stat
     )
 
+
+def get_session_user():
+    data = session.get("mission_user")
+    if not data:
+        return None
+    return data
+
 @app.route("/mission/", methods=['GET'])
 def index():
     if CAS:
-        if request.cookies.get("SESSID") != None:
-            if request.cookies.get("SESSID") in oauth_user.keys() :
-                return render_template('index.html')
-            else:
-                return redirect("/mission/oauth")
-        else:
+        if get_session_user() is None:
             return redirect("/mission/oauth")
-    else:
-        return render_template('index.html')
+    return render_template('index.html')
 
 #################################
 
@@ -302,16 +301,12 @@ def oauth():
             ##print(f" {DB.user} | Login {data}")
 
             if login != None: # Verif si user autorised sinon 403 list(cur.execute("SELECT ID FROM "))
-                if id in oauth_user.items(): #Verif si user deja un SESSID
-                    key = {i for i in oauth_user if oauth_user[i]==id}
-                    oauth_user.pop(key)
-
-                SESSID = uuid4().int.__str__()[:10]
                 status = admin_user.get(id,"BASIC")
-                oauth_user[SESSID] = [id,login,status]
-                ##print(oauth_user[SESSID])
-                resp = flask.make_response(redirect("/mission"))  
-                resp.set_cookie("SESSID", value = SESSID)
+                session.clear()
+                session["mission_user"] = [id, login, status]
+                session.permanent = True
+                resp = flask.make_response(redirect("/mission"))
+                resp.delete_cookie("SESSID")
 
                 ##print(f"USER {id} authorized with {status} authority")
             else:return abort(403)
@@ -509,9 +504,8 @@ def DBConnect():
 
 @app.route("/mission/who_is_loged")
 def WHO_IS():
-    ID = request.cookies.get('SESSID')
     name = Verif_Connection(request)
-    return f"<html><body> <h1>  {name} with key {ID}  </h1></body></html>"
+    return f"<html><body> <h1>  {name}  </h1></body></html>"
 
 def new_ID():
     import uuid
@@ -554,8 +548,7 @@ def connect_to_DB_cas():
         raise DatabaseUnavailableError(f"Error connecting to the database: {e}")
 
 def Verif_Connection(request):
-    session_id = request.cookies.get("SESSID", None)
-    data = oauth_user.get(session_id, None)
+    data = get_session_user()
     if data is not None:
         return data
     if CAS == True:
