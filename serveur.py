@@ -248,6 +248,10 @@ def mission_values_from_record(record):
     return values
 
 
+def sort_tracking_missions(missions):
+    return sorted(missions, key=lambda mission: int(mission[4]), reverse=True)
+
+
 def render_mission_form(page_mode, admin=False, mission_values=None, can_edit_mission=True, show_admin_panel=False, detail_id=None, detail_stat=0):
     return render_template(
         'new_order.html',
@@ -339,20 +343,20 @@ def view():
     ADMIN = is_admin_user(data)
     if DEV_MODE:
         all_user = sorted({mission[2] for mission in DEV_TRACKING_MISSIONS}) if ADMIN else None
-        return render_template('view.html', Missions=DEV_TRACKING_MISSIONS, ADMIN=ADMIN, All_User=all_user)
+        return render_template('view.html', Missions=sort_tracking_missions(DEV_TRACKING_MISSIONS), ADMIN=ADMIN, All_User=all_user)
     try:
         DB = connect_to_DB_mission()
         cur = DB.cursor()
 
         if data[2] == "BASIC":
             cur.execute(f"SELECT * FROM suivi_mission WHERE ID_USER = '{data[0]}'")
-            mission = cur.fetchall()
+            mission = sort_tracking_missions(list(cur.fetchall()))
             return render_template('view.html', Missions=mission , ADMIN=ADMIN)
         elif data[2] == "ADMIN" or data[2] == "GESTION":
             DB_CAS= connect_to_DB_cas()
             cur_cas = DB_CAS.cursor()
             cur.execute(f"SELECT * FROM suivi_mission")
-            mission = list(cur.fetchall())
+            mission = sort_tracking_missions(list(cur.fetchall()))
             cur.execute(f"SELECT DISTINCT ID_USER FROM suivi_mission")
             users = tuple(item[0] for item in cur.fetchall())
             cur_cas.execute(f"SELECT nom FROM personnels WHERE login IN {users}")
