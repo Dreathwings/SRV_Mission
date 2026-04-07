@@ -1,781 +1,642 @@
-
+<!DOCTYPE html>
 <html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/solid.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/thinline.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.bubble.css" rel="stylesheet" />
-
-	<link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.bubble.css" rel="stylesheet">
+    <script>
+        (function() {
+            try {
+                const storedTheme = window.localStorage.getItem('mission-theme');
+                const theme = storedTheme === 'light' || storedTheme === 'dark'
+                    ? storedTheme
+                    : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (error) {}
+        })();
+    </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"></script>
-	<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
 
-	<script type="text/javascript" src="{{url_for('static', filename='js/bootstarp.min.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='js/ville.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='/js/JQuery.js')}}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstarp.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/ville.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/JQuery.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/moment-with-locales.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap-material-datetimepicker.js') }}"></script>
 
-
-    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-material-datetimepicker.css')}}" />
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/radio_card2.css')}}">
-    
-    
-    <script type="text/javascript" src="{{url_for('static', filename='js/moment-with-locales.min.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap-material-datetimepicker.js')}}"></script>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="{{url_for('static', filename='ressources/bm_gradignan_geii_rvb.png')}}">
-    <title>Demande d'ordre de mission</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-material-datetimepicker.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='ressources/bm_gradignan_geii_rvb.png') }}">
+    <title>{% if page_mode == 'detail' %}Fiche mission{% else %}Nouvelle demande de mission{% endif %}</title>
 </head>
-<body>
+{% set is_detail = page_mode == 'detail' %}
+{% set is_readonly = is_detail and not can_edit_mission %}
+{% set form_action = url_for('upstatmiss_mission', id_mission=detail_id) if is_detail else url_for('create_new_mission') %}
+{% set submit_label = 'Enregistrer les modifications' if is_detail else 'Envoyer la demande' %}
+<body class="page-form{% if is_detail %} page-detail{% endif %}{% if is_readonly %} page-readonly-detail{% endif %}">
     <input class="checkbox" type="checkbox" name="general" id="general">
-                <label class="for-checkbox" for="general"></label>
-                <div class="FABMenu">
-                    <input type="checkbox" autocomplete="off"/>
-                    <div class="hamburger">
-                      <div class="dots">
-                        <span class="first"></span>
-                        <span class="second"></span>
-                        <span class="third"></span>
-                      </div>
-                    </div>
-                    <div class="action_items_bar">
-                      <div class="action_items">
-                        <a class="first_item" href="http://geii.iut.u-bordeaux.fr/mission">
-                          <i class="material-icons">
-                          home
-                          </i>
-                        </a>
-                        <a class="second_item" id="go-back">
-                            <script>
-                                document.getElementById("go-back").addEventListener("click", () => {
-                                    history.back();
-                                  });
-                            </script>
-                          <i class="material-icons">
-                            keyboard_double_arrow_left
-                          </i>
-                        </a>
-                        <a class="third_item">
-                            <i class="material-icons">
-                                admin_panel_settings
-                            </i>
-                        </a>
-                        <a class="fourth_item" id="go-reload">
-                            <script>
-                                document.getElementById("go-reload").addEventListener("click", () => {
-                                    window.location.reload()
-                                  });
-                            </script>
-                            <i class="material-icons">
-                                refresh
-                            </i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
     <div class="background-color"></div>
-    <form method="post" action="/mission/create_mission" name="theForm" >
-    <div class="body" id="body">
-        <div class="Header" style="margin-left: 10px;">
-            <input type="text" class="intext" name="PRENOM"    id="Prenom"     placeholder="Prenom"    autocomplete="off" required>
-            <input type="text" class="intext" name="NOM"       id="Nom"        placeholder="Nom"       autocomplete="off" required>
-            <input type="text" class="intext"  id="TodayDateDisplay"  readonly>
-            <input type="text" class="intext" name="DATE_AJD"  id="TodayDate"  readonly style="visibility: hidden; height:0; width:0" >
-            <script>
-                date = new Date()
-                let mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-                document.getElementById("TodayDate").value = Date.now()
-                document.getElementById("TodayDateDisplay").value =  date.getDate()+" "+ mois[date.getMonth()]+" "+(1900+date.getYear());
-                
-            </script>   
-        </div>
-        
-        <div style="display: flex; justify-content: center; margin: 10px;">
-            <!--<select style="width: 20%;  text-align: center;">
-                <option value="GESII">GESII</option>
-                <option value="AUTRE">AUTRE</option>
-            </select>: max(820px,30%)-->
-            <input style="width:68.5%;" type="text" class="intext" name="NOM_MISSION" id="NOM_MISSION" placeholder="NOM DE LA MISSION" required>   
-        </div>
-        
-        <div class="mission">
-    
-            <div class="container_mission">
-                <input class="checkbox-budget" type="radio" name="MISSION" value='FRANCE' id="France" autocomplete="off" checked>
-						<label class="pays" for="France">
-							<span data-hover="France">France</span>
-						</label>
-                <div class="box_mission " id="France">
-                    <div>
-                        <input class="checkbox-budget" type="radio" name="FRAIS" value='AVEC' id="FRAIS_oui" autocomplete="off">
-                        <label class="oui_non" for="FRAIS_oui">
-                            <span data-hover="AVEC FRAIS">AVEC</span>
-                        </label> 
-                    </div>
-                    <p class="FRAIS">FRAIS ?</p>
-                    <div>
-                        <input class="checkbox-budget" type="radio" name="FRAIS" value='SANS' id="FRAIS_non" autocomplete="off" checked>
-                        <label class="oui_non" for="FRAIS_non">
-                            <span data-hover="SANS FRAIS">SANS</span>
-                        </label>    
-                    </div>
-                </div>
-            </div>
-            
-            <div class="container_mission">
-                <input class="checkbox-budget" type="radio" name="MISSION" value='AUTRE' id="Autre" autocomplete="off" >
-                <label class="pays" for="Autre">
-                    <span data-hover="Autre">Autre</span>
-                </label> 
-                <div class="box_mission" id="AUTRE">
-                    <div class="listsearch">
-                        <input class="chosen-value" id="pays_list" type="text" value="" name="pays" placeholder="Choisir un Pays" autocomplete="off">
-                        <ul class="value-list">
-                            <li value="Afghanistan">Afghanistan</li>
-                            <li value="Afrique_Centrale">Afrique_Centrale</li>
-                            <li value="Afrique_du_sud">Afrique_du_Sud</li>
-                            <li value="Albanie">Albanie</li>
-                            <li value="Algerie">Algerie</li>
-                            <li value="Allemagne">Allemagne</li>
-                            <li value="Andorre">Andorre</li>
-                            <li value="Angola">Angola</li>
-                            <li value="Anguilla">Anguilla</li>
-                            <li value="Arabie_Saoudite">Arabie_Saoudite</li>
-                            <li value="Argentine">Argentine</li>
-                            <li value="Armenie">Armenie</li>
-                            <li value="Australie">Australie</li>
-                            <li value="Autriche">Autriche</li>
-                            <li value="Azerbaidjan">Azerbaidjan</li>
-                            
-                            <li value="Bahamas">Bahamas</li>
-                            <li value="Bangladesh">Bangladesh</li>
-                            <li value="Barbade">Barbade</li>
-                            <li value="Bahrein">Bahrein</li>
-                            <li value="Belgique">Belgique</li>
-                            <li value="Belize">Belize</li>
-                            <li value="Benin">Benin</li>
-                            <li value="Bermudes">Bermudes</li>
-                            <li value="Bielorussie">Bielorussie</li>
-                            <li value="Bolivie">Bolivie</li>
-                            <li value="Botswana">Botswana</li>
-                            <li value="Bhoutan">Bhoutan</li>
-                            <li value="Boznie_Herzegovine">Boznie_Herzegovine</li>
-                            <li value="Bresil">Bresil</li>
-                            <li value="Brunei">Brunei</li>
-                            <li value="Bulgarie">Bulgarie</li>
-                            <li value="Burkina_Faso">Burkina_Faso</li>
-                            <li value="Burundi">Burundi</li>
-                            <li value="Caiman">Caiman</li>
-                            <li value="Cambodge">Cambodge</li>
-                            <li value="Cameroun">Cameroun</li>
-                            <li value="Canada">Canada</li>
-                            <li value="Canaries">Canaries</li>
-                            <li value="Cap_vert">Cap_Vert</li>
-                            <li value="Chili">Chili</li>
-                            <li value="Chine">Chine</li>
-                            <li value="Chypre">Chypre</li>
-                            <li value="Colombie">Colombie</li>
-                            <li value="Comores">Colombie</li>
-                            <li value="Congo">Congo</li>
-                            <li value="Congo_democratique">Congo_democratique</li>
-                            <li value="Cook">Cook</li>
-                            <li value="Coree_du_Nord">Coree_du_Nord</li>
-                            <li value="Coree_du_Sud">Coree_du_Sud</li>
-                            <li value="Costa_Rica">Costa_Rica</li>
-                            <li value="Cote_d_Ivoire">Côte_d_Ivoire</li>
-                            <li value="Croatie">Croatie</li>
-                            <li value="Cuba">Cuba</li>
-                            
-                            <li value="Danemark">Danemark</li>
-                            <li value="Djibouti">Djibouti</li>
-                            <li value="Dominique">Dominique</li>
-                            
-                            <li value="Egypte">Egypte</li>
-                            <li value="Emirats_Arabes_Unis">Emirats_Arabes_Unis</li>
-                            <li value="Equateur">Equateur</li>
-                            <li value="Erythree">Erythree</li>
-                            <li value="Espagne">Espagne</li>
-                            <li value="Estonie">Estonie</li>
-                            <li value="Etats_Unis">Etats_Unis</li>
-                            <li value="Ethiopie">Ethiopie</li>
-                            
-                            <li value="Falkland">Falkland</li>
-                            <li value="Feroe">Feroe</li>
-                            <li value="Fidji">Fidji</li>
-                            <li value="Finlande">Finlande</li>
-                            <li value="France">France</li>
-                            
-                            <li value="Gabon">Gabon</li>
-                            <li value="Gambie">Gambie</li>
-                            <li value="Georgie">Georgie</li>
-                            <li value="Ghana">Ghana</li>
-                            <li value="Gibraltar">Gibraltar</li>
-                            <li value="Grece">Grece</li>
-                            <li value="Grenade">Grenade</li>
-                            <li value="Groenland">Groenland</li>
-                            <li value="Guadeloupe">Guadeloupe</li>
-                            <li value="Guam">Guam</li>
-                            <li value="Guatemala">Guatemal</li>
-                            <li value="Guernesey">Guernesey</li>
-                            <li value="Guinee">Guinee</li>
-                            <li value="Guinee_Bissau">Guinee_Bissau</li>
-                            <li value="Guinee equatoriale">Guinee_Equatoriale</li>
-                            <li value="Guyana">Guyana</li>
-                            <li value="Guyane_Francaise ">Guyane_Francaise</li>
-                            
-                            <li value="Haiti">Haiti</li>
-                            <li value="Hawaii">Hawaii</li>
-                            <li value="Honduras">Honduras</li>
-                            <li value="Hong_Kong">Hong_Kong</li>
-                            <li value="Hongrie">Hongrie</li>
-                            
-                            <li value="Inde">Inde</li>
-                            <li value="Indonesie">Indonesie</li>
-                            <li value="Iran">Iran</li>
-                            <li value="Iraq">Iraq</li>
-                            <li value="Irlande">Irlande</li>
-                            <li value="Islande">Islande</li>
-                            <li value="Israel">Israel</li>
-                            <li value="Italie">italie</li>
-                            
-                            <li value="Jamaique">Jamaique</li>
-                            <li value="Jan Mayen">Jan Mayen</li>
-                            <li value="Japon">Japon</li>
-                            <li value="Jersey">Jersey</li>
-                            <li value="Jordanie">Jordanie</li>
-                            
-                            <li value="Kazakhstan">Kazakhstan</li>
-                            <li value="Kenya">Kenya</li>
-                            <li value="Kirghizstan">Kirghizistan</li>
-                            <li value="Kiribati">Kiribati</li>
-                            <li value="Koweit">Koweit</li>
-                            
-                            <li value="Laos">Laos</li>
-                            <li value="Lesotho">Lesotho</li>
-                            <li value="Lettonie">Lettonie</li>
-                            <li value="Liban">Liban</li>
-                            <li value="Liberia">Liberia</li>
-                            <li value="Liechtenstein">Liechtenstein</li>
-                            <li value="Lituanie">Lituanie</li>
-                            <li value="Luxembourg">Luxembourg</li>
-                            <li value="Lybie">Lybie</li>
-                            
-                            <li value="Macao">Macao</li>
-                            <li value="Macedoine">Macedoine</li>
-                            <li value="Madagascar">Madagascar</li>
-                            <li value="Madère">Madère</li>
-                            <li value="Malaisie">Malaisie</li>
-                            <li value="Malawi">Malawi</li>
-                            <li value="Maldives">Maldives</li>
-                            <li value="Mali">Mali</li>
-                            <li value="Malte">Malte</li>
-                            <li value="Man">Man</li>
-                            <li value="Mariannes du Nord">Mariannes du Nord</li>
-                            <li value="Maroc">Maroc</li>
-                            <li value="Marshall">Marshall</li>
-                            <li value="Martinique">Martinique</li>
-                            <li value="Maurice">Maurice</li>
-                            <li value="Mauritanie">Mauritanie</li>
-                            <li value="Mayotte">Mayotte</li>
-                            <li value="Mexique">Mexique</li>
-                            <li value="Micronesie">Micronesie</li>
-                            <li value="Midway">Midway</li>
-                            <li value="Moldavie">Moldavie</li>
-                            <li value="Monaco">Monaco</li>
-                            <li value="Mongolie">Mongolie</li>
-                            <li value="Montserrat">Montserrat</li>
-                            <li value="Mozambique">Mozambique</li>
-                            
-                            <li value="Namibie">Namibie</li>
-                            <li value="Nauru">Nauru</li>
-                            <li value="Nepal">Nepal</li>
-                            <li value="Nicaragua">Nicaragua</li>
-                            <li value="Niger">Niger</li>
-                            <li value="Nigeria">Nigeria</li>
-                            <li value="Niue">Niue</li>
-                            <li value="Norfolk">Norfolk</li>
-                            <li value="Norvege">Norvege</li>
-                            <li value="Nouvelle_Caledonie">Nouvelle_Caledonie</li>
-                            <li value="Nouvelle_Zelande">Nouvelle_Zelande</li>
-                            
-                            <li value="Oman">Oman</li>
-                            <li value="Ouganda">Ouganda</li>
-                            <li value="Ouzbekistan">Ouzbekistan</li>
-                            
-                            <li value="Pakistan">Pakistan</li>
-                            <li value="Palau">Palau</li>
-                            <li value="Palestine">Palestine</li>
-                            <li value="Panama">Panama</li>
-                            <li value="Papouasie_Nouvelle_Guinee">Papouasie_Nouvelle_Guinee</li>
-                            <li value="Paraguay">Paraguay</li>
-                            <li value="Pays_Bas">Pays_Bas</li>
-                            <li value="Perou">Perou</li>
-                            <li value="Philippines">Philippines</li>
-                            <li value="Pologne">Pologne</li>
-                            <li value="Polynesie">Polynesie</li>
-                            <li value="Porto_Rico">Porto_Rico</li>
-                            <li value="Portugal">Portugal</li>
-                            
-                            <li value="Qatar">Qatar</li>
-                            
-                            <li value="Republique_Dominicaine">Republique_Dominicaine</li>
-                            <li value="Republique_Tcheque">Republique_Tcheque</li>
-                            <li value="Reunion">Reunion</li>
-                            <li value="Roumanie">Roumanie</li>
-                            <li value="Royaume_Uni">Royaume_Uni</li>
-                            <li value="Russie">Russie</li>
-                            <li value="Rwanda">Rwanda</li>
-                            
-                            <li value="Sahara Occidental">Sahara Occidental</li>
-                            <li value="Sainte_Lucie">Sainte_Lucie</li>
-                            <li value="Saint_Marin">Saint_Marin</li>
-                            <li value="Salomon">Salomon</li>
-                            <li value="Salvador">Salvador</li>
-                            <li value="Samoa_Occidentales">Samoa_Occidentale</li>
-                            <li value="Samoa_Americaine">Samoa_Americaine</li>
-                            <li value="Sao_Tome_et_Principe">Sao_Tome_et_Principe</li>
-                            <li value="Senegal">Senegal</li>
-                            <li value="Seychelles">Seychelles</li>
-                            <li value="Sierra Leone">Sierra Leone</li>
-                            <li value="Singapour">Singapour</li>
-                            <li value="Slovaquie">Slovaquie</li>
-                            <li value="Slovenie">Sloveni</li>
-                            <li value="Somalie">Somalie</li>
-                            <li value="Soudan">Soudan</li>
-                            <li value="Sri_Lanka">Sri_Lanka</li>
-                            <li value="Suede">Suede</li>
-                            <li value="Suisse">Suisse</li>
-                            <li value="Surinam">Surinam</li>
-                            <li value="Swaziland">Swaziland</li>
-                            <li value="Syrie">Syrie</li>
-                            
-                            <li value="Tadjikistan">Tadjikistan</li>
-                            <li value="Taiwan">Taiwan</li>
-                            <li value="Tonga">Tonga</li>
-                            <li value="Tanzanie">Tanzanie</li>
-                            <li value="Tchad">Tchad</li>
-                            <li value="Thailande">Thailande</li>
-                            <li value="Tibet">Tibet</li>
-                            <li value="Timor_Oriental">Timor_Oriental</li>
-                            <li value="Togo">Togo</li>
-                            <li value="Trinite_et_Tobago">Trinite_et_Tobago</li>
-                            <li value="Tristan da cunha">Tristan de cuncha</li>
-                            <li value="Tunisie">Tunisie</li>
-                            <li value="Turkmenistan">Turmenistan</li>
-                            <li value="Turquie">Turquie</li>
-                            
-                            <li value="Ukraine">Ukraine</li>
-                            <li value="Uruguay">Uruguay</li>
-                            
-                            <li value="Vanuatu">Vanuatu</li>
-                            <li value="Vatican">Vatican</li>
-                            <li value="Venezuela">Venezuela</li>
-                            <li value="Vierges_Americaines">Vierges_Americaines</li>
-                            <li value="Vierges_Britanniques">Vierges_Britanniques</li>
-                            <li value="Vietnam">Vietnam</li>
-                            
-                            <li value="Wake">Wake</li>
-                            <li value="Wallis et Futuma">Wallis et Futuma</li>
-                            
-                            <li value="Yemen">Yemen</li>
-                            <li value="Yougoslavie">Yougoslavie</li>
-                            
-                            <li value="Zambie">Zambie</li>
-                            <li value="Zimbabwe">Zimbabwe</li>
-                        </ul>
-                    </div>
-                      <script>
-                        const inputField = document.querySelector('.chosen-value');
-                        const dropdown = document.querySelector('.value-list');
-                        const dropdownArray = [... document.querySelectorAll('li')];
-                        console.log(typeof dropdownArray)
-                        let valueArray = [];
-                        dropdownArray.forEach(item => {
-                          valueArray.push(item.textContent);
-                        });
-                        
-                        const closeDropdown = () => {
-                          dropdown.classList.remove('open');
-                        }
-                        
-                        inputField.addEventListener('input', () => {
-                          dropdown.classList.add('open');
-                          let inputValue = inputField.value.toLowerCase();
-                          let valueSubstring;
-                          if (inputValue.length > 0) {
-                            for (let j = 0; j < valueArray.length; j++) {
-                              if (!(inputValue.substring(0, inputValue.length) === valueArray[j].substring(0, inputValue.length).toLowerCase())) {
-                                dropdownArray[j].classList.add('closed');
-                              } else {
-                                dropdownArray[j].classList.remove('closed');
-                              }
-                            }
-                          } else {
-                            for (let i = 0; i < dropdownArray.length; i++) {
-                              dropdownArray[i].classList.remove('closed');
-                            }
-                          }
-                        });
-                        
-                        dropdownArray.forEach(item => {
-                          item.addEventListener('click', (evt) => {
-                            inputField.value = item.textContent;
-                            dropdownArray.forEach(dropdown => {
-                              dropdown.classList.add('closed');
-                            });
-                          });
-                        })
-                        
-                        inputField.addEventListener('focus', () => {
-                           inputField.placeholder = 'Recherche';
-                           dropdown.classList.add('open');
-                           dropdownArray.forEach(dropdown => {
-                             dropdown.classList.remove('closed');
-                           });
-                        });
-                        
-                        inputField.addEventListener('blur', () => {
-                           inputField.placeholder = 'Choisir un Pays';
-                          dropdown.classList.remove('open');
-                        });
-                        
-                        document.addEventListener('click', (evt) => {
-                          const isDropdown = dropdown.contains(evt.target);
-                          const isInput = inputField.contains(evt.target);
-                          if (!isDropdown && !isInput) {
-                            dropdown.classList.remove('open');
-                          }
-                        });
-                    </script>
-                </div>
-            </div> 
-    
-        </div>
-        <div class="mission">
-            <div class="container_mission">
-                <input type="text" id="date-fr-start" class="form-control floating-label intext" name="D_DEPART" value="" placeholder="Date de départ" autocomplete="off" required>
-                <input type="text" id="time-fr-start" class="form-control floating-label intext" name="H_DEPART" value="" placeholder="Heure de départ" autocomplete="off" required>
-            </div>
-            <div class='container_mission'>
-                    <input type="text" id="date-fr-return" class="form-control floating-label intext" name="D_RETOUR" value="" placeholder="Date de retour" autocomplete="off" required>
-                    <input type="text" id="time-fr-return" class="form-control floating-label intext" name="H_RETOUR" value="" placeholder="Heure de retour" autocomplete="off" required>
-            </div>
-        </div>
-            
-            <script type="text/javascript">
-                $(document).ready(function()
-                {
-                    $('#date-fr-start').bootstrapMaterialDatePicker
-                    ({
-                        format: 'DD/MM/YYYY',
-                        time: false,
-                        lang: 'fr',
-                        weekStart: 1, 
-                        cancelText : 'ANNULER',
-                        nowButton : false,
-                        switchOnClick : true,
-                    }).on('change', function(e, date){
-                        $('#date-fr-return').bootstrapMaterialDatePicker('setMinDate', date);
-                        $('#date-fr-return').bootstrapMaterialDatePicker('setDate', date);
-                        //document.getElementById("date-fr-start").value = date;
-                    });
-                    $('#time-fr-start').bootstrapMaterialDatePicker({
-                        date: false,
-                        format: 'HH:mm'
-                    }); 
-                    $('#date-fr-return').bootstrapMaterialDatePicker({
-                        format: 'DD/MM/YYYY',
-                        time: false,
-                        lang: 'fr',
-                        weekStart: 1, 
-                        cancelText : 'ANNULER',
-                        nowButton : false,
-                        switchOnClick : true
-                    });
-                    $('#time-fr-return').bootstrapMaterialDatePicker({
-                        date: false,
-                        format: 'HH:mm'
-                    }); 
 
-                    let dateActuelle = new Date();
-                    dateActuelle.setHours(0)
-                    dateActuelle.setMinutes(0)
-                    let maxDate = new Date(new Date().getFullYear()+1, 11, 32)
-                    $("#date-fr-start").bootstrapMaterialDatePicker('setMaxDate', maxDate)
-                    $("#date-fr-return").bootstrapMaterialDatePicker('setMaxDate', maxDate)
-                    {% if ADMIN %}
-                    dateActuelle.setDate(dateActuelle.getDate());
-                    {% else %}
-                    dateActuelle.setDate(dateActuelle.getDate()+10);
-                    {% endif %}
-                    
-                    $("#date-fr-start").bootstrapMaterialDatePicker('setMinDate', dateActuelle)
-                    $.material.init()
-                });
-            </script>
-    
-                
-    
-                <div style="padding-top: 20px;padding-bottom: 20px;">
-                    <div>
-                        <strong id="title_part">_____Lieu de déplacement_____</strong>
-                        <div style="display: flex; justify-content: center;">
-                            <input class="intext" style="width: 60%; margin: 15px;" type="text" name="LIEU" id="lieu" placeholder="Lieu de la mission" autocomplete="off">
+    {% set nav_context = 'Fiche mission' if is_detail else 'Nouvelle mission' %}
+    {% set nav_active = 'detail' if is_detail else 'create' %}
+    {% set nav_show_back = true %}
+    {% include '_app_header.html' %}
+
+    <main class="page-shell">
+        {% if show_admin_panel %}
+        <section class="admin-panel">
+            <form class="adminMenu" method="post" action="{{ url_for('upstatmiss_mission', id_mission=detail_id) }}">
+                <input type="hidden" name="FORM_ACTION" value="admin_status">
+                {% set status_labels = ["Ouvert", "En cours de validation", "Validé", "Cloturé"] %}
+                <div class="listsearch">
+                    <input class="chosen-value" id="selected_annee_choose" type="text" value="{{ status_labels[detail_stat] }}" placeholder="Statut" name="STAT" autocomplete="off">
+                    <ul class="value-list" id="selected_annee_list" style="left:0; width:100%;">
+                        <li michel="ANNEE" value="0" style="background-color: #88665D;">Ouvert</li>
+                        <li michel="ANNEE" value="1" style="background-color: #1B263B;">En cours de validation</li>
+                        <li michel="ANNEE" value="2" style="background-color: #4B644A;">Validé</li>
+                        <li michel="ANNEE" value="3" style="background-color: #B88D00;">Cloturé</li>
+                    </ul>
+                </div>
+                <input class="checkbox-budget" type="checkbox" name="DEL" id="Delete" autocomplete="off" onclick="alertdelete()">
+                <label class="pays action-button" for="Delete">
+                    <span data-hover="DELETE">Supprimer</span>
+                    <span data-hover="delete_forever" class="material-icons">delete_forever</span>
+                </label>
+                <input class="checkbox-budget" type="submit" name="update" id="Update" autocomplete="off" aria-checked="true" checked>
+                <label class="pays action-button" for="Update">
+                    <span data-hover="UPDATE">Mettre à jour</span>
+                    <span data-hover="update" class="material-icons">update</span>
+                </label>
+            </form>
+        </section>
+        {% endif %}
+
+        <form method="post" action="{{ form_action }}" name="theForm" class="mission-form{% if is_readonly %} is-readonly{% endif %}">
+            {% if is_detail and can_edit_mission %}
+            <input type="hidden" name="FORM_ACTION" value="update_mission">
+            {% endif %}
+            <div class="body" id="body">
+                <section class="app-panel identity-panel">
+                    <div class="Header">
+                        <input type="text" class="intext" name="PRENOM" id="Prenom" placeholder="Prenom" autocomplete="off" value="{{ mission_values.PRENOM }}" required{% if is_readonly %} readonly{% endif %}>
+                        <input type="text" class="intext" name="NOM" id="Nom" placeholder="Nom" autocomplete="off" value="{{ mission_values.NOM }}" required{% if is_readonly %} readonly{% endif %}>
+                        <input type="text" class="intext" id="TodayDateDisplay" readonly>
+                        <input type="text" class="intext" name="DATE_AJD" id="TodayDate" readonly value="{{ mission_values.DATE_AJD }}" style="visibility: hidden; height: 0; width: 0;">
+                        <script>
+                            const rawDateValue = {{ mission_values.DATE_AJD|tojson }};
+                            const date = rawDateValue ? new Date(Number(rawDateValue)) : new Date();
+                            let mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+                            document.getElementById('TodayDate').value = rawDateValue || Date.now();
+                            document.getElementById('TodayDateDisplay').value = date.getDate() + ' ' + mois[date.getMonth()] + ' ' + date.getFullYear();
+                        </script>
+                    </div>
+
+                    <div class="mission-title-row">
+                        <input type="text" class="intext" name="NOM_MISSION" id="NOM_MISSION" placeholder="Nom de la mission" value="{{ mission_values.NOM_MISSION }}" required{% if is_readonly %} readonly{% endif %}>
+                    </div>
+                </section>
+
+                <section class="app-panel type-panel">
+                    <div class="mission">
+                        <div class="container_mission">
+                            <input class="checkbox-budget" type="radio" name="MISSION" value="FRANCE" id="France" autocomplete="off"{% if mission_values.MISSION == 'FRANCE' %} checked{% endif %}{% if is_readonly %} disabled{% endif %}>
+                            <label class="pays" for="France">
+                                <span data-hover="France">France</span>
+                            </label>
+                            <div class="box_mission box_mission--france" id="France">
+                                <div class="france-choice">
+                                    <input class="checkbox-budget" type="radio" name="FRAIS" value="AVEC" id="FRAIS_oui" autocomplete="off"{% if mission_values.FRAIS == 'AVEC' %} checked{% endif %}{% if is_readonly %} disabled{% endif %}>
+                                    <label class="oui_non" for="FRAIS_oui">
+                                        <span data-hover="AVEC FRAIS">Avec</span>
+                                    </label>
+                                </div>
+                                <p class="FRAIS">Frais pris en charge ?</p>
+                                <div class="france-choice">
+                                    <input class="checkbox-budget" type="radio" name="FRAIS" value="SANS" id="FRAIS_non" autocomplete="off"{% if mission_values.FRAIS == 'SANS' %} checked{% endif %}{% if is_readonly %} disabled{% endif %}>
+                                    <label class="oui_non" for="FRAIS_non">
+                                        <span data-hover="SANS FRAIS">Sans</span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mission" style="justify-content: center;">
-                            <div id="div_codeptl" style="width: 40%;">
-                                <input class="Dest numeric intext" type="text" name="CODE_PTL" id="code" placeholder="Code postal" autocomplete="off">
-                                <script>
-                                    $(".numeric").on("input", function () {
+
+                        <div class="container_mission">
+                            <input class="checkbox-budget" type="radio" name="MISSION" value="AUTRE" id="Autre" autocomplete="off"{% if mission_values.MISSION == 'AUTRE' %} checked{% endif %}{% if is_readonly %} disabled{% endif %}>
+                            <label class="pays" for="Autre">
+                                <span data-hover="Autre">Autre</span>
+                            </label>
+                            <div class="box_mission" id="AUTRE">
+                                <div class="listsearch" id="country-picker">
+                                    <input class="chosen-value" id="pays_list" type="text" value="{{ mission_values.pays }}" name="pays" placeholder="Choisir un pays" autocomplete="off"{% if is_readonly %} disabled{% endif %}>
+                                    <ul class="value-list">
+                                        {% include 'list_pays.html' %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="app-panel timing-panel">
+                    <div class="mission mission--stack">
+                        <div class="container_mission datetime-shell">
+                            <input type="hidden" id="date-fr-start" name="D_DEPART" value="{{ mission_values.D_DEPART }}">
+                            <input type="hidden" id="time-fr-start" name="H_DEPART" value="{{ mission_values.H_DEPART }}">
+                            <button type="button" class="datetime-trigger is-empty" id="datetime-trigger-start" aria-haspopup="dialog"{% if is_readonly %} disabled{% endif %}>
+                                <span class="datetime-trigger-copy">
+                                    <span class="datetime-trigger-label">Depart</span>
+                                    <span class="datetime-trigger-value" id="datetime-display-start">Selectionner date et heure</span>
+                                </span>
+                                <span class="material-icons">calendar_month</span>
+                            </button>
+                        </div>
+                        <div class="container_mission datetime-shell">
+                            <input type="hidden" id="date-fr-return" name="D_RETOUR" value="{{ mission_values.D_RETOUR }}">
+                            <input type="hidden" id="time-fr-return" name="H_RETOUR" value="{{ mission_values.H_RETOUR }}">
+                            <button type="button" class="datetime-trigger is-empty" id="datetime-trigger-return" aria-haspopup="dialog"{% if is_readonly %} disabled{% endif %}>
+                                <span class="datetime-trigger-copy">
+                                    <span class="datetime-trigger-label">Retour</span>
+                                    <span class="datetime-trigger-value" id="datetime-display-return">Selectionner date et heure</span>
+                                </span>
+                                <span class="material-icons">calendar_month</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mission-datetime-overlay" id="mission-datetime-overlay" hidden>
+                        <div class="mission-datetime-dialog" id="mission-datetime-dialog" role="dialog" aria-modal="true" aria-labelledby="mission-datetime-title">
+                            <div class="mission-datetime-head">
+                                <div>
+                                    <p class="mission-datetime-kicker">Date and Time Picker</p>
+                                    <h2 id="mission-datetime-title">Depart</h2>
+                                    <p class="mission-datetime-summary" id="mission-datetime-summary"></p>
+                                </div>
+                                <button type="button" class="mission-datetime-close" id="mission-datetime-cancel" aria-label="Fermer">
+                                    <span class="material-icons">close</span>
+                                </button>
+                            </div>
+
+                            <div class="mission-datetime-toolbar">
+                                <button type="button" class="mission-datetime-nav" id="mission-picker-prev" aria-label="Mois precedent">
+                                    <span class="material-icons">chevron_left</span>
+                                </button>
+                                <div class="mission-datetime-range">
+                                    <select id="mission-picker-month" class="mission-picker-select">
+                                        {% for month in range(12) %}
+                                        <option value="{{ month }}">{{ month + 1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <select id="mission-picker-year" class="mission-picker-select"></select>
+                                </div>
+                                <button type="button" class="mission-datetime-nav" id="mission-picker-next" aria-label="Mois suivant">
+                                    <span class="material-icons">chevron_right</span>
+                                </button>
+                            </div>
+
+                            <div class="mission-calendar-weekdays" id="mission-calendar-weekdays"></div>
+                            <div class="mission-calendar-grid" id="mission-calendar-grid"></div>
+
+                            <div class="mission-time-panel">
+                                <label class="mission-time-field" for="mission-picker-hour">
+                                    <span>Heure</span>
+                                    <select id="mission-picker-hour" class="mission-picker-select"></select>
+                                </label>
+                                <label class="mission-time-field" for="mission-picker-minute">
+                                    <span>Minute</span>
+                                    <select id="mission-picker-minute" class="mission-picker-select"></select>
+                                </label>
+                            </div>
+
+                            <div class="mission-datetime-actions">
+                                <button type="button" class="mission-action-button mission-action-button--ghost" id="mission-datetime-dismiss">Annuler</button>
+                                <button type="button" class="mission-action-button" id="mission-datetime-apply">Appliquer</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="app-panel location-panel">
+                    <strong id="title_part">Lieu de deplacement</strong>
+                    <div class="location-main-row">
+                        <input class="intext" type="text" name="LIEU" id="lieu" placeholder="Lieu de la mission" autocomplete="off" value="{{ mission_values.LIEU }}"{% if is_readonly %} readonly{% endif %}>
+                    </div>
+                    <div class="mission location-grid" id="location-fields">
+                        <div id="div_codeptl" class="location-field">
+                            <input class="Dest numeric intext" type="text" name="CODE_PTL" id="code" placeholder="Code postal" autocomplete="off" value="{{ mission_values.CODE_PTL }}"{% if is_readonly %} readonly{% endif %}>
+                            <script>
+                                $('.numeric').on('input', function() {
                                     var inputValue = $(this).val();
                                     var validChars = /^[0-9]+$/;
 
                                     if (!validChars.test(inputValue)) {
-                                        // Remove invalid characters
                                         $(this).val(inputValue.replace(/[^0-9]+/g, ''));
                                     }
                                 });
-                                document.getElementById('Autre').addEventListener("change", (e) => {
-                                        document.getElementById('div_codeptl').style.display = "none";
-                                        document.getElementById('ville').style.width = "69%";
-                                        document.getElementById("pays_list").required = true;
-                                        
-                                });
-                                document.getElementById('France').addEventListener("change", (e) => {
-                                        document.getElementById('div_codeptl').style.display = "initial";
-                                        document.getElementById('ville').style.width = "50%";
-                                        document.getElementById("pays_list").required = false;
-                                });
-
-
-                                </script>
-                            </div>
-                            <div id="div_ville" style="width: 40%;">
-                                <input class="Dest intext" type="text" id="ville" name="VILLE" placeholder="Ville" autocomplete="off"onkeypress="return (event.charCode > 64 && 
-	                                event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 32">
-                            </div>
+                            </script>
+                        </div>
+                        <div id="div_ville" class="location-field">
+                            <input class="Dest intext" type="text" id="ville" name="VILLE" placeholder="Ville" autocomplete="off" value="{{ mission_values.VILLE }}"{% if is_readonly %} readonly{% endif %} onkeypress="return (event.charCode > 64 &&
+                                    event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 32">
                         </div>
                     </div>
+
                     <section id="ville_section" style="z-index: 1000;">
                         <div class="list">
                             <ul class="ville" id="list_ville">
-                                <li class="ville" data-vicopo="#ville, #code" data-vicopo-click='{"#code": "code", "#ville": "ville"}' >
-                                  <div id="code_postal" data-vicopo-code-postal></div>
-                                  <div id="ville" data-vicopo-ville></div>
-                            </li>
-                            </ul>   
+                                <li class="ville" data-vicopo="#ville, #code" data-vicopo-click='{"#code": "code", "#ville": "ville"}'>
+                                    <div id="code_postal" data-vicopo-code-postal></div>
+                                    <div id="ville" data-vicopo-ville></div>
+                                </li>
+                            </ul>
                         </div>
                         <div class="animation"></div>
                     </section>
-                    <script>
-                        const input1 = document.getElementById('code');
-                        const input2 = document.getElementById('ville');
-                        const monSelector = document.getElementById('ville_section');
-                        let timeoutId; // Variable pour stocker l'identifiant du timeout
+                </section>
 
-                        function toggleVisibility() {
-                            clearTimeout(timeoutId); // Annuler le précédent timeout
+                <section class="app-panel transport-panel">
+                    <strong id="title_part">Moyen de transport</strong>
+                    <div id="transport">
+                        <input class="checkbox-tools" type="radio" name="TRANSPORT" id="tool-1" value="V_PERSO" autocomplete="off"{% if mission_values.TRANSPORT == 'V_PERSO' %} checked{% endif %}{% if is_readonly %} disabled{% endif %}>
+                        <label class="for-checkbox-tools" for="tool-1">
+                            <img class="img_vehicule" src="{{ url_for('static', filename='ressources/voiture.svg') }}" alt="">
+                            Véhicule personnel
+                        </label>
 
-                            // Délai de 0.5s
-                            timeoutId = setTimeout(() => {
-                                // Vérifie si au moins un des inputs est sélectionné (focus)
-                                if (document.activeElement === input1 || document.activeElement === input2) {
-                                    monSelector.style.visibility = 'visible'; // Rendre visible
-                                } else {
-                                    monSelector.style.visibility = 'hidden'; // Cacher
-                                }
-                            }, 100);
-                        }
-                                        
-                        // Écoute des événements sur les deux inputs
-                        input1.addEventListener('focus', toggleVisibility);
-                        input2.addEventListener('focus', toggleVisibility);
-                        input1.addEventListener('blur', toggleVisibility);
-                        input2.addEventListener('blur', toggleVisibility);
-                    </script>
-                    
-                </div>
-    
-    
-        <strong id="title_part">_____Moyen de transport_____</strong>
-        <div id="transport">
-                    <input class="checkbox-tools" type="radio" name="TRANSPORT" id="tool-1" value='V_PERSO' checked autocomplete="off">
-                    <label class="for-checkbox-tools" for="tool-1">
-                        <img class="img_vehicule" src="{{url_for('static', filename='ressources/voiture.svg')}}" alt="">
-                        Véhicule personnel
-                    </label><!--
-                    --><input class="checkbox-tools" type="radio" name="TRANSPORT" id="tool-2" value='V_UB' autocomplete="off" onclick="V_UB()">
-                    <label class="for-checkbox-tools" for="tool-2">
-                        <img class="img_vehicule" src="{{url_for('static', filename='ressources/construction-automobile.svg')}}" alt="">
-                        Véhicule de l'Université
-                    </label>
+                        <input class="checkbox-tools" type="radio" name="TRANSPORT" id="tool-2" value="V_UB" autocomplete="off" onclick="V_UB()"{% if mission_values.TRANSPORT == 'V_UB' %} checked{% endif %}{% if is_readonly %} disabled{% endif %}>
+                        <label class="for-checkbox-tools" for="tool-2">
+                            <img class="img_vehicule" src="{{ url_for('static', filename='ressources/construction-automobile.svg') }}" alt="">
+                            Véhicule de l'Université
+                        </label>
+
+                        <input class="checkbox-tools" type="radio" name="TRANSPORT" id="tool-3" value="TRAIN" autocomplete="off"{% if mission_values.TRANSPORT == 'TRAIN' %} checked{% endif %}{% if is_readonly %} disabled{% endif %}>
+                        <label class="for-checkbox-tools" for="tool-3">
+                            <img class="img_vehicule" src="{{ url_for('static', filename='ressources/former.svg') }}" alt="">
+                            Train
+                        </label>
+
+                        <input class="checkbox-tools" type="radio" name="TRANSPORT" id="tool-4" value="AVION" autocomplete="off"{% if mission_values.TRANSPORT == 'AVION' %} checked{% endif %}{% if is_readonly %} disabled{% endif %}>
+                        <label class="for-checkbox-tools" for="tool-4">
+                            <img class="img_vehicule" src="{{ url_for('static', filename='ressources/avion-alt.svg') }}" alt="">
+                            Avion
+                        </label>
+                    </div>
+
                     <div class="popup" id="popup">
                         <div class="popup-encart"></div>
-                        <div class="popup-contenu">Pour utilisé un vehicule de l'Université <br> VOUS <br> devez faire une demande via <a target="_blank" href='https://ent.u-bordeaux.fr/uPortal/f/services-lo/p/GRR.u38l1n503/max/render.uP?pCp'>l'intranet</a><br><a href="#" id="popup-fermeture">Fermer</a></div>
+                        <div class="popup-contenu">Pour utiliser un vehicule de l'Universite, vous devez faire une demande via <a target="_blank" href="https://ent.u-bordeaux.fr/uPortal/f/services-lo/p/GRR.u38l1n503/max/render.uP?pCp">l'intranet</a>.<br><br><a href="#" id="popup-fermeture">Fermer</a></div>
                     </div>
-                    <style>
-                   
-                          
-                    </style>
-                    <!--
-                    --><input class="checkbox-tools" type="radio" name="TRANSPORT" id="tool-3" value='TRAIN' autocomplete="off">
-                    <label class="for-checkbox-tools" for="tool-3">
-                        <img class="img_vehicule" src="{{url_for('static', filename='ressources/former.svg')}}" alt="">
-                        Train
-                    </label><!--
-                    --><input class="checkbox-tools" type="radio" name="TRANSPORT" id="tool-4" value='AVION' autocomplete="off">
-                    <label class="for-checkbox-tools" for="tool-4">
-                        <img class="img_vehicule" src="{{url_for('static', filename='ressources/avion-alt.svg')}}" alt="">
-                        Avion
-                    </label>
-    
-        </div>
-        <strong id="title_part">_____Hotel_____</strong>
-        <p class="sub_text"> Besoin d'un hotel?</p>
+                </section>
 
-        <div id="hotel">
-            <div style="display: flex; justify-content: center;">
-                <input type = "hidden" id = "booking-3_H" name = "HOTEL" value = "OUI"/>
-                <input class="checkbox-booking" type="checkbox" name="HOTEL" id="booking-3" value="NON" autocomplete="off" checked>
-                
-                <label class="for-checkbox-booking" for="booking-3" style="position: relative; display: inline-block; ">							
-                        <i class="uil uil-building"></i><span class="text"> Hotel ?</span>
-                </label>  
+                <section class="app-panel hotel-panel">
+                    <strong id="title_part">Hebergement</strong>
+                    <p class="sub_text">Besoin d'un hotel ?</p>
+                    <div id="hotel">
+                        <div class="hotel-toggle">
+                            <input type="hidden" id="booking-3_H" name="HOTEL" value="OUI">
+                            <input class="checkbox-booking" type="checkbox" name="HOTEL" id="booking-3" value="NON" autocomplete="off"{% if mission_values.HOTEL == 'NON' %} checked{% endif %}{% if is_readonly %} disabled{% endif %}>
+
+                            <label class="for-checkbox-booking" for="booking-3">
+                                <i class="uil uil-building"></i><span class="text">Hotel ?</span>
+                            </label>
+                        </div>
+
+                        <div id="hotel" class="hotel_info">
+                            <input id="Arrondisement" placeholder="Arrondisement si existant" style="display: none;">
+                            <p class="sub_text">Petit dejeuner compris ?</p>
+                            <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                                <input class="checkbox-budget" type="radio" name="PTDEJ" id="PtDej_oui" value="OUI" autocomplete="off"{% if mission_values.PTDEJ == 'OUI' %} checked{% endif %}{% if is_readonly %} disabled{% endif %}>
+                                <label class="oui_non" for="PtDej_oui">
+                                    <span data-hover="OUI">Oui</span>
+                                </label>
+                                <input class="checkbox-budget" type="radio" name="PTDEJ" id="PtDej_non" value="NON" autocomplete="off"{% if mission_values.PTDEJ == 'NON' %} checked{% endif %}{% if is_readonly %} disabled{% endif %}>
+                                <label class="oui_non" for="PtDej_non">
+                                    <span data-hover="NON">Non</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="app-panel editor-panel">
+                    <script src="{{ url_for('static', filename='js/quill.min.js') }}"></script>
+                    <script src="{{ url_for('static', filename='js/quill-resize-module.js') }}"></script>
+
+                    <div id="editor" style="height: 80%"></div>
+                    <input class="intext" name="QUILL" id="playground" type="text" style="visibility: hidden; height: 0; border: 0;">
+                </section>
             </div>
-            
-            <div id="hotel" class="hotel_info">
-                <input id="Arrondisement" placeholder="Arrondisement si existant" style="display: none;">
-                    <p class="sub_text">Petit déjeuner compris ?</p>
-                <div style="display: flex; justify-content: center;">
-                    <input class="checkbox-budget" type="radio" name="PTDEJ" id="PtDej_oui" value='OUI' autocomplete="off">
-                    <label class="oui_non" for="PtDej_oui">
-                        <span data-hover="OUI">OUI</span>
-                    </label>
-                    <input class="checkbox-budget" type="radio" name="PTDEJ" id="PtDej_non" value='NON' autocomplete="off" checked>
-                    <label class="oui_non" for="PtDej_non">
-                        <span data-hover="NON">NON</span>
-                    </label>  
-                </div>
+
+            {% if not is_readonly %}
+            <div class="form-submit-row">
+                <input type="button" class="checkbox-budget" id="Valid" onclick="submitMissionForm()" style="visibility: hidden;" checked>
+                <label class="pays" for="Valid" style="width: 50%;">
+                    <span data-hover="{{ submit_label }}">{{ submit_label }}</span>
+                </label>
             </div>
-            <script type="text/javascript">
-                $(document).ready(function() {
-                    $('#booking-3').change(function() {
-                        if ($(this).is(':checked')) {
-                            document.getElementById("booking-3_H").disabled = true;
-                            $('.hotel_info').hide();  // Montre la div quand l'input est coché
-                        } else {
-                            document.getElementById("booking-3_H").disabled = false;
-                            $('.hotel_info').show();  // Cache la div quand l'input est décoché
-                        }
-                    });
-                    
-                    // Initial check on page load
-                    if ($('#booking-3').is(':checked')) {
-                        document.getElementById("booking-3_H").disabled = true;
-                        $('.hotel_info').hide();
-                    } else {
-                        document.getElementById("booking-3_H").disabled = false;
-                        $('.hotel_info').show();
-                    }
-                });
-            </script>
-        </div>
+            {% endif %}
         </form>
-        <script src="{{url_for('static', filename='/js/quill.min.js')}}"></script>
-        <script src="{{url_for('static', filename='/js/quill-resize-module.js')}}"></script>
+    </main>
 
-        <div id="editor" style="height: 80%">
-        </div>
-        <input class="intext" name="QUILL" id="playground" name="QUILL" type="text" style="visibility: hidden; height: 0px; border: 0;"></input>
-        <script>
-            Quill.register("modules/resize", window.QuillResizeModule);
-            const toolbarOptions = [  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-                ['blockquote', 'code-block'],
-                ['link', 'image', 'video', 'formula'],
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/mission_datetime_picker.js') }}"></script>
+    <script>
+        const isReadOnlyMission = {{ 'true' if is_readonly else 'false' }};
 
-                [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-                [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
-                [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-                [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-                [{ 'direction': 'rtl' }],                         // text direction
+        (function initialiseStatusDropdown() {
+            const inputField = document.getElementById('selected_annee_choose');
+            const dropdown = document.getElementById('selected_annee_list');
+            if (!inputField || !dropdown) {
+                return;
+            }
 
-                [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            const dropdownArray = [...dropdown.querySelectorAll('[michel*="ANNEE"]')];
+            const valueArray = dropdownArray.map((item) => item.textContent);
 
-                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-                [{ 'font': [] }],
-                [{ 'align': [] }],
+            inputField.addEventListener('input', () => {
+                dropdown.classList.add('open');
+                const inputValue = inputField.value.toLowerCase();
+                dropdownArray.forEach((item, index) => {
+                    item.classList.toggle('closed', inputValue.length > 0 && !valueArray[index].toLowerCase().includes(inputValue));
+                });
+            });
 
-                ['clean'] ];
+            dropdownArray.forEach((item) => {
+                item.addEventListener('click', () => {
+                    inputField.value = item.textContent;
+                    dropdownArray.forEach((entry) => entry.classList.add('closed'));
+                });
+            });
+
+            inputField.addEventListener('focus', () => {
+                inputField.placeholder = 'Recherche';
+                dropdown.classList.add('open');
+                dropdownArray.forEach((entry) => entry.classList.remove('closed'));
+            });
+
+            inputField.addEventListener('blur', () => {
+                dropdown.classList.remove('open');
+            });
+
+            document.addEventListener('click', (event) => {
+                const isDropdown = dropdown.contains(event.target);
+                const isInput = inputField.contains(event.target);
+                if (!isDropdown && !isInput) {
+                    dropdown.classList.remove('open');
+                }
+            });
+        })();
+
+        function alertdelete() {
+            if (confirm('ATTENTION VOUS ALLEZ SUPPRIMER LA MISSION') === true) {
+                document.getElementById('Delete').checked = true;
+            } else {
+                document.getElementById('Delete').checked = false;
+            }
+        }
+
+        (function initialiseCountryPicker() {
+            const inputField = document.getElementById('pays_list');
+            const dropdown = document.querySelector('#country-picker .value-list');
+            if (!inputField || !dropdown || inputField.disabled) {
+                return;
+            }
+
+            const dropdownArray = [...dropdown.querySelectorAll('li')];
+            const valueArray = dropdownArray.map((item) => item.textContent);
+
+            inputField.addEventListener('input', () => {
+                dropdown.classList.add('open');
+                const inputValue = inputField.value.toLowerCase();
+                dropdownArray.forEach((item, index) => {
+                    item.classList.toggle('closed', inputValue.length > 0 && !valueArray[index].toLowerCase().includes(inputValue));
+                });
+            });
+
+            dropdownArray.forEach((item) => {
+                item.addEventListener('click', () => {
+                    inputField.value = item.textContent;
+                    dropdownArray.forEach((entry) => entry.classList.add('closed'));
+                });
+            });
+
+            inputField.addEventListener('focus', () => {
+                inputField.placeholder = 'Recherche';
+                dropdown.classList.add('open');
+                dropdownArray.forEach((entry) => entry.classList.remove('closed'));
+            });
+
+            inputField.addEventListener('blur', () => {
+                inputField.placeholder = 'Choisir un pays';
+                dropdown.classList.remove('open');
+            });
+
+            document.addEventListener('click', (event) => {
+                const isDropdown = dropdown.contains(event.target);
+                const isInput = inputField.contains(event.target);
+                if (!isDropdown && !isInput) {
+                    dropdown.classList.remove('open');
+                }
+            });
+        })();
+
+        (function initialiseLocationAutocomplete() {
+            if (isReadOnlyMission) {
+                return;
+            }
+
+            const input1 = document.getElementById('code');
+            const input2 = document.getElementById('ville');
+            const monSelector = document.getElementById('ville_section');
+            let timeoutId;
+
+            function toggleVisibility() {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => {
+                    if (document.activeElement === input1 || document.activeElement === input2) {
+                        monSelector.style.visibility = 'visible';
+                    } else {
+                        monSelector.style.visibility = 'hidden';
+                    }
+                }, 100);
+            }
+
+            input1.addEventListener('focus', toggleVisibility);
+            input2.addEventListener('focus', toggleVisibility);
+            input1.addEventListener('blur', toggleVisibility);
+            input2.addEventListener('blur', toggleVisibility);
+        })();
+
+        function updateMissionLocationMode(clearCode) {
+            const isForeignMission = document.getElementById('Autre').checked;
+            const countryField = document.getElementById('pays_list');
+            const codeField = document.getElementById('code');
+
+            document.getElementById('location-fields').classList.toggle('mission--foreign', isForeignMission);
+            countryField.required = isForeignMission && !isReadOnlyMission;
+            countryField.disabled = isReadOnlyMission;
+            codeField.disabled = isForeignMission;
+            codeField.readOnly = isReadOnlyMission || isForeignMission;
+            if (isForeignMission && clearCode) {
+                codeField.value = '';
+            }
+        }
+
+        document.getElementById('Autre').addEventListener('change', () => updateMissionLocationMode(true));
+        document.getElementById('France').addEventListener('change', () => updateMissionLocationMode(false));
+        updateMissionLocationMode(false);
+
+        const missionDatePicker = window.setupMissionDateTimePicker({
+            overlayId: 'mission-datetime-overlay',
+            dialogId: 'mission-datetime-dialog',
+            titleId: 'mission-datetime-title',
+            summaryId: 'mission-datetime-summary',
+            weekdaysId: 'mission-calendar-weekdays',
+            monthSelectId: 'mission-picker-month',
+            yearSelectId: 'mission-picker-year',
+            gridId: 'mission-calendar-grid',
+            hourSelectId: 'mission-picker-hour',
+            minuteSelectId: 'mission-picker-minute',
+            previousButtonId: 'mission-picker-prev',
+            nextButtonId: 'mission-picker-next',
+            cancelButtonId: 'mission-datetime-cancel',
+            dismissButtonId: 'mission-datetime-dismiss',
+            applyButtonId: 'mission-datetime-apply',
+            startKey: 'start',
+            returnKey: 'return',
+            readOnly: isReadOnlyMission,
+            startMinDate: () => {
+                {% if ADMIN %}
+                return new Date(2000, 0, 1);
+                {% else %}
+                const value = new Date();
+                value.setHours(0, 0, 0, 0);
+                value.setDate(value.getDate() + 14);
+                return value;
+                {% endif %}
+            },
+            maxDate: () => new Date(new Date().getFullYear() + 1, 11, 31),
+            fields: {
+                start: {
+                    title: 'Depart',
+                    placeholder: 'Selectionner date et heure',
+                    triggerId: 'datetime-trigger-start',
+                    displayId: 'datetime-display-start',
+                    dateInputId: 'date-fr-start',
+                    timeInputId: 'time-fr-start'
+                },
+                return: {
+                    title: 'Retour',
+                    placeholder: 'Selectionner date et heure',
+                    triggerId: 'datetime-trigger-return',
+                    displayId: 'datetime-display-return',
+                    dateInputId: 'date-fr-return',
+                    timeInputId: 'time-fr-return'
+                }
+            }
+        });
+
+        (function initialiseHotelToggle() {
+            const hotelCheckbox = $('#booking-3');
+            const hotelHidden = document.getElementById('booking-3_H');
+
+            function syncHotelState() {
+                if (hotelCheckbox.is(':checked')) {
+                    hotelHidden.disabled = true;
+                    $('.hotel_info').hide();
+                } else {
+                    hotelHidden.disabled = false;
+                    $('.hotel_info').show();
+                }
+            }
+
+            hotelCheckbox.change(syncHotelState);
+            syncHotelState();
+        })();
+
+        Quill.register('modules/resize', window.QuillResizeModule);
+        const initialQuillHtml = {{ mission_values.QUILL|tojson }};
+        const toolbarOptions = [
+            ['bold', 'italic', 'underline', 'strike'],
+            ['blockquote', 'code-block'],
+            ['link', 'image', 'video', 'formula'],
+            [{ 'header': 1 }, { 'header': 2 }],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'list': 'check' }],
+            [{ 'script': 'sub' }, { 'script': 'super' }],
+            [{ 'indent': '-1' }, { 'indent': '+1' }],
+            [{ 'direction': 'rtl' }],
+            [{ 'size': ['small', false, 'large', 'huge'] }],
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            [{ 'color': [] }, { 'background': [] }],
+            [{ 'font': [] }],
+            [{ 'align': [] }],
+            ['clean']
+        ];
         const quill = new Quill('#editor', {
             theme: 'snow',
             modules: {
-                toolbar: toolbarOptions,
+                toolbar: isReadOnlyMission ? false : toolbarOptions,
                 resize: {
                     locale: {},
                 }
             }
+        });
+        const playground = document.getElementById('playground');
+        quill.root.innerHTML = initialQuillHtml || '';
+        playground.value = initialQuillHtml || '';
+        if (isReadOnlyMission) {
+            quill.disable();
+        } else {
+            quill.on(Quill.events.TEXT_CHANGE, updateEditorValue);
+            updateEditorValue();
+        }
+
+        function updateEditorValue() {
+            playground.value = document.getElementById('editor').innerHTML;
+        }
+
+        const goBackButton = document.getElementById('go-back');
+        if (goBackButton) {
+            goBackButton.addEventListener('click', () => {
+                history.back();
             });
-            quill.on(Quill.events.TEXT_CHANGE, update);
-            const playground = document.getElementById("playground");
-            update();
+        }
 
-            function formatDelta(delta) {
-            return `<div>${JSON.stringify(delta.ops, null, 2)}</div>`;
+        function submitMissionForm() {
+            const dateFields = ['date-fr-start', 'time-fr-start', 'date-fr-return', 'time-fr-return'];
+            const isDateTimeComplete = dateFields.every((id) => document.getElementById(id).value !== '');
+            if (!isDateTimeComplete) {
+                window.alert("Selectionne les dates et heures de depart et de retour");
+                return;
             }
 
-            function update(delta) {
-            const contents = quill.getContents();
-            let html = document.getElementById("editor").innerHTML;
-            playground.value = html;
+            if (document.theForm.checkValidity()) {
+                document.theForm.submit();
+            } else {
+                window.alert("Le formulaire n'est pas complet");
             }
-            </script>
-        
-    </div>
-    
-    <div style="display: flex;
-                margin-left: auto;
-                margin-right: auto;
-                justify-content: center;
-                align-items: center;"
-                >
-        <input type="button" class="checkbox-budget" id="Valid" onclick="placeOrder()" style="visibility: hidden;" checked>
-        <label class="pays" for="Valid" style="width: 50%;">
-            <span data-hover="Envoyer la demande">Envoyer la demande</span>
-        </label> 
-        <script>
-            function placeOrder() {
-                //console.log(document.body.innerHTML)
-                if( document.theForm.checkValidity()){
-                    document.theForm.submit();
-                }
-                else{
-                    window.alert("Le formulaire n'est pas complet");
-                }
-                
+        }
+
+        function V_UB() {
+            if (isReadOnlyMission) {
+                return;
             }
-            function V_UB(){
-                let popupAlreadyShowed = false
-                if( ! popupAlreadyShowed ) {
-                    document.getElementById('popup').style.display = 'block'
-                }
-                
-                document.getElementById('popup-fermeture').addEventListener('click', function(e) {
-                document.getElementById('popup').style.display = 'none'
-                })
-            }
-        </script>
-        
-    </div>
+            document.getElementById('popup').style.display = 'block';
+
+            document.getElementById('popup-fermeture').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('popup').style.display = 'none';
+            });
+        }
+    </script>
 </body>
 </html>

@@ -1,449 +1,199 @@
-
+<!DOCTYPE html>
 <html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/solid.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/thinline.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/radio_card2.css')}}">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="{{url_for('static', filename='ressources/bm_gradignan_geii_rvb.png')}}">
-    <title>List Mission</title>
+    <script>
+        (function() {
+            try {
+                const storedTheme = window.localStorage.getItem('mission-theme');
+                const theme = storedTheme === 'light' || storedTheme === 'dark'
+                    ? storedTheme
+                    : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (error) {}
+        })();
+    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='ressources/bm_gradignan_geii_rvb.png') }}">
+    <title>Registre des missions</title>
 </head>
-<body class="view">
-    <input class="checkbox" type="checkbox" name="general" id="general">
-                <label class="for-checkbox" for="general"></label>
-                <div class="FABMenu">
-                    <input type="checkbox" autocomplete="off"/>
-                    <div class="hamburger">
-                      <div class="dots">
-                        <span class="first"></span>
-                        <span class="second"></span>
-                        <span class="third"></span>
-                      </div>
-                    </div>
-                    <div class="action_items_bar">
-                      <div class="action_items">
-                        <a class="first_item" href="http://geii.iut.u-bordeaux.fr/mission">
-                          <i class="material-icons">
-                          home
-                          </i>
-                        </a>
-                        <a class="second_item" id="go-back">
-                            <script>
-                                document.getElementById("go-back").addEventListener("click", () => {
-                                    history.back();
-                                  });
-                            </script>
-                          <i class="material-icons">
-                            keyboard_double_arrow_left
-                          </i>
-                        </a>
-                        <a class="third_item">
-                            <i class="material-icons">
-                                admin_panel_settings
-                            </i>
-                        </a>
-                        <a class="fourth_item" id="go-reload">
-                            <script>
-                                document.getElementById("go-reload").addEventListener("click", () => {
-                                    window.location.reload()
-                                  });
-                            </script>
-                            <i class="material-icons">
-                                refresh
-                            </i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+<body class="page-list">
     <div class="background-color"></div>
-    <ul class="view" id="list_view">
-        {% if ADMIN %}
-            <li class="view" id="title"><div style="width: 99%; background: none;display: flex;align-items: center;margin: 7.5px;">
-                <div class="view" id="id_mission">ID Mission</div>
-                <div class="view" id="nom_mission">NOM Mission
-                    <div class="listsearch" style="height: 40px;">
-                        <input class="chosen-value" id="selected_mission_choose" type="text" value="" placeholder="NOM_MISSION" autocomplete="off" style="height: 2.5rem;">
-                    </div>
-                </div> 
-                <div class="view" id="id_user">Demandeur
-                    <div class="listsearch" style="height: 40px;">
-                        <input class="chosen-value" id="selected_user_choose" type="text" value="" placeholder="NOM" autocomplete="off" style="height: 2.5rem;">
-                        <ul class="value-list" id="selected_user_list" style="margin-top: 40px;">
-                            {% for user in All_User %}
-                                <li michel="NAME" value="{{user}}">{{user}}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <script>
-                        const inputField = document.querySelector('#selected_user_choose');
-                        const dropdown = document.querySelector('#selected_user_list');
-                        const dropdownArray = [... document.querySelectorAll('[michel*="NAME"]')];
-                        console.log(typeof dropdownArray)
-                        let valueArray = [];
-                        dropdownArray.forEach(item => {
-                          valueArray.push(item.textContent);
-                        });
-                        
-                        const closeDropdown = () => {
-                          dropdown.classList.remove('open');
-                        }
-                        
-                        inputField.addEventListener('input', () => {
-                          dropdown.classList.add('open');
-                          let inputValue = inputField.value.toLowerCase();
-                          let valueSubstring;
-                          if (inputValue.length > 0) {
-                            for (let j = 0; j < valueArray.length; j++) {
-                                console.log(valueArray[j].toLowerCase().includes(inputValue))
-                              if (!(valueArray[j].toLowerCase().includes(inputValue))) {
-                                dropdownArray[j].classList.add('closed');
-                              } else {
-                                dropdownArray[j].classList.remove('closed');
-                              }
-                            }
-                          } else {
-                            for (let i = 0; i < dropdownArray.length; i++) {
-                              dropdownArray[i].classList.remove('closed');
-                            }
-                          }
-                        });
-                        
-                        dropdownArray.forEach(item => {
-                          item.addEventListener('click', (evt) => {
-                            inputField.value = item.textContent;
-                            dropdownArray.forEach(dropdown => {
-                              dropdown.classList.add('closed');
-                              const selector = document.getElementById("selected_user_choose")
-                              selector.dispatchEvent(new Event("change"));
-                            });
-                          });
-                        })
-                        
-                        inputField.addEventListener('focus', () => {
-                           inputField.placeholder = 'Recherche';
-                           dropdown.classList.add('open');
-                           dropdownArray.forEach(dropdown => {
-                             dropdown.classList.remove('closed');
-                           });
-                        });
-                        
-                        inputField.addEventListener('blur', () => {
-                           inputField.placeholder = 'Utilisateur';
-                          dropdown.classList.remove('open');
-                        });
-                        
-                        document.addEventListener('click', (evt) => {
-                          const isDropdown = dropdown.contains(evt.target);
-                          const isInput = inputField.contains(evt.target);
-                          if (!isDropdown && !isInput) {
-                            dropdown.classList.remove('open');
-                            const selector = document.getElementById("selected_user_choose")
-                            selector.dispatchEvent(new Event("change"));
-                          }
-                        });
-                    </script> 
-                </div>
-                <div class="view" id="date">Date
-                    <div class="listsearch" style="height: 40px;">
-                        <input class="chosen-value" id="selected_mois_choose" type="text" value="" placeholder="Mois" autocomplete="off" style="font-size:0.9rem;height: 2.5rem;width: 50%;">
-                        <ul class="value-list" id="selected_mois_list" style="margin-top: 40px;width: 50%;">
-                            <li michel="MOIS" value="Janvier">Janvier</li>
-                            <li michel="MOIS" value="Février">Février</li>
-                            <li michel="MOIS" value="Mars">Mars</li>
-                            <li michel="MOIS" value="Avril">Avril</li>
-                            <li michel="MOIS" value="Mai">Mai</li>
-                            <li michel="MOIS" value="Juin">Juin</li>
-                            <li michel="MOIS" value="Juillet">Juillet</li>
-                            <li michel="MOIS" value="Août">Août</li>
-                            <li michel="MOIS" value="Septembre">Septembre</li>
-                            <li michel="MOIS" value="Octobre">Octobre</li>
-                            <li michel="MOIS" value="Novembre">Novembre</li>
-                            <li michel="MOIS" value="Décembre">Décembre</li>
-                        </ul>
-                        <script>
-                            const inputField2 = document.querySelector('#selected_mois_choose');
-                            const dropdown2 = document.querySelector('#selected_mois_list');
-                            const dropdownArray2 = [... document.querySelectorAll('[michel*="MOIS"]')];
-                            //console.log(typeof dropdownArray2)
-                            let valueArray2 = [];
-                            dropdownArray2.forEach(item => {
-                              valueArray2.push(item.textContent);
-                            });
-                            
-                            const closeDropdown2 = () => {
-                              dropdown2.classList.remove('open');
-                            }
-                            
-                            inputField2.addEventListener('input', () => {
-                              dropdown2.classList.add('open');
-                              let inputValue = inputField2.value.toLowerCase();
-                              let valueSubstring;
-                              if (inputValue.length > 0) {
-                                for (let j = 0; j < valueArray2.length; j++) {
-                                    /*console.log(valueArray2[j].toLowerCase().includes(inputValue))*/
-                                  if (!(valueArray2[j].toLowerCase().includes(inputValue))) {
-                                    dropdownArray2[j].classList.add('closed');
-                                  } else {
-                                    dropdownArray2[j].classList.remove('closed');
-                                  }
-                                }
-                              } else {
-                                for (let i = 0; i < dropdownArray2.length; i++) {
-                                  dropdownArray2[i].classList.remove('closed');
-                                }
-                              }
-                            });
-                            
-                            dropdownArray2.forEach(item => {
-                              item.addEventListener('click', (evt) => {
-                                inputField2.value = item.textContent;
-                                dropdownArray2.forEach(dropdown2 => {
-                                  dropdown2.classList.add('closed');
-                                  const selector2 = document.getElementById("selected_mois_choose")
-                                  selector2.dispatchEvent(new Event("change"));
-                                  /*console.log('Event click bobo')*/
-                                });
-                              });
-                            })
-                            
-                            inputField2.addEventListener('focus', () => {
-                               inputField2.placeholder = 'Recherche';
-                               dropdown2.classList.add('open');
-                               dropdownArray2.forEach(dropdown2 => {
-                                 dropdown2.classList.remove('closed');
-                               });
-                            });
-                            
-                            inputField2.addEventListener('blur', () => {
-                               inputField2.placeholder = 'Mois';
-                              dropdown2.classList.remove('open');
-                            });
-                            
-                            document.addEventListener('click', (evt) => {
-                              const isDropdown2 = dropdown2.contains(evt.target);
-                              const isInput2 = inputField2.contains(evt.target);
-                              if (!isDropdown2 && !isInput2) {
-                                dropdown2.classList.remove('open');
-                                const selector2 = document.getElementById("selected_mois_choose")
-                                selector2.dispatchEvent(new Event("change"));
-                              }
-                            });
-                        </script> 
 
-                        <input class="chosen-value" id="selected_annee_choose" type="text" value="" placeholder="Annee" autocomplete="off" style="font-size:0.9rem;left:50%;height: 2.5rem;width: 50%;">
-                        <ul class="value-list" id="selected_annee_list" style="left:50%;margin-top: 40px;width: 50%;">
-                            <li michel="ANNEE" value="2024">2024</li>
-                            <li michel="ANNEE" value="2025">2025</li>
-                        </ul>
-                        <script>
-                          const inputField3 = document.querySelector('#selected_annee_choose');
-                          const dropdown3 = document.querySelector('#selected_annee_list');
-                          const dropdownArray3 = [... document.querySelectorAll('[michel*="ANNEE"]')];
-                          //console.log(typeof dropdownArray3)
-                          let valueArray3 = [];
-                          dropdownArray3.forEach(item => {
-                            valueArray3.push(item.textContent);
-                          });
-                          
-                          const closeDropdown3 = () => {
-                            dropdown3.classList.remove('open');
-                          }
-                          
-                          inputField3.addEventListener('input', () => {
-                            dropdown3.classList.add('open');
-                            let inputValue = inputField3.value.toLowerCase();
-                            let valueSubstring;
-                            if (inputValue.length > 0) {
-                              for (let j = 0; j < valueArray3.length; j++) {
-                                  /*console.log(valueArray3[j].toLowerCase().includes(inputValue))*/
-                                if (!(valueArray3[j].toLowerCase().includes(inputValue))) {
-                                  dropdownArray3[j].classList.add('closed');
-                                } else {
-                                  dropdownArray3[j].classList.remove('closed');
-                                }
-                              }
-                            } else {
-                              for (let i = 0; i < dropdownArray3.length; i++) {
-                                dropdownArray3[i].classList.remove('closed');
-                              }
-                            }
-                          });
-                          
-                          dropdownArray3.forEach(item => {
-                            item.addEventListener('click', (evt) => {
-                              inputField3.value = item.textContent;
-                              dropdownArray3.forEach(dropdown3 => {
-                                dropdown3.classList.add('closed');
-                                const selector3 = document.getElementById("selected_annee_choose")
-                                selector3.dispatchEvent(new Event("change"));
-                                /*console.log('Event click bobo')*/
-                              });
-                            });
-                          })
-                          
-                          inputField3.addEventListener('focus', () => {
-                             inputField3.placeholder = 'Recherche';
-                             dropdown3.classList.add('open');
-                             dropdownArray3.forEach(dropdown3 => {
-                               dropdown3.classList.remove('closed');
-                             });
-                          });
-                          
-                          inputField3.addEventListener('blur', () => {
-                             inputField3.placeholder = 'Année';
-                            dropdown3.classList.remove('open');
-                          });
-                          
-                          document.addEventListener('click', (evt) => {
-                            const isDropdown3 = dropdown3.contains(evt.target);
-                            const isInput3 = inputField3.contains(evt.target);
-                            if (!isDropdown3 && !isInput3) {
-                              dropdown3.classList.remove('open');
-                              const selector3 = document.getElementById("selected_annee_choose")
-                              selector3.dispatchEvent(new Event("change"));
-                            }
-                          });
-                        </script> 
-                    </div>
-                </div> 
-                <div class="view" id="status">Status
-                    <div class="listsearch" style="height: 37px; border: 2px solid var(--light);background-image: linear-gradient(138deg, var(--red), var(--yellow)); border-radius:0.75rem">
-                      <fieldset style="border:none;display:flex; justify-content:space-between">
-                          <input onclick="update_checkbox()" type="checkbox" value="0" name="0" id="selected_annee_choose_0" style="display:none;" autocomplete="off">
-                            <label for="selected_annee_choose_0"><i class="material-icons" style="color: #88665D;"></i></label>
-                          <input onclick="update_checkbox()" type="checkbox" value="1" name="1" id="selected_annee_choose_1" style="display:none;" autocomplete="off">
-                            <label for="selected_annee_choose_1"><i class="material-icons" style="color: #1B263B;"></i></label>
-                          <input onclick="update_checkbox()" type="checkbox" value="2" name="2" id="selected_annee_choose_2" style="display:none;" autocomplete="off">
-                            <label for="selected_annee_choose_2"><i class="material-icons" style="color: #4B644A;"></i></label>
-                          <input onclick="update_checkbox()" type="checkbox" value="" name="3" id="selected_annee_choose_3" style="display:none;" autocomplete="off" checked>
-                            <label for="selected_annee_choose_3"><i class="material-icons" style="color: #B88D00;"></i></label>
-                      </fieldset>
-                      
+    {% set nav_context = 'Registre' %}
+    {% set nav_active = 'view' %}
+    {% set nav_show_back = true %}
+    {% include '_app_header.html' %}
 
-                    </div>
-                </div>
-                </div>
-            </li>
-        {% else %}
-            <li class="view" id="title"><div style="width: 99%; background: none;display: flex;align-items: center;margin: 7.5px;color:transparent"><div class="view" id="id_mission">ID Mission</div> <div class="view" id="id_user">Demandeur</div> <div class="view" id="date">Date</div> <div class="view" id="status">Status</div></div></li>
-        {% endif %}
-        {% set list = ["Ouvert","En cours de traitement","Validé","Cloturé"] %}.
-        {% set color = ["#88665D","#1B263B","#4B644A","#B88D00"] %}.
-        {% for mission in Missions %}
-            <a href="http://geii.iut.u-bordeaux.fr/mission/view_mission/{{mission[0]}}" style="text-decoration:none;">
-            <li class="view" id="view_mission" user="{{mission[2]}}" nom_mission="{{mission[3]}}" mois="" annee="" status="{{mission[5]}}">
-                <div class="view" id="background" style="background-color: {{color[mission[5]]}}; ">
-                    <div class="view" id="id_mission">{{mission[0]}}</div> 
-                    <div class="view" id="nom_mission">{{mission[3]}}</div> 
-                    <div class="view" id="id_user">{{mission[2]}}</div> 
-                    <div class="view" id="date" date="{{mission[4]}}"></div>
-                    <div class="view" id="status">{{list[mission[5]]}}</div>
-                </div>
-            </li>
-            </a>
-        {% endfor %}
-    </ul>
-</body>
-<script>
-    function Dated(){
-        Nodelist = document.querySelectorAll('[id*="view_mission"]')
-        let mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-        for (i in Nodelist){
-            let node = Nodelist[i];
-            //console.log(node);
-            let nodedate = node.querySelectorAll('[id*="date"]');
-            //console.log(nodedate[0].getAttribute("date"));
-            let date = new Date(parseInt(nodedate[0].getAttribute("date")));
-            node.setAttribute('mois',mois[date.getMonth()])
-            let bob = String((1900+date.getYear()))//.replace('20',"")
-            node.setAttribute("annee",bob)
-            nodedate[0].innerHTML = date.getDate()+" "+ mois[date.getMonth()]+" "+(1900+date.getYear());
-        }
-    }
-    Dated()
-</script>
-<script>
-    let selector_user = document.getElementById("selected_user_choose")
-    selector_user.addEventListener("change",update_filter)
-    let selector_mois = document.getElementById("selected_mois_choose")
-    selector_mois.addEventListener("change",update_filter)
-    let selector_mission = document.getElementById("selected_mission_choose")
-    selector_mission.addEventListener("change",update_filter)
-    let selector_annee_0 = document.getElementById("selected_annee_choose_0")
-    selector_annee_0.addEventListener("change",update_filter)
-    let selector_annee_1 = document.getElementById("selected_annee_choose_1")
-    selector_annee_1.addEventListener("change",update_filter)
-    let selector_annee_2 = document.getElementById("selected_annee_choose_2")
-    selector_annee_2.addEventListener("change",update_filter)
-    let selector_annee_3 = document.getElementById("selected_annee_choose_3")
-    selector_annee_3.addEventListener("change",update_filter)
-    let selector_annee = document.getElementById("selected_annee_choose")
-    selector_annee.addEventListener("change",update_filter)
+    <main class="page-shell">
+        <section class="register-panel app-panel">
+            <div class="section-intro register-intro">
+                <h2 class="register-title">Registre des missions</h2>
+            </div>
 
-    function update_filter(){
-        Nodelist = document.querySelectorAll('[id*="view_mission"]')
-        for (i in Nodelist){
-            let node = Nodelist[i]
-            console.log(node)
-            values =    new Array(selector_user.value,           selector_mois.value,        selector_mission.value.toLowerCase(),             selector_annee.value,         [selector_annee_0.value,selector_annee_1.value,selector_annee_2.value,selector_annee_3.value])
-            attribute = new Array(node.getAttribute("user"),     node.getAttribute("mois"),  node.getAttribute("nom_mission").toLowerCase(),   node.getAttribute("annee"),   node.getAttribute("status"))
-            
-            let filtre = false
-            console.log(values);
-            console.log(attribute);
-            
-            for(value in values){
-              let val = values[value]
-              let att = attribute[value]
-              /*console.log("VALLL:", val);*/
-              console.log(val+ " || " + (att.includes(val)) + " || " + att);
-              if(val === ""){
-                console.log("Rien");
-              } else if(att.includes(val) || val.includes(att)){
-                if(node.style.display === "flex" || !filtre){
-                  console.log("Filtré");
-                  node.style.display = 'flex'; 
-                  filtre = true;
-                }else{
-                  console.log("DEJA Filtré");
-                  node.style.display = 'none'; 
+            <div class="register-filters{% if ADMIN %} is-admin{% endif %}">
+                <label class="register-filter register-filter--search" for="filter-search">
+                    <span>Recherche</span>
+                    <input class="register-filter-control" id="filter-search" type="text" placeholder="ID, mission ou demandeur" autocomplete="off">
+                </label>
+                <label class="register-filter" for="filter-month">
+                    <span>Mois</span>
+                    <select class="register-filter-control" id="filter-month">
+                        <option value="">Tous</option>
+                        <option value="1">Janvier</option>
+                        <option value="2">Fevrier</option>
+                        <option value="3">Mars</option>
+                        <option value="4">Avril</option>
+                        <option value="5">Mai</option>
+                        <option value="6">Juin</option>
+                        <option value="7">Juillet</option>
+                        <option value="8">Aout</option>
+                        <option value="9">Septembre</option>
+                        <option value="10">Octobre</option>
+                        <option value="11">Novembre</option>
+                        <option value="12">Decembre</option>
+                    </select>
+                </label>
+                <label class="register-filter" for="filter-year">
+                    <span>Annee</span>
+                    <select class="register-filter-control" id="filter-year">
+                        <option value="">Toutes</option>
+                    </select>
+                </label>
+                <label class="register-filter" for="filter-status">
+                    <span>Statut</span>
+                    <select class="register-filter-control" id="filter-status">
+                        <option value="">Tous</option>
+                        <option value="0">Ouvert</option>
+                        <option value="1">En cours de traitement</option>
+                        <option value="2">Valide</option>
+                        <option value="3">Cloture</option>
+                    </select>
+                </label>
+                <button class="register-reset" id="filter-reset" type="button">Reinitialiser</button>
+            </div>
+
+            <ul class="view" id="list_view">
+                <li class="view" id="title">
+                    <div>
+                        <div class="view" id="id_mission">ID mission</div>
+                        <div class="view" id="nom_mission">Nom mission</div>
+                        <div class="view" id="id_user">Demandeur</div>
+                        <div class="view" id="date">Date</div>
+                        <div class="view" id="status">Statut</div>
+                    </div>
+                </li>
+
+                {% set list = ["Ouvert", "En cours de traitement", "Valide", "Cloture"] %}
+                {% set color = ["#88665D", "#1B263B", "#4B644A", "#B88D00"] %}
+                {% for mission in Missions %}
+                    <li class="view register-row" id="view_mission" data-id="{{ mission[0] }}" data-mission="{{ mission[3] }}" data-user="{{ mission[2] }}" data-date="{{ mission[4] }}" data-month="" data-year="" data-status="{{ mission[5] }}">
+                        <a class="register-row-link" href="{{ url_for('show_mission', id_mission=mission[0]) }}">
+                            <div class="view" id="background" style="--status-color: {{ color[mission[5]] }};">
+                                <div class="view" id="id_mission" data-label="ID mission">{{ mission[0] }}</div>
+                                <div class="view" id="nom_mission" data-label="Mission">{{ mission[3] }}</div>
+                                <div class="view" id="id_user" data-label="Demandeur">{{ mission[2] }}</div>
+                                <div class="view" id="date" data-label="Date" date="{{ mission[4] }}"></div>
+                                <div class="view" id="status" data-label="Statut">{{ list[mission[5]] }}</div>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <p class="register-empty" id="register-empty" hidden>Aucune mission ne correspond aux filtres.</p>
+        </section>
+    </main>
+    <script>
+        document.getElementById('go-back').addEventListener('click', () => {
+            history.back();
+        });
+    </script>
+    <script>
+        const REGISTER_MONTHS = ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'];
+        const registerRows = Array.from(document.querySelectorAll('.register-row'));
+        const searchInput = document.getElementById('filter-search');
+        const monthSelect = document.getElementById('filter-month');
+        const yearSelect = document.getElementById('filter-year');
+        const statusSelect = document.getElementById('filter-status');
+        const resetButton = document.getElementById('filter-reset');
+        const emptyState = document.getElementById('register-empty');
+
+        function hydrateRegisterRows() {
+            const years = new Set();
+
+            registerRows.forEach((row) => {
+                const timestamp = Number(row.dataset.date);
+                const dateCell = row.querySelector('div#date');
+                const date = new Date(timestamp);
+                const month = date.getMonth() + 1;
+                const year = date.getFullYear();
+
+                row.dataset.month = String(month);
+                row.dataset.year = String(year);
+                row.dataset.search = `${row.dataset.id} ${row.dataset.mission} ${row.dataset.user}`.toLowerCase();
+                years.add(String(year));
+
+                if (dateCell && !Number.isNaN(date.getTime())) {
+                    dateCell.textContent = `${date.getDate()} ${REGISTER_MONTHS[date.getMonth()]} ${year}`;
                 }
-              } else{
-                node.style.display = "none";
-                console.log("Masquée");
-                filtre = true;
-              }
-              
-            }
-            /*console.log(filtre)*/
-            if(!filtre){
-              /*console.log(values); */
-              node.style.display = 'flex';
-              /*console.log("Aucun filtre");*/
-            }
-            /*console.log("next");*/
+            });
+
+            Array.from(years)
+                .sort((left, right) => Number(right) - Number(left))
+                .forEach((year) => {
+                    const option = document.createElement('option');
+                    option.value = year;
+                    option.textContent = year;
+                    yearSelect.appendChild(option);
+                });
         }
-    }
-    function update_checkbox(){
-      let vis = new Array(document.getElementById("selected_annee_choose_0"),
-      document.getElementById("selected_annee_choose_1"),
-      document.getElementById("selected_annee_choose_2"),
-      document.getElementById("selected_annee_choose_3"))
-      for(v in vis){
-        if (vis[v].checked){
-          vis[v].value = ""
-        }else{
-          vis[v].value = vis[v].name
+
+        function applyRegisterFilters() {
+            const search = searchInput.value.trim().toLowerCase();
+            const month = monthSelect.value;
+            const year = yearSelect.value;
+            const status = statusSelect.value;
+            let visibleCount = 0;
+
+            registerRows.forEach((row) => {
+                const matchesSearch = !search || row.dataset.search.includes(search);
+                const matchesMonth = !month || row.dataset.month === month;
+                const matchesYear = !year || row.dataset.year === year;
+                const matchesStatus = !status || row.dataset.status === status;
+                const visible = matchesSearch && matchesMonth && matchesYear && matchesStatus;
+                row.hidden = !visible;
+                row.style.display = visible ? '' : 'none';
+
+                if (visible) {
+                    visibleCount += 1;
+                }
+            });
+
+            emptyState.hidden = visibleCount !== 0;
         }
-      }
-      
-    }
-    update_filter()
-</script>
+
+        function resetRegisterFilters() {
+            searchInput.value = '';
+            monthSelect.value = '';
+            yearSelect.value = '';
+            statusSelect.value = '';
+            applyRegisterFilters();
+        }
+
+        hydrateRegisterRows();
+        applyRegisterFilters();
+
+        searchInput.addEventListener('input', applyRegisterFilters);
+        monthSelect.addEventListener('change', applyRegisterFilters);
+        yearSelect.addEventListener('change', applyRegisterFilters);
+        statusSelect.addEventListener('change', applyRegisterFilters);
+        resetButton.addEventListener('click', resetRegisterFilters);
+    </script>
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+</body>
 </html>

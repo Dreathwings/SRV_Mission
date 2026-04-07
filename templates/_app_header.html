@@ -1,0 +1,35 @@
+<header class="app-header">
+    <div class="app-header-main">
+        <a class="brand-block" href="{{ url_for('index') }}">
+            <img class="brand-mark" src="{{ url_for('static', filename='ressources/bm_gradignan_geii_rvb.png') }}" alt="GEII">
+        </a>
+        <div class="brand-copy">
+            <h1 class="brand-title">Ordres de mission</h1>
+            <p class="brand-context{% if nav_active in ['detail', 'error'] %} is-current{% endif %}">{{ nav_context }}</p>
+        </div>
+    </div>
+    <div class="header-actions">
+        <a class="header-action{% if nav_active == 'home' %} is-active{% endif %}" href="{{ url_for('index') }}"{% if nav_active == 'home' %} aria-current="page"{% endif %}>
+            <span class="material-icons">home</span>
+            Accueil
+        </a>
+        <a class="header-action{% if nav_active == 'create' %} is-active{% endif %}" href="{{ url_for('ordre') }}"{% if nav_active == 'create' %} aria-current="page"{% endif %}>
+            <span class="material-icons">add_circle</span>
+            Nouvelle mission
+        </a>
+        <a class="header-action{% if nav_active == 'view' %} is-active{% endif %}" href="{{ url_for('view') }}"{% if nav_active == 'view' %} aria-current="page"{% endif %}>
+            <span class="material-icons">fact_check</span>
+            Registre
+        </a>
+        {% if nav_show_back %}
+        <button class="header-action" type="button" id="go-back">
+            <span class="material-icons">arrow_back</span>
+            Retour
+        </button>
+        {% endif %}
+        <button class="header-action theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+            <span class="material-icons" data-theme-icon>dark_mode</span>
+            <span data-theme-label>Mode sombre</span>
+        </button>
+    </div>
+</header>

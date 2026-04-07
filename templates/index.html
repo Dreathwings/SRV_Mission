@@ -1,43 +1,51 @@
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/radio_card2.css')}}">
-    
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/solid.css">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/thinline.css">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-
-    <link rel="icon" type="image/png" href="{{url_for('static', filename='ressources/bm_gradignan_geii_rvb.png')}}">
-    <title>Accueil</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script>
+        (function() {
+            try {
+                const storedTheme = window.localStorage.getItem('mission-theme');
+                const theme = storedTheme === 'light' || storedTheme === 'dark'
+                    ? storedTheme
+                    : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (error) {}
+        })();
+    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='ressources/bm_gradignan_geii_rvb.png') }}">
+    <title>Ordres de mission</title>
 </head>
-<body>
-    <input class="checkbox" type="checkbox" name="general" id="general">
-                <label class="for-checkbox" for="general"></label>
+<body class="page-home">
     <div class="background-color"></div>
-    <div class="body" id="body">
-      <div class="container_mission" style="width: 100%;margin-top: 25%;">
-            <div class="box_mission " style="visibility: visible;">
-              <div>
-                <input  class="checkbox-budget" type="radio" name="MISSION" id="Nouvelle demande mission" autocomplete="off" onclick="location.href = '/mission/create_mission';" checked>
-					    	<label style="width: 80%;" class="pays" for="Nouvelle demande mission">
-					    		<span data-hover="Nouvelle demande mission">Nouvelle demande mission</span>
-					    	</label> 
-              </div>
 
-              <div>
-                <input class="checkbox-budget" type="radio" name="alphga" id="Consulter les missions" autocomplete="off" checked onclick="location.href = '/mission/view_mission';">
-					    	<label style="width: 80%;" class="pays" for="Consulter les missions">
-					    		<span data-hover="Consulter les missions">Consulter les missions</span>
-					    	</label> 
-              </div>
-                
+    {% set nav_context = 'Accueil' %}
+    {% set nav_active = 'home' %}
+    {% set nav_show_back = false %}
+    {% include '_app_header.html' %}
+
+    <main class="page-shell">
+        <section class="home-panel">
+            <div class="home-actions">
+                <a class="home-action primary" href="{{ url_for('ordre') }}">
+                    <div>
+                        <h3 class="home-action-title">Nouvelle demande mission</h3>
+                    </div>
+                    <span class="material-icons">east</span>
+                </a>
+
+                <a class="home-action" href="{{ url_for('view') }}">
+                    <div>
+                        <h3 class="home-action-title">Consulter les missions</h3>
+                    </div>
+                    <span class="material-icons">visibility</span>
+                </a>
             </div>
-      </div> 
-    </div>
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
 </body>
 </html>
