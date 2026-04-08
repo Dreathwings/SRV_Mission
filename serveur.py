@@ -290,6 +290,7 @@ def get_session_user():
         return None
     return data
 
+@app.route("/mission", methods=['GET'])
 @app.route("/mission/", methods=['GET'])
 def index():
     if CAS:
@@ -299,6 +300,7 @@ def index():
 
 #################################
 
+@app.route("/mission/oauth")
 @app.route("/mission/oauth/")
 def oauth():
     service_url = public_url("/mission/oauth", request)
