@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script>
+        (function() {
+            try {
+                const storedTheme = window.localStorage.getItem('mission-theme');
+                const theme = storedTheme === 'light' || storedTheme === 'dark'
+                    ? storedTheme
+                    : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (error) {}
+        })();
+    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='ressources/bm_gradignan_geii_rvb.png') }}">
+    <title>Administration des missions</title>
+</head>
+<body class="page-admin">
+    <div class="background-color"></div>
+
+    {% set nav_context = 'Administration' %}
+    {% set nav_active = 'admin' %}
+    {% set nav_show_back = true %}
+    {% include '_app_header.html' %}
+
+    <main class="page-shell">
+        <section class="app-panel">
+            <div class="section-intro">
+                <p class="section-kicker">Administration</p>
+                <h2 class="section-title">Réglages des missions</h2>
+            </div>
+
+            {% if is_fake_admin %}
+            <div class="admin-feedback" role="status">
+                Mode développement: cette page affiche des données fictives pour l'administration et l'annuaire CAS.
+            </div>
+            {% endif %}
+
+            {% if admin_error %}
+            <div class="admin-feedback admin-feedback--error" role="alert">{{ admin_error }}</div>
+            {% endif %}
+
+            <div class="admin-grid">
+                <section class="admin-card">
+                    <div class="section-intro">
+                        <p class="section-kicker">Notifications</p>
+                        <h3 class="section-title">Destinataires email</h3>
+                    </div>
+
+                    {% if notification_error %}
+                    <div class="admin-feedback admin-feedback--error" role="alert">{{ notification_error }}</div>
+                    {% elif notification_success %}
+                    <div class="admin-feedback admin-feedback--success" role="status">{{ notification_success }}</div>
+                    {% endif %}
+
+                    <form class="admin-form" method="post" action="{{ url_for('admin_page') }}">
+                        <input type="hidden" name="FORM_ACTION" value="save_recipients">
+                        <div class="admin-recipient-list" id="admin-recipient-list">
+                            {% for recipient in notification_recipients %}
+                            <div class="admin-recipient-row" data-recipient-row>
+                                <input class="intext admin-recipient-email" type="email" name="recipient_email" value="{{ recipient.email }}" placeholder="nom@exemple.fr" autocomplete="off">
+                                <label class="admin-recipient-toggle" for="recipient-enabled-{{ loop.index }}">
+                                    <input class="admin-recipient-checkbox" id="recipient-enabled-{{ loop.index }}" type="checkbox" {% if recipient.enabled %}checked{% endif %} data-recipient-toggle>
+                                    <span>Actif</span>
+                                </label>
+                                <input type="hidden" name="recipient_enabled" value="{{ '1' if recipient.enabled else '0' }}" data-recipient-enabled>
+                                <button class="header-action admin-recipient-remove" type="button" data-remove-recipient>
+                                    <span class="material-icons">remove_circle</span>
+                                    Retirer
+                                </button>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="admin-recipient-actions">
+                            <button class="header-action" id="add-recipient" type="button">
+                                <span class="material-icons">add_circle</span>
+                                Ajouter un destinataire
+                            </button>
+                            <button class="header-action primary admin-submit" type="submit">
+                                <span class="material-icons">save</span>
+                                Enregistrer
+                            </button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="admin-card">
+                    <div class="section-intro">
+                        <p class="section-kicker">Autocloture</p>
+                        <h3 class="section-title">Fermer les missions dépassées</h3>
+                    </div>
+
+                    <form class="admin-form" method="post" action="{{ url_for('admin_page') }}">
+                        <input type="hidden" name="FORM_ACTION" value="run_autoclose">
+                        <button class="admin-plain-button" type="submit">
+                            Lancer l'autocloture
+                        </button>
+                    </form>
+
+                    {% if autoclose_summary %}
+                    <div class="admin-summary" aria-live="polite">
+                        <div class="admin-feedback admin-feedback--success" role="status">
+                            {{ autoclose_summary.closed_count }} mission(s) clôturée(s) le {{ autoclose_summary.run_at }}.
+                        </div>
+                        {% if autoclose_summary.missions %}
+                        <ul class="admin-summary-list">
+                            {% for mission in autoclose_summary.missions %}
+                            <li class="admin-summary-item">
+                                <strong>{{ mission.id }}</strong>
+                                <span>{{ mission.mission_name }}</span>
+                                <span class="admin-summary-meta">Retour prévu: {{ mission.return_at }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p class="section-copy">Aucune mission à clôturer pour cette exécution.</p>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </section>
+
+                <section class="admin-card admin-card--wide">
+                    <div class="section-intro">
+                        <p class="section-kicker">Autorisations</p>
+                        <h3 class="section-title">Annuaire CAS</h3>
+                    </div>
+
+                    {% if role_error %}
+                    <div class="admin-feedback admin-feedback--error" role="alert">{{ role_error }}</div>
+                    {% elif role_success %}
+                    <div class="admin-feedback admin-feedback--success" role="status">{{ role_success }}</div>
+                    {% endif %}
+
+                    <div class="admin-user-search-shell">
+                        <label class="admin-label" for="admin-user-search">Recherche</label>
+                        <input class="register-filter-control" id="admin-user-search" type="text" placeholder="Nom, login ou rôle" autocomplete="off">
+                    </div>
+
+                    <form class="admin-form" method="post" action="{{ url_for('admin_page') }}">
+                        <input type="hidden" name="FORM_ACTION" value="save_roles">
+                        <div class="admin-user-table-shell">
+                            <table class="admin-user-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Login</th>
+                                        <th>Autorisation</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-user-table-body">
+                                    {% for user in admin_users %}
+                                    <tr class="admin-user-row" data-search="{{ (user.name ~ ' ' ~ user.login ~ ' ' ~ user.role)|lower }}">
+                                        <td>{{ user.name }}</td>
+                                        <td>{{ user.login }}</td>
+                                        <td>
+                                            <select class="register-filter-control admin-role-select" name="role__{{ user.login }}">
+                                                {% for role in role_options %}
+                                                <option value="{{ role }}"{% if user.role == role %} selected{% endif %}>{{ role }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="register-empty" id="admin-user-empty" hidden>Aucun utilisateur ne correspond à la recherche.</p>
+                        <button class="header-action primary admin-submit" type="submit">
+                            <span class="material-icons">manage_accounts</span>
+                            Enregistrer les autorisations
+                        </button>
+                    </form>
+                </section>
+            </div>
+        </section>
+    </main>
+    <script>
+        const goBackButton = document.getElementById('go-back');
+        if (goBackButton) {
+            goBackButton.addEventListener('click', () => {
+                history.back();
+            });
+        }
+
+        const adminRecipientList = document.getElementById('admin-recipient-list');
+        const addRecipientButton = document.getElementById('add-recipient');
+
+        const syncRecipientRow = (row) => {
+            const toggle = row.querySelector('[data-recipient-toggle]');
+            const hiddenInput = row.querySelector('[data-recipient-enabled]');
+            const removeButton = row.querySelector('[data-remove-recipient]');
+            if (!toggle || !hiddenInput) {
+                return;
+            }
+
+            const updateValue = () => {
+                hiddenInput.value = toggle.checked ? '1' : '0';
+                row.classList.toggle('is-disabled', !toggle.checked);
+            };
+
+            updateValue();
+            toggle.addEventListener('change', updateValue);
+
+            if (removeButton) {
+                removeButton.addEventListener('click', () => {
+                    row.remove();
+                });
+            }
+        };
+
+        if (adminRecipientList) {
+            Array.from(adminRecipientList.querySelectorAll('[data-recipient-row]')).forEach(syncRecipientRow);
+        }
+
+        if (addRecipientButton && adminRecipientList) {
+            addRecipientButton.addEventListener('click', () => {
+                const row = document.createElement('div');
+                row.className = 'admin-recipient-row';
+                row.setAttribute('data-recipient-row', '');
+                row.innerHTML = `
+                    <input class="intext admin-recipient-email" type="email" name="recipient_email" value="" placeholder="nom@exemple.fr" autocomplete="off">
+                    <label class="admin-recipient-toggle">
+                        <input class="admin-recipient-checkbox" type="checkbox" checked data-recipient-toggle>
+                        <span>Actif</span>
+                    </label>
+                    <input type="hidden" name="recipient_enabled" value="1" data-recipient-enabled>
+                    <button class="header-action admin-recipient-remove" type="button" data-remove-recipient>
+                        <span class="material-icons">remove_circle</span>
+                        Retirer
+                    </button>
+                `;
+                adminRecipientList.appendChild(row);
+                syncRecipientRow(row);
+                const emailInput = row.querySelector('.admin-recipient-email');
+                if (emailInput) {
+                    emailInput.focus();
+                }
+            });
+        }
+
+        const adminUserSearch = document.getElementById('admin-user-search');
+        const adminUserRows = Array.from(document.querySelectorAll('.admin-user-row'));
+        const adminUserEmpty = document.getElementById('admin-user-empty');
+
+        if (adminUserSearch && adminUserRows.length > 0) {
+            const applyAdminUserFilter = () => {
+                const query = adminUserSearch.value.trim().toLowerCase();
+                let visibleCount = 0;
+
+                adminUserRows.forEach((row) => {
+                    const visible = !query || row.dataset.search.includes(query);
+                    row.hidden = !visible;
+                    row.style.display = visible ? '' : 'none';
+                    if (visible) {
+                        visibleCount += 1;
+                    }
+                });
+
+                adminUserEmpty.hidden = visibleCount !== 0;
+            };
+
+            applyAdminUserFilter();
+            adminUserSearch.addEventListener('input', applyAdminUserFilter);
+        }
+    </script>
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+</body>
+</html>

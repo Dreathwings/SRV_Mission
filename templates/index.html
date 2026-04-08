@@ -43,6 +43,15 @@
                     </div>
                     <span class="material-icons">visibility</span>
                 </a>
+
+                {% if is_admin %}
+                <a class="home-action" href="{{ url_for('admin_page') }}">
+                    <div>
+                        <h3 class="home-action-title">Administration</h3>
+                    </div>
+                    <span class="material-icons">admin_panel_settings</span>
+                </a>
+                {% endif %}
             </div>
         </section>
     </main>

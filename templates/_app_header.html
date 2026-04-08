@@ -21,6 +21,12 @@
             <span class="material-icons">fact_check</span>
             Registre
         </a>
+        {% if is_admin %}
+        <a class="header-action{% if nav_active == 'admin' %} is-active{% endif %}" href="{{ url_for('admin_page') }}"{% if nav_active == 'admin' %} aria-current="page"{% endif %}>
+            <span class="material-icons">admin_panel_settings</span>
+            Administration
+        </a>
+        {% endif %}
         {% if nav_show_back %}
         <button class="header-action" type="button" id="go-back">
             <span class="material-icons">arrow_back</span>
