@@ -81,6 +81,13 @@
         </section>
         {% endif %}
 
+        {% if validation_error %}
+        <section class="app-panel" role="alert" aria-live="polite">
+            <strong>Formulaire incomplet</strong>
+            <p class="sub_text">{{ validation_error }}</p>
+        </section>
+        {% endif %}
+
         <form method="post" action="{{ form_action }}" name="theForm" class="mission-form{% if is_readonly %} is-readonly{% endif %}">
             {% if is_detail and can_edit_mission %}
             <input type="hidden" name="FORM_ACTION" value="update_mission">
@@ -137,7 +144,7 @@
                             </label>
                             <div class="box_mission" id="AUTRE">
                                 <div class="listsearch" id="country-picker">
-                                    <input class="chosen-value" id="pays_list" type="text" value="{{ mission_values.pays }}" name="pays" placeholder="Choisir un pays" autocomplete="off"{% if is_readonly %} disabled{% endif %}>
+                                    <input class="chosen-value" id="pays_list" type="text" value="{{ mission_values.pays }}" name="pays" placeholder="Choisir un pays" autocomplete="off"{% if mission_values.MISSION == 'AUTRE' and not is_readonly %} required{% endif %}{% if is_readonly %} disabled{% endif %}>
                                     <ul class="value-list">
                                         {% include 'list_pays.html' %}
                                     </ul>
@@ -228,11 +235,11 @@
                 <section class="app-panel location-panel">
                     <strong id="title_part">Lieu de deplacement</strong>
                     <div class="location-main-row">
-                        <input class="intext" type="text" name="LIEU" id="lieu" placeholder="Lieu de la mission" autocomplete="off" value="{{ mission_values.LIEU }}"{% if is_readonly %} readonly{% endif %}>
+                        <input class="intext" type="text" name="LIEU" id="lieu" placeholder="Lieu de la mission" autocomplete="off" value="{{ mission_values.LIEU }}" required{% if is_readonly %} readonly{% endif %}>
                     </div>
                     <div class="mission location-grid" id="location-fields">
                         <div id="div_codeptl" class="location-field">
-                            <input class="Dest numeric intext" type="text" name="CODE_PTL" id="code" placeholder="Code postal" autocomplete="off" value="{{ mission_values.CODE_PTL }}"{% if is_readonly %} readonly{% endif %}>
+                            <input class="Dest numeric intext" type="text" name="CODE_PTL" id="code" placeholder="Code postal" autocomplete="off" value="{{ mission_values.CODE_PTL }}"{% if mission_values.MISSION != 'AUTRE' and not is_readonly %} required{% endif %}{% if is_readonly %} readonly{% endif %}>
                             <script>
                                 $('.numeric').on('input', function() {
                                     var inputValue = $(this).val();
@@ -245,7 +252,7 @@
                             </script>
                         </div>
                         <div id="div_ville" class="location-field">
-                            <input class="Dest intext" type="text" id="ville" name="VILLE" placeholder="Ville" autocomplete="off" value="{{ mission_values.VILLE }}"{% if is_readonly %} readonly{% endif %} onkeypress="return (event.charCode > 64 &&
+                            <input class="Dest intext" type="text" id="ville" name="VILLE" placeholder="Ville" autocomplete="off" value="{{ mission_values.VILLE }}" required{% if is_readonly %} readonly{% endif %} onkeypress="return (event.charCode > 64 &&
                                     event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 32">
                         </div>
                     </div>
@@ -479,11 +486,16 @@
         function updateMissionLocationMode(clearCode) {
             const isForeignMission = document.getElementById('Autre').checked;
             const countryField = document.getElementById('pays_list');
+            const locationField = document.getElementById('lieu');
             const codeField = document.getElementById('code');
+            const cityField = document.getElementById('ville');
 
             document.getElementById('location-fields').classList.toggle('mission--foreign', isForeignMission);
+            locationField.required = !isReadOnlyMission;
+            cityField.required = !isReadOnlyMission;
             countryField.required = isForeignMission && !isReadOnlyMission;
             countryField.disabled = isReadOnlyMission;
+            codeField.required = !isForeignMission && !isReadOnlyMission;
             codeField.disabled = isForeignMission;
             codeField.readOnly = isReadOnlyMission || isForeignMission;
             if (isForeignMission && clearCode) {

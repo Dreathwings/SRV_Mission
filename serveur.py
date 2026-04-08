@@ -236,6 +236,76 @@ def empty_mission_values():
     }
 
 
+def mission_values_from_form(form):
+    values = empty_mission_values()
+    mission_type = (form.get("MISSION") or "FRANCE").strip().upper()
+    values.update({
+        "NOM": form.get("NOM", ""),
+        "PRENOM": form.get("PRENOM", ""),
+        "DATE_AJD": form.get("DATE_AJD", ""),
+        "NOM_MISSION": form.get("NOM_MISSION", ""),
+        "MISSION": "AUTRE" if mission_type == "AUTRE" else "FRANCE",
+        "pays": form.get("pays", ""),
+        "FRAIS": form.get("FRAIS", "SANS"),
+        "D_DEPART": form.get("D_DEPART", ""),
+        "H_DEPART": form.get("H_DEPART", ""),
+        "D_RETOUR": form.get("D_RETOUR", ""),
+        "H_RETOUR": form.get("H_RETOUR", ""),
+        "TRANSPORT": form.get("TRANSPORT", "V_PERSO"),
+        "LIEU": form.get("LIEU", ""),
+        "CODE_PTL": form.get("CODE_PTL", ""),
+        "VILLE": form.get("VILLE", ""),
+        "HOTEL": "NON" if form.get("HOTEL") == "NON" else "OUI",
+        "PTDEJ": form.get("PTDEJ", "NON"),
+        "QUILL": form.get("QUILL", ""),
+    })
+    return values
+
+
+def validate_mission_required_fields(form):
+    required_fields = (
+        ("PRENOM", "Le prenom est obligatoire."),
+        ("NOM", "Le nom est obligatoire."),
+        ("DATE_AJD", "La date de creation est obligatoire."),
+        ("NOM_MISSION", "Le nom de la mission est obligatoire."),
+        ("D_DEPART", "La date de depart est obligatoire."),
+        ("H_DEPART", "L'heure de depart est obligatoire."),
+        ("D_RETOUR", "La date de retour est obligatoire."),
+        ("H_RETOUR", "L'heure de retour est obligatoire."),
+    )
+    for field_name, error_message in required_fields:
+        if not (form.get(field_name) or "").strip():
+            return error_message
+    return None
+
+
+def validate_mission_address(form):
+    mission_type = (form.get("MISSION") or "FRANCE").strip().upper()
+    lieu = (form.get("LIEU") or "").strip()
+    code_postal = (form.get("CODE_PTL") or "").strip()
+    ville = (form.get("VILLE") or "").strip()
+    pays = (form.get("pays") or "").strip()
+
+    if not lieu:
+        return "Le lieu de la mission est obligatoire."
+    if not ville:
+        return "La ville est obligatoire."
+    if mission_type == "AUTRE":
+        if not pays:
+            return "Le pays est obligatoire pour une mission hors France."
+        return None
+    if not code_postal:
+        return "Le code postal est obligatoire pour une mission en France."
+    return None
+
+
+def validate_mission_form(form):
+    validation_error = validate_mission_required_fields(form)
+    if validation_error is not None:
+        return validation_error
+    return validate_mission_address(form)
+
+
 def mission_values_from_record(record):
     values = empty_mission_values()
     if record is None:
@@ -271,7 +341,7 @@ def sort_tracking_missions(missions):
     return sorted(missions, key=lambda mission: int(mission[4]), reverse=True)
 
 
-def render_mission_form(page_mode, admin=False, mission_values=None, can_edit_mission=True, show_admin_panel=False, detail_id=None, detail_stat=0):
+def render_mission_form(page_mode, admin=False, mission_values=None, can_edit_mission=True, show_admin_panel=False, detail_id=None, detail_stat=0, validation_error=None):
     return render_template(
         'new_order.html',
         ADMIN=admin,
@@ -280,7 +350,8 @@ def render_mission_form(page_mode, admin=False, mission_values=None, can_edit_mi
         can_edit_mission=can_edit_mission,
         show_admin_panel=show_admin_panel,
         detail_id=detail_id,
-        detail_stat=detail_stat
+        detail_stat=detail_stat,
+        validation_error=validation_error
     )
 
 
@@ -443,7 +514,7 @@ def upstatmiss_mission(id_mission):
     try:
         DB = connect_to_DB_mission()
         cur = DB.cursor()
-        cur.execute("SELECT ID_USER FROM suivi_mission WHERE ID = %s", (id_mission,))
+        cur.execute("SELECT ID_USER, STATUE FROM suivi_mission WHERE ID = %s", (id_mission,))
         tracking = cur.fetchone()
         if tracking is None:
             return abort(404)
@@ -453,6 +524,18 @@ def upstatmiss_mission(id_mission):
                 return abort(403)
 
             val = request.values
+            validation_error = validate_mission_form(val)
+            if validation_error is not None:
+                return render_mission_form(
+                    page_mode='detail',
+                    admin=ADMIN,
+                    mission_values=mission_values_from_form(val),
+                    can_edit_mission=True,
+                    show_admin_panel=True,
+                    detail_id=id_mission,
+                    detail_stat=tracking[1],
+                    validation_error=validation_error
+                ), 400
             country = "FRANCE" if val["MISSION"] == "FRANCE" else val["pays"]
             cur.execute(
                 "UPDATE mission.ordre_mission SET NOM=%s, PRENOM=%s, DATE_AJD=%s, NOM_MISSION=%s, PAYS_MISSION=%s, FRAIS=%s, D_DEPART=%s, H_DEPART=%s, D_RETOUR=%s, H_RETOUR=%s, TRANSPORT=%s, LIEU=%s, CODE_PTL=%s, VILLE=%s, HOTEL=%s, PTDEJ=%s, QUILL=%s WHERE ID=%s",
@@ -490,6 +573,16 @@ def create_new_mission():
     #for value in request.values:
         #print(f"{value} | {request.values[value]} | {type(request.values[value])}")
     val = request.values
+    validation_error = validate_mission_form(val)
+    if validation_error is not None:
+        return render_mission_form(
+            page_mode='create',
+            admin=is_admin_user(data),
+            mission_values=mission_values_from_form(val),
+            can_edit_mission=True,
+            show_admin_panel=False,
+            validation_error=validation_error
+        ), 400
     try:
         DB = connect_to_DB_mission()
         cur = DB.cursor()
