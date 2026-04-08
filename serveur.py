@@ -39,7 +39,7 @@ if IS_PRODUCTION and not SECRET_KEY:
 app.secret_key = SECRET_KEY or 'CECIESTLACLEFSECRETDEGEII'
 app.config.update(
     TEMPLATES_AUTO_RELOAD=not IS_PRODUCTION,
-    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_HTTPONLY=False,
     SESSION_COOKIE_SAMESITE=os.getenv("MISSION_SESSION_COOKIE_SAMESITE", "Lax"),
     SESSION_COOKIE_SECURE=env_flag("MISSION_SESSION_COOKIE_SECURE", IS_PRODUCTION),
     PREFERRED_URL_SCHEME=os.getenv("MISSION_PREFERRED_URL_SCHEME", "https" if IS_PRODUCTION else "http"),
@@ -125,7 +125,7 @@ def public_url(path, request_context=None):
     base_url = PUBLIC_BASE_URL
     if not base_url and request_context is not None:
         forwarded_proto = request_context.headers.get("X-Forwarded-Proto", "").split(",")[0].strip()
-        scheme = forwarded_proto or request_context.scheme or app.config.get("PREFERRED_URL_SCHEME", "http")
+        scheme = forwarded_proto or request_context.scheme or app.config.get("PREFERRED_URL_SCHEME", "https")
         base_url = request_context.host_url.rstrip("/")
         if "://" in base_url:
             _, _, host_part = base_url.partition("://")
